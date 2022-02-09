@@ -1,6 +1,7 @@
 import { extendTheme } from '@chakra-ui/react'
 
 const colors = {
+  navbarLogo: '#8FB339',
   color1: '#2F86A6',
   color2: '#34BE82',
   color3: '#2FDD92',

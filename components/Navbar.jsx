@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import NextLink from 'next/link'
 import {
   Flex,
   Box,
@@ -13,12 +14,12 @@ import {
   MenuItem,
   MenuDivider,
   MenuButton,
-  MenuList,
-  MenuGroup
+  MenuList
 } from '@chakra-ui/react'
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai'
 import { BiHomeHeart, BiTrip } from 'react-icons/bi'
 import { GrGallery, GrContact } from 'react-icons/gr'
+import { FaRegUserCircle } from 'react-icons/fa'
 
 const links = [
   { name: 'Home', href: '#home', icon: <BiHomeHeart /> },
@@ -32,12 +33,12 @@ const BookBtn = () => (
     size="sm"
     rounded="full"
     px={3}
-    fontSize="12px"
+    fontSize="16px"
     bg="color5"
     color="white"
     fontFamily="'Roboto'"
     _hover={{
-      bg: 'color2'
+      bg: 'color6'
     }}
     fontWeight="normal"
     display={{ base: 'none', md: 'flex' }}
@@ -45,6 +46,19 @@ const BookBtn = () => (
   >
     Book now
   </Button>
+)
+
+const LinkItem = ({ href, children, key }) => (
+  <NextLink href={href} key={key}>
+    <Link
+      fontSize="16px"
+      fontFamily="'Roboto'"
+      _hover={{ color: 'color5' }}
+      _active={{ color: 'color5' }}
+    >
+      {children}
+    </Link>
+  </NextLink>
 )
 
 const Navbar = () => {
@@ -61,24 +75,27 @@ const Navbar = () => {
       mb={4}
     >
       <Flex justifyContent="center" alignItems="center">
-        <Heading as="h3" color="color8">
+        <Heading as="h4" fontSize="24px" color="navbarLogo">
           Kite India
         </Heading>
         <Spacer />
         <HStack gap={{ base: 4, lg: 8 }} display={{ base: 'none', md: 'flex' }}>
           {links.map(({ name, href }, idx) => (
-            <Link
-              href={href}
-              key={idx}
-              fontFamily="'Roboto'"
-              _hover={{ color: 'color3' }}
-              _active={{ color: 'color3' }}
-            >
+            <LinkItem key={idx} href={href}>
               {name}
-            </Link>
+            </LinkItem>
           ))}
         </HStack>
-        <Avatar w="25px" h="25px" ml={8} mr={4} />
+        <Avatar
+          icon={<FaRegUserCircle />}
+          color="color5"
+          bg="white"
+          w="25px"
+          h="25px"
+          ml={8}
+          mr={4}
+          _hover={{ color: 'color6' }}
+        />
         <BookBtn />
         <Menu>
           <MenuButton
@@ -91,15 +108,19 @@ const Navbar = () => {
           />
           <MenuList display={{ base: '', md: 'none' }}>
             {links.map(({ name, href, icon }, idx) => (
-              <MenuItem
-                icon={icon}
-                key={idx}
-                fontFamily="'Roboto'"
-                _hover={{ color: 'color3' }}
-                _active={{ color: 'color3' }}
-              >
-                <Link href={href}>{name}</Link>
-              </MenuItem>
+              <NextLink href={href} key={idx}>
+                <MenuItem
+                  as={Link}
+                  icon={icon}
+                  fontFamily="'Roboto'"
+                  fontSize="16px"
+                  _hover={{ color: 'color5' }}
+                  _active={{ color: 'color5' }}
+                  onClick={() => setOpen(!isOpen)}
+                >
+                  {name}
+                </MenuItem>
+              </NextLink>
             ))}
             <MenuDivider />
             <MenuItem
@@ -110,7 +131,7 @@ const Navbar = () => {
               color="white"
               rounded="md"
               px={4}
-              fontSize="18px"
+              fontSize="16px"
             >
               Book Now
             </MenuItem>
