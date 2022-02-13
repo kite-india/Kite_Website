@@ -6,7 +6,7 @@ const Page = () => {
   return (
     <>
       <Navbar />
-      <Container as="main" pt={16}>
+      <Container as="main" id="home" pt={16}>
         <Section delay={0.2}>
           <Box borderRadius="lg" p={3} mb={6} align="center">
             <Heading as="h2" color={'color3'} fontWeight="normal">
