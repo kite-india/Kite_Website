@@ -69,11 +69,11 @@ const Navbar = () => {
       px={{ base: 4, md: 8, lg: 32 }}
       align="center"
       position="fixed"
-      w="100%"
-      bg="rgba(255,255,255,1)"
-      backdropFilter="saturate(180%) blur(5px)"
-      mb={4}
       zIndex={100}
+      display="block"
+      w="100vw"
+      bg="rgba(255,255,255,0.8)"
+      backdropFilter="saturate(180%) blur(5px)"
     >
       <Flex justifyContent="center" alignItems="center">
         <Heading as="h4" fontSize="24px" color="navbarLogo">

@@ -4,16 +4,12 @@ import {
   Box,
   Text,
   Heading,
-  chakra,
   Input,
   InputGroup,
   InputLeftElement
 } from '@chakra-ui/react'
 import Section from '../Section'
-import img1 from '../../images/hero.png'
 import { BsSearch } from 'react-icons/bs'
-
-const ChakraImage = chakra(Image)
 
 const HeroSection = () => {
   return (
@@ -24,17 +20,12 @@ const HeroSection = () => {
       alignItems="center"
       justifyContent={{ base: 'center', md: 'flex-start' }}
       pt={{ base: 3, md: 0 }}
+      bgImage="url('/images/background.jpg')"
+      bgSize="cover"
+      bgRepeat="no-repeat"
+      bgPosition="center"
     >
-      <ChakraImage
-        src={img1}
-        alt="hero"
-        layout="fill"
-        objectFit="cover"
-        quality={100}
-        zIndex={0}
-      />
       <Box
-        mt={{ base: 16, md: 0 }}
         position="absolute"
         zIndex={10}
         w="100vw"

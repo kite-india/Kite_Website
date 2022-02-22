@@ -1,14 +1,15 @@
 import React from 'react'
-import { Box, Heading, Text, Container } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import { Navbar, Section } from '../components'
-import HeroSection from '../components/sections/hero-section'
+import { HeroSection, FeaturedSection } from '../components/sections'
 
 const Page = () => {
   return (
-    <div>
+    <Box as="main">
       <Navbar />
       <HeroSection />
-    </div>
+      <FeaturedSection />
+    </Box>
   )
 }
 
