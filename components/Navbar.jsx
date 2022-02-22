@@ -48,8 +48,8 @@ const BookBtn = () => (
   </Button>
 )
 
-const LinkItem = ({ href, children, key }) => (
-  <NextLink href={href} key={key}>
+const LinkItem = ({ href, children }) => (
+  <NextLink href={href}>
     <Link
       fontSize="16px"
       fontFamily="'Roboto'"
@@ -70,9 +70,10 @@ const Navbar = () => {
       align="center"
       position="fixed"
       w="100%"
-      bg="rgba(255,255,255,0.8)"
+      bg="rgba(255,255,255,1)"
       backdropFilter="saturate(180%) blur(5px)"
       mb={4}
+      zIndex={100}
     >
       <Flex justifyContent="center" alignItems="center">
         <Heading as="h4" fontSize="24px" color="navbarLogo">
