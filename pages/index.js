@@ -1,15 +1,13 @@
 import React from 'react'
-import { Box } from '@chakra-ui/react'
-import { Navbar } from '../components'
-import { HeroSection, FeaturedSection } from '../components/sections'
+import { HeroSection, FeaturedSection } from '../sections'
+import Layout from '../components/layouts/main'
 
 const Page = () => {
   return (
-    <Box as="main">
-      <Navbar />
+    <Layout>
       <HeroSection />
       <FeaturedSection />
-    </Box>
+    </Layout>
   )
 }
 

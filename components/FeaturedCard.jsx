@@ -26,7 +26,12 @@ const FeaturedCard = ({ data }) => {
     >
       <Section delay={0.3}>
         <Stack direction={{ base: 'column', lg: 'row' }} spacing="2.18rem">
-          <Image src="/images/featured.png" alt={title} />
+          <Image
+            src="/images/featured.png"
+            alt={title}
+            borderRadius="xl"
+            objectFit="cover"
+          />
           <Box pt={{ base: 0, md: 6 }} w={{ base: '95vw', md: '38rem' }}>
             <Flex direction="column" gap="1.2rem" align="left">
               <Heading
@@ -63,6 +68,7 @@ const FeaturedCard = ({ data }) => {
                   color="white"
                   bg="#B7CE63"
                   size="lg"
+                  borderRadius="xl"
                   w={{ base: '10.5rem', md: '12rem' }}
                 >
                   Book now
@@ -71,6 +77,7 @@ const FeaturedCard = ({ data }) => {
                   color="white"
                   bg="#B7CE63"
                   size="lg"
+                  borderRadius="xl"
                   w={{ base: '10.5rem', md: '12rem' }}
                 >
                   Know More

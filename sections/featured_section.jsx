@@ -5,7 +5,7 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/autoplay'
 
-import FeaturedCard from '../FeaturedCard'
+import FeaturedCard from '../components/FeaturedCard'
 
 const dummyData = [
   {

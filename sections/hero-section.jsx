@@ -8,7 +8,7 @@ import {
   InputGroup,
   InputLeftElement
 } from '@chakra-ui/react'
-import Section from '../Section'
+import Section from '../components/Section'
 import { BsSearch } from 'react-icons/bs'
 
 const HeroSection = () => {

@@ -22,8 +22,8 @@ import { GrGallery, GrContact } from 'react-icons/gr'
 import { FaRegUserCircle } from 'react-icons/fa'
 
 const links = [
-  { name: 'Home', href: '#home', icon: <BiHomeHeart /> },
-  { name: 'Trips', href: '#trips', icon: <BiTrip /> },
+  { name: 'Home', href: '/', icon: <BiHomeHeart /> },
+  { name: 'Trips', href: '/trips', icon: <BiTrip /> },
   { name: 'Gallery', href: '#gallery', icon: <GrGallery /> },
   { name: 'Contact Us', href: '#contact', icon: <GrContact /> }
 ]
@@ -65,7 +65,7 @@ const Navbar = () => {
   const [isOpen, setOpen] = useState(false)
   return (
     <Box
-      py={2}
+      py={3}
       px={{ base: 4, md: 8, lg: 32 }}
       align="center"
       position="fixed"
@@ -74,6 +74,7 @@ const Navbar = () => {
       w="100vw"
       bg="rgba(255,255,255,0.8)"
       backdropFilter="saturate(180%) blur(5px)"
+      boxShadow="xl"
     >
       <Flex justifyContent="center" alignItems="center">
         <Heading as="h4" fontSize="24px" color="navbarLogo">
