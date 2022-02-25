@@ -1,4 +1,10 @@
 import { Box } from '@chakra-ui/react'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Pagination, Autoplay } from 'swiper'
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/autoplay'
+
 import FeaturedCard from '../FeaturedCard'
 
 const dummyData = [
@@ -33,10 +39,24 @@ const dummyData = [
 
 const FeaturedSection = () => {
   return (
-    <Box bg="white">
-      {dummyData.map(data => (
-        <FeaturedCard key={data.id} data={data} />
-      ))}
+    <Box bg="white" w="100%" px={2}>
+      <Swiper
+        modules={[Pagination, Autoplay]}
+        slidesPerView={1}
+        autoplay={{
+          delay: 2000,
+          disableOnInteraction: false
+        }}
+        centeredSlides={true}
+        pagination={{ clickable: true }}
+        spaceBetween={20}
+      >
+        {dummyData.map(data => (
+          <SwiperSlide key={data.id}>
+            <FeaturedCard data={data} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </Box>
   )
 }

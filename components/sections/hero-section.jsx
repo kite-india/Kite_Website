@@ -14,7 +14,7 @@ import { BsSearch } from 'react-icons/bs'
 const HeroSection = () => {
   return (
     <Box
-      w="100vw"
+      w="100%"
       h={{ base: '85vh', md: '65vh' }}
       display="flex"
       alignItems="center"
@@ -28,7 +28,7 @@ const HeroSection = () => {
       <Box
         position="absolute"
         zIndex={10}
-        w="100vw"
+        w="100%"
         px={{ base: '3', md: '8.75rem' }}
       >
         <Section delay={0.2}>

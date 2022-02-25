@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box } from '@chakra-ui/react'
-import { Navbar, Section } from '../components'
+import { Navbar } from '../components'
 import { HeroSection, FeaturedSection } from '../components/sections'
 
 const Page = () => {
