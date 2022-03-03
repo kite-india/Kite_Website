@@ -1,4 +1,5 @@
 import React from 'react'
+import Head from 'next/head'
 import {
   Box,
   Heading,
@@ -15,6 +16,9 @@ import Layout from '../components/layouts/main'
 const Trips = () => {
   return (
     <Layout>
+      <Head>
+        <title>Kite India - Trips</title>
+      </Head>
       <Container w="100%" pt={8} maxW="container.xl">
         <Section delay={0.2}>
           <Heading
