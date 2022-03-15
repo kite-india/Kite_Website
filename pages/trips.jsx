@@ -61,6 +61,7 @@ const Trips = () => {
                   px={12}
                   bg="#B7CE63"
                   color="white"
+                  fontFamily="'Roboto'"
                   borderRadius="xl"
                   _hover={{ bg: 'green' }}
                 >

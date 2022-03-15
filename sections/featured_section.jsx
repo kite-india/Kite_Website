@@ -44,10 +44,11 @@ const FeaturedSection = () => {
         modules={[Pagination, Autoplay]}
         slidesPerView={1}
         autoplay={{
-          delay: 2000,
-          disableOnInteraction: false
+          delay: 3000,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true
         }}
-        centeredSlides={true}
+        loop={true}
         pagination={{ clickable: true }}
         spaceBetween={20}
       >

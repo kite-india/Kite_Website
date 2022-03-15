@@ -63,13 +63,14 @@ const FeaturedCard = ({ data }) => {
                   Watch Now
                 </Button>
               </Box>
-              <ButtonGroup spacing={6} mt={6}>
+              <ButtonGroup spacing={6} mt={6} fontFamily="'Roboto'">
                 <Button
                   color="white"
                   bg="#B7CE63"
                   size="lg"
                   borderRadius="xl"
                   w={{ base: '10.5rem', md: '12rem' }}
+                  _hover={{ bg: '#3E7C17' }}
                 >
                   Book now
                 </Button>
@@ -79,6 +80,7 @@ const FeaturedCard = ({ data }) => {
                   size="lg"
                   borderRadius="xl"
                   w={{ base: '10.5rem', md: '12rem' }}
+                  _hover={{ bg: '#3E7C17' }}
                 >
                   Know More
                 </Button>

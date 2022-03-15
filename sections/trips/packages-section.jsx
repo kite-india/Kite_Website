@@ -12,8 +12,8 @@ import 'swiper/css/grid'
 import { PackageCard } from '../../components'
 
 const Packages = () => {
+  const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
   const tags = ['Food', 'Places', 'Travel']
-  const isSmallerScreen = useMediaQuery('min-width(768px)')
   return (
     <Box w="100%">
       <Heading
@@ -25,6 +25,7 @@ const Packages = () => {
       >
         Packages
       </Heading>
+      {/* TODO: Add a vertical slide for each state by multiple carousel */}
       <Swiper
         modules={[Pagination, Autoplay, Grid]}
         breakpoints={{
@@ -37,27 +38,17 @@ const Packages = () => {
         }}
         spaceBetween={20}
         autoplay={{
-          delay: 2500,
+          delay: 3000,
           disableOnInteraction: false
         }}
         pagination={{ clickable: true }}
         slidesPerView={1}
       >
-        <SwiperSlide>
-          <PackageCard tags={tags} />
-        </SwiperSlide>
-        <SwiperSlide>
-          <PackageCard tags={tags} />
-        </SwiperSlide>
-        <SwiperSlide>
-          <PackageCard tags={tags} />
-        </SwiperSlide>
-        <SwiperSlide>
-          <PackageCard tags={tags} />
-        </SwiperSlide>
-        <SwiperSlide>
-          <PackageCard tags={tags} />
-        </SwiperSlide>
+        {arr.map(i => (
+          <SwiperSlide key={i}>
+            <PackageCard tags={tags} />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </Box>
   )
