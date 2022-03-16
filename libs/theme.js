@@ -13,7 +13,8 @@ const colors = {
   color9: '#1E6F5C',
   color10: '#289672',
   color11: '#29BB89',
-  color12: '#E6DD3B'
+  color12: '#E6DD3B',
+  color13: '#8FB339'
 }
 
 const fonts = {
