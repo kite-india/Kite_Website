@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Formik, Form, Field } from 'formik'
 import {
   Button,
@@ -7,12 +7,12 @@ import {
   Heading,
   Input,
   Stack,
+  Text,
   useColorModeValue,
   Box,
   Center,
   Select,
   Textarea,
-  FormHelperText,
   FormErrorMessage
 } from '@chakra-ui/react'
 
@@ -84,12 +84,12 @@ const NextDestinationForm = () => {
         >
           <Heading
             color={'color13'}
-            fontFamily={'Poppins'}
+            fontFamily="'Poppins'"
             size={'sm'}
             align={'center'}
             p={'4'}
           >
-            LET'S BUILD OUR COMMUNITY
+            LET&apos;S BUILD OUR COMMUNITY
           </Heading>
           Join our next destination
         </Heading>
@@ -106,17 +106,18 @@ const NextDestinationForm = () => {
           my={12}
         >
           <Heading
-            fontFamily={'Changa One'}
+            fontFamily="'Changa One'"
             lineHeight={1.1}
-            fontWeight={'bold'}
+            color="#434343"
+            fontWeight={'semibold'}
             fontSize={{ base: 'xl', sm: '2xl' }}
           >
             Share your travels
           </Heading>
-          <p fontFamily={'Roboto'}>
+          <Text fontFamily="'Roboto'">
             Suggest a new travel destination that you want to see and we will
             feature it in our blog.
-          </p>
+          </Text>
           <Formik
             initialValues={initialValues}
             onSubmit={(values, actions) => {
@@ -128,7 +129,7 @@ const NextDestinationForm = () => {
           >
             {props => (
               <Form>
-                <Stack spacing={4}>
+                <Stack spacing={4} fontFamily="'Roboto'" fontSize="16px">
                   <Field
                     name="destinationName"
                     validate={validateDestinationName}

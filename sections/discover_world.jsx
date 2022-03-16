@@ -1,31 +1,31 @@
 import React from 'react'
 import { Flex, Box, Heading, Center, Stack } from '@chakra-ui/react'
-import BlogPostWithImage from './blogCard'
+import BlogPostWithImage from '../components/blogCard'
 const DiscoverTheWorld = () => {
   return (
     <Box position={'relative'} pb={'8'}>
       <Center>
         <Heading
           color={'color5'}
-          fontFamily={'Poppins'}
+          fontFamily="'Poppins'"
           pt={'1'}
           mt={'10'}
           fontSize={{ base: 'xl', sm: '3xl' }}
         >
           <Heading
             color={'color13'}
-            fontFamily={'Poppins'}
+            fontFamily="'Poppins'"
             size={'sm'}
             align={'center'}
             p={'4'}
           >
             JOIN OUR ADVENTURES
           </Heading>
-          Dicover India with us
+          Discover India with us
         </Heading>
       </Center>
       <Flex p={4} align={'center'} justify="center">
-        <Stack spacing="24px" direction={{ base: 'column', lg: 'row' }}>
+        <Stack spacing="36px" direction={{ base: 'column', lg: 'row' }}>
           <Box>
             <BlogPostWithImage />
           </Box>

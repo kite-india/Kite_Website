@@ -1,6 +1,11 @@
 import React from 'react'
 import Head from 'next/head'
-import { HeroSection, FeaturedSection } from '../sections'
+import {
+  HeroSection,
+  FeaturedSection,
+  DiscoverTheWorld,
+  NextDestinationForm
+} from '../sections'
 import Layout from '../components/layouts/main'
 
 const Page = () => {
@@ -11,6 +16,8 @@ const Page = () => {
       </Head>
       <HeroSection />
       <FeaturedSection />
+      <DiscoverTheWorld />
+      <NextDestinationForm />
     </Layout>
   )
 }

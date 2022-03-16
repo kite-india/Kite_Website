@@ -1,15 +1,6 @@
 // import Image from 'next/image'
 import styled from '@emotion/styled'
-import {
-  Box,
-  Center,
-  Heading,
-  Text,
-  Stack,
-  HStack,
-  Avatar,
-  useColorModeValue
-} from '@chakra-ui/react'
+import { Box, Center, Heading, Text, Stack } from '@chakra-ui/react'
 
 const Image = styled.img`
   border-radius: 10px;
@@ -31,14 +22,17 @@ export default function BlogPostWithImage() {
           src={
             'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
           }
+          alt="world"
         />
         <Center>
           <Box pt="8px">
             <Heading
               as="h4"
               size="md"
-              fontSize={'2xl'}
-              fontFamily={'Changa One'}
+              fontSize="24px"
+              fontFamily="'Changa One'"
+              color="#434343"
+              fontWeight="semibold"
             >
               Budget
             </Heading>
@@ -57,10 +51,15 @@ export default function BlogPostWithImage() {
             // overflow={'hidden'}
           >
             <Stack>
-              <Text fontSize="xs" fontFamily="Roboto">
+              <Text fontSize="16px" fontFamily="'Roboto'">
                 Featuring razor-sharp peaks housing the arctic landscape. This
                 astonishing island is perfect for your next postcard.
-                <Text fontSize="xs" cursor={'pointer'} color={'color13'} fontFamily={'Poppins'}>
+                <Text
+                  fontSize="16px"
+                  cursor="pointer"
+                  color="#8fb339"
+                  fontFamily="'Poppins'"
+                >
                   view full blog...
                 </Text>
               </Text>
