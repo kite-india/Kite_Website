@@ -1,6 +1,10 @@
 import React from 'react'
 import { Box, Heading, Text } from '@chakra-ui/react'
-import { DiscoverTheWorld, NextDestinationForm } from '../sections'
+import {
+  DiscoverTheWorld,
+  FlightSearch,
+  NextDestinationForm
+} from '../sections'
 
 const Page = () => {
   return (
@@ -10,6 +14,7 @@ const Page = () => {
           Hello, World I&apos;m from Kite India!
         </Heading>
         <Text color={'color1'}>Kite Description here</Text>
+        <FlightSearch />
       </Box>
     </>
   )
