@@ -13,7 +13,7 @@ import Section from './Section'
 import { BsPlayCircleFill } from 'react-icons/bs'
 
 const FeaturedCard = ({ data }) => {
-  const { id, title, description, imgUrl, watchLink, knowMoreLink } = data
+  const { _id, title, description, image } = data
   return (
     <Box
       w="100%"
@@ -27,10 +27,12 @@ const FeaturedCard = ({ data }) => {
       <Section delay={0.3}>
         <Stack direction={{ base: 'column', lg: 'row' }} spacing="2.18rem">
           <Image
-            src="/images/featured.png"
+            src={image}
             alt={title}
             borderRadius="xl"
             objectFit="cover"
+            w="600px"
+            h="400px"
           />
           <Box pt={{ base: 0, md: 6 }} w={{ base: '95vw', md: '38rem' }}>
             <Flex direction="column" gap="1.2rem" align="left">

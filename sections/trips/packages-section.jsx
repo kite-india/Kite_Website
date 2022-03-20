@@ -11,9 +11,7 @@ import 'swiper/css/grid'
 
 import { PackageCard } from '../../components'
 
-const Packages = () => {
-  const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-  const tags = ['Food', 'Places', 'Travel']
+const Packages = ({ data }) => {
   return (
     <Box w="100%">
       <Heading
@@ -44,9 +42,9 @@ const Packages = () => {
         pagination={{ clickable: true }}
         slidesPerView={1}
       >
-        {arr.map(i => (
-          <SwiperSlide key={i}>
-            <PackageCard tags={tags} />
+        {data.map(data => (
+          <SwiperSlide key={data._id}>
+            <PackageCard data={data} />
           </SwiperSlide>
         ))}
       </Swiper>

@@ -9,7 +9,8 @@ const Image = styled.img`
   object-fit: cover;
 `
 
-export default function BlogPostWithImage() {
+export default function BlogPostWithImage({ blog }) {
+  const { _id, name, image, description } = blog
   return (
     <Center>
       <Box
@@ -18,12 +19,7 @@ export default function BlogPostWithImage() {
         // overflow={'hidden'}
         rounded="md"
       >
-        <Image
-          src={
-            'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
-          }
-          alt="world"
-        />
+        <Image src={image} alt={_id} />
         <Center>
           <Box pt="8px">
             <Heading
@@ -34,7 +30,7 @@ export default function BlogPostWithImage() {
               color="#434343"
               fontWeight="semibold"
             >
-              Budget
+              {name}
             </Heading>
           </Box>
         </Center>
@@ -52,8 +48,7 @@ export default function BlogPostWithImage() {
           >
             <Stack>
               <Text fontSize="16px" fontFamily="'Roboto'">
-                Featuring razor-sharp peaks housing the arctic landscape. This
-                astonishing island is perfect for your next postcard.
+                {description}
                 <Text
                   fontSize="16px"
                   cursor="pointer"

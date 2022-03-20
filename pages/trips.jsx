@@ -13,7 +13,7 @@ import { PackagesSection } from '../sections'
 import Section from '../components/Section'
 import Layout from '../components/layouts/main'
 
-const Trips = () => {
+const Trips = ({ packages_data }) => {
   return (
     <Layout>
       <Head>
@@ -72,11 +72,20 @@ const Trips = () => {
           </Flex>
         </Section>
         <Section delay={0.3}>
-          <PackagesSection />
+          <PackagesSection data={packages_data} />
         </Section>
       </Container>
     </Layout>
   )
+}
+
+export async function getServerSideProps() {
+  const res1 = await fetch(
+    'https://kite-backend-test.azurewebsites.net/package'
+  )
+  const packages_data = await res1.json()
+
+  return { props: { packages_data } }
 }
 
 export default Trips

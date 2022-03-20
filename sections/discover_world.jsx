@@ -1,7 +1,7 @@
 import React from 'react'
 import { Flex, Box, Heading, Center, Stack } from '@chakra-ui/react'
 import { BlogCard, Section } from '../components'
-const DiscoverTheWorld = () => {
+const DiscoverTheWorld = ({ data }) => {
   return (
     <Box position={'relative'} pb={'8'}>
       <Center>
@@ -27,15 +27,11 @@ const DiscoverTheWorld = () => {
       <Section delay={0.3}>
         <Flex p={4} align={'center'} justify="center">
           <Stack spacing="36px" direction={{ base: 'column', lg: 'row' }}>
-            <Box>
-              <BlogCard />
-            </Box>
-            <Box>
-              <BlogCard />
-            </Box>
-            <Box>
-              <BlogCard />
-            </Box>
+            {data.map(blog => (
+              <Box key={blog._id}>
+                <BlogCard blog={blog} />
+              </Box>
+            ))}
           </Stack>
         </Flex>
       </Section>

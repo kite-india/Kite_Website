@@ -7,7 +7,7 @@ import 'swiper/css/autoplay'
 
 import FeaturedCard from '../components/FeaturedCard'
 
-const dummyData = [
+/* const dummyData = [
   {
     id: 1,
     title: 'Our Himachal adventure blog',
@@ -36,8 +36,9 @@ const dummyData = [
     knowMoreLink: ''
   }
 ]
+*/
 
-const FeaturedSection = () => {
+const FeaturedSection = ({ data }) => {
   return (
     <Box bg="white" w="100%" px={2}>
       <Swiper
@@ -52,7 +53,7 @@ const FeaturedSection = () => {
         pagination={{ clickable: true }}
         spaceBetween={20}
       >
-        {dummyData.map(data => (
+        {data.map(data => (
           <SwiperSlide key={data.id}>
             <FeaturedCard data={data} />
           </SwiperSlide>

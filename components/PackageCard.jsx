@@ -4,18 +4,27 @@ import {
   Text,
   Flex,
   Image,
-  Spacer,
   SimpleGrid,
-  Icon
+  Icon,
+  ButtonGroup,
+  Button
 } from '@chakra-ui/react'
 
-import { AiOutlineCoffee } from 'react-icons/ai'
 import { FiMap } from 'react-icons/fi'
 
-const PackageCard = ({ tags, duration, location }) => {
+const PackageCard = ({ data }) => {
+  const { _id, location, price, activities, duration, image } = data
   return (
     <Box as="div" boxShadow="md" borderRadius="lg" maxW="container.sm" p={3}>
-      <Image src="/images/trips.png" alt="card" w="100%" mb={3} />
+      <Image
+        src={image}
+        alt="card"
+        w="500px"
+        h="300px"
+        mb={3}
+        objectFit="cover"
+        borderRadius="lg"
+      />
       <Flex
         direction={{ base: 'column', md: 'row' }}
         align="center"
@@ -24,22 +33,23 @@ const PackageCard = ({ tags, duration, location }) => {
         mb={3}
       >
         <Text fontFamily="'Poppins'" fontWeight="semibold" fontSize="24px">
-          Location
+          {location}
         </Text>
         <Text fontFamily="'Poppins'" fontWeight="normal" fontSize="16px">
-          Duration: 5 Days / 4 Nights
+          Duration: {duration}
         </Text>
       </Flex>
       <SimpleGrid
         fontFamily="'Poppins'"
-        columns={{ base: 2, md: 2 }}
+        columns={2}
         align={{ base: 'center', lg: 'left' }}
         w="100%"
         spacingX="40px"
         px={3}
+        mb={6}
       >
         <Box w="100%">
-          {tags.map((tag, idx) => (
+          {activities.map((tag, idx) => (
             <Text key={idx} w="100%">
               <Icon as={FiMap} mr={2} />
               {tag}
@@ -47,7 +57,7 @@ const PackageCard = ({ tags, duration, location }) => {
           ))}
         </Box>
         <Box w="100%">
-          {tags.map((tag, idx) => (
+          {activities.map((tag, idx) => (
             <Text key={idx} w="100%">
               <Icon as={FiMap} mr={2} />
               {tag}
@@ -55,6 +65,33 @@ const PackageCard = ({ tags, duration, location }) => {
           ))}
         </Box>
       </SimpleGrid>
+      <Flex
+        direction={{ base: 'column', md: 'row' }}
+        align="center"
+        justify="space-between"
+        w="100%"
+        gap={{ base: 2, lg: 0 }}
+      >
+        <Text fontFamily="'Poppins'" fontSize="18px">
+          Rs {price}/{' '}
+          <Text as="span" fontFamily="'Poppins'" fontSize="12px">
+            person
+          </Text>
+        </Text>
+        <ButtonGroup
+          fontFamily="'Roboto'"
+          color="white"
+          w={{ base: '100%', lg: '60%' }}
+          justifyContent="center"
+        >
+          <Button bg="#125C13" _hover={{ bg: '#8FB339' }} px={8}>
+            More Info
+          </Button>
+          <Button bg="#8FB339" _hover={{ bg: '#125C13' }} px={8}>
+            Book Now
+          </Button>
+        </ButtonGroup>
+      </Flex>
     </Box>
   )
 }
