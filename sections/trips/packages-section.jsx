@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Heading, Text, useMediaQuery } from '@chakra-ui/react'
+import { Box, Heading } from '@chakra-ui/react'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Autoplay, Grid } from 'swiper'

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Flex, Box, Heading, Center, Stack } from '@chakra-ui/react'
-import BlogPostWithImage from '../components/blogCard'
+import { BlogCard, Section } from '../components'
 const DiscoverTheWorld = () => {
   return (
     <Box position={'relative'} pb={'8'}>
@@ -24,19 +24,21 @@ const DiscoverTheWorld = () => {
           Discover India with us
         </Heading>
       </Center>
-      <Flex p={4} align={'center'} justify="center">
-        <Stack spacing="36px" direction={{ base: 'column', lg: 'row' }}>
-          <Box>
-            <BlogPostWithImage />
-          </Box>
-          <Box>
-            <BlogPostWithImage />
-          </Box>
-          <Box>
-            <BlogPostWithImage />
-          </Box>
-        </Stack>
-      </Flex>
+      <Section delay={0.3}>
+        <Flex p={4} align={'center'} justify="center">
+          <Stack spacing="36px" direction={{ base: 'column', lg: 'row' }}>
+            <Box>
+              <BlogCard />
+            </Box>
+            <Box>
+              <BlogCard />
+            </Box>
+            <Box>
+              <BlogCard />
+            </Box>
+          </Stack>
+        </Flex>
+      </Section>
     </Box>
   )
 }
