@@ -9,7 +9,7 @@ import {
   Container,
   Image
 } from '@chakra-ui/react'
-import { PackagesSection } from '../sections'
+import { PackagesSection, Activities } from '../sections'
 import Section from '../components/Section'
 import Layout from '../components/layouts/main'
 
@@ -73,6 +73,9 @@ const Trips = () => {
         </Section>
         <Section delay={0.3}>
           <PackagesSection />
+        </Section>
+        <Section delay={0.3} mt={6}>
+          <Activities />
         </Section>
       </Container>
     </Layout>

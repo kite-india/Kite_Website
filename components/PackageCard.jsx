@@ -1,20 +1,11 @@
 import React from 'react'
-import {
-  Box,
-  Text,
-  Flex,
-  Image,
-  Spacer,
-  SimpleGrid,
-  Icon
-} from '@chakra-ui/react'
+import { Box, Text, Flex, Image, SimpleGrid, Icon } from '@chakra-ui/react'
 
-import { AiOutlineCoffee } from 'react-icons/ai'
 import { FiMap } from 'react-icons/fi'
 
-const PackageCard = ({ tags, duration, location }) => {
+const PackageCard = ({ tags }) => {
   return (
-    <Box as="div" boxShadow="md" borderRadius="lg" maxW="container.sm" p={3}>
+    <Box as="div" boxShadow="lg" borderRadius="lg" maxW="container.sm" p={3}>
       <Image src="/images/trips.png" alt="card" w="100%" mb={3} />
       <Flex
         direction={{ base: 'column', md: 'row' }}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Heading, Text, useMediaQuery } from '@chakra-ui/react'
+import { Box, Heading } from '@chakra-ui/react'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Autoplay, Grid } from 'swiper'
@@ -25,31 +25,33 @@ const Packages = () => {
       >
         Packages
       </Heading>
-      {/* TODO: Add a vertical slide for each state by multiple carousel */}
-      <Swiper
-        modules={[Pagination, Autoplay, Grid]}
-        breakpoints={{
-          768: {
-            slidesPerView: 2
-          },
-          1024: {
-            slidesPerView: 3
-          }
-        }}
-        spaceBetween={20}
-        autoplay={{
-          delay: 3000,
-          disableOnInteraction: false
-        }}
-        pagination={{ clickable: true }}
-        slidesPerView={1}
-      >
-        {arr.map(i => (
-          <SwiperSlide key={i}>
-            <PackageCard tags={tags} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      <Box>
+        {/* TODO: Add a vertical slide for each state by multiple carousel */}
+        <Swiper
+          modules={[Pagination, Autoplay, Grid]}
+          breakpoints={{
+            768: {
+              slidesPerView: 2
+            },
+            1024: {
+              slidesPerView: 3
+            }
+          }}
+          spaceBetween={20}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false
+          }}
+          pagination={{ clickable: true }}
+          slidesPerView={1}
+        >
+          {arr.map(i => (
+            <SwiperSlide key={i} style={{ paddingBottom: '55px' }}>
+              <PackageCard tags={tags} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </Box>
     </Box>
   )
 }
