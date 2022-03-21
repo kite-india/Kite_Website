@@ -23,31 +23,33 @@ const Packages = ({ data }) => {
       >
         Packages
       </Heading>
-      {/* TODO: Add a vertical slide for each state by multiple carousel */}
-      <Swiper
-        modules={[Pagination, Autoplay, Grid]}
-        breakpoints={{
-          768: {
-            slidesPerView: 2
-          },
-          1024: {
-            slidesPerView: 3
-          }
-        }}
-        spaceBetween={20}
-        autoplay={{
-          delay: 3000,
-          disableOnInteraction: false
-        }}
-        pagination={{ clickable: true }}
-        slidesPerView={1}
-      >
-        {data.map(data => (
-          <SwiperSlide key={data._id}>
-            <PackageCard data={data} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      <Box>
+        {/* TODO: Add a vertical slide for each state by multiple carousel */}
+        <Swiper
+          modules={[Pagination, Autoplay, Grid]}
+          breakpoints={{
+            768: {
+              slidesPerView: 2
+            },
+            1024: {
+              slidesPerView: 3
+            }
+          }}
+          spaceBetween={20}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false
+          }}
+          pagination={{ clickable: true }}
+          slidesPerView={1}
+        >
+          {data.map(data => (
+            <SwiperSlide key={data._id} style={{ paddingBottom: '55px' }}>
+              <PackageCard data={data} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </Box>
     </Box>
   )
 }

@@ -19,7 +19,7 @@ const HeroSection = () => {
       alignItems="center"
       justifyContent={{ base: 'center', md: 'flex-start' }}
       pt={{ base: 3, md: 0 }}
-      bgImage="url('/images/background.jpg')"
+      bgImage="url('/images/hero.png')"
       bgSize="cover"
       bgRepeat="no-repeat"
       bgPosition="center"

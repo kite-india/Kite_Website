@@ -15,7 +15,7 @@ import { FiMap } from 'react-icons/fi'
 const PackageCard = ({ data }) => {
   const { _id, location, price, activities, duration, image } = data
   return (
-    <Box as="div" boxShadow="md" borderRadius="lg" maxW="container.sm" p={3}>
+    <Box as="div" boxShadow="lg" borderRadius="lg" maxW="container.sm" p={3}>
       <Image
         src={image}
         alt="card"
