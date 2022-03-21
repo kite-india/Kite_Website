@@ -45,7 +45,7 @@ const PackageCard = ({ data }) => {
         align={{ base: 'center', lg: 'left' }}
         w="100%"
         spacingX="40px"
-        px={3}
+        px={1}
         mb={6}
       >
         <Box w="100%">

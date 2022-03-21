@@ -9,7 +9,7 @@ import 'swiper/css'
 import 'swiper/css/bundle'
 import 'swiper/css/grid'
 
-const Activities = () => {
+const Activities = ({ data }) => {
   return (
     <Box w="100%" bg="#F7F8F9" borderRadius="lg" p={{ base: 3, lg: 6 }}>
       <Flex
@@ -51,24 +51,14 @@ const Activities = () => {
           }}
           slidesPerView={1}
         >
-          <SwiperSlide>
-            <Flex direction="column" gap={4} mb={4}>
-              <ActivityCard />
-              <ActivityCard />
-            </Flex>
-          </SwiperSlide>
-          <SwiperSlide>
-            <Flex direction="column" gap={4} mb={4}>
-              <ActivityCard />
-              <ActivityCard />
-            </Flex>
-          </SwiperSlide>
-          <SwiperSlide>
-            <Flex direction="column" gap={4} mb={4}>
-              <ActivityCard />
-              <ActivityCard />
-            </Flex>
-          </SwiperSlide>
+          {data.map(activity => (
+            <SwiperSlide key={activity._id}>
+              <Flex direction="column" gap={4} mb={4}>
+                <ActivityCard data={activity} />
+                <ActivityCard data={activity} />
+              </Flex>
+            </SwiperSlide>
+          ))}
         </Swiper>
       </Box>
     </Box>

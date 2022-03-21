@@ -1,7 +1,9 @@
 import React from 'react'
 import { Box, Heading, Image, Text, Button, Flex } from '@chakra-ui/react'
 
-const ActivityCard = () => {
+const ActivityCard = ({ data }) => {
+  const { _id, name, description, image } = data
+  console.log(data)
   return (
     <Flex
       gap={4}
@@ -12,10 +14,9 @@ const ActivityCard = () => {
       direction={{ base: 'column', lg: 'row' }}
       p={3}
       w="100%"
-      h={{ base: '40%', lg: '25%' }}
     >
       <Image
-        src="/images/trips.png"
+        src={image}
         alt="activity"
         w={{ base: '100%', lg: '160px' }}
         h={{ base: '100%', lg: '160px' }}
@@ -25,11 +26,10 @@ const ActivityCard = () => {
       <Box w="100%">
         <Box mb={4}>
           <Heading fontWeight="semibold" fontSize="24px">
-            Activity
+            {name}
           </Heading>
-          <Text as="p" fontFamily="'Poppins'">
-            Card desription. Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit. Sit rhoncus imperdiet nisi.
+          <Text as="p" fontFamily="'Poppins'" fontSize="16px">
+            {description}
           </Text>
         </Box>
         <Flex justify="space-between" alignItems="center" p={1}>

@@ -14,7 +14,7 @@ export default function BlogPostWithImage({ blog }) {
   return (
     <Center>
       <Box
-        W={'100%'}
+        w={'100%'}
         h={'435px'}
         // overflow={'hidden'}
         rounded="md"
