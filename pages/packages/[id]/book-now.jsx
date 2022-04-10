@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 import {
   Heading,
   Box,
@@ -93,26 +92,26 @@ const ExtraPassenger = ({ onToggle, num, handleExtraPassengers }) => {
           <Select
             w="30%"
             type="text"
-            name="gender"
+            name="suffix"
             onChange={e => handleChange(e, e.target.name)}
             placeholder="Suffix"
           >
-            <option value="male">Mr</option>
-            <option value="female">Mrs</option>
+            <option value="mr">Mr</option>
+            <option value="mrs">Mrs</option>
           </Select>
           <Input
             type="text"
-            name="first_name"
+            name="fname"
             placeholder="First Name"
             onChange={e => handleChange(e, e.target.name)}
             required
           />
-          <Input type="text" name="middle_name" placeholder="Middle" />
+          <Input type="text" name="mname" placeholder="Middle" />
         </Flex>
         <Flex gap={{ base: 2, md: 6 }} w="100%">
           <Input
             type="text"
-            name="last_name"
+            name="lname"
             placeholder="Last Name"
             onChange={e => handleChange(e, e.target.name)}
             required
@@ -125,11 +124,11 @@ const ExtraPassenger = ({ onToggle, num, handleExtraPassengers }) => {
             onChange={e => handleChange(e, e.target.name)}
           />
           <Input
-            type="number"
-            name="age"
+            type="text"
+            name="phone"
             w="20%"
             onChange={e => handleChange(e, e.target.name)}
-            placeholder="Age"
+            placeholder="Phone Number"
           />
         </Flex>
       </Flex>
@@ -145,15 +144,12 @@ const ExtraPassenger = ({ onToggle, num, handleExtraPassengers }) => {
 }
 
 const BookNow = ({ packages_data }) => {
-  const router = useRouter()
   const { isOpen, onToggle } = useDisclosure()
   const [formParams, setFormParams] = useState({})
   const [passengers, setPassengers] = useState(1)
   const [extraPassengers, setExtraPassengers] = useState({})
 
-  const { id } = router.query
-  const [pkg_data] = packages_data.filter(pkg => pkg._id === id)
-  const { location, price, duration } = pkg_data
+  const { _id, name, location, price, duration } = packages_data
   const [days, nights] = duration.split('/')
 
   const handleExtraPassengers = (num, passenger) => {
@@ -165,21 +161,20 @@ const BookNow = ({ packages_data }) => {
     e.preventDefault()
   }
 
-  const handleSubmit = async () => {
-    const formDetails = formParams
-    formDetails['persons'] = Object.values(extraPassengers)
-    const res = await fetch(
-      'https://kite-backend-test.azurewebsites.net/book/camp',
-      {
-        method: 'POST',
-        body: formDetails,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-    )
-    const data = await res.json()
-    console.log(data)
+  const handleSubmit = () => {
+    formParams['packageid'] = _id
+    formParams['persons'] = JSON.stringify(Object.values(extraPassengers))
+    formParams['dob'] = new Date(formParams.dob).toISOString()
+    formParams['from'] = new Date(formParams.from).toISOString()
+    formParams['to'] = new Date(formParams.to).toISOString()
+    console.log(formParams)
+    fetch('https://kite-backend-test.azurewebsites.net/book/package', {
+      method: 'POST',
+      body: formParams
+    })
+      .then(response => response.json())
+      .then(result => console.log(result))
+      .catch(err => console.log(err))
   }
 
   return (
@@ -215,7 +210,7 @@ const BookNow = ({ packages_data }) => {
           <Section delay={0.3}>
             <Box align="center" maxW="container.xl">
               <Heading fontSize="48px" fontWeight="semibold" mb={2}>
-                Jannat Chalein
+                {name}
               </Heading>
               <Flex
                 gap={6}
@@ -258,23 +253,23 @@ const BookNow = ({ packages_data }) => {
                     <Select
                       w="30%"
                       type="text"
-                      name="gender"
+                      name="suffix"
                       placeholder="Suffix"
                       onChange={e => handleChange(e, e.target.name)}
                     >
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
+                      <option value="mr">Mr</option>
+                      <option value="mrs">Mrs</option>
                     </Select>
                     <Input
                       type="text"
-                      name="first_name"
+                      name="fname"
                       placeholder="First Name"
                       onChange={e => handleChange(e, e.target.name)}
                       required
                     />
                     <Input
                       type="text"
-                      name="middle_name"
+                      name="mname"
                       placeholder="Middle"
                       onChange={e => handleChange(e, e.target.name)}
                     />
@@ -282,7 +277,7 @@ const BookNow = ({ packages_data }) => {
                   <Flex gap={{ base: 4, md: 12 }}>
                     <Input
                       type="text"
-                      name="last_name"
+                      name="lname"
                       placeholder="Last Name"
                       required
                       onChange={e => handleChange(e, e.target.name)}
@@ -304,8 +299,8 @@ const BookNow = ({ packages_data }) => {
                       onChange={e => handleChange(e, e.target.name)}
                     />
                     <Input
-                      type="number"
-                      name="phone_number"
+                      type="text"
+                      name="phone"
                       placeholder="Phone Number"
                       required
                       onChange={e => handleChange(e, e.target.name)}
@@ -313,15 +308,15 @@ const BookNow = ({ packages_data }) => {
                   </Flex>
                   <Flex gap={{ base: 2, md: 6 }}>
                     <Input
-                      type="date"
-                      name="start_date"
+                      type="datetime-local"
+                      name="from"
                       placeholder="Start Date"
                       required
                       onChange={e => handleChange(e, e.target.name)}
                     />
                     <Input
-                      type="date"
-                      name="end_date"
+                      type="datetime-local"
+                      name="to"
                       placeholder="End Date"
                       required
                       onChange={e => handleChange(e, e.target.name)}
@@ -362,7 +357,7 @@ const BookNow = ({ packages_data }) => {
                   {[...Array(passengers)].map((x, i) => (
                     <ExtraPassenger
                       handleExtraPassengers={handleExtraPassengers}
-                      key={x}
+                      key={i}
                       num={i + 2}
                       onToggle={onToggle}
                     />
@@ -389,9 +384,10 @@ const BookNow = ({ packages_data }) => {
 
 export default BookNow
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  const { id } = context.params
   const res1 = await fetch(
-    'https://kite-backend-test.azurewebsites.net/package'
+    `https://kite-backend-test.azurewebsites.net/package/${id}`
   )
   const packages_data = await res1.json()
   return { props: { packages_data } }

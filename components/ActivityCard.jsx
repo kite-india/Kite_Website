@@ -29,7 +29,9 @@ const ActivityCard = ({ data }) => {
             {name}
           </Heading>
           <Text as="p" fontFamily="'Poppins'" fontSize="16px">
-            {description}
+            {description.length > 120
+              ? description.slice(0, 120) + '...'
+              : description}
           </Text>
         </Box>
         <Flex justify="space-between" alignItems="center" p={1}>

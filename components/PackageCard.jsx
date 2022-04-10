@@ -1,4 +1,5 @@
 import React from 'react'
+import { useRouter } from 'next/router'
 import {
   Box,
   Text,
@@ -13,7 +14,11 @@ import {
 import { FiMap } from 'react-icons/fi'
 
 const PackageCard = ({ data }) => {
+  const router = useRouter()
   const { _id, location, price, activities, duration, image } = data
+  const bookNow = () => {
+    router.push(`/packages/${_id}/book-now`)
+  }
   return (
     <Box as="div" boxShadow="lg" borderRadius="lg" maxW="container.sm" p={3}>
       <Image
@@ -87,7 +92,12 @@ const PackageCard = ({ data }) => {
           <Button bg="#125C13" _hover={{ bg: '#8FB339' }} px={8}>
             More Info
           </Button>
-          <Button bg="#8FB339" _hover={{ bg: '#125C13' }} px={8}>
+          <Button
+            bg="#8FB339"
+            _hover={{ bg: '#125C13' }}
+            onClick={bookNow}
+            px={8}
+          >
             Book Now
           </Button>
         </ButtonGroup>
