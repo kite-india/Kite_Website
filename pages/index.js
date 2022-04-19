@@ -7,6 +7,7 @@ import {
   NextDestinationForm
 } from '../sections'
 import Layout from '../components/layouts/main'
+import axios from 'axios'
 
 const Page = ({ featured_data, activities_data }) => {
   return (
@@ -23,13 +24,13 @@ const Page = ({ featured_data, activities_data }) => {
 }
 
 export async function getStaticProps() {
-  const res1 = await fetch('https://kite-backend-test.azurewebsites.net/home')
-  const featured_data = await res1.json()
+  const res1 = await axios.get(`${process.env.NEXT_PUBLIC_KITE_BACKEND}/home`)
+  const featured_data = await res1.data
 
-  const res2 = await fetch(
-    'https://kite-backend-test.azurewebsites.net/activity'
+  const res2 = await axios.get(
+    `${process.env.NEXT_PUBLIC_KITE_BACKEND}/activity`
   )
-  const activities_data = await res2.json()
+  const activities_data = await res2.data
 
   return { props: { featured_data, activities_data } }
 }

@@ -16,6 +16,7 @@ import {
   Collapse,
   useDisclosure
 } from '@chakra-ui/react'
+import axios from 'axios'
 // import { BsPersonFill } from 'react-icons/bs'
 // import {
 //   GiAirplaneDeparture,
@@ -163,17 +164,17 @@ const BookNow = ({ packages_data }) => {
 
   const handleSubmit = () => {
     formParams['packageid'] = _id
-    formParams['persons'] = JSON.stringify(Object.values(extraPassengers))
+    formParams['persons'] = Object.values(extraPassengers)
     formParams['dob'] = new Date(formParams.dob).toISOString()
     formParams['from'] = new Date(formParams.from).toISOString()
     formParams['to'] = new Date(formParams.to).toISOString()
     console.log(formParams)
-    fetch('https://kite-backend-test.azurewebsites.net/book/package', {
-      method: 'POST',
-      body: formParams
-    })
-      .then(response => response.json())
-      .then(result => console.log(result))
+    axios
+      .post(
+        'https://kite-backend-test.azurewebsites.net/book/package',
+        formParams
+      )
+      .then(response => console.log(response.data))
       .catch(err => console.log(err))
   }
 
@@ -386,9 +387,9 @@ export default BookNow
 
 export async function getServerSideProps(context) {
   const { id } = context.params
-  const res1 = await fetch(
-    `https://kite-backend-test.azurewebsites.net/package/${id}`
+  const res1 = await axios.get(
+    `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package/${id}`
   )
-  const packages_data = await res1.json()
+  const packages_data = await res1.data
   return { props: { packages_data } }
 }

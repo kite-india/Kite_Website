@@ -9,6 +9,7 @@ import {
   Container,
   Image
 } from '@chakra-ui/react'
+import axios from 'axios'
 import { PackagesSection, Activities } from '../sections'
 import Section from '../components/Section'
 import Layout from '../components/layouts/main'
@@ -83,15 +84,15 @@ const Trips = ({ packages_data, activities_data }) => {
 }
 
 export async function getServerSideProps() {
-  const res1 = await fetch(
-    'https://kite-backend-test.azurewebsites.net/package'
+  const res1 = await axios.get(
+    `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package`
   )
-  const packages_data = await res1.json()
+  const packages_data = await res1.data
 
-  const res2 = await fetch(
-    'https://kite-backend-test.azurewebsites.net/activity'
+  const res2 = await axios.get(
+    `${process.env.NEXT_PUBLIC_KITE_BACKEND}/activity`
   )
-  const activities_data = await res2.json()
+  const activities_data = await res2.data
 
   return { props: { packages_data, activities_data } }
 }
