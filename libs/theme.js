@@ -1,5 +1,10 @@
 import { extendTheme } from '@chakra-ui/react'
 
+const config = {
+  initialColorMode: 'light',
+  useSystemColorMode: false
+}
+
 const colors = {
   navbarLogo: '#8FB339',
   color1: '#2F86A6',
@@ -22,6 +27,7 @@ const fonts = {
 }
 
 const theme = extendTheme({
+  config,
   colors,
   fonts
 })
