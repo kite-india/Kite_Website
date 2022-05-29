@@ -12,9 +12,12 @@ import {
   Divider
 } from '@chakra-ui/react'
 import React from 'react'
+import { signIn, useSession } from 'next-auth/react'
 import Layout from '../components/layouts/main'
 
 const Login = () => {
+  const { session, status } = useSession()
+  console.log(session, status)
   return (
     <Layout>
       <Flex w="100%" justify="center" align="center" direction="col">
@@ -37,6 +40,7 @@ const Login = () => {
             px={12}
             py={2}
             bgColor="white"
+            onClick={() => signIn('google')}
           >
             Login with Google
           </Button>

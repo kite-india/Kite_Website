@@ -11,7 +11,7 @@ const Website = ({
   return (
     <ChakraProvider theme={theme}>
       <Fonts />
-      <SessionProvider session={session}>
+      <SessionProvider session={session} refetchInterval={30 * 60}>
         <Component {...pageProps} key={router.route} />
       </SessionProvider>
     </ChakraProvider>

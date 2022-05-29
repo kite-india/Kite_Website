@@ -41,6 +41,7 @@ export async function getServerSideProps(context) {
     context.res.end()
     return {}
   }
+  console.log(session)
   return { props: { packages_data, user: session.user } }
 }
 

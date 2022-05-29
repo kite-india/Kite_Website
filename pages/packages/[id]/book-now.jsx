@@ -14,7 +14,8 @@ import {
   Select,
   InputRightElement,
   Collapse,
-  useDisclosure
+  useDisclosure,
+  Image
 } from '@chakra-ui/react'
 import axios from 'axios'
 // import { BsPersonFill } from 'react-icons/bs'
@@ -150,7 +151,7 @@ const BookNow = ({ packages_data }) => {
   const [passengers, setPassengers] = useState(1)
   const [extraPassengers, setExtraPassengers] = useState({})
 
-  const { _id, name, location, price, duration } = packages_data
+  const { _id, name, image, location, price, duration } = packages_data
   const [days, nights] = duration.split('/')
 
   const handleExtraPassengers = (num, passenger) => {
@@ -209,28 +210,43 @@ const BookNow = ({ packages_data }) => {
         </Section>
         <Box mt={12} maxW="container.xl">
           <Section delay={0.3}>
-            <Box align="center" maxW="container.xl">
-              <Heading fontSize="48px" fontWeight="semibold" mb={2}>
-                {name}
-              </Heading>
-              <Flex
-                gap={6}
-                fontSize="20px"
-                fontFamily="'Poppins'"
-                justifyContent="center"
-              >
-                <Text>
-                  {days} Days / {nights} Nights
-                </Text>
-                <Text>{location}</Text>
-                <Text>
-                  Rs {price}/
-                  <Text as="span" fontSize="12px">
-                    per person
+            <Flex align="center" direction={{ base: 'column', lg: 'row' }}>
+              <Image
+                alt={_id}
+                src={image}
+                w={{ base: '80vw', lg: '100%' }}
+                h={{ base: '80vw', lg: '32vh' }}
+                objectFit="cover"
+                borderRadius="lg"
+                clipPath={{
+                  base: 'circle(50% at 50% 50%)',
+                  lg: 'polygon(86% 0, 100% 49%, 84% 100%, 0% 100%, 10% 49%, 0% 0%)'
+                }}
+                mb={{ base: 6, lg: 0 }}
+              />
+              <Box align="center" w="100%">
+                <Heading fontSize="48px" fontWeight="semibold" mb={2}>
+                  {name}
+                </Heading>
+                <Flex
+                  gap={6}
+                  fontSize="20px"
+                  fontFamily="'Poppins'"
+                  justifyContent="center"
+                >
+                  <Text>
+                    {days} Days / {nights} Nights
                   </Text>
-                </Text>
-              </Flex>
-            </Box>
+                  <Text>{location}</Text>
+                  <Text>
+                    Rs {price}/
+                    <Text as="span" fontSize="12px">
+                      per person
+                    </Text>
+                  </Text>
+                </Flex>
+              </Box>
+            </Flex>
             <Box mt={8} mb={4} maxW="container.xl">
               <Text
                 color="#3E7C17"

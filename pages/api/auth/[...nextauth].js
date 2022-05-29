@@ -5,27 +5,20 @@ export default NextAuth({
   providers: [
     GoogleProvider({
       clientId: process.env.NEXT_PUBLIC_GOOGLE_ID,
-      clientSecret: process.env.NEXT_PUBLIC_GOOGLE_SECRET,
-      authorization: {
-        params: {
-          prompt: 'consent',
-          access_type: 'offline',
-          response_type: 'code'
-        }
-      }
+      clientSecret: process.env.NEXT_PUBLIC_GOOGLE_SECRET
     })
   ],
   jwt: { encryption: true },
-  secret: 'some secret',
+  secret: process.env.NEXT_PUBLIC_SECRET,
   callbacks: {
-    async jwt(token, account) {
-      if (account?.accessToken) {
+    async jwt({ token, account }) {
+      if (account) {
         token.accessToken = account.accessToken
       }
       return token
     },
     redirect: async (url, _baseUrl) => {
-      if (url === '/user') {
+      if (url === '/profile') {
         return Promise.resolve('/')
       }
       return Promise.resolve('/')
