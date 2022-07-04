@@ -1,21 +1,14 @@
 import NextDocument, { Html, Head, Main, NextScript } from 'next/document'
-import { ServerStyleSheet } from 'styled-components'
+import { ColorModeScript } from '@chakra-ui/react'
+import theme from '../libs/theme'
 
 export default class Document extends NextDocument {
-  static getInitialProps({ renderPage }) {
-    const sheet = new ServerStyleSheet()
-    const page = renderPage(
-      App => props => sheet.collectStyles(<App {...props} />)
-    )
-    const styleTags = sheet.getStyleElement()
-    return { ...page, styleTags }
-  }
   render() {
     return (
       <Html lang="en">
         <Head />
-        {this.props.styleTags}
         <body>
+          <ColorModeScript initialColorMode={theme.config.initialColorMode} />
           <Main />
           <NextScript />
         </body>

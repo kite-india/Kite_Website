@@ -42,7 +42,7 @@ const WebsiteLinks = () => {
 
 const Footer = () => {
   return (
-    <Box w="100%" py={12} bgColor="#F9F9F9">
+    <Box w="100%" py={6} bgColor="#F9F9F9" bottom={0}>
       <Flex
         w="100%"
         direction={{ base: 'column', md: 'row' }}
