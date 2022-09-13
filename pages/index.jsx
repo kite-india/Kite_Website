@@ -33,7 +33,7 @@ const Page = ({ featured_data, activities_data }) => {
   )
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const { data: featured_data } = await axios.get(
     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/home`
   )
