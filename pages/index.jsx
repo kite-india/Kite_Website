@@ -10,7 +10,7 @@ import Layout from '../components/layouts/main'
 import axios from 'axios'
 
 const Page = ({ featured_data, activities_data }) => {
-  if (!featured_data && !activities_data) {
+  if (!featured_data || !activities_data) {
     return (
       <Layout>
         <Head>
@@ -33,7 +33,7 @@ const Page = ({ featured_data, activities_data }) => {
   )
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const { data: featured_data } = await axios.get(
     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/home`
   )

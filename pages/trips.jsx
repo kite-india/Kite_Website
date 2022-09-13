@@ -15,7 +15,7 @@ import Section from '../components/Section'
 import Layout from '../components/layouts/main'
 
 const Trips = ({ packages_data, activities_data }) => {
-  if (!packages_data && !activities_data) {
+  if (!packages_data || !activities_data) {
     return (
       <Layout>
         <Container>
@@ -146,7 +146,7 @@ const Trips = ({ packages_data, activities_data }) => {
   )
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const { data: packages_data } = await axios.get(
     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package`
   )
