@@ -8,7 +8,6 @@ import {
   FormControl,
   Input,
   InputGroup,
-  // InputLeftElement,
   Flex,
   Button,
   Select,
@@ -18,49 +17,8 @@ import {
   Image
 } from '@chakra-ui/react'
 import axios from 'axios'
-// import { BsPersonFill } from 'react-icons/bs'
-// import {
-//   GiAirplaneDeparture,
-//   GiAirplaneArrival,
-//   GiCalendar
-// } from 'react-icons/gi'
 import { Section } from '../../../components'
 import Layout from '../../../components/layouts/main'
-
-// const dummyData = [
-//   {
-//     name: 'From where?',
-//     type: 'text',
-//     icon: <GiAirplaneDeparture />
-//   },
-//   {
-//     name: 'Where To?',
-//     type: 'text',
-//     icon: <GiAirplaneArrival />
-//   },
-//   {
-//     name: 'Depart - Return',
-//     type: 'date',
-//     icon: <GiCalendar />
-//   },
-//   {
-//     name: '1 Adult',
-//     type: 'number',
-//     icon: <BsPersonFill />
-//   }
-// ]
-
-// const InputItem = ({ item, no }) => (
-//   <InputGroup>
-//     <InputLeftElement>{item.icon}</InputLeftElement>
-//     <Input
-//       type={item.type}
-//       placeholder={item.name}
-//       borderRadius={no === 0 ? 'md' : '0'}
-//       borderEndRadius="0"
-//     />
-//   </InputGroup>
-// )
 
 const ExtraPassenger = ({ onToggle, num, handleExtraPassengers }) => {
   const [passengerDetails, setPassengerDetails] = useState({})
@@ -150,6 +108,10 @@ const BookNow = ({ packages_data }) => {
   const [formParams, setFormParams] = useState({})
   const [passengers, setPassengers] = useState(1)
   const [extraPassengers, setExtraPassengers] = useState({})
+
+  if (!packages_data) {
+    return null
+  }
 
   const { _id, name, image, location, price, duration } = packages_data
   const [days, nights] = duration.split('/')

@@ -17,7 +17,13 @@ import Layout from '../components/layouts/main'
 
 const Login = () => {
   const { session, status } = useSession()
-  console.log(session, status)
+  if (status !== 'unauthenticated' && !session) {
+    return (
+      <Layout>
+        <Heading>Already Logged In</Heading>
+      </Layout>
+    )
+  }
   return (
     <Layout>
       <Flex w="100%" justify="center" align="center" direction="col">

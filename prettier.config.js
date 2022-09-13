@@ -1,4 +1,4 @@
-const options = {
+module.exports = {
   semi: false,
   trailingComma: 'none',
   singleQuote: true,
@@ -6,5 +6,3 @@ const options = {
   tabWidth: 2,
   arrowParens: 'avoid'
 }
-
-module.exports = options

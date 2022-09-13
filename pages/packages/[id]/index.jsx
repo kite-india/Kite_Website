@@ -6,6 +6,7 @@ import { Section } from '../../../components'
 import Layout from '../../../components/layouts/main'
 
 const Page = ({ packages_data }) => {
+  if (!packages_data) return null
   const { name, _id, image, description } = packages_data
   return (
     <Layout>

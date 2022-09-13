@@ -3,7 +3,7 @@ import { Box, Heading, Image, Text, Button, Flex } from '@chakra-ui/react'
 
 const ActivityCard = ({ data }) => {
   const { _id, name, description, image } = data
-  console.log(data)
+  if (!data) return null
   return (
     <Flex
       gap={4}
