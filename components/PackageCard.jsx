@@ -53,16 +53,16 @@ const PackageCard = ({ data }) => {
         mb={6}
       >
         <Box w="100%">
-          {activities.map((tag, idx) => (
-            <Text key={idx} w="100%">
+          {activities.map(tag => (
+            <Text key={tag} w="100%">
               <Icon as={FiMap} mr={2} />
               {tag}
             </Text>
           ))}
         </Box>
         <Box w="100%">
-          {activities.map((tag, idx) => (
-            <Text key={idx} w="100%">
+          {activities.map(tag => (
+            <Text key={tag} w="100%">
               <Icon as={FiMap} mr={2} />
               {tag}
             </Text>

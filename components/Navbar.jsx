@@ -82,8 +82,8 @@ const Navbar = () => {
         </Heading>
         <Spacer />
         <HStack gap={{ base: 4, lg: 8 }} display={{ base: 'none', md: 'flex' }}>
-          {links.map(({ name, href }, idx) => (
-            <LinkItem key={idx} href={href}>
+          {links.map(({ name, href }) => (
+            <LinkItem key={name} href={href}>
               {name}
             </LinkItem>
           ))}
@@ -109,8 +109,8 @@ const Navbar = () => {
             onClick={() => setOpen(!isOpen)}
           />
           <MenuList display={{ base: '', md: 'none' }}>
-            {links.map(({ name, href, icon }, idx) => (
-              <NextLink href={href} key={idx}>
+            {links.map(({ name, href, icon }) => (
+              <NextLink href={href} key={name}>
                 <MenuItem
                   as={Link}
                   icon={icon}
