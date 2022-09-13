@@ -24,8 +24,8 @@ import { FaRegUserCircle } from 'react-icons/fa'
 const links = [
   { name: 'Home', href: '/', icon: <BiHomeHeart /> },
   { name: 'Trips', href: '/trips', icon: <BiTrip /> },
-  { name: 'Gallery', href: '#gallery', icon: <GrGallery /> },
-  { name: 'Contact Us', href: '#contact', icon: <GrContact /> }
+  { name: 'Gallery', href: '/gallery', icon: <GrGallery /> },
+  { name: 'Contact Us', href: '/contact-us', icon: <GrContact /> }
 ]
 
 const BookBtn = () => (

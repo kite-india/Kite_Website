@@ -30,10 +30,9 @@ const Page = ({ packages_data }) => {
 
 export async function getServerSideProps(context) {
   const { id } = context.params
-  const res1 = await axios.get(
+  const { data } = await axios.get(
     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package/${id}`
   )
-  const packages_data = await res1.data
 
   const session = await getSession(context)
   if (!session) {
@@ -42,7 +41,7 @@ export async function getServerSideProps(context) {
     return {}
   }
   console.log(session)
-  return { props: { packages_data, user: session.user } }
+  return { props: { packages_data: data, user: session.user } }
 }
 
 export default Page

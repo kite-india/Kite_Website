@@ -84,7 +84,10 @@ const Login = () => {
               Login
             </Button>
             <Text fontWeight="medium" my={2} fontSize="14px" textAlign="left">
-              Don&apos;t have an Account? <Link color="#125C13">Sign Up</Link>
+              Don&apos;t have an Account?{' '}
+              <Link href="/signup" color="#125C13">
+                Sign Up
+              </Link>
             </Text>
           </FormControl>
         </Container>

@@ -9,7 +9,7 @@ const Image = styled.img`
   object-fit: cover;
 `
 
-export default function BlogPostWithImage({ blog }) {
+const BlogPostWithImage = ({ blog }) => {
   const { _id, name, image, description } = blog
   return (
     <Center>
@@ -65,3 +65,5 @@ export default function BlogPostWithImage({ blog }) {
     </Center>
   )
 }
+
+export default BlogPostWithImage

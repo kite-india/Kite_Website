@@ -153,7 +153,6 @@ const BookNow = ({ packages_data }) => {
 
   const { _id, name, image, location, price, duration } = packages_data
   const [days, nights] = duration.split('/')
-
   const handleExtraPassengers = (num, passenger) => {
     setExtraPassengers(prevState => ({ ...prevState, [num]: passenger }))
   }
@@ -171,10 +170,7 @@ const BookNow = ({ packages_data }) => {
     formParams['to'] = new Date(formParams.to).toISOString()
     console.log(formParams)
     axios
-      .post(
-        'https://kite-backend-test.azurewebsites.net/book/package',
-        formParams
-      )
+      .post(`${process.env.NEXT_PUBLIC_KITE_BACKEND}/book/package`, formParams)
       .then(response => console.log(response.data))
       .catch(err => console.log(err))
   }
@@ -189,24 +185,6 @@ const BookNow = ({ packages_data }) => {
           <Heading fontSize="72px" fontWeight="semibold" color="#8FB339">
             Book Now
           </Heading>
-          {/* <Flex
-            direction="row"
-            alignItems="center"
-            justifyContent="center"
-            my={8}
-            fontFamily="'Roboto'"
-          >
-            <FormControl>
-              <Flex>
-                {dummyData.map((item, idx) => (
-                  <InputItem item={item} key={idx} no={idx} />
-                ))}
-                <Button bg="#5D5FEF" color="white" borderRadius="md" px={8}>
-                  Search
-                </Button>
-              </Flex>
-            </FormControl>
-          </Flex> */}
         </Section>
         <Box mt={12} maxW="container.xl">
           <Section delay={0.3}>
@@ -403,9 +381,8 @@ export default BookNow
 
 export async function getServerSideProps(context) {
   const { id } = context.params
-  const res1 = await axios.get(
+  const { data } = await axios.get(
     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package/${id}`
   )
-  const packages_data = await res1.data
-  return { props: { packages_data } }
+  return { props: { packages_data: data } }
 }

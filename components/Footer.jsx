@@ -35,7 +35,7 @@ const WebsiteLinks = () => {
       <Link href="/">Home</Link>
       <Link href="/trips">Trips</Link>
       <Link href="/gallery">Gallery</Link>
-      <Link href="/#contact-us">Contact Us</Link>
+      <Link href="/contact-us">Contact Us</Link>
     </Flex>
   )
 }

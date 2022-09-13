@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { ChakraProvider } from '@chakra-ui/react'
 import { SessionProvider } from 'next-auth/react'
 import Fonts from '../libs/fonts'
@@ -8,6 +9,14 @@ const Website = ({
   pageProps: { session, ...pageProps },
   router
 }) => {
+  const [isSSR, setIsSSR] = useState(true)
+
+  useEffect(() => {
+    setIsSSR(false)
+  }, [])
+
+  if (isSSR) return null
+
   return (
     <ChakraProvider theme={theme}>
       <Fonts />

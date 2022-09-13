@@ -24,13 +24,13 @@ const Page = ({ featured_data, activities_data }) => {
 }
 
 export async function getStaticProps() {
-  const res1 = await axios.get(`${process.env.NEXT_PUBLIC_KITE_BACKEND}/home`)
-  const featured_data = await res1.data
+  const { data: featured_data } = await axios.get(
+    `${process.env.NEXT_PUBLIC_KITE_BACKEND}/home`
+  )
 
-  const res2 = await axios.get(
+  const { data: activities_data } = await axios.get(
     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/activity`
   )
-  const activities_data = await res2.data
 
   return { props: { featured_data, activities_data } }
 }

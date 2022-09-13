@@ -84,15 +84,13 @@ const Trips = ({ packages_data, activities_data }) => {
 }
 
 export async function getServerSideProps() {
-  const res1 = await axios.get(
+  const { data: packages_data } = await axios.get(
     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package`
   )
-  const packages_data = await res1.data
 
-  const res2 = await axios.get(
+  const { data: activities_data } = await axios.get(
     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/activity`
   )
-  const activities_data = await res2.data
 
   return { props: { packages_data, activities_data } }
 }

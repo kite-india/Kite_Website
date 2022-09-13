@@ -10,7 +10,6 @@ import {
   ButtonGroup,
   Button
 } from '@chakra-ui/react'
-
 import { FiMap } from 'react-icons/fi'
 
 const PackageCard = ({ data }) => {
