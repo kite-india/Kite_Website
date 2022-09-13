@@ -146,7 +146,7 @@ const Trips = ({ packages_data, activities_data }) => {
   )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const { data: packages_data } = await axios.get(
     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package`
   )
