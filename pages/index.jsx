@@ -33,7 +33,7 @@ const Page = ({ featured_data, activities_data }) => {
   )
 }
 
-export async function getServerSideProps() {
+Page.getInitialProps = async () => {
   const { data: featured_data } = await axios.get(
     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/home`
   )
@@ -42,7 +42,19 @@ export async function getServerSideProps() {
     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/activity`
   )
 
-  return { props: { featured_data, activities_data } }
+  return { featured_data, activities_data }
 }
+
+// export async function getServerSideProps() {
+//   const { data: featured_data } = await axios.get(
+//     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/home`
+//   )
+
+//   const { data: activities_data } = await axios.get(
+//     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/activity`
+//   )
+
+//   return { props: { featured_data, activities_data } }
+// }
 
 export default Page

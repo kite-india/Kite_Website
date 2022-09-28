@@ -146,7 +146,7 @@ const Trips = ({ packages_data, activities_data }) => {
   )
 }
 
-export async function getServerSideProps() {
+Trips.getInitialProps = async () => {
   const { data: packages_data } = await axios.get(
     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package`
   )
@@ -155,7 +155,19 @@ export async function getServerSideProps() {
     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/activity`
   )
 
-  return { props: { packages_data, activities_data } }
+  return { packages_data, activities_data }
 }
+
+// export async function getServerSideProps() {
+//   const { data: packages_data } = await axios.get(
+//     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package`
+//   )
+
+//   const { data: activities_data } = await axios.get(
+//     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/activity`
+//   )
+
+//   return { props: { packages_data, activities_data } }
+// }
 
 export default Trips
