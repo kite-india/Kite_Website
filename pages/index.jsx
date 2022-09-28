@@ -9,7 +9,7 @@ import {
 import Layout from '../components/layouts/main'
 import axios from 'axios'
 
-const Page = ({ featured_data, activities_data }) => {
+const Page = ({ featured_data = null, activities_data = null }) => {
   if (!featured_data || !activities_data) {
     return (
       <Layout>

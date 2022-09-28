@@ -14,7 +14,7 @@ import { PackagesSection, Activities } from '../sections'
 import Section from '../components/Section'
 import Layout from '../components/layouts/main'
 
-const Trips = ({ packages_data, activities_data }) => {
+const Trips = ({ packages_data = null, activities_data = null }) => {
   if (!packages_data || !activities_data) {
     return (
       <Layout>
