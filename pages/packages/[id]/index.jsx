@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Container, Flex, Heading, Image, Text } from '@chakra-ui/react'
 import axios from 'axios'
-import { getSession } from 'next-auth/react'
+
 import { Section } from '../../../components'
 import Layout from '../../../components/layouts/main'
 
@@ -35,14 +35,7 @@ export async function getServerSideProps(context) {
     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package/${id}`
   )
 
-  const session = await getSession(context)
-  if (!session) {
-    context.res.writeHead(302, { Location: '/' })
-    context.res.end()
-    return {}
-  }
-  console.log(session)
-  return { props: { packages_data: data, user: session.user } }
+  return { props: { packages_data: data } }
 }
 
 export default Page
