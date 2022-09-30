@@ -28,15 +28,33 @@ const HeroSection = () => {
         position="absolute"
         zIndex={10}
         w="100%"
+        mt={4}
         px={{ base: '3', md: '8.75rem' }}
       >
         <Section delay={0.2}>
-          <Heading fontSize="4.625rem" color="white">
-            <Text as="span" color="#B7CE63">
+          <Heading fontSize={{ base: '4rem', lg: '4.625rem' }} color="white">
+            <Text
+              as="span"
+              color="#B7CE63"
+              textShadow="0px 0px 0 rgb(183,206,99),
+              -1px 1px  0 rgb(183,206,99),
+              -2px 2px 1px rgba(0,0,0,0.08),
+              -2px 2px 1px rgba(0,0,0,0.5),
+              0px 0px 1px rgba(0,0,0,.2)"
+            >
               Let&apos;s talk{' '}
             </Text>
-            about
-            <br /> your next trip!
+            <Text
+              as="span"
+              textShadow="0px 0px 0 rgb(255,255,255),
+              -1px 1px  0 rgb(255,255,255),
+              -2px 2px 1px rgba(0,0,0,0.08),
+              -2px 2px 1px rgba(0,0,0,0.5),
+              0px 0px 1px rgba(0,0,0,.2)"
+            >
+              about
+              <br /> your next trip!
+            </Text>
           </Heading>
           <Text
             w={{ md: '31.56rem' }}

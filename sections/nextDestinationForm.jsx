@@ -74,16 +74,7 @@ const NextDestinationForm = () => {
       py={{ base: '3', lg: '6' }}
       px="4"
     >
-      <Box
-        textAlign="center"
-        display="flex"
-        direction={{ base: 'column', md: 'row' }}
-        flexWrap="wrap"
-        justifyContent="center"
-        alignItems="center"
-        gap={{ base: 2, lg: 4 }}
-        pt={4}
-      >
+      <Box textAlign="center" gap={{ base: 2, lg: 4 }} pt={4}>
         <Heading
           color={'color13'}
           fontFamily="'Poppins'"

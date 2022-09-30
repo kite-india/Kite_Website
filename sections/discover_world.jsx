@@ -5,12 +5,7 @@ const DiscoverTheWorld = ({ data }) => {
   return (
     <Box position={'relative'} py={'8'}>
       <Box
-        display="flex"
         textAlign="center"
-        direction={{ base: 'column', lg: ' row' }}
-        alignItems="center"
-        flexWrap="wrap"
-        justifyContent="center"
         px={6}
         py={{ base: 2, lg: 6 }}
         gap={{ base: 2, lg: 4 }}
