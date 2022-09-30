@@ -1,4 +1,4 @@
-import { Box, Spinner } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Autoplay } from 'swiper'
 import 'swiper/css'
@@ -38,18 +38,7 @@ import FeaturedCard from '../components/FeaturedCard'
 ]
 */
 
-const FeaturedSection = ({ data, isLoading }) => {
-  if (isLoading) {
-    return (
-      <Spinner
-        size="xl"
-        thickness="4px"
-        speed="0.5s"
-        emptyColor="black"
-        color="white"
-      />
-    )
-  }
+const FeaturedSection = ({ data }) => {
   return (
     <Box bg="white" w="100%" px={2}>
       <Swiper

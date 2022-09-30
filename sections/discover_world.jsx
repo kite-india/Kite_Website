@@ -1,18 +1,7 @@
 import React from 'react'
-import { Flex, Box, Heading, Center, Stack, Spinner } from '@chakra-ui/react'
+import { Flex, Box, Heading, Center, Stack } from '@chakra-ui/react'
 import { BlogCard, Section } from '../components'
-const DiscoverTheWorld = ({ data, isLoading }) => {
-  if (isLoading) {
-    return (
-      <Spinner
-        size="xl"
-        thickness="4px"
-        speed="0.5s"
-        emptyColor="gray.200"
-        color="color13"
-      />
-    )
-  }
+const DiscoverTheWorld = ({ data }) => {
   return (
     <Box position={'relative'} pb={'8'}>
       <Center>
