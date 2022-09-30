@@ -10,16 +10,6 @@ import Layout from '../components/layouts/main'
 import axios from 'axios'
 
 const Page = ({ featured_data = null, activities_data = null }) => {
-  if (!featured_data || !activities_data) {
-    return (
-      <Layout>
-        <Head>
-          <title>Kite India - Home</title>
-        </Head>
-        <HeroSection />
-      </Layout>
-    )
-  }
   return (
     <Layout>
       <Head>
@@ -53,6 +43,12 @@ export async function getStaticProps() {
   const { data: activities_data } = await axios.get(
     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/activity`
   )
+
+  if (!featured_data || !activities_data) {
+    return {
+      notFound: true
+    }
+  }
 
   return { props: { featured_data, activities_data } }
 }

@@ -9,7 +9,7 @@ const Image = styled.img`
   object-fit: cover;
 `
 
-const BlogPostWithImage = ({ blog }) => {
+const BlogCard = ({ blog }) => {
   const { _id, name, image, description } = blog
   return (
     <Center>
@@ -23,7 +23,7 @@ const BlogPostWithImage = ({ blog }) => {
         <Center>
           <Box pt="8px">
             <Heading
-              as="h4"
+              as="h2"
               size="md"
               fontSize="24px"
               fontFamily="'Changa One'"
@@ -54,6 +54,7 @@ const BlogPostWithImage = ({ blog }) => {
                   cursor="pointer"
                   color="#8fb339"
                   fontFamily="'Poppins'"
+                  as="span"
                 >
                   view full blog...
                 </Text>
@@ -66,4 +67,4 @@ const BlogPostWithImage = ({ blog }) => {
   )
 }
 
-export default BlogPostWithImage
+export default BlogCard

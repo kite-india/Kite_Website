@@ -18,6 +18,7 @@ const DiscoverTheWorld = ({ data }) => {
             size={'sm'}
             align={'center'}
             p={'4'}
+            as="span"
           >
             JOIN OUR ADVENTURES
           </Heading>
@@ -28,9 +29,7 @@ const DiscoverTheWorld = ({ data }) => {
         <Flex p={4} align={'center'} justify="center">
           <Stack spacing="36px" direction={{ base: 'column', lg: 'row' }}>
             {data.map(blog => (
-              <Box key={blog._id}>
-                <BlogCard blog={blog} />
-              </Box>
+              <BlogCard blog={blog} key={blog.name} />
             ))}
           </Stack>
         </Flex>

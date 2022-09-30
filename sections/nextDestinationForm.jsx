@@ -88,6 +88,7 @@ const NextDestinationForm = () => {
             size={'sm'}
             align={'center'}
             p={'4'}
+            as="span"
           >
             LET&apos;S BUILD OUR COMMUNITY
           </Heading>
@@ -111,6 +112,7 @@ const NextDestinationForm = () => {
             color="#434343"
             fontWeight={'semibold'}
             fontSize={{ base: 'xl', sm: '2xl' }}
+            as="h2"
           >
             Share your travels
           </Heading>
