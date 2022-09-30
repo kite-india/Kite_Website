@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef } from 'react'
 import NextLink from 'next/link'
 import {
   Flex,
@@ -9,14 +9,18 @@ import {
   Link,
   Button,
   Avatar,
-  IconButton,
-  Menu,
-  MenuItem,
-  MenuDivider,
-  MenuButton,
-  MenuList
+  useDisclosure,
+  useMediaQuery,
+  Drawer,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  DrawerHeader,
+  DrawerBody,
+  VStack,
+  DrawerFooter
 } from '@chakra-ui/react'
-import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai'
+import { AiOutlineMenu } from 'react-icons/ai'
 import { BiHomeHeart, BiTrip } from 'react-icons/bi'
 import { GrGallery, GrContact } from 'react-icons/gr'
 import { FaRegUserCircle } from 'react-icons/fa'
@@ -43,6 +47,7 @@ const BookBtn = () => (
     fontWeight="normal"
     display={{ base: 'none', md: 'flex' }}
     onClick={() => {}}
+    variant="outline"
   >
     Book now
   </Button>
@@ -61,8 +66,28 @@ const LinkItem = ({ href, children }) => (
   </NextLink>
 )
 
+const DrawerLink = ({ href, children, icon }) => (
+  <NextLink href={href}>
+    <Link
+      fontFamily="'Roboto'"
+      fontSize="16px"
+      _hover={{ color: 'color5' }}
+      _active={{ color: 'color5' }}
+      display="flex"
+      alignItems="center"
+      gap={1}
+    >
+      {icon}
+      {children}
+    </Link>
+  </NextLink>
+)
+
 const Navbar = () => {
-  const [isOpen, setOpen] = useState(false)
+  // const [isOpen, setOpen] = useState(false)
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const btnRef = useRef()
+  const [isSmallerThanMd] = useMediaQuery('(max-width:768px)')
   return (
     <Box
       py={3}
@@ -99,48 +124,87 @@ const Navbar = () => {
           _hover={{ color: 'color6' }}
         />
         <BookBtn />
-        <Menu>
-          <MenuButton
-            display={{ base: 'flex', md: 'none' }}
-            as={IconButton}
-            aria-label="Options"
-            icon={isOpen ? <AiOutlineClose /> : <AiOutlineMenu />}
-            variant="outline"
-            onClick={() => setOpen(!isOpen)}
-          />
-          <MenuList display={{ base: '', md: 'none' }}>
-            {links.map(({ name, href, icon }) => (
-              <NextLink href={href} key={name}>
-                <MenuItem
-                  as={Link}
-                  icon={icon}
-                  fontFamily="'Roboto'"
-                  fontSize="16px"
-                  _hover={{ color: 'color5' }}
-                  _active={{ color: 'color5' }}
-                  onClick={() => setOpen(!isOpen)}
-                >
-                  {name}
-                </MenuItem>
-              </NextLink>
-            ))}
-            <MenuDivider />
-            <MenuItem
-              bg="color2"
-              fontFamily="'Roboto'"
-              _hover={{ color: 'color3' }}
-              _active={{ color: 'color3' }}
-              color="white"
-              rounded="md"
-              px={4}
-              m={1}
-              fontSize="16px"
-              w="200px"
+        {isSmallerThanMd && (
+          <Button
+            aria-label="drawer-open"
+            ref={btnRef}
+            onClick={onOpen}
+            fontSize="16px"
+            bg="color5"
+            color="white"
+            rounded="lg"
+            _hover={{ bg: 'green.400' }}
+          >
+            <AiOutlineMenu />
+          </Button>
+        )}
+        <Drawer
+          isOpen={isOpen}
+          placement="left"
+          onClose={onClose}
+          finalFocusRef={btnRef}
+          size="xs"
+        >
+          <DrawerOverlay />
+          <DrawerContent
+            zIndex={100}
+            backdropFilter="saturate(180%) blur(3px)"
+            bg="rgba(255,255,255,0.9)"
+          >
+            <DrawerCloseButton />
+            <DrawerHeader
+              borderBottomWidth="1px"
+              color="#B7CE6A"
+              borderColor="#B7CE6A"
+              bg="rgba(255,255,255,1)"
+              boxShadow="xl"
+              alignItems="center"
+              justifyContent="center"
+              fontFamily="'Poppins'"
             >
-              Book Now
-            </MenuItem>
-          </MenuList>
-        </Menu>
+              Kite India
+            </DrawerHeader>
+            <DrawerBody px={2} py={2}>
+              <VStack
+                gap={{ base: 4, lg: 8 }}
+                bg="rgba(255,255,255,1)"
+                boxShadow="xl"
+                rounded="lg"
+                p={6}
+              >
+                {links.map(({ name, href, icon }) => (
+                  <DrawerLink icon={icon} name={name} href={href} key={name}>
+                    {name}
+                  </DrawerLink>
+                ))}
+                <Button
+                  bg="color2"
+                  fontFamily="'Roboto'"
+                  _hover={{ color: 'color3' }}
+                  _active={{ color: 'color3' }}
+                  color="white"
+                  rounded="md"
+                  px={4}
+                  m={1}
+                  fontSize="16px"
+                  w="200px"
+                >
+                  Book Now
+                </Button>
+              </VStack>
+            </DrawerBody>
+            <DrawerFooter
+              bg="rgba(255,255,255,1)"
+              boxShadow="lg"
+              fontFamily="'Roboto'"
+              color="#B7CE6A"
+              fontSize="20px"
+              fontStyle="italic"
+            >
+              Kite India @2022
+            </DrawerFooter>
+          </DrawerContent>
+        </Drawer>
       </Flex>
     </Box>
   )
