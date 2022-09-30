@@ -19,7 +19,7 @@ const ActivityCard = ({ data }) => {
         src={image}
         alt="activity"
         w={{ base: '100%', lg: '160px' }}
-        h={{ base: '100%', lg: '160px' }}
+        h={{ base: '180px', md: '40vh', lg: '160px' }}
         objectFit="cover"
         borderRadius="lg"
       />
@@ -43,10 +43,11 @@ const ActivityCard = ({ data }) => {
           </Text>
           <Button
             bg="#8FB339"
-            _hover={{ bg: '#125C13' }}
+            _hover={{ bg: 'green.400' }}
+            _focus={{ bg: 'green.400' }}
             color="white"
             fontFamily="'Roboto'"
-            borderRadius="lg"
+            borderRadius="full"
             px={{ base: 6, lg: 12 }}
           >
             Add to Cart

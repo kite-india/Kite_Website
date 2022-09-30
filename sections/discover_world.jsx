@@ -1,30 +1,36 @@
 import React from 'react'
-import { Flex, Box, Heading, Center, Stack } from '@chakra-ui/react'
+import { Flex, Box, Heading, Stack } from '@chakra-ui/react'
 import { BlogCard, Section } from '../components'
 const DiscoverTheWorld = ({ data }) => {
   return (
-    <Box position={'relative'} pb={'8'}>
-      <Center>
+    <Box position={'relative'} py={'8'}>
+      <Box
+        display="flex"
+        textAlign="center"
+        direction={{ base: 'column', lg: ' row' }}
+        alignItems="center"
+        flexWrap="wrap"
+        justifyContent="center"
+        px={6}
+        py={{ base: 2, lg: 6 }}
+        gap={{ base: 2, lg: 4 }}
+      >
+        <Heading
+          color={'color13'}
+          fontFamily="'Poppins'"
+          size={'sm'}
+          align={'center'}
+        >
+          JOIN OUR ADVENTURES
+        </Heading>
         <Heading
           color={'color5'}
           fontFamily="'Poppins'"
-          pt={'1'}
-          mt={'10'}
           fontSize={{ base: 'xl', sm: '3xl' }}
         >
-          <Heading
-            color={'color13'}
-            fontFamily="'Poppins'"
-            size={'sm'}
-            align={'center'}
-            p={'4'}
-            as="span"
-          >
-            JOIN OUR ADVENTURES
-          </Heading>
           Discover India with us
         </Heading>
-      </Center>
+      </Box>
       <Section delay={0.3}>
         <Flex p={4} align={'center'} justify="center">
           <Stack spacing="36px" direction={{ base: 'column', lg: 'row' }}>

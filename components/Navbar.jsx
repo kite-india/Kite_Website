@@ -133,7 +133,9 @@ const Navbar = () => {
               color="white"
               rounded="md"
               px={4}
+              m={1}
               fontSize="16px"
+              w="200px"
             >
               Book Now
             </MenuItem>

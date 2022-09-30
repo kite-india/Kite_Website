@@ -44,11 +44,21 @@ const Trips = ({ packages_data = null, activities_data = null }) => {
               boxShadow="lg"
             />
             <Section delay={0.3}>
-              <Box align="left" py={3}>
+              <Box
+                align="left"
+                py={3}
+                textAlign={{ base: 'center', lg: 'left' }}
+              >
                 <Heading fontSize="72px" fontWeight="semibold">
                   Kashmir
                 </Heading>
-                <Text fontFamily="'Poppins'" fontWeight="light" fontSize="22px">
+                <Text
+                  fontFamily="'Poppins'"
+                  fontWeight="light"
+                  fontSize="22px"
+                  textAlign="justify"
+                  my={1}
+                >
                   Volutpat at sit curabitur duis tristique est. Pharetra vel,
                   arcu ultrices fringilla. Eu arcu dolor neque enim ac lectus
                   adipiscing proin. Neque, senectus tellus lectus molestie
@@ -57,14 +67,16 @@ const Trips = ({ packages_data = null, activities_data = null }) => {
                   tristique in.
                 </Text>
                 <Button
-                  size="lg"
+                  size="xl"
                   mt={3}
-                  px={12}
+                  py={4}
+                  px={16}
                   bg="#B7CE63"
                   color="white"
-                  fontFamily="'Roboto'"
-                  borderRadius="xl"
-                  _hover={{ bg: 'green' }}
+                  fontFamily="'Roboto', serif"
+                  borderRadius="full"
+                  _hover={{ bg: 'green.400' }}
+                  fontSize="2xl"
                 >
                   Explore Packages
                 </Button>
@@ -82,18 +94,6 @@ const Trips = ({ packages_data = null, activities_data = null }) => {
     </Layout>
   )
 }
-
-// Trips.getInitialProps = async () => {
-//   const { data: packages_data } = await axios.get(
-//     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package`
-//   )
-
-//   const { data: activities_data } = await axios.get(
-//     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/activity`
-//   )
-
-//   return { packages_data, activities_data }
-// }
 
 export async function getServerSideProps() {
   const { data: packages_data } = await axios.get(

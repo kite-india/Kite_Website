@@ -10,7 +10,6 @@ import {
   Text,
   useColorModeValue,
   Box,
-  Center,
   Select,
   Textarea,
   FormErrorMessage
@@ -72,30 +71,36 @@ const NextDestinationForm = () => {
     <Box
       bg={useColorModeValue('gray.50', 'gray.800')}
       position={'relative'}
-      pb={'8'}
+      py={{ base: '3', lg: '6' }}
+      px="4"
     >
-      <Center m={'0'}>
+      <Box
+        textAlign="center"
+        display="flex"
+        direction={{ base: 'column', md: 'row' }}
+        flexWrap="wrap"
+        justifyContent="center"
+        alignItems="center"
+        gap={{ base: 2, lg: 4 }}
+        pt={4}
+      >
+        <Heading
+          color={'color13'}
+          fontFamily="'Poppins'"
+          size={'sm'}
+          align={'center'}
+        >
+          LET&apos;S BUILD OUR COMMUNITY
+        </Heading>
         <Heading
           color={'color5'}
           fontFamily={'Poppins'}
-          pt={'1'}
-          mt={'10'}
           fontSize={{ base: 'xl', sm: '3xl' }}
         >
-          <Heading
-            color={'color13'}
-            fontFamily="'Poppins'"
-            size={'sm'}
-            align={'center'}
-            p={'4'}
-            as="span"
-          >
-            LET&apos;S BUILD OUR COMMUNITY
-          </Heading>
           Join our next destination
         </Heading>
-      </Center>
-      <Flex m={'0'} minH={'50vh'} align={'center'} justify={'center'}>
+      </Box>
+      <Flex minH={'50vh'} align={'center'} justify={'center'}>
         <Stack
           spacing={4}
           w={'full'}
@@ -104,7 +109,7 @@ const NextDestinationForm = () => {
           rounded={'xl'}
           boxShadow={'lg'}
           p={6}
-          my={12}
+          my={8}
         >
           <Heading
             fontFamily="'Changa One'"

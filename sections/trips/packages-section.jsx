@@ -20,6 +20,7 @@ const Packages = ({ data }) => {
         my={8}
         fontSize={{ base: '56px', md: '72px' }}
         color="#B7CE63"
+        textAlign={{ base: 'center', lg: 'left' }}
       >
         Packages
       </Heading>

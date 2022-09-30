@@ -38,7 +38,7 @@ const Activities = ({ data }) => {
           Add Them to your Trip
         </Text>
       </Flex>
-      <Box mb={8} mx={{ base: 2, lg: 6 }}>
+      <Box mb={4} mx={{ base: 2, lg: 6 }}>
         <Swiper
           modules={[Autoplay, Grid]}
           breakpoints={{
