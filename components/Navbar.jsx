@@ -24,6 +24,7 @@ import { AiOutlineMenu } from 'react-icons/ai'
 import { BiHomeHeart, BiTrip } from 'react-icons/bi'
 import { GrGallery, GrContact } from 'react-icons/gr'
 import { FaRegUserCircle } from 'react-icons/fa'
+import { motion } from 'framer-motion'
 
 const links = [
   { name: 'Home', href: '/', icon: <BiHomeHeart /> },
@@ -34,6 +35,9 @@ const links = [
 
 const BookBtn = () => (
   <Button
+    as={motion.button}
+    whileHover={{ scale: 1.1 }}
+    whileTap={{ scale: 0.9 }}
     size="sm"
     rounded="full"
     px={3}
@@ -42,7 +46,7 @@ const BookBtn = () => (
     color="white"
     fontFamily="'Roboto'"
     _hover={{
-      bg: 'color6'
+      bg: 'green.400'
     }}
     fontWeight="normal"
     display={{ base: 'none', md: 'flex' }}
@@ -58,8 +62,10 @@ const LinkItem = ({ href, children }) => (
     <Link
       fontSize="16px"
       fontFamily="'Roboto'"
+      color="black"
       _hover={{ color: 'color5' }}
       _active={{ color: 'color5' }}
+      fontWeight="normal"
     >
       {children}
     </Link>
@@ -90,18 +96,24 @@ const Navbar = () => {
   const [isSmallerThanMd] = useMediaQuery('(max-width:768px)')
   return (
     <Box
-      py={3}
+      py={4}
       px={{ base: 4, md: 8, lg: 32 }}
       align="center"
       position="fixed"
       zIndex={100}
       display="block"
       w="100vw"
-      bg="rgba(255,255,255,0.8)"
+      bg="rgba(255,255,255,0.7)"
       backdropFilter="saturate(180%) blur(5px)"
       boxShadow="xl"
     >
-      <Flex justifyContent="center" alignItems="center">
+      <Flex
+        justifyContent="center"
+        alignItems="center"
+        as={motion.div}
+        animate={{ y: [-200, 0], opacity: [0, 1] }}
+        transition={{ duration: 3, delay: 3, ease: 'linear' }}
+      >
         <Heading as="h4" fontSize="24px" color="navbarLogo">
           Kite India
         </Heading>
@@ -171,6 +183,9 @@ const Navbar = () => {
                 boxShadow="xl"
                 rounded="lg"
                 p={6}
+                as={motion.div}
+                animate={{ y: [-600, 0], opacity: 1 }}
+                transition={{ duration: 3, delay: 2, ease: 'linear' }}
               >
                 {links.map(({ name, href, icon }) => (
                   <DrawerLink icon={icon} name={name} href={href} key={name}>
@@ -188,6 +203,8 @@ const Navbar = () => {
                   m={1}
                   fontSize="16px"
                   w="200px"
+                  as={motion.button}
+                  whileTap={{ scale: 1.2 }}
                 >
                   Book Now
                 </Button>

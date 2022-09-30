@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
   return (
     <Box w="100%" as="main">
       <Navbar path={router.asPath} />
-      <Box w="100%" pt={12}>
+      <Box w="100%" pt={16}>
         {children}
       </Box>
       <Footer />

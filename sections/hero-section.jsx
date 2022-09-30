@@ -14,10 +14,10 @@ const HeroSection = () => {
   return (
     <Box
       w="100%"
-      h={{ base: '85vh', md: '65vh' }}
+      h={{ base: '85vh', md: '75vh' }}
       display="flex"
       alignItems="center"
-      justifyContent={{ base: 'center', md: 'flex-start' }}
+      justifyContent={{ base: 'center', lg: 'flex-start' }}
       pt={{ base: 3, md: 0 }}
       bgImage="url('/images/hero.png')"
       bgSize="cover"

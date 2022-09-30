@@ -1,5 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
+import { motion } from 'framer-motion'
 import {
   Box,
   Heading,
@@ -77,6 +78,9 @@ const Trips = ({ packages_data = null, activities_data = null }) => {
                   borderRadius="full"
                   _hover={{ bg: 'green.400' }}
                   fontSize="2xl"
+                  as={motion.button}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
                 >
                   Explore Packages
                 </Button>
@@ -84,10 +88,10 @@ const Trips = ({ packages_data = null, activities_data = null }) => {
             </Section>
           </Flex>
         </Section>
-        <Section delay={0.3}>
+        <Section delay={0.4}>
           <PackagesSection data={packages_data} />
         </Section>
-        <Section delay={0.3} mt={6}>
+        <Section delay={0.5} mt={6}>
           <Activities data={activities_data} />
         </Section>
       </Container>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Box, Heading, Image, Text, Button, Flex } from '@chakra-ui/react'
+import { motion } from 'framer-motion'
 
 const ActivityCard = ({ data }) => {
   const { _id, name, description, image } = data
@@ -49,6 +50,9 @@ const ActivityCard = ({ data }) => {
             fontFamily="'Roboto'"
             borderRadius="full"
             px={{ base: 6, lg: 12 }}
+            as={motion.button}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
           >
             Add to Cart
           </Button>
