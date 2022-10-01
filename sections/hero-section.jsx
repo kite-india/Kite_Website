@@ -9,21 +9,33 @@ import {
 } from '@chakra-ui/react'
 import Section from '../components/Section'
 import { BsSearch } from 'react-icons/bs'
+import Image from 'next/image'
+import HeroImage from '../public/images/hero1.jpg'
 
 const HeroSection = () => {
   return (
     <Box
+      scrollSnapAlign="center"
       w="100%"
       h={{ base: '85vh', md: '75vh' }}
       display="flex"
       alignItems="center"
       justifyContent={{ base: 'center', lg: 'flex-start' }}
       pt={{ base: 3, md: 0 }}
-      bgImage="url('/images/hero.png')"
-      bgSize="cover"
-      bgRepeat="no-repeat"
-      bgPosition="center"
+      position="relative"
+      // bgImage="url('/images/hero.png')"
+      // bgSize="cover"
+      // bgRepeat="no-repeat"
+      // bgPosition="center"
     >
+      <Image
+        src={HeroImage}
+        alt="hero"
+        priority
+        layout="fill"
+        objectFit="cover"
+        objectPosition="center"
+      />
       <Box
         position="absolute"
         zIndex={10}

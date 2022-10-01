@@ -14,6 +14,8 @@ import {
   Textarea,
   FormErrorMessage
 } from '@chakra-ui/react'
+import { Section } from '../components'
+import { motion } from 'framer-motion'
 
 const NextDestinationForm = () => {
   function validateDestinationName(value) {
@@ -75,21 +77,23 @@ const NextDestinationForm = () => {
       px="4"
     >
       <Box textAlign="center" gap={{ base: 2, lg: 4 }} pt={4}>
-        <Heading
-          color={'color13'}
-          fontFamily="'Poppins'"
-          size={'sm'}
-          align={'center'}
-        >
-          LET&apos;S BUILD OUR COMMUNITY
-        </Heading>
-        <Heading
-          color={'color5'}
-          fontFamily={'Poppins'}
-          fontSize={{ base: 'xl', sm: '3xl' }}
-        >
-          Join our next destination
-        </Heading>
+        <Section>
+          <Heading
+            color={'color13'}
+            fontFamily="'Poppins'"
+            size={'sm'}
+            align={'center'}
+          >
+            LET&apos;S BUILD OUR COMMUNITY
+          </Heading>
+          <Heading
+            color={'color5'}
+            fontFamily={'Poppins'}
+            fontSize={{ base: 'xl', sm: '3xl' }}
+          >
+            Join our next destination
+          </Heading>
+        </Section>
       </Box>
       <Flex minH={'50vh'} align={'center'} justify={'center'}>
         <Stack
@@ -240,6 +244,9 @@ const NextDestinationForm = () => {
                     _hover={{
                       bg: 'color5'
                     }}
+                    as={motion.button}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
                   >
                     Submit
                   </Button>

@@ -96,16 +96,22 @@ const Navbar = () => {
   const [isSmallerThanMd] = useMediaQuery('(max-width:768px)')
   return (
     <Box
-      py={4}
+      as={motion.div}
+      py={{ base: 3, md: 4 }}
       px={{ base: 4, md: 8, lg: 32 }}
       align="center"
       position="fixed"
       zIndex={100}
       display="block"
       w="100vw"
-      bg="rgba(255,255,255,0.7)"
+      bg="rgba(255,255,255,1)"
+      opacity="0.8"
       backdropFilter="saturate(180%) blur(5px)"
       boxShadow="xl"
+      whileHover={{
+        opacity: [0.8, 1],
+        transition: { duration: 1 }
+      }}
     >
       <Flex
         justifyContent="center"
@@ -133,7 +139,8 @@ const Navbar = () => {
           h="25px"
           ml={8}
           mr={4}
-          _hover={{ color: 'color6' }}
+          size="lg"
+          _hover={{ color: 'green.400' }}
         />
         <BookBtn />
         {isSmallerThanMd && (

@@ -3,7 +3,7 @@ import { Flex, Box, Heading, Stack } from '@chakra-ui/react'
 import { BlogCard, Section } from '../components'
 const DiscoverTheWorld = ({ data }) => {
   return (
-    <Box position={'relative'} py={'8'}>
+    <Box position={'relative'} py={'8'} scrollSnapAlign="center">
       <Box
         textAlign="center"
         px={6}
