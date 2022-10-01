@@ -3,7 +3,6 @@ import { Box, Text, Heading, Flex, Container } from '@chakra-ui/react'
 import Layout from '../components/layouts/main'
 import Image from 'next/image'
 import Section from '../components/Section'
-import globeSVG from '../public/Saly-44.svg'
 
 const Gallery = () => {
   return (
@@ -29,7 +28,7 @@ const Gallery = () => {
             <Box>
               <Image
                 priority
-                src={globeSVG}
+                src="/Saly-44.svg"
                 layout="fixed"
                 width="280px"
                 height="280px"
