@@ -4,12 +4,16 @@ import axios from 'axios'
 
 import { Section } from '../../../components'
 import Layout from '../../../components/layouts/main'
+import Head from 'next/head'
 
 const Page = ({ packages_data }) => {
   if (!packages_data) return null
   const { name, _id, image, description } = packages_data
   return (
     <Layout>
+      <Head>
+        <title>Kite India&apos;s Trip</title>
+      </Head>
       <Container w="100%" pt={8} maxWidth="container.xl">
         <Section delay={0.2}>
           <Flex gap={6}>

@@ -15,6 +15,7 @@ import Layout from '../components/layouts/main'
 import { Section } from '../components'
 import { motion } from 'framer-motion'
 import { IoIosMail } from 'react-icons/io'
+import Head from 'next/head'
 
 const Contact = () => {
   const [contactDetails, setContactDetails] = useState({})
@@ -30,11 +31,14 @@ const Contact = () => {
   }
   return (
     <Layout>
+      <Head>
+        <title>Kite India</title>
+      </Head>
       <Container maxW="container.xl" p={3} my={4}>
         <Section>
           <Center>
             <Flex
-              bgColor="#8FB339"
+              bgColor="#C7D59F"
               rounded="lg"
               direction={{ base: 'column-reverse', lg: 'row' }}
               justifyContent="between"

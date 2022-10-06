@@ -1,6 +1,7 @@
 // import Image from 'next/image'
 import styled from '@emotion/styled'
 import { Box, Center, Heading, Text, Stack } from '@chakra-ui/react'
+import { motion } from 'framer-motion'
 
 const Image = styled.img`
   border-radius: 10px;
@@ -12,7 +13,7 @@ const Image = styled.img`
 const BlogCard = ({ blog }) => {
   const { _id, name, image, description } = blog
   return (
-    <Center>
+    <Center as={motion.div} whileHover={{ scale: 1.1 }} cursor="pointer">
       <Box
         w={'100%'}
         h={'435px'}
@@ -56,7 +57,8 @@ const BlogCard = ({ blog }) => {
                   fontFamily="'Poppins'"
                   as="span"
                 >
-                  view full blog...
+                  {' '}
+                  Read more...
                 </Text>
               </Text>
             </Stack>

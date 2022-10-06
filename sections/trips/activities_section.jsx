@@ -58,7 +58,7 @@ const Activities = ({ data }) => {
           slidesPerView={1}
         >
           {data.map(activity => (
-            <SwiperSlide key={activity._id}>
+            <SwiperSlide key={activity.name}>
               <Flex direction="column" gap={4} mb={4}>
                 <ActivityCard data={activity} />
                 <ActivityCard data={activity} />

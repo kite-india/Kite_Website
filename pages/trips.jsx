@@ -38,7 +38,7 @@ const Trips = ({ packages_data = null, activities_data = null }) => {
             gap={{ base: 8, lg: 16 }}
           >
             <Image
-              priority
+              priority="true"
               src="/images/trips.png"
               alt="trips"
               objectFit="cover"

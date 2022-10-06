@@ -31,7 +31,7 @@ const HeroSection = () => {
       <Image
         src={HeroImage}
         alt="hero"
-        priority
+        priority="true"
         layout="fill"
         objectFit="cover"
         objectPosition="center"

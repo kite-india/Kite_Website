@@ -14,7 +14,7 @@ const Page = ({ featured_data = null, activities_data = null }) => {
     <Layout>
       <Head>
         <title>Kite India - Home</title>
-        <meta name="viewport" content="width=device-width, initial-scale-1" />
+        <meta name="viewport" content="width=device-width" />
       </Head>
       <HeroSection />
       <FeaturedSection data={featured_data} />
