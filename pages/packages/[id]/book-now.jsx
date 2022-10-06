@@ -23,8 +23,11 @@ import Layout from '../../../components/layouts/main'
 const ExtraPassenger = ({ onToggle, num, handleExtraPassengers }) => {
   const [passengerDetails, setPassengerDetails] = useState({})
 
-  const handleChange = (e, name) => {
-    setPassengerDetails(prevState => ({ ...prevState, [name]: e.target.value }))
+  const handleChange = e => {
+    setPassengerDetails(prevState => ({
+      ...prevState,
+      [e.target.name]: e.target.value
+    }))
     handleExtraPassengers(num - 1, passengerDetails)
     e.preventDefault()
   }
@@ -53,7 +56,7 @@ const ExtraPassenger = ({ onToggle, num, handleExtraPassengers }) => {
             w="30%"
             type="text"
             name="suffix"
-            onChange={e => handleChange(e, e.target.name)}
+            onChange={handleChange}
             placeholder="Suffix"
           >
             <option value="mr">Mr</option>
@@ -63,7 +66,7 @@ const ExtraPassenger = ({ onToggle, num, handleExtraPassengers }) => {
             type="text"
             name="fname"
             placeholder="First Name"
-            onChange={e => handleChange(e, e.target.name)}
+            onChange={handleChange}
             required
           />
           <Input type="text" name="mname" placeholder="Middle" />
@@ -73,7 +76,7 @@ const ExtraPassenger = ({ onToggle, num, handleExtraPassengers }) => {
             type="text"
             name="lname"
             placeholder="Last Name"
-            onChange={e => handleChange(e, e.target.name)}
+            onChange={handleChange}
             required
           />
           <Input
@@ -81,13 +84,13 @@ const ExtraPassenger = ({ onToggle, num, handleExtraPassengers }) => {
             name="email"
             w="70%"
             placeholder="Email Address"
-            onChange={e => handleChange(e, e.target.name)}
+            onChange={handleChange}
           />
           <Input
             type="text"
             name="phone"
             w="20%"
-            onChange={e => handleChange(e, e.target.name)}
+            onChange={handleChange}
             placeholder="Phone Number"
           />
         </Flex>
@@ -119,8 +122,11 @@ const BookNow = ({ packages_data }) => {
     setExtraPassengers(prevState => ({ ...prevState, [num]: passenger }))
   }
 
-  const handleChange = (e, name) => {
-    setFormParams(prevState => ({ ...prevState, [name]: e.target.value }))
+  const handleChange = e => {
+    setFormParams(prevState => ({
+      ...prevState,
+      [e.target.name]: e.target.value
+    }))
     e.preventDefault()
   }
 
@@ -212,7 +218,7 @@ const BookNow = ({ packages_data }) => {
                       type="text"
                       name="suffix"
                       placeholder="Suffix"
-                      onChange={e => handleChange(e, e.target.name)}
+                      onChange={handleChange}
                     >
                       <option value="mr">Mr</option>
                       <option value="mrs">Mrs</option>
@@ -221,7 +227,7 @@ const BookNow = ({ packages_data }) => {
                       type="text"
                       name="fname"
                       placeholder="First Name"
-                      onChange={e => handleChange(e, e.target.name)}
+                      onChange={handleChange}
                       required
                     />
                     <Input
@@ -237,14 +243,14 @@ const BookNow = ({ packages_data }) => {
                       name="lname"
                       placeholder="Last Name"
                       required
-                      onChange={e => handleChange(e, e.target.name)}
+                      onChange={handleChange}
                     />
                     <Input
                       type="date"
                       name="dob"
                       placeholder="Date of Birth"
                       required
-                      onChange={e => handleChange(e, e.target.name)}
+                      onChange={handleChange}
                     />
                   </Flex>
                   <Flex gap={{ base: 4, md: 12 }}>
@@ -253,14 +259,14 @@ const BookNow = ({ packages_data }) => {
                       name="email"
                       placeholder="Email Address"
                       required
-                      onChange={e => handleChange(e, e.target.name)}
+                      onChange={handleChange}
                     />
                     <Input
                       type="text"
                       name="phone"
                       placeholder="Phone Number"
                       required
-                      onChange={e => handleChange(e, e.target.name)}
+                      onChange={handleChange}
                     />
                   </Flex>
                   <Flex gap={{ base: 2, md: 6 }}>
@@ -269,14 +275,14 @@ const BookNow = ({ packages_data }) => {
                       name="from"
                       placeholder="Start Date"
                       required
-                      onChange={e => handleChange(e, e.target.name)}
+                      onChange={handleChange}
                     />
                     <Input
                       type="datetime-local"
                       name="to"
                       placeholder="End Date"
                       required
-                      onChange={e => handleChange(e, e.target.name)}
+                      onChange={handleChange}
                     />
                     <InputGroup>
                       <InputRightElement>
