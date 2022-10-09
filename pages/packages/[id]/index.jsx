@@ -33,7 +33,23 @@ const Page = ({ packages_data }) => {
   )
 }
 
-export async function getServerSideProps(context) {
+export async function getStaticPaths() {
+  const { data } = await axios.get(
+    `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package`
+  )
+
+  const paths = data.map(el => {
+    return {
+      params: { id: `${el._id}` }
+    }
+  })
+  return {
+    paths,
+    fallback: false
+  }
+}
+
+export async function getStaticProps(context) {
   const { id } = context.params
   const { data } = await axios.get(
     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package/${id}`
