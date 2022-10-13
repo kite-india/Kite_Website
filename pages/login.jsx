@@ -60,8 +60,10 @@ const Login = () => {
 
             <Flex gap="2px" justifyContent="center" flexDirection="column">
               <Button width="100%" px="3" my="20px" borderRadius="10px" color="white" backgroundColor="#A4C15E" boxShadow="lg" fontFamily="'Poppins'">LOGIN</Button>
-              <Text fontWeight="500" fontFamily="'Poppins'">Don't have an Account ?</Text>
-              <Text cursor="pointer" fontWeight="500"  fontFamily="'Poppins'" color="green">Sign Up</Text>
+              <Flex gap="4px">
+                <Text fontWeight="500" fontFamily="'Poppins'">Don't have an Account ?</Text>
+                <Text cursor="pointer" fontWeight="500"  fontFamily="'Poppins'" color="green">Sign Up</Text>
+              </Flex>
             </Flex>
           </Flex>
 
