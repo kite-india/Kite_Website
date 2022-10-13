@@ -131,6 +131,7 @@ const Navbar = () => {
             </LinkItem>
           ))}
         </HStack>
+     
         <Avatar
           icon={<FaRegUserCircle />}
           color="color5"
@@ -141,7 +142,10 @@ const Navbar = () => {
           mr={4}
           size="lg"
           _hover={{ color: 'green.400' }}
+          cursor="pointer"
         />
+     
+        
         <BookBtn />
         {isSmallerThanMd && (
           <Button
