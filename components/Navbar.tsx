@@ -50,7 +50,7 @@ const BookBtn = () => (
     }}
     fontWeight="normal"
     display={{ base: 'none', md: 'flex' }}
-    onClick={() => {}}
+    onClick={() => {""}}
     variant="outline"
   >
     Book now
@@ -89,7 +89,11 @@ const DrawerLink = ({ href, children, icon }) => (
   </NextLink>
 )
 
-const Navbar = () => {
+interface NavProps {
+  path?: string
+}
+
+const Navbar: React.FC<NavProps> = () => {
   // const [isOpen, setOpen] = useState(false)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = useRef()

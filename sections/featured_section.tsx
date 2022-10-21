@@ -38,7 +38,11 @@ import FeaturedCard from '../components/FeaturedCard'
 ]
 */
 
-const FeaturedSection = ({ data }) => {
+interface Props {
+  data: any;
+}
+
+const FeaturedSection: React.FC<Props> = ({ data }) => {
   return (
     <Box bg="white" w="100%" px={2}>
       <Swiper

@@ -8,11 +8,11 @@ import {
   InputLeftElement
 } from '@chakra-ui/react'
 import Section from '../components/Section'
-import { BsSearch } from 'react-icons/bs'
+import { BiSearchAlt } from 'react-icons/bi'
 import Image from 'next/image'
 import HeroImage from '../public/images/hero1.jpg'
 
-const HeroSection = () => {
+const HeroSection: React.FC = () => {
   return (
     <Box
       scrollSnapAlign="center"
@@ -31,7 +31,7 @@ const HeroSection = () => {
       <Image
         src={HeroImage}
         alt="hero"
-        priority="true"
+        priority
         layout="fill"
         objectFit="cover"
         objectPosition="center"
@@ -80,13 +80,13 @@ const HeroSection = () => {
           </Text>
           <InputGroup w={{ md: '25rem' }} mt={8}>
             <InputLeftElement pointerEvents="none">
-              <BsSearch color="#3E7C17" fontSize="1.2rem" />
+              <BiSearchAlt color="#3E7C17" fontSize="1.3rem" />
             </InputLeftElement>
             <Input
               placeholder="Search"
               variant="filled"
-              fontSize="1.2rem"
-              color="#434343"
+              fontSize="1.1rem"
+              color="#e4e4e4"
             />
           </InputGroup>
         </Section>

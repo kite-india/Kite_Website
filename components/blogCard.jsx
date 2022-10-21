@@ -1,14 +1,6 @@
-// import Image from 'next/image'
-import styled from '@emotion/styled'
+import Image from 'next/image'
 import { Box, Center, Heading, Text, Stack } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
-
-const Image = styled.img`
-  border-radius: 10px;
-  height: 317.05px;
-  width: 368.67px;
-  object-fit: cover;
-`
 
 const BlogCard = ({ blog }) => {
   const { _id, name, image, description } = blog
@@ -20,7 +12,16 @@ const BlogCard = ({ blog }) => {
         // overflow={'hidden'}
         rounded="md"
       >
-        <Image src={image} alt={_id} />
+        <Box borderRadius="lg" overflow={'hidden'}>
+          <Image
+            src={image}
+            alt={_id}
+            layout="responsive"
+            width={368.67}
+            height={317.05}
+            objectFit="cover"
+          />
+        </Box>
         <Center>
           <Box pt="8px">
             <Heading

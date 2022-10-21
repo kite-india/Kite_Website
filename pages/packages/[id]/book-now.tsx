@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Head from 'next/head'
 import {
   Heading,
   Box,
@@ -19,8 +18,9 @@ import {
 import axios from 'axios'
 import { Section } from '../../../components'
 import Layout from '../../../components/layouts/main'
+import { NextPage } from 'next'
 
-const ExtraPassenger = ({ onToggle, num, handleExtraPassengers }) => {
+const ExtraPassenger: React.FC<any> = ({ onToggle, num, handleExtraPassengers }) => {
   const [passengerDetails, setPassengerDetails] = useState({})
 
   const handleChange = e => {
@@ -106,7 +106,11 @@ const ExtraPassenger = ({ onToggle, num, handleExtraPassengers }) => {
   )
 }
 
-const BookNow = ({ packages_data }) => {
+interface BookNowProps {
+  packages_data: any;
+}
+
+const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
   const { isOpen, onToggle } = useDisclosure()
   const [formParams, setFormParams] = useState({})
   const [passengers, setPassengers] = useState(1)
@@ -122,7 +126,7 @@ const BookNow = ({ packages_data }) => {
     setExtraPassengers(prevState => ({ ...prevState, [num]: passenger }))
   }
 
-  const handleChange = e => {
+  const handleChange = (e: React.ChangeEvent) => {
     setFormParams(prevState => ({
       ...prevState,
       [e.target.name]: e.target.value
@@ -133,9 +137,9 @@ const BookNow = ({ packages_data }) => {
   const handleSubmit = () => {
     formParams['packageid'] = _id
     formParams['persons'] = Object.values(extraPassengers)
-    formParams['dob'] = new Date(formParams.dob).toISOString()
-    formParams['from'] = new Date(formParams.from).toISOString()
-    formParams['to'] = new Date(formParams.to).toISOString()
+    formParams['dob'] = new Date(formParams?.dob).toISOString()
+    formParams['from'] = new Date(formParams?.from).toISOString()
+    formParams['to'] = new Date(formParams?.to).toISOString()
     console.log(formParams)
     axios
       .post(`${process.env.NEXT_PUBLIC_KITE_BACKEND}/book/package`, formParams)
@@ -144,10 +148,7 @@ const BookNow = ({ packages_data }) => {
   }
 
   return (
-    <Layout>
-      <Head>
-        <title>Kite India - Book Now</title>
-      </Head>
+    <Layout title="Book Now">
       <Container w="100%" pt={8} maxWidth="container.xl">
         <Section delay={0.1}>
           <Heading fontSize="72px" fontWeight="semibold" color="#8FB339">
@@ -234,7 +235,7 @@ const BookNow = ({ packages_data }) => {
                       type="text"
                       name="mname"
                       placeholder="Middle"
-                      onChange={e => handleChange(e, e.target.name)}
+                      onChange={handleChange}
                     />
                   </Flex>
                   <Flex gap={{ base: 4, md: 12 }}>

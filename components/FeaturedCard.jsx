@@ -13,7 +13,7 @@ import Section from './Section'
 import { BsPlayCircleFill } from 'react-icons/bs'
 
 const FeaturedCard = ({ data }) => {
-  const { _id, title, description, image } = data
+  const { title, description, image } = data
   return (
     <Box
       w="100%"

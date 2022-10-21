@@ -1,5 +1,4 @@
 import React from 'react'
-import Head from 'next/head'
 import {
   HeroSection,
   FeaturedSection,
@@ -8,14 +7,13 @@ import {
 } from '../sections'
 import Layout from '../components/layouts/main'
 import axios from 'axios'
+import type { NextPage } from 'next'
+import type { HomePageProps } from '../utils/types'
 
-const Page = ({ featured_data = null, activities_data = null }) => {
+
+const Page: NextPage<HomePageProps> = ({ featured_data = null, activities_data = null }) => {
   return (
-    <Layout>
-      <Head>
-        <title>Kite India - Home</title>
-        <meta name="viewport" content="width=device-width" />
-      </Head>
+    <Layout title="Home">
       <HeroSection />
       <FeaturedSection data={featured_data} />
       <DiscoverTheWorld data={activities_data} />

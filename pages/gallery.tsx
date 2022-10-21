@@ -3,14 +3,12 @@ import { Box, Text, Heading, Flex, Container } from '@chakra-ui/react'
 import Layout from '../components/layouts/main'
 import Image from 'next/image'
 import Section from '../components/Section'
-import Head from 'next/head'
+import { NextPage } from 'next'
 
-const Gallery = () => {
+
+const Gallery: NextPage = () => {
   return (
-    <Layout>
-      <Head>
-        <title>Kite India - Gallery</title>
-      </Head>
+    <Layout title="Gallery">
       <Container maxW="container.xl" my={8} w="100%">
         <Section delay={0.2}>
           <Flex

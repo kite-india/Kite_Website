@@ -15,11 +15,11 @@ import Layout from '../components/layouts/main'
 import { Section } from '../components'
 import { motion } from 'framer-motion'
 import { IoIosMail } from 'react-icons/io'
-import Head from 'next/head'
+import { NextPage } from 'next'
 
-const Contact = () => {
+const Contact: NextPage = () => {
   const [contactDetails, setContactDetails] = useState({})
-  const handleChange = e => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
     setContactDetails(prevState => ({
       ...prevState,
@@ -30,10 +30,7 @@ const Contact = () => {
     console.table(contactDetails)
   }
   return (
-    <Layout>
-      <Head>
-        <title>Kite India</title>
-      </Head>
+    <Layout title="Contact US">
       <Container maxW="container.xl" p={3} my={4}>
         <Section>
           <Center>
