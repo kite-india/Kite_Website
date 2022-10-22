@@ -5,7 +5,7 @@ export default function TransactionCardGroup(props) {
     <Stack
       mx={{ sm: '10px' }}
       direction={'column'}
-      gap={'10px'}
+      gap={'20px'}
       ml={{ lg: '60px' }}
     >
       {props.nid.map((val, key) => {

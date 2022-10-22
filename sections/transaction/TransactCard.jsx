@@ -26,21 +26,30 @@ export default function TransactCard(props) {
         >
           <img height={'70px'} width={'72px'} src={props.img} />
           <Flex flexDirection={'column'} lineHeight={'25px'}>
-            <Text fontSize={{ sm: '15px', lg: '19px' }} fontWeight={'700'}>
+            <Text
+              fontSize={{ sm: '13px', md: '17px', lg: '19px' }}
+              fontWeight={'700'}
+            >
               {props.place}
             </Text>
-            <Text fontSize={{ sm: '14px', lg: '18px' }} fontWeight={'500'}>
+            <Text
+              fontSize={{ sm: '11px', md: '16px', lg: '18px' }}
+              fontWeight={'500'}
+            >
               {props.date}
             </Text>
-            <Text fontSize={{ sm: '15px', lg: '19px' }} fontWeight={'700'}>
+            <Text
+              fontSize={{ sm: '11px', md: '17px', lg: '19px' }}
+              fontWeight={'700'}
+            >
               {props.guest} Guests
             </Text>
           </Flex>
           <Text
-            pr={'60px'}
+            pr={{ sm: '10px', md: '40px', lg: '60px' }}
             mt={'15px'}
             fontWeight={'400'}
-            fontSize={{ sm: '28px', lg: '32px' }}
+            fontSize={{ sm: '16px', md: '28px', lg: '32px' }}
           >
             Rs : {props.cost}
           </Text>
@@ -48,7 +57,7 @@ export default function TransactCard(props) {
       </Box>
       <Text
         backgroundColor={'rgba(217, 217, 217, 0.22)'}
-        fontSize={{ sm: '13px', lg: '15px' }}
+        fontSize={{ sm: '12px', md: '14px', lg: '15px' }}
         fontWeight={'500px'}
         textAlign={'right'}
         textTransform={'upperCase'}
@@ -56,8 +65,8 @@ export default function TransactCard(props) {
         status :
         {props.status ? (
           <Badge
-            fontSize={{ sm: '13px', lg: '15px' }}
-            mr={'59px'}
+            fontSize={{ sm: '12px', md: '14px', lg: '15px' }}
+            mr={{ sm: '10px', md: '40px', lg: '60px' }}
             ml={'5px'}
             colorScheme={'white'}
             color="green"
@@ -66,8 +75,8 @@ export default function TransactCard(props) {
           </Badge>
         ) : (
           <Badge
-            fontSize={{ sm: '13px', lg: '15px' }}
-            mr={'59px'}
+            fontSize={{ sm: '12px', md: '14px', lg: '15px' }}
+            mr={{ sm: '10px', md: '40px', lg: '60px' }}
             ml={'5px'}
             colorScheme={'white'}
             color="red"

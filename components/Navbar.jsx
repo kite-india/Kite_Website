@@ -27,7 +27,12 @@ import {
   Text
 } from '@chakra-ui/react'
 import { AiOutlineMenu } from 'react-icons/ai'
-import { BiHomeHeart, BiTrip } from 'react-icons/bi'
+import {
+  BiHomeHeart,
+  BiTrip,
+  BiShieldQuarter,
+  BiCreditCard
+} from 'react-icons/bi'
 import { GrGallery, GrContact } from 'react-icons/gr'
 import { FaRegUserCircle } from 'react-icons/fa'
 import { motion } from 'framer-motion'
@@ -169,7 +174,7 @@ const Navbar = () => {
               }}
             >
               <Avatar
-                icon={<FaRegUserCircle />}
+                icon={<FaRegUserCircle color="black" />}
                 color="color5"
                 bg="white"
                 w="30px"
@@ -179,7 +184,6 @@ const Navbar = () => {
                 _hover={{ color: 'green.400' }}
                 cursor="pointer"
               />
-
               <Text
                 fontFamily={'Poppins'}
                 fontWeight="500"
@@ -197,7 +201,7 @@ const Navbar = () => {
               }}
             >
               <Avatar
-                icon={<FaRegUserCircle />}
+                icon={<BiShieldQuarter color="black" />}
                 color="color5"
                 bg="white"
                 w="30px"
@@ -224,7 +228,7 @@ const Navbar = () => {
               }}
             >
               <Avatar
-                icon={<FaRegUserCircle />}
+                icon={<BiCreditCard color="black" />}
                 color="color5"
                 bg="white"
                 w="30px"

@@ -9,9 +9,8 @@ import {
   Tab,
   Box
 } from '@chakra-ui/react'
-import Navbar from '../components/Navbar'
+
 import TransactionCardGroup from '../sections/transaction/TransactionCardGroup'
-import Footer from '../components/Footer'
 import Layout from '../components/layouts/main'
 
 const Transaction = () => {
@@ -20,7 +19,7 @@ const Transaction = () => {
       <Container alignItems={'center'} mt={'80px'}>
         <Text
           fontFamily={'Poppins'}
-          fontSize={'35px'}
+          fontSize={{ sm: '20px', md: '28px', lg: '35px' }}
           fontWeight="500"
           lineHeight={'53px'}
           textAlign="center"
@@ -46,19 +45,21 @@ const Transaction = () => {
           variant="soft-rounded"
           colorScheme="green"
         >
-          <TabList mb={'15px'}>
-            <Tab px="25px" borderRadius={'30px'} ml={'40px'}>
+          <TabList
+            ml={{ sm: '12px', md: '25px', lg: '40px' }}
+            mb={'15px'}
+            gap={{ sm: '12px', md: '25px', lg: '40px' }}
+          >
+            <Tab px="25px" borderRadius={'30px'}>
               All
             </Tab>
-            <Tab borderRadius={'30px'} ml={'40px'}>
-              Upcoming
-            </Tab>
-            <Tab px="20px" borderRadius={'30px'} ml={'40px'}>
+            <Tab borderRadius={'30px'}>Upcoming</Tab>
+            <Tab px="20px" borderRadius={'30px'}>
               Past
             </Tab>
           </TabList>
           <hr />
-          <TabPanels>
+          <TabPanels pb={'30px'}>
             <TabPanel>
               <TransactionCardGroup
                 nid={[1234567890, 1234567891, 1234567892]}
