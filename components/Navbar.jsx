@@ -18,7 +18,13 @@ import {
   DrawerHeader,
   DrawerBody,
   VStack,
-  DrawerFooter
+  DrawerFooter,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  IconButton,
+  Text
 } from '@chakra-ui/react'
 import { AiOutlineMenu } from 'react-icons/ai'
 import { BiHomeHeart, BiTrip } from 'react-icons/bi'
@@ -131,21 +137,114 @@ const Navbar = () => {
             </LinkItem>
           ))}
         </HStack>
-     
-        <Avatar
-          icon={<FaRegUserCircle />}
-          color="color5"
-          bg="white"
-          w="25px"
-          h="25px"
-          ml={8}
-          mr={4}
-          size="lg"
-          _hover={{ color: 'green.400' }}
-          cursor="pointer"
-        />
-     
-        
+        <Menu>
+          <MenuButton
+            backgroundColor={'transparent'}
+            as={IconButton}
+            borderRadius="full"
+            ml={8}
+            mr={4}
+            p={'0px'}
+            aria-label="settings"
+            _hover={{ backgroundColor: 'transparent', outline: 'none' }}
+          >
+            <Avatar
+              icon={<FaRegUserCircle />}
+              color="color5"
+              bg="white"
+              w="25px"
+              h="25px"
+              size="lg"
+              _hover={{ color: 'green.400' }}
+              cursor="pointer"
+            />
+          </MenuButton>
+          <MenuList border={'2px solid rgba(199, 213, 159, 1)'}>
+            <MenuItem
+              minH={'48px'}
+              _hover={{ borderRadius: '20px', backgroundColor: '#c6f34d' }}
+              _focus={{
+                borderRadius: '20px',
+                backgroundColor: 'rgba(199, 213, 159, 1)'
+              }}
+            >
+              <Avatar
+                icon={<FaRegUserCircle />}
+                color="color5"
+                bg="white"
+                w="30px"
+                h="30px"
+                mr="23px"
+                size="lg"
+                _hover={{ color: 'green.400' }}
+                cursor="pointer"
+              />
+
+              <Text
+                fontFamily={'Poppins'}
+                fontWeight="500"
+                fontSize={{ sm: '14px', md: '16px', lg: '18px' }}
+              >
+                Personal Info
+              </Text>
+            </MenuItem>
+            <MenuItem
+              minH={'48px'}
+              _hover={{ borderRadius: '20px', backgroundColor: '#c6f34d' }}
+              _focus={{
+                borderRadius: '20px',
+                backgroundColor: 'rgba(199, 213, 159, 1)'
+              }}
+            >
+              <Avatar
+                icon={<FaRegUserCircle />}
+                color="color5"
+                bg="white"
+                w="30px"
+                h="30px"
+                mr="23px"
+                size="lg"
+                _hover={{ color: 'green.400' }}
+                cursor="pointer"
+              />
+              <Text
+                fontFamily={'Poppins'}
+                fontWeight="500"
+                fontSize={{ sm: '14px', md: '16px', lg: '18px' }}
+              >
+                Security
+              </Text>
+            </MenuItem>
+            <MenuItem
+              minH={'48px'}
+              _hover={{ borderRadius: '20px', backgroundColor: '#c6f34d' }}
+              _focus={{
+                borderRadius: '20px',
+                backgroundColor: 'rgba(199, 213, 159, 1)'
+              }}
+            >
+              <Avatar
+                icon={<FaRegUserCircle />}
+                color="color5"
+                bg="white"
+                w="30px"
+                h="30px"
+                mr="23px"
+                size="lg"
+                _hover={{ color: 'green.400' }}
+                cursor="pointer"
+              />
+              <Text
+                fontFamily={'Poppins'}
+                fontWeight="500"
+                fontSize={{ sm: '14px', md: '16px', lg: '18px' }}
+              >
+                Transaction Info
+              </Text>
+            </MenuItem>
+          </MenuList>
+        </Menu>
+
         <BookBtn />
         {isSmallerThanMd && (
           <Button
