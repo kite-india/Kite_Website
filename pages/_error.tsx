@@ -1,4 +1,4 @@
-function Error({ statusCode }) {
+export default function Error({ statusCode }) {
   return (
     <p>
       {statusCode
@@ -13,4 +13,4 @@ Error.getInitialProps = ({ res, err }) => {
   return { statusCode }
 }
 
-export default Error
+

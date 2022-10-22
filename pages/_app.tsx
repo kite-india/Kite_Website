@@ -1,9 +1,9 @@
 import type { AppProps } from 'next/app'
-import { wrapper } from '../app/store'
 import { ChakraProvider } from '@chakra-ui/react'
 import { AnimatePresence } from 'framer-motion'
-import Fonts from '../libs/fonts'
-import theme from '../libs/theme'
+import { wrapper } from '@redux-app/store'
+import Fonts from '@libs/fonts'
+import theme from '@libs/theme'
 
 const Website = ({ Component, pageProps, router }: AppProps) => {
   return (

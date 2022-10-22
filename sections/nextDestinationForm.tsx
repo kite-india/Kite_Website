@@ -17,7 +17,7 @@ import {
 import { Section } from '../components'
 import { motion } from 'framer-motion'
 
-const NextDestinationForm = () => {
+const NextDestinationForm: React.FC = () => {
   function validateDestinationName(value) {
     let error
     if (!value) {

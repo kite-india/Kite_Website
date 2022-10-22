@@ -4,11 +4,11 @@ import {
   FeaturedSection,
   DiscoverTheWorld,
   NextDestinationForm
-} from '../sections'
-import Layout from '../components/layouts/main'
+} from '@sections/index'
+import Layout from '@components/layouts/main'
 import axios from 'axios'
 import type { NextPage } from 'next'
-import type { HomePageProps } from '../utils/types'
+import type { HomePageProps } from '@utils/types'
 
 
 const Page: NextPage<HomePageProps> = ({ featured_data = null, activities_data = null }) => {

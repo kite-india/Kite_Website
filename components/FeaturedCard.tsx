@@ -12,7 +12,11 @@ import Section from './Section'
 
 import { BsPlayCircleFill } from 'react-icons/bs'
 
-const FeaturedCard = ({ data }) => {
+interface FeaturedDataProps {
+  data: any;
+}
+
+const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
   const { title, description, image } = data
   return (
     <Box

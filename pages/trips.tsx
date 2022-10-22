@@ -10,11 +10,11 @@ import {
   Image
 } from '@chakra-ui/react'
 import axios from 'axios'
-import { PackagesSection, Activities } from '../sections'
-import Section from '../components/Section'
-import Layout from '../components/layouts/main'
+import { PackagesSection, Activities } from '@sections/index'
+import Section from '@components/Section'
+import Layout from '@components/layouts/main'
 import type { NextPage } from 'next'
-import type { TripsPageProps } from '../utils/types'
+import type { TripsPageProps } from '@utils/types'
 
 const Trips: NextPage<TripsPageProps> = ({ packages_data = null, activities_data = null }) => {
   return (
@@ -44,7 +44,7 @@ const Trips: NextPage<TripsPageProps> = ({ packages_data = null, activities_data
             />
             <Section delay={0.3}>
               <Box
-                align="left"
+                alignItems="left"
                 py={3}
                 textAlign={{ base: 'center', lg: 'left' }}
               >
@@ -86,10 +86,10 @@ const Trips: NextPage<TripsPageProps> = ({ packages_data = null, activities_data
             </Section>
           </Flex>
         </Section>
-        <Section delay={0.4}>
+        <Section delay={0.3}>
           <PackagesSection data={packages_data} />
         </Section>
-        <Section delay={0.5} mt={6}>
+        <Section delay={0.4}>
           <Activities data={activities_data} />
         </Section>
       </Container>

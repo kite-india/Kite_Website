@@ -11,11 +11,11 @@ import {
   Text
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
-import Layout from '../components/layouts/main'
-import { Section } from '../components'
 import { motion } from 'framer-motion'
 import { IoIosMail } from 'react-icons/io'
 import { NextPage } from 'next'
+import Layout from '@components/layouts/main'
+import { Section } from '@components/index'
 
 const Contact: NextPage = () => {
   const [contactDetails, setContactDetails] = useState({})

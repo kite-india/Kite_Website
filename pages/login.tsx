@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Layout from '../components/layouts/main'
+import Layout from '@components/layouts/main'
 import {
   Box,
   Heading,
@@ -11,7 +11,7 @@ import {
   Input,
   Checkbox
 } from '@chakra-ui/react'
-import Section from '../components/Section'
+import Section from '@components/Section'
 
 const Login: React.FC = () => {
   const [loginParams, setLoginParams] = useState({})

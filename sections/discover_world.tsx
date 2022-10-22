@@ -1,6 +1,6 @@
 import React from 'react'
 import { Flex, Box, Heading, Stack } from '@chakra-ui/react'
-import { BlogCard, Section } from '../components'
+import { BlogCard, Section } from '@components/index'
 
 interface Props {
   data: any

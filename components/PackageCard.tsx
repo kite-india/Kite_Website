@@ -11,8 +11,13 @@ import {
 } from '@chakra-ui/react'
 import { FiMap } from 'react-icons/fi'
 import Image from 'next/image'
+import type { Trip } from '@utils/types'
 
-const PackageCard = ({ data }) => {
+interface PackageProps {
+  data: Trip;
+}
+
+const PackageCard: React.FC<PackageProps> = ({ data }) => {
   const router = useRouter()
   const { _id, location, price, activities, duration, image } = data
   const bookNow = () => {
@@ -54,7 +59,7 @@ const PackageCard = ({ data }) => {
       <SimpleGrid
         fontFamily="'Poppins'"
         columns={2}
-        align={{ base: 'center', lg: 'left' }}
+        alignItems={{ base: 'center', lg: 'left' }}
         w="100%"
         spacingX="40px"
         px={1}

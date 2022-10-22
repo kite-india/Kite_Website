@@ -7,7 +7,7 @@ import {
   InputGroup,
   InputLeftElement
 } from '@chakra-ui/react'
-import Section from '../components/Section'
+import Section from '@components/Section'
 import { BiSearchAlt } from 'react-icons/bi'
 import Image from 'next/image'
 import HeroImage from '../public/images/hero1.jpg'

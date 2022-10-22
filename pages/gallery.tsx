@@ -1,8 +1,8 @@
 import React from 'react'
 import { Box, Text, Heading, Flex, Container } from '@chakra-ui/react'
-import Layout from '../components/layouts/main'
+import Layout from '@components/layouts/main'
 import Image from 'next/image'
-import Section from '../components/Section'
+import Section from '@components/Section'
 import { NextPage } from 'next'
 
 
