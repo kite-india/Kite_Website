@@ -8,16 +8,16 @@ export default function TransactionCardGroup(props) {
       gap={'20px'}
       ml={{ lg: '60px' }}
     >
-      {props.nid.map((val, key) => {
+      {props.data.map((val, key) => {
         return (
           <TransactCard
-            id={props.nid[key]}
-            place={props.place[key]}
-            date={props.date[key]}
-            guest={props.guest[key]}
-            cost={props.cost[key]}
-            status={props.status[key]}
-            img={props.img[key]}
+            id={val.nid}
+            place={val.place}
+            date={val.date}
+            guest={val.guest}
+            cost={val.cost}
+            status={val.status}
+            img={val.img}
           />
         )
       })}

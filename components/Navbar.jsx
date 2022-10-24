@@ -167,7 +167,10 @@ const Navbar = () => {
           <MenuList border={'2px solid rgba(199, 213, 159, 1)'}>
             <MenuItem
               minH={'48px'}
-              _hover={{ borderRadius: '20px', backgroundColor: '#c6f34d' }}
+              _hover={{
+                borderRadius: '20px',
+                backgroundColor: 'rgba(199, 213, 159, 1)'
+              }}
               _focus={{
                 borderRadius: '20px',
                 backgroundColor: 'rgba(199, 213, 159, 1)'
@@ -194,7 +197,10 @@ const Navbar = () => {
             </MenuItem>
             <MenuItem
               minH={'48px'}
-              _hover={{ borderRadius: '20px', backgroundColor: '#c6f34d' }}
+              _hover={{
+                borderRadius: '20px',
+                backgroundColor: 'rgba(199, 213, 159, 1)'
+              }}
               _focus={{
                 borderRadius: '20px',
                 backgroundColor: 'rgba(199, 213, 159, 1)'
@@ -221,7 +227,10 @@ const Navbar = () => {
             </MenuItem>
             <MenuItem
               minH={'48px'}
-              _hover={{ borderRadius: '20px', backgroundColor: '#c6f34d' }}
+              _hover={{
+                borderRadius: '20px',
+                backgroundColor: 'rgba(199, 213, 159, 1)'
+              }}
               _focus={{
                 borderRadius: '20px',
                 backgroundColor: 'rgba(199, 213, 159, 1)'

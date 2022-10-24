@@ -10,7 +10,7 @@ import {
   Box
 } from '@chakra-ui/react'
 
-import TransactionCardGroup from '../sections/transaction/TransactionCardGroup'
+import TransactionCardGroup from '../components/transaction/TransactionCardGroup'
 import Layout from '../components/layouts/main'
 
 const Transaction = () => {
@@ -33,7 +33,7 @@ const Transaction = () => {
         borderRadius={'38px'}
         maxW={'1000px'}
         alignItems="center"
-        mb="140px"
+        mb="100px"
       >
         <Tabs
           fontFamily={'Poppins'}
@@ -62,25 +62,35 @@ const Transaction = () => {
           <TabPanels pb={'30px'}>
             <TabPanel>
               <TransactionCardGroup
-                nid={[1234567890, 1234567891, 1234567892]}
-                img={[
-                  'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
-                  'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
-                  'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
+                data={[
+                  {
+                    nid: 1234567890,
+                    img: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
+                    place: 'Bombay Adda, Bombay',
+                    date: 'Sun, 10 Sep At 9:30PM',
+                    guest: 6,
+                    cost: '30,000',
+                    status: true
+                  },
+                  {
+                    nid: 1234567891,
+                    img: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
+                    place: 'Bombay Adda, Austria',
+                    date: 'Sun, 11 Sep At 9:30PM',
+                    guest: 4,
+                    cost: '50,000',
+                    status: false
+                  },
+                  {
+                    nid: 1234567892,
+                    img: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
+                    place: 'Bombay Adda, America',
+                    date: 'Sun, 12 Sep At 9:30PM',
+                    guest: 5,
+                    cost: '70,000',
+                    status: true
+                  }
                 ]}
-                place={[
-                  'Bombay Adda, Bombay',
-                  'Bombay Adda, Austria',
-                  'Bombay Adda, America'
-                ]}
-                date={[
-                  'Sun, 10 Sep At 9:30PM',
-                  'Sun, 11 Sep At 9:30PM',
-                  'Sun, 12 Sep At 9:30PM'
-                ]}
-                guest={[6, 4, 8]}
-                cost={['30,000', '20,000', '50,000']}
-                status={[true, false, true]}
               />
             </TabPanel>
             <TabPanel>
