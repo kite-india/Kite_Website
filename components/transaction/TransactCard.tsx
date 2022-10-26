@@ -1,10 +1,17 @@
 import { Text, Box, Flex, Badge } from '@chakra-ui/react'
 import Image from 'next/image'
-export default function TransactCard(props) {
+import { Transaction } from '@utils/types'
+
+interface IProps {
+  transaction: Transaction
+}
+
+const TransactCard: React.FC<IProps> = ({ transaction }) => {
+  const { nid, img, place, date, guest, cost, status } = transaction
   return (
     <Box
       py={'15px'}
-      key={props.id}
+      key={nid}
       maxWidth={{ base: '2000px', md: '800px' }}
       _hover={{ border: '3px solid #9ca75c' }}
       border={'3px solid #D9D9D9'}
@@ -15,7 +22,7 @@ export default function TransactCard(props) {
         backgroundColor={'rgba(217, 217, 217, 0.22)'}
         fontSize={'12px'}
       >
-        id : {props.id}
+        id : {nid}
       </Text>
       <Box>
         <Flex
@@ -29,8 +36,9 @@ export default function TransactCard(props) {
             <Image
               height={'70px'}
               width={'72px'}
-              src={props.img}
+              src={img}
               loading="lazy"
+              alt={place}
             />
           </div>
           <Flex
@@ -42,19 +50,19 @@ export default function TransactCard(props) {
               fontSize={{ base: '16px', md: '17px', lg: '19px' }}
               fontWeight={'700'}
             >
-              {props.place}
+              {place}
             </Text>
             <Text
               fontSize={{ base: '15px', md: '16px', lg: '18px' }}
               fontWeight={'500'}
             >
-              {props.date}
+              {date}
             </Text>
             <Text
               fontSize={{ base: '16px', md: '17px', lg: '19px' }}
               fontWeight={'700'}
             >
-              {props.guest} Guests
+              {guest} Guests
             </Text>
           </Flex>
           <Text
@@ -63,7 +71,7 @@ export default function TransactCard(props) {
             fontWeight={'400'}
             fontSize={{ base: '24px', md: '28px', lg: '32px' }}
           >
-            Rs : {props.cost}
+            Rs : {cost}
           </Text>
         </Flex>
       </Box>
@@ -72,10 +80,10 @@ export default function TransactCard(props) {
         fontSize={{ base: '14px', md: '14px', lg: '15px' }}
         fontWeight={'500px'}
         textAlign={'right'}
-        textTransform={'upperCase'}
+        textTransform={'uppercase'}
       >
         status :
-        {props.status ? (
+        {status ? (
           <Badge
             fontSize={{ base: '14px', md: '14px', lg: '15px' }}
             mr={{ base: '10px', md: '40px', lg: '60px' }}
@@ -100,3 +108,5 @@ export default function TransactCard(props) {
     </Box>
   )
 }
+
+export default TransactCard

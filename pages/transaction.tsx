@@ -7,15 +7,15 @@ import {
   TabPanels,
   TabPanel,
   Tab,
-  Box
-} from '@chakra-ui/react'
 
+} from '@chakra-ui/react'
 import TransactionCardGroup from '../components/transaction/TransactionCardGroup'
 import Layout from '../components/layouts/main'
+import type { NextPage } from 'next'
 
-const Transaction = () => {
+const Transaction: NextPage = () => {
   return (
-    <Layout>
+    <Layout title="Transactions">
       <Container alignItems={'center'} mt={'80px'}>
         <Text
           fontFamily={'Poppins'}
