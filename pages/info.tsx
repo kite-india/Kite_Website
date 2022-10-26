@@ -1,7 +1,5 @@
 import React from 'react'
-import Head from 'next/head'
 import Layout from '../components/layouts/main'
-import axios from 'axios'
 import Section from '../components/Section'
 import {
   Text,
@@ -17,14 +15,11 @@ import {
   AvatarBadge,
   Select
 } from '@chakra-ui/react'
+import { NextPage } from 'next'
 
-const Info = () => {
+const Info: NextPage = () => {
   return (
-    <Layout>
-      <Head>
-        <title>Kite India - Home</title>
-        <meta name="viewport" content="width=device-width" />
-      </Head>
+    <Layout title="Info">
       <Text
         fontFamily="'Poppins'"
         fontWeight="500"
@@ -59,7 +54,7 @@ const Info = () => {
             <Flex direction="column" ml="72px" mr="60px" gap="230">
               <Avatar w="137.89px" h="auto">
                 <AvatarBadge borderColor="#FFFFFF" bg="#8A8888" boxSize="55px">
-                  <Image src="./Vector.png"></Image>
+                  <Image src="./Vector.png" alt="vector-img" />
                 </AvatarBadge>
               </Avatar>
               <Link>

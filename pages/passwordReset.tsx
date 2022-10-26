@@ -1,7 +1,5 @@
 import React , {useState} from 'react'
-import Head from 'next/head'
 import Layout from '../components/layouts/main'
-import axios from 'axios'
 import Section from '../components/Section'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 import {
@@ -15,8 +13,9 @@ import {
   InputGroup,
   IconButton
 } from '@chakra-ui/react'
+import type { NextPage } from 'next'
 
-const PasswordChange = () => {
+const PasswordChange: NextPage = () => {
   const [data, setData] = useState([
     {
       id: 0,
@@ -34,11 +33,10 @@ const PasswordChange = () => {
       showPassword: false
     }
   ])
-  console.log(data[0])
 
-  const handleClickShowPassword = i=> e => {
+  const handleClickShowPassword = i => e => {
     e.preventDefault()
-    let newArr = [...data]
+    const newArr = [...data]
     newArr[i].showPassword = !newArr[i].showPassword
     setData(newArr)
   }
@@ -46,12 +44,9 @@ const PasswordChange = () => {
   const handleMouseDownPassword = event => {
     event.preventDefault()
   }
+
   return (
-    <Layout>
-      <Head>
-        <title>Kite India - Home</title>
-        <meta name="viewport" content="width=device-width" />
-      </Head>
+    <Layout title="Password Info">
       <Text
         fontFamily="'Poppins'"
         fontWeight="500"
@@ -109,6 +104,7 @@ const PasswordChange = () => {
                   />
                   <InputRightElement width="4.5rem">
                     <IconButton
+                      aria-label="Show Password"
                       variant="none"
                       onClick={handleClickShowPassword(0)}
                       onMouseDown={handleMouseDownPassword}
@@ -149,6 +145,7 @@ const PasswordChange = () => {
                 />
                 <InputRightElement width="4.5rem">
                   <IconButton
+                    aria-label="Show Password"
                     variant="none"
                     onClick={handleClickShowPassword(1)}
                     onMouseDown={handleMouseDownPassword}
@@ -188,6 +185,7 @@ const PasswordChange = () => {
                 />
                 <InputRightElement width="4.5rem">
                   <IconButton
+                    aria-label="Show Password"
                     variant="none"
                     onClick={handleClickShowPassword(2)}
                     onMouseDown={handleMouseDownPassword}
