@@ -4,15 +4,20 @@ import {
   Box,
   Text,
   Flex,
-  Image,
   SimpleGrid,
   Icon,
   ButtonGroup,
   Button
 } from '@chakra-ui/react'
 import { FiMap } from 'react-icons/fi'
+import Image from 'next/image'
+import type { Trip } from '@utils/types'
 
-const PackageCard = ({ data }) => {
+interface PackageProps {
+  data: Trip;
+}
+
+const PackageCard: React.FC<PackageProps> = ({ data }) => {
   const router = useRouter()
   const { _id, location, price, activities, duration, image } = data
   const bookNow = () => {
@@ -20,15 +25,23 @@ const PackageCard = ({ data }) => {
   }
   return (
     <Box as="div" boxShadow="lg" borderRadius="lg" maxW="container.sm" p={3}>
-      <Image
-        src={image}
-        alt="card"
-        w="500px"
-        h="300px"
+      <Box
+        w={{ base: '340px', lg: '380px' }}
+        h={{ base: '220px', lg: '240px' }}
         mb={3}
-        objectFit="cover"
         borderRadius="lg"
-      />
+        overflow="hidden"
+      >
+        <Image
+          src={image}
+          alt="card"
+          objectFit="cover"
+          layout="responsive"
+          sizes="100vw"
+          width={300}
+          height={200}
+        />
+      </Box>
       <Flex
         direction={{ base: 'column', md: 'row' }}
         align="center"
@@ -46,7 +59,7 @@ const PackageCard = ({ data }) => {
       <SimpleGrid
         fontFamily="'Poppins'"
         columns={2}
-        align={{ base: 'center', lg: 'left' }}
+        alignItems={{ base: 'center', lg: 'left' }}
         w="100%"
         spacingX="40px"
         px={1}

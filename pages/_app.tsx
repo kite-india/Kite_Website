@@ -1,9 +1,11 @@
+import type { AppProps } from 'next/app'
 import { ChakraProvider } from '@chakra-ui/react'
 import { AnimatePresence } from 'framer-motion'
-import Fonts from '../libs/fonts'
-import theme from '../libs/theme'
+import { wrapper } from '@redux-app/store'
+import Fonts from '@libs/fonts'
+import theme from '@libs/theme'
 
-const Website = ({ Component, pageProps, router }) => {
+const Website = ({ Component, pageProps, router }: AppProps) => {
   return (
     <ChakraProvider theme={theme}>
       <Fonts />
@@ -14,4 +16,4 @@ const Website = ({ Component, pageProps, router }) => {
   )
 }
 
-export default Website
+export default wrapper.withRedux(Website)

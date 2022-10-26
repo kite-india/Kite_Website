@@ -40,7 +40,7 @@ const WebsiteLinks = () => {
   )
 }
 
-const Footer = () => {
+const Footer: React.FC = () => {
   return (
     <Box w="100%" py={6} bgColor="#F9F9F9" bottom={0}>
       <Flex

@@ -9,9 +9,14 @@ import 'swiper/css/bundle'
 import 'swiper/css/pagination'
 import 'swiper/css/grid'
 
-import { PackageCard } from '../../components'
+import { PackageCard } from '@components/index'
+import type { Trip } from '@utils/types'
 
-const Packages = ({ data }) => {
+interface PackageProps {
+  data: [Trip]
+}
+
+const Packages: React.FC<PackageProps> = ({ data }) => {
   return (
     <Box w="100%">
       <Heading

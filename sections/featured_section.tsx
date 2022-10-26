@@ -5,7 +5,7 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/autoplay'
 
-import FeaturedCard from '../components/FeaturedCard'
+import FeaturedCard from '@components/FeaturedCard'
 
 /* const dummyData = [
   {
@@ -38,7 +38,11 @@ import FeaturedCard from '../components/FeaturedCard'
 ]
 */
 
-const FeaturedSection = ({ data }) => {
+interface Props {
+  data: any;
+}
+
+const FeaturedSection: React.FC<Props> = ({ data }) => {
   return (
     <Box bg="white" w="100%" px={2}>
       <Swiper

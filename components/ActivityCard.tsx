@@ -1,9 +1,15 @@
 import React from 'react'
-import { Box, Heading, Image, Text, Button, Flex } from '@chakra-ui/react'
+import { Box, Heading, Text, Button, Flex } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
+import Image from 'next/image'
+import type { Activity } from '@utils/types'
 
-const ActivityCard = ({ data }) => {
-  const { _id, name, description, image } = data
+interface IProps { 
+  data: Activity;
+}
+
+const ActivityCard: React.FC<IProps> = ({ data }) => {
+  const { name, description, image } = data
   if (!data) return null
   return (
     <Flex
@@ -16,14 +22,24 @@ const ActivityCard = ({ data }) => {
       p={3}
       w="100%"
     >
-      <Image
-        src={image}
-        alt="activity"
-        w={{ base: '100%', lg: '160px' }}
+      <Box
+        w={{ base: '100%', lg: '320px' }}
         h={{ base: '180px', md: '40vh', lg: '160px' }}
-        objectFit="cover"
         borderRadius="lg"
-      />
+        overflow="hidden"
+      >
+        <Image
+          src={image}
+          alt="activity"
+          width={160}
+          height={160}
+          sizes="100vw"
+          layout="responsive"
+          objectFit="cover"
+          objectPosition="50%"
+          loading="lazy"
+        />
+      </Box>
       <Box w="100%">
         <Box mb={4}>
           <Heading fontWeight="semibold" fontSize="24px">

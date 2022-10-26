@@ -4,16 +4,17 @@ import axios from 'axios'
 
 import { Section } from '../../../components'
 import Layout from '../../../components/layouts/main'
-import Head from 'next/head'
+import { NextPage } from 'next'
 
-const Page = ({ packages_data }) => {
+interface PackagesPageProps {
+  packages_data: any;
+}
+
+const Page: NextPage<PackagesPageProps> = ({ packages_data }) => {
   if (!packages_data) return null
   const { name, _id, image, description } = packages_data
   return (
-    <Layout>
-      <Head>
-        <title>Kite India&apos;s Trip</title>
-      </Head>
+    <Layout title={name}>
       <Container w="100%" pt={8} maxWidth="container.xl">
         <Section delay={0.2}>
           <Flex gap={6}>

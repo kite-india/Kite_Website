@@ -1,5 +1,4 @@
 import React from 'react'
-import Head from 'next/head'
 import { motion } from 'framer-motion'
 import {
   Box,
@@ -11,16 +10,15 @@ import {
   Image
 } from '@chakra-ui/react'
 import axios from 'axios'
-import { PackagesSection, Activities } from '../sections'
-import Section from '../components/Section'
-import Layout from '../components/layouts/main'
+import { PackagesSection, Activities } from '@sections/index'
+import Section from '@components/Section'
+import Layout from '@components/layouts/main'
+import type { NextPage } from 'next'
+import type { TripsPageProps } from '@utils/types'
 
-const Trips = ({ packages_data = null, activities_data = null }) => {
+const Trips: NextPage<TripsPageProps> = ({ packages_data = null, activities_data = null }) => {
   return (
-    <Layout>
-      <Head>
-        <title>Kite India - Trips</title>
-      </Head>
+    <Layout title="Trips">
       <Container w="100%" pt={8} maxW="container.xl">
         <Section delay={0.2}>
           <Heading
@@ -38,7 +36,6 @@ const Trips = ({ packages_data = null, activities_data = null }) => {
             gap={{ base: 8, lg: 16 }}
           >
             <Image
-              priority="true"
               src="/images/trips.png"
               alt="trips"
               objectFit="cover"
@@ -47,7 +44,7 @@ const Trips = ({ packages_data = null, activities_data = null }) => {
             />
             <Section delay={0.3}>
               <Box
-                align="left"
+                alignItems="left"
                 py={3}
                 textAlign={{ base: 'center', lg: 'left' }}
               >
@@ -89,10 +86,10 @@ const Trips = ({ packages_data = null, activities_data = null }) => {
             </Section>
           </Flex>
         </Section>
-        <Section delay={0.4}>
+        <Section delay={0.3}>
           <PackagesSection data={packages_data} />
         </Section>
-        <Section delay={0.5} mt={6}>
+        <Section delay={0.4}>
           <Activities data={activities_data} />
         </Section>
       </Container>

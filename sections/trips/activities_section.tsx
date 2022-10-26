@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Heading, Text, Flex } from '@chakra-ui/react'
-import { ActivityCard } from '../../components'
+import { ActivityCard } from '@components/index'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Grid } from 'swiper'
@@ -8,8 +8,13 @@ import { Autoplay, Grid } from 'swiper'
 import 'swiper/css'
 import 'swiper/css/bundle'
 import 'swiper/css/grid'
+import type { Activity } from '@utils/types'
 
-const Activities = ({ data }) => {
+interface ActivityProps {
+  data: [Activity]
+}
+
+const Activities: React.FC<ActivityProps> = ({ data }) => {
   return (
     <Box
       w="100%"
