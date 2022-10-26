@@ -16,6 +16,6 @@ module.exports = {
       'i0.wp.com',
       'rajaampatbiodiversity.com',
       'www.tripsavvy.com'
-    ]
+    , 'cdn.pixabay.com']
   }
 }
