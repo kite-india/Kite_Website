@@ -72,7 +72,7 @@ const Login: React.FC = () => {
             Or
           </Text>
 
-          <Flex px="50px" flexDirection="column" gap="9px">
+          <Flex px={{base:2, lg: "50px"}} flexDirection="column" gap="9px">
             <Flex flexDirection="column" justifyContent="center" width="100%">
               <Text fontFamily="'Poppins'" fontWeight="500" fontSize="18px">
                 Email
