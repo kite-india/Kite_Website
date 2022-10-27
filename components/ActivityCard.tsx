@@ -27,14 +27,12 @@ const ActivityCard: React.FC<IProps> = ({ data }) => {
         h={{ base: '180px', md: '40vh', lg: '160px' }}
         borderRadius="lg"
         overflow="hidden"
+        position="relative"
       >
         <Image
           src={image}
           alt="activity"
-          width={160}
-          height={160}
-          sizes="100vw"
-          layout="responsive"
+          layout="fill"
           objectFit="cover"
           objectPosition="50%"
           loading="lazy"

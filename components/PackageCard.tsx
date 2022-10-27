@@ -26,10 +26,10 @@ const PackageCard: React.FC<PackageProps> = ({ data }) => {
   return (
     <Box as="div" boxShadow="lg" borderRadius="lg" maxW="container.sm" p={3}>
       <Box
-        w={{ base: '340px', lg: '380px' }}
-        h={{ base: '220px', lg: '240px' }}
+        w={{ base: '100%', lg: '380px' }}
+        h={{ base: '100%', lg: '240px' }}
         mb={3}
-        borderRadius="lg"
+        borderRadius="xl"
         overflow="hidden"
       >
         <Image
@@ -38,8 +38,8 @@ const PackageCard: React.FC<PackageProps> = ({ data }) => {
           objectFit="cover"
           layout="responsive"
           sizes="100vw"
-          width={300}
-          height={200}
+          width={380}
+          height={240}
         />
       </Box>
       <Flex

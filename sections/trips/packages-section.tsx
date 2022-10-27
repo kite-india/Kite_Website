@@ -13,7 +13,7 @@ import { PackageCard } from '@components/index'
 import type { Trip } from '@utils/types'
 
 interface PackageProps {
-  data: [Trip]
+  data: Trip[]
 }
 
 const Packages: React.FC<PackageProps> = ({ data }) => {

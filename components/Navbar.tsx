@@ -114,7 +114,7 @@ const Navbar: React.FC<NavProps> = () => {
       as={motion.div}
       py={{ base: 3, md: 4 }}
       px={{ base: 4, md: 8, lg: 32 }}
-      align="center"
+      alignItems="center"
       position="fixed"
       zIndex={100}
       display="block"
@@ -315,7 +315,7 @@ const Navbar: React.FC<NavProps> = () => {
                 transition={{ duration: 3, delay: 2, ease: 'linear' }}
               >
                 {links.map(({ name, href, icon }) => (
-                  <DrawerLink icon={icon} name={name} href={href} key={name}>
+                  <DrawerLink icon={icon} href={href} key={name}>
                     {name}
                   </DrawerLink>
                 ))}

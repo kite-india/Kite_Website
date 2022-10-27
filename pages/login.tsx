@@ -27,7 +27,7 @@ const Login: React.FC = () => {
   return (
     <Layout title="Login">
       <Container
-        maxW="container.sm"
+        maxW={{ base: "container.sm", lg: "container.md"}}
         my={12}
         w="100%"
         borderWidth={3}
@@ -48,7 +48,7 @@ const Login: React.FC = () => {
               LOG IN
             </Heading>
             <Button
-              width="461px"
+              width={{ base: "100%", lg: "75%"}}
               m="auto"
               px="3"
               borderRadius="10px"

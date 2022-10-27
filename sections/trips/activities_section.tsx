@@ -11,7 +11,7 @@ import 'swiper/css/grid'
 import type { Activity } from '@utils/types'
 
 interface ActivityProps {
-  data: [Activity]
+  data: Activity[]
 }
 
 const Activities: React.FC<ActivityProps> = ({ data }) => {
@@ -21,7 +21,6 @@ const Activities: React.FC<ActivityProps> = ({ data }) => {
       bg="#F7F8F9"
       borderRadius="lg"
       p={{ base: 3, lg: 6 }}
-      boxShadow="lg"
     >
       <Flex
         direction={{ base: 'column', lg: 'row' }}
