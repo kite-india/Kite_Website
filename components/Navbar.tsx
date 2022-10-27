@@ -61,7 +61,9 @@ const BookBtn = () => (
     }}
     fontWeight="normal"
     display={{ base: 'none', md: 'flex' }}
-    onClick={() => {""}}
+    onClick={() => {
+      ;('')
+    }}
     variant="outline"
   >
     Book now
@@ -169,96 +171,114 @@ const Navbar: React.FC<NavProps> = () => {
             />
           </MenuButton>
           <MenuList border={'2px solid rgba(199, 213, 159, 1)'}>
-            <MenuItem
-              minH={'48px'}
-              _hover={{
-                borderRadius: '20px',
-                backgroundColor: 'rgba(199, 213, 159, 1)'
-              }}
-              _focus={{
-                borderRadius: '20px',
-                backgroundColor: 'rgba(199, 213, 159, 1)'
-              }}
+            <Link
+              href="/info"
+              _focus={{ textDecoration: 'none' }}
+              _hover={{ textDecoration: 'none' }}
             >
-              <Avatar
-                icon={<FaRegUserCircle color="black" />}
-                color="color5"
-                bg="white"
-                w="30px"
-                h="30px"
-                mr="23px"
-                size="lg"
-                _hover={{ color: 'green.400' }}
-                cursor="pointer"
-              />
-              <Text
-                fontFamily={'Poppins'}
-                fontWeight="500"
-                fontSize={{ sm: '14px', md: '16px', lg: '18px' }}
+              <MenuItem
+                minH={'48px'}
+                _hover={{
+                  borderRadius: '20px',
+                  backgroundColor: 'rgba(199, 213, 159, 1)'
+                }}
+                _focus={{
+                  borderRadius: '20px',
+                  backgroundColor: 'rgba(199, 213, 159, 1)'
+                }}
               >
-                Personal Info
-              </Text>
-            </MenuItem>
-            <MenuItem
-              minH={'48px'}
-              _hover={{
-                borderRadius: '20px',
-                backgroundColor: 'rgba(199, 213, 159, 1)'
-              }}
-              _focus={{
-                borderRadius: '20px',
-                backgroundColor: 'rgba(199, 213, 159, 1)'
-              }}
+                <Avatar
+                  icon={<FaRegUserCircle color="black" />}
+                  color="color5"
+                  bg="white"
+                  w="30px"
+                  h="30px"
+                  mr="23px"
+                  size="lg"
+                  _hover={{ color: 'green.400' }}
+                  cursor="pointer"
+                />
+                <Text
+                  fontFamily={'Poppins'}
+                  fontWeight="500"
+                  fontSize={{ sm: '14px', md: '16px', lg: '18px' }}
+                >
+                  Personal Info
+                </Text>
+              </MenuItem>
+            </Link>
+            <Link
+              href="/passwordReset"
+              _focus={{ textDecoration: 'none' }}
+              _hover={{ textDecoration: 'none' }}
             >
-              <Avatar
-                icon={<BiShieldQuarter color="black" />}
-                color="color5"
-                bg="white"
-                w="30px"
-                h="30px"
-                mr="23px"
-                size="lg"
-                _hover={{ color: 'green.400' }}
-                cursor="pointer"
-              />
-              <Text
-                fontFamily={'Poppins'}
-                fontWeight="500"
-                fontSize={{ sm: '14px', md: '16px', lg: '18px' }}
+              <MenuItem
+                minH={'48px'}
+                _hover={{
+                  borderRadius: '20px',
+                  backgroundColor: 'rgba(199, 213, 159, 1)'
+                }}
+                _focus={{
+                  borderRadius: '20px',
+                  backgroundColor: 'rgba(199, 213, 159, 1)'
+                }}
               >
-                Security
-              </Text>
-            </MenuItem>
-            <MenuItem
-              minH={'48px'}
-              _hover={{
-                borderRadius: '20px',
-                backgroundColor: 'rgba(199, 213, 159, 1)'
-              }}
-              _focus={{
-                borderRadius: '20px',
-                backgroundColor: 'rgba(199, 213, 159, 1)'
-              }}
+                <Avatar
+                  icon={<BiShieldQuarter color="black" />}
+                  color="color5"
+                  bg="white"
+                  w="30px"
+                  h="30px"
+                  mr="23px"
+                  size="lg"
+                  _hover={{ color: 'green.400' }}
+                  cursor="pointer"
+                />
+                <Text
+                  fontFamily={'Poppins'}
+                  fontWeight="500"
+                  fontSize={{ sm: '14px', md: '16px', lg: '18px' }}
+                >
+                  Security
+                </Text>
+              </MenuItem>
+            </Link>
+            <Link
+              href="/transaction"
+              _focus={{ textDecoration: 'none' }}
+              _hover={{ textDecoration: 'none' }}
             >
-              <Avatar
-                icon={<BiCreditCard color="black" />}
-                color="color5"
-                bg="white"
-                w="30px"
-                h="30px"
-                mr="23px"
-                size="lg"
-                _hover={{ color: 'green.400' }}
-                cursor="pointer"
-              />
-              <Text
-                fontFamily={'Poppins'}
-                fontWeight="500"
-                fontSize={{ sm: '14px', md: '16px', lg: '18px' }}
+              <MenuItem
+                minH={'48px'}
+                _hover={{
+                  borderRadius: '20px',
+                  backgroundColor: 'rgba(199, 213, 159, 1)'
+                }}
+                _focus={{
+                  borderRadius: '20px',
+                  backgroundColor: 'rgba(199, 213, 159, 1)'
+                }}
               >
-                Transaction Info
-              </Text>
-            </MenuItem>
+                <Avatar
+                  icon={<BiCreditCard color="black" />}
+                  color="color5"
+                  bg="white"
+                  w="30px"
+                  h="30px"
+                  mr="23px"
+                  size="lg"
+                  _hover={{ color: 'green.400' }}
+                  cursor="pointer"
+                />
+                <Text
+                  fontFamily={'Poppins'}
+                  fontWeight="500"
+                  fontSize={{ sm: '14px', md: '16px', lg: '18px' }}
+                >
+                  Transaction Info
+                </Text>
+              </MenuItem>
+            </Link>
           </MenuList>
         </Menu>
 

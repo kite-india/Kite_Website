@@ -1,7 +1,7 @@
 import { Text, Box, Flex, Badge } from '@chakra-ui/react'
 import Image from 'next/image'
 import { Transaction } from '@utils/types'
-
+import React from 'react'
 interface IProps {
   transaction: Transaction
 }
@@ -32,7 +32,7 @@ const TransactCard: React.FC<IProps> = ({ transaction }) => {
           pl={'25px'}
           py="15px"
         >
-          <div className={{ width: '72px' }}>
+          <div style={{ width: '72px' }}>
             <Image
               height={'70px'}
               width={'72px'}
