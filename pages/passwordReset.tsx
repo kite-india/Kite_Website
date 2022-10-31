@@ -1,4 +1,4 @@
-import React , {useState} from 'react'
+import React, { useState } from 'react'
 import Layout from '../components/layouts/main'
 import Section from '../components/Section'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
@@ -50,7 +50,7 @@ const PasswordChange: NextPage = () => {
       <Text
         fontFamily="'Poppins'"
         fontWeight="500"
-        fontSize="35px"
+        fontSize={{ base: '20px', sm: '35px' }}
         m="100px"
         lineHeight="52px"
         align="center"
@@ -58,9 +58,10 @@ const PasswordChange: NextPage = () => {
         Password
       </Text>
       <Container
-        maxW="container.lg"
+        maxW={{ base: 'container.sm', lg: 'container.md' }}
         my={12}
         borderWidth={3}
+        w="100%"
         borderRadius="38px"
         boxShadow="lg"
       >
@@ -68,7 +69,7 @@ const PasswordChange: NextPage = () => {
           <Text
             fontFamily="'Poppins'"
             fontWeight="500"
-            fontSize="30px"
+            fontSize={{ base: '18px', sm: '30px' }}
             lineHeight="45px"
             color="#464646"
             mt="29px"
@@ -77,7 +78,7 @@ const PasswordChange: NextPage = () => {
           >
             Change Password
           </Text>
-          <Flex flexDirection="column" mx="220px" gap={35} mt="45px">
+          <Flex flexDirection="column" px={{ base: 2, lg: '50px' }} gap={35}>
             <Flex
               flexDirection="column"
               justifyContent="center"
@@ -87,7 +88,7 @@ const PasswordChange: NextPage = () => {
               <Text
                 fontFamily="'Poppins'"
                 fontWeight="400"
-                fontSize="20px"
+                fontSize={{ base: '10px', sm: '20px' }}
                 lineHeight="30px"
               >
                 Old Password
@@ -97,7 +98,7 @@ const PasswordChange: NextPage = () => {
                   <Input
                     position="relative"
                     type={data[0].showPassword ? 'text' : 'password'}
-                    width="562px"
+                    width="100%"
                     boxShadow="md"
                     borderRadius="6px"
                     backgroundColor="white"
@@ -129,7 +130,7 @@ const PasswordChange: NextPage = () => {
               <Text
                 fontFamily="'Poppins'"
                 fontWeight="400"
-                fontSize="20px"
+                fontSize={{ base: '10px', sm: '20px' }}
                 lineHeight="30px"
               >
                 New Password
@@ -138,7 +139,7 @@ const PasswordChange: NextPage = () => {
                 <Input
                   position="relative"
                   type={data[1].showPassword ? 'text' : 'password'}
-                  width="562px"
+                  width="100%"
                   boxShadow="md"
                   borderRadius="6px"
                   backgroundColor="white"
@@ -169,7 +170,7 @@ const PasswordChange: NextPage = () => {
               <Text
                 fontFamily="'Poppins'"
                 fontWeight="400"
-                fontSize="20px"
+                fontSize={{ base: '10px', sm: '20px' }}
                 lineHeight="30px"
               >
                 Confirm Password
@@ -178,7 +179,7 @@ const PasswordChange: NextPage = () => {
                 <Input
                   position="relative"
                   type={data[2].showPassword ? 'text' : 'password'}
-                  width="562px"
+                  width="100%"
                   boxShadow="md"
                   borderRadius="6px"
                   backgroundColor="white"
