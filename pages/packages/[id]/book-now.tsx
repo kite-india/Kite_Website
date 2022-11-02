@@ -16,11 +16,15 @@ import {
   Image
 } from '@chakra-ui/react'
 import axios from 'axios'
-import { Section } from '../../../components'
-import Layout from '../../../components/layouts/main'
-import { NextPage } from 'next'
+import { Section } from '@components/index'
+import Layout from '@components/layouts/main'
+import type { NextPage } from 'next'
 
-const ExtraPassenger: React.FC<any> = ({ onToggle, num, handleExtraPassengers }) => {
+const ExtraPassenger: React.FC<any> = ({
+  onToggle,
+  num,
+  handleExtraPassengers
+}) => {
   const [passengerDetails, setPassengerDetails] = useState({})
 
   const handleChange = e => {
@@ -107,7 +111,7 @@ const ExtraPassenger: React.FC<any> = ({ onToggle, num, handleExtraPassengers })
 }
 
 interface BookNowProps {
-  packages_data: any;
+  packages_data: any
 }
 
 const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {

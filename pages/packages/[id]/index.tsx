@@ -2,12 +2,13 @@ import React from 'react'
 import { Box, Container, Flex, Heading, Image, Text } from '@chakra-ui/react'
 import axios from 'axios'
 
-import { Section } from '../../../components'
-import Layout from '../../../components/layouts/main'
-import { NextPage } from 'next'
+import { Section } from '@components/index'
+import Layout from '@components/layouts/main'
+import type { NextPage } from 'next'
+import type { Trip } from '@utils/types'
 
 interface PackagesPageProps {
-  packages_data: any;
+  packages_data: Trip
 }
 
 const Page: NextPage<PackagesPageProps> = ({ packages_data }) => {
@@ -35,13 +36,13 @@ const Page: NextPage<PackagesPageProps> = ({ packages_data }) => {
 }
 
 export async function getStaticPaths() {
-  const { data } = await axios.get(
+  const { data }: { data: Trip[] } = await axios.get(
     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package`
   )
 
-  const paths = data.map(el => {
+  const paths = data.map((trip: Trip) => {
     return {
-      params: { id: `${el._id}` }
+      params: { id: `${trip._id}` }
     }
   })
   return {
@@ -52,11 +53,11 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
   const { id } = context.params
-  const { data } = await axios.get(
+  const { data }: { data: Trip } = await axios.get(
     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package/${id}`
   )
 
-  return { props: { packages_data: data } }
+  return { props: { packages_data: data as Trip } }
 }
 
 export default Page

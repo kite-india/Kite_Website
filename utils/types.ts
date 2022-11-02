@@ -30,6 +30,7 @@ export type Trip = {
   duration: string
   image: string
   name: string
+  description?: string
 }
 
 export type Transaction = {
