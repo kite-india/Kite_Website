@@ -13,9 +13,11 @@ import {
   Link,
   Avatar,
   AvatarBadge,
-  Select
+  Select,
+  Spacer
 } from '@chakra-ui/react'
 import { NextPage } from 'next'
+import { maxHeaderSize } from 'http'
 
 const Info: NextPage = () => {
   return (
@@ -23,15 +25,15 @@ const Info: NextPage = () => {
       <Text
         fontFamily="'Poppins'"
         fontWeight="500"
-        fontSize="35px"
-        m="100px"
+        fontSize={{ base: '20px', sm: '25px', lg: '35px' }}
+        m={{ base: '20px', sm: '100px' }}
         lineHeight="52px"
         align="center"
       >
         Personal info
       </Text>
       <Container
-        maxW="container.lg"
+        maxW={{ base: 'container.sm', lg: 'container.lg' }}
         my={12}
         borderWidth={3}
         borderRadius="38px"
@@ -41,40 +43,70 @@ const Info: NextPage = () => {
           <Text
             fontFamily="'Poppins'"
             fontWeight="500"
-            fontSize="30px"
+            fontSize={{ base: '18px', lg: '30px' }}
             lineHeight="45px"
             color="#464646"
+            visibility={{ base: 'collapse', lg: 'visible' }}
             mt="29px"
-            ml="84px"
-            mb="20px"
+            ml="50px"
           >
             Basic information
           </Text>
-          <Flex direction="row" gap="3">
-            <Flex direction="column" ml="72px" mr="60px" gap="230">
-              <Avatar w="137.89px" h="auto">
-                <AvatarBadge borderColor="#FFFFFF" bg="#8A8888" boxSize="55px">
-                  <Image src="./Vector.png" alt="vector-img" />
-                </AvatarBadge>
-              </Avatar>
-              <Link>
-                <Text
-                  fontFamily="'Poppins'"
-                  w="154px"
-                  fontWeight="500"
-                  fontSize="20px"
-                  color="#E83A3A;
+          <Flex direction={{ base: 'column', lg: 'row' }} gap="3">
+            <Flex direction={{ base: 'column', sm: 'row', lg: 'column' }}>
+              <Text
+                fontFamily="'Poppins'"
+                ml="50px"
+                fontWeight="500"
+                fontSize={{ base: '18px', sm: '25px', lg: '30px' }}
+                lineHeight="45px"
+                color="#464646"
+                m={{ base: '0', sm: '5' }}
+                visibility={{ base: 'visible', lg: 'collapse' }}
+              >
+                Basic information
+              </Text>
+              <Spacer></Spacer>
+
+              <Flex
+                direction="column"
+                gap={{ base: '3', lg: '230' }}
+                alignItems="center"
+              >
+                <Center mr={6}>
+                  <Avatar w={{ base: '100px', lg: '137.89px' }} h="auto">
+                    <AvatarBadge
+                      borderColor="#FFFFFF"
+                      bg="#8A8888"
+                      boxSize={{ base: '20px', lg: '50px' }}
+                    >
+                      <Image src="./Vector.png" alt="vector-img" />
+                    </AvatarBadge>
+                  </Avatar>
+                </Center>
+                <Center mr={6}>
+                  <Link>
+                    <Text
+                      fontFamily="'Poppins'"
+                      fontWeight="500"
+                      fontSize={{ base: '10px', lg: '20px' }}
+                      color="#E83A3A;
 "
-                >
-                  Delete Account
-                </Text>
-              </Link>
+                    >
+                      Delete Account
+                    </Text>
+                  </Link>
+                </Center>
+              </Flex>
             </Flex>
-            <Center height="429px">
-              <Divider orientation="vertical" />
+            <Center>
+              <Divider
+                orientation="vertical"
+                visibility={{ base: 'hidden', lg: 'inherit' }}
+              />
             </Center>
             <Flex px="50px" flexDirection="column" gap="9px">
-              <Flex flexDirection="row" gap={10}>
+              <Flex flexDirection={{ base: 'column', sm: 'row' }} gap={10}>
                 <Flex
                   flexDirection="column"
                   justifyContent="center"
@@ -84,13 +116,13 @@ const Info: NextPage = () => {
                   <Text
                     fontFamily="'Poppins'"
                     fontWeight="400"
-                    fontSize="20px"
+                    fontSize={{ base: '10px', lg: '20px' }}
                     lineHeight="30px"
                   >
                     First Name
                   </Text>
                   <Input
-                    width="268px"
+                    width="100%"
                     boxShadow="md"
                     borderRadius="6px"
                     backgroundColor="white"
@@ -105,20 +137,20 @@ const Info: NextPage = () => {
                   <Text
                     fontFamily="'Poppins'"
                     fontWeight="400"
-                    fontSize="20px"
+                    fontSize={{ base: '10px', lg: '20px' }}
                     lineHeight="30px"
                   >
                     Last Name
                   </Text>
                   <Input
-                    width="268px"
+                    width="100%"
                     boxShadow="md"
                     borderRadius="6px"
                     backgroundColor="white"
                   />
                 </Flex>
               </Flex>
-              <Flex flexDirection="row" gap={10}>
+              <Flex flexDirection={{ base: 'column', sm: 'row' }} gap={10}>
                 <Flex
                   flexDirection="column"
                   justifyContent="center"
@@ -128,14 +160,14 @@ const Info: NextPage = () => {
                   <Text
                     fontFamily="'Poppins'"
                     fontWeight="400"
-                    fontSize="20px"
+                    fontSize={{ base: '10px', lg: '20px' }}
                     lineHeight="30px"
                   >
                     Birthday
                   </Text>
                   <Input
                     type="date"
-                    width="268px"
+                    width="100%"
                     boxShadow="md"
                     borderRadius="6px"
                     backgroundColor="white"
@@ -150,7 +182,7 @@ const Info: NextPage = () => {
                   <Text
                     fontFamily="'Poppins'"
                     fontWeight="400"
-                    fontSize="20px"
+                    fontSize={{ base: '10px', lg: '20px' }}
                     lineHeight="30px"
                   >
                     Gender
@@ -172,7 +204,7 @@ const Info: NextPage = () => {
                 <Text
                   fontFamily="'Poppins'"
                   fontWeight="400"
-                  fontSize="20px"
+                  fontSize={{ base: '10px', lg: '20px' }}
                   lineHeight="30px"
                 >
                   Location
@@ -186,7 +218,7 @@ const Info: NextPage = () => {
                     backgroundColor="white"
                   />
                   <Input
-                    width="268px"
+                    width="100%"
                     boxShadow="md"
                     borderRadius="6px"
                     backgroundColor="white"
@@ -203,7 +235,7 @@ const Info: NextPage = () => {
                 <Text
                   fontFamily="'Poppins'"
                   fontWeight="400"
-                  fontSize="20px"
+                  fontSize={{ base: '10px', lg: '20px' }}
                   lineHeight="30px"
                 >
                   Email
@@ -220,19 +252,20 @@ const Info: NextPage = () => {
           </Flex>
         </Section>
       </Container>
-      <Container float="right" m="45px">
-        <Button
-          px="3"
-          borderRadius="10px"
-          color="white"
-          backgroundColor="#A4C15E"
-          boxShadow="lg"
-          fontFamily="'Poppins'"
-          w="229px"
-          height="56px"
-        >
-          Save Changes
-        </Button>
+      <Container float="right" mb={8}>
+        <Center>
+          <Button
+            width={{ base: '50%', lg: '75%' }}
+            borderRadius="10px"
+            color="white"
+            backgroundColor="#A4C15E"
+            boxShadow="lg"
+            fontFamily="'Poppins'"
+            height="56px"
+          >
+            Save Changes
+          </Button>
+        </Center>
       </Container>
     </Layout>
   )
