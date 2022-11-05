@@ -9,7 +9,7 @@ module.exports = {
     ignoreBuildErrors: true
   },
   eslint: {
-    ignoreBuildErrors: true
+    ignoreDuringBuilds: true
   },
   assetPrefix: isProd ? 'https://kite-india.netlify.app' : undefined,
   images: {
