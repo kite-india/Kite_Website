@@ -3,6 +3,10 @@
  **/
 // const isProd = process.env.NODE_ENV === 'production'
 
+const convertDaysToSecs = days => {
+  return days * 24 * 60 * 60
+}
+
 module.exports = {
   reactStrictMode: true,
   typescript: {
@@ -19,6 +23,7 @@ module.exports = {
       'rajaampatbiodiversity.com',
       'www.tripsavvy.com',
       'cdn.pixabay.com'
-    ]
+    ],
+    minimumCacheTTL: convertDaysToSecs(7)
   }
 }
