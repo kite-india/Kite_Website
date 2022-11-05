@@ -8,6 +8,9 @@ module.exports = {
   typescript: {
     ignoreBuildErrors: true
   },
+  eslint: {
+    ignoreBuildErrors: true
+  },
   assetPrefix: isProd ? 'https://kite-india.netlify.app' : undefined,
   images: {
     domains: [
@@ -15,7 +18,8 @@ module.exports = {
       'img.traveltriangle.com',
       'i0.wp.com',
       'rajaampatbiodiversity.com',
-      'www.tripsavvy.com'
-    , 'cdn.pixabay.com']
+      'www.tripsavvy.com',
+      'cdn.pixabay.com'
+    ]
   }
 }

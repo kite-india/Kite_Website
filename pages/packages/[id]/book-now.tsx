@@ -58,7 +58,6 @@ const ExtraPassenger: React.FC<any> = ({
         <Flex gap={{ base: 2, md: 6 }} w="100%">
           <Select
             w="30%"
-            type="text"
             name="suffix"
             onChange={handleChange}
             placeholder="Suffix"
