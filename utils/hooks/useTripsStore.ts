@@ -3,15 +3,9 @@ import axios from 'axios'
 import create from 'zustand'
 import { devtools } from 'zustand/middleware'
 import type { Trip } from '../types'
+import type { TripStore } from '../store.types'
 
-type TripsStore = {
-  trips: Trip[]
-  singleTripById: Trip
-  fetchTrips: () => Promise<void>
-  fetchSingleTripById: (id: string) => Promise<void>
-}
-
-export const useTripsStore = create<TripsStore>()(
+export const useTripsStore = create<TripStore>()(
   devtools(set => ({
     trips: [],
     singleTripById: {},

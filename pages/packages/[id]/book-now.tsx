@@ -19,15 +19,25 @@ import axios from 'axios'
 import { Section } from '@components/index'
 import Layout from '@components/layouts/main'
 import type { NextPage } from 'next'
+import type {
+  BookNowFormType,
+  BookNowProps,
+  ExtraPassengerProps,
+  ExtraPassengersType
+} from '@utils/types'
 
-const ExtraPassenger: React.FC<any> = ({
+const ExtraPassenger: React.FC<ExtraPassengerProps> = ({
   onToggle,
   num,
   handleExtraPassengers
 }) => {
-  const [passengerDetails, setPassengerDetails] = useState({})
+  const [passengerDetails, setPassengerDetails] = useState<ExtraPassengersType>(
+    {}
+  )
 
-  const handleChange = e => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
+  ) => {
     setPassengerDetails(prevState => ({
       ...prevState,
       [e.target.name]: e.target.value
@@ -109,15 +119,13 @@ const ExtraPassenger: React.FC<any> = ({
   )
 }
 
-interface BookNowProps {
-  packages_data: any
-}
-
 const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
   const { isOpen, onToggle } = useDisclosure()
-  const [formParams, setFormParams] = useState({})
-  const [passengers, setPassengers] = useState(1)
-  const [extraPassengers, setExtraPassengers] = useState({})
+  const [formParams, setFormParams] = useState<BookNowFormType>({})
+  const [passengers, setPassengers] = useState<number>(1)
+  const [extraPassengers, setExtraPassengers] = useState<{
+    [key: number]: ExtraPassengersType
+  }>({})
 
   if (!packages_data) {
     return null
@@ -125,11 +133,16 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
 
   const { _id, name, image, location, price, duration } = packages_data
   const [days, nights] = duration.split('/')
-  const handleExtraPassengers = (num, passenger) => {
+  const handleExtraPassengers = (
+    num: number,
+    passenger: ExtraPassengersType
+  ) => {
     setExtraPassengers(prevState => ({ ...prevState, [num]: passenger }))
   }
 
-  const handleChange = (e: React.ChangeEvent) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
+  ) => {
     setFormParams(prevState => ({
       ...prevState,
       [e.target.name]: e.target.value
@@ -351,7 +364,7 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
 
 export default BookNow
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: { params: { id: string } }) {
   const { id } = context.params
   const { data } = await axios.get(
     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package/${id}`

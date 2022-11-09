@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export type User = {
   name?: string
   email?: string
@@ -45,4 +46,36 @@ export type Transaction = {
 
 export interface TransactionPageProps {
   data?: Transaction[]
+}
+
+export interface BookNowProps {
+  packages_data?: Trip
+}
+
+export interface ExtraPassengerProps {
+  num: number
+  onToggle: () => void
+  handleExtraPassengers: (num?: number, passenger?: ExtraPassengersType) => void
+}
+
+export interface BookNowFormType {
+  packagesid?: string
+  suffix?: 'mr' | 'mrs'
+  fname?: string
+  mname?: string
+  lname?: string
+  email?: string
+  phone?: string
+  persons?: ExtraPassengersType[]
+  dob?: Date | string
+  from?: Date | string
+  to?: Date | string
+}
+
+export interface ExtraPassengersType {
+  suffix?: 'mr' | 'mrs'
+  fname?: string
+  lname?: string
+  email?: string
+  phone?: string
 }
