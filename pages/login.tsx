@@ -11,13 +11,22 @@ import {
   Input,
   Checkbox
 } from '@chakra-ui/react'
+import { signIn } from 'next-auth/react'
 import Section from '@components/Section'
+import type { NextPage } from 'next'
 
-const Login: React.FC = () => {
+const Login: NextPage = () => {
   const [loginParams, setLoginParams] = useState({})
 
+  const handleGoogleLogin = () => {
+    signIn('google', { callbackUrl: 'http://localhost:3000' })
+  }
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLoginParams(prevState => ({ ...prevState, [e.target.name]: e.target.value }))
+    setLoginParams(prevState => ({
+      ...prevState,
+      [e.target.name]: e.target.value
+    }))
   }
 
   const handleLogin = () => {
@@ -27,7 +36,7 @@ const Login: React.FC = () => {
   return (
     <Layout title="Login">
       <Container
-        maxW={{ base: "container.sm", lg: "container.md"}}
+        maxW={{ base: 'container.sm', lg: 'container.md' }}
         my={12}
         w="100%"
         borderWidth={3}
@@ -48,12 +57,13 @@ const Login: React.FC = () => {
               LOG IN
             </Heading>
             <Button
-              width={{ base: "100%", lg: "75%"}}
+              width={{ base: '100%', lg: '75%' }}
               m="auto"
               px="3"
               borderRadius="10px"
               backgroundColor="#fcfafa"
               boxShadow="lg"
+              onClick={handleGoogleLogin}
             >
               <Box mr={4}>
                 <Image
@@ -72,7 +82,7 @@ const Login: React.FC = () => {
             Or
           </Text>
 
-          <Flex px={{base:2, lg: "50px"}} flexDirection="column" gap="9px">
+          <Flex px={{ base: 2, lg: '50px' }} flexDirection="column" gap="9px">
             <Flex flexDirection="column" justifyContent="center" width="100%">
               <Text fontFamily="'Poppins'" fontWeight="500" fontSize="18px">
                 Email
@@ -87,11 +97,7 @@ const Login: React.FC = () => {
               />
             </Flex>
             <Flex flexDirection="column" justifyContent="center" width="100%">
-              <Text
-                fontFamily="'Poppins'"
-                fontWeight="500"
-                fontSize="18px"
-                >
+              <Text fontFamily="'Poppins'" fontWeight="500" fontSize="18px">
                 Password
               </Text>
               <Input
@@ -123,7 +129,7 @@ const Login: React.FC = () => {
                 backgroundColor="#A4C15E"
                 boxShadow="lg"
                 fontFamily="'Poppins'"
-                onClick ={() => handleLogin()}
+                onClick={() => handleLogin()}
               >
                 LOGIN
               </Button>
