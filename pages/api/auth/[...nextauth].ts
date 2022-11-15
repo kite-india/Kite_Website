@@ -12,13 +12,12 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: 'jwt'
   },
-  jwt: {
-    secret: process.env.NEXT_PUBLIC_JWT_KEY_SECRET
-  },
   callbacks: {
-    session: async ({ session, user }) => {
-      session.id = user.id
-      return Promise.resolve(session)
+    signIn: async () => {
+      return Promise.resolve(true)
+    },
+    session: ({ session }) => {
+      return session
     }
   }
 }

@@ -64,7 +64,7 @@ export async function getStaticPaths() {
   }
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps(context: { params: { id: string } }) {
   const { id } = context.params
   // const { data }: { data: Trip } = await axios.get(
   //   `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package/${id}`
@@ -78,5 +78,3 @@ export async function getStaticProps(context) {
 }
 
 export default Page
-
-// TODO: React Map to set destinations, custom packages and directions service on google map, origin to client, services to show famous places around the selected area or search by name.

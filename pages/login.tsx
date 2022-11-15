@@ -11,15 +11,20 @@ import {
   Input,
   Checkbox
 } from '@chakra-ui/react'
-import { signIn } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 import Section from '@components/Section'
 import type { NextPage } from 'next'
 
 const Login: NextPage = () => {
+  const { status } = useSession()
   const [loginParams, setLoginParams] = useState({})
 
+  if (status === 'loading') {
+    return <h1>Loading....</h1>
+  }
+
   const handleGoogleLogin = () => {
-    signIn('google', { callbackUrl: 'http://localhost:3000' })
+    signIn('google', { callbackUrl: `${window.location.origin}` })
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

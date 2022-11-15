@@ -16,8 +16,8 @@ import {
   Select,
   Spacer
 } from '@chakra-ui/react'
-import { NextPage } from 'next'
-import { maxHeaderSize } from 'http'
+import { GetServerSidePropsContext, NextPage } from 'next'
+import { requireAuth } from '@utils/helpers/requireAuth'
 
 const Info: NextPage = () => {
   return (
@@ -271,3 +271,11 @@ const Info: NextPage = () => {
   )
 }
 export default Info
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  return requireAuth(context, session => {
+    return {
+      props: { session }
+    }
+  })
+}
