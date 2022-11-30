@@ -78,7 +78,7 @@ const HeroSection: React.FC = () => {
             Share your favorite travel destination and we will feature it in our
             next blog!
           </Text>
-          <InputGroup w={{ md: '25rem' }} mt={8}>
+          {/* <InputGroup w={{ md: '25rem' }} mt={8}>
             <InputLeftElement pointerEvents="none">
               <BiSearchAlt color="#3E7C17" fontSize="1.3rem" />
             </InputLeftElement>
@@ -88,7 +88,7 @@ const HeroSection: React.FC = () => {
               fontSize="1.1rem"
               color="#e4e4e4"
             />
-          </InputGroup>
+          </InputGroup> */}
         </Section>
       </Box>
     </Box>

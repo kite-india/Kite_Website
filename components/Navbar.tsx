@@ -44,31 +44,31 @@ const links = [
   { name: 'Contact Us', href: '/contact', icon: <GrContact /> }
 ]
 
-const BookBtn = () => (
-  <Button
-    as={motion.button}
-    whileHover={{ scale: 1.1 }}
-    whileTap={{ scale: 0.9 }}
-    size="sm"
-    rounded="full"
-    px={3}
-    fontSize="16px"
-    bg="color5"
-    color="white"
-    fontFamily="'Roboto'"
-    _hover={{
-      bg: 'green.400'
-    }}
-    fontWeight="normal"
-    display={{ base: 'none', md: 'flex' }}
-    onClick={() => {
-      ;('')
-    }}
-    variant="outline"
-  >
-    Book now
-  </Button>
-)
+// const BookBtn = () => (
+//   <Button
+//     as={motion.button}
+//     whileHover={{ scale: 1.1 }}
+//     whileTap={{ scale: 0.9 }}
+//     size="sm"
+//     rounded="full"
+//     px={3}
+//     fontSize="16px"
+//     bg="color5"
+//     color="white"
+//     fontFamily="'Roboto'"
+//     _hover={{
+//       bg: 'green.400'
+//     }}
+//     fontWeight="normal"
+//     display={{ base: 'none', md: 'flex' }}
+//     onClick={() => {
+//       ;('')
+//     }}
+//     variant="outline"
+//   >
+//     Book now
+//   </Button>
+// )
 
 const LinkItem = ({ href, children }) => (
   <NextLink href={href}>
@@ -282,7 +282,7 @@ const Navbar: React.FC<NavProps> = () => {
           </MenuList>
         </Menu>
 
-        <BookBtn />
+        {/* <BookBtn /> */}
         {isSmallerThanMd && (
           <Button
             aria-label="drawer-open"
