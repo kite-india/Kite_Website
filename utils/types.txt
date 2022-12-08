@@ -1,0 +1,11 @@
+Models                  Changes
+
+1)Activity          Remove campId (activity)
+
+2)User              Add name,email,gender,password,isOAuth,bookedPackages. Change imageUrl to profile_img(User)
+
+3)Transaction      change nid to id,....(Lot of changes)(Transactions)
+
+4)Trip              change _id to id,price to cost. Remove duration. Add contact,details_file
+
+5)

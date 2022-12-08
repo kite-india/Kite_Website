@@ -1,0 +1,19 @@
+/api will there be in url
+
+
+1)pages/packages/book-now.tsx line 70 "/book/package" not there in backend (found "/api/packageregistration")
+
+2) pages/index.tsx -line 48 "/home" is not there in the backend (found "/api/transactions")   -----doubt
+
+
+
+****************BACKEND***********************
+
+1)/packages/{id}/book_now not found    --------doubt
+2)book/package not found (found "/api/package")
+3) /home not found                  ----------doubt
+
+
+
+
+Other routes are available!
