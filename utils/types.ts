@@ -2,7 +2,11 @@
 export type User = {
   name?: string
   email?: string
-  imageUrl?: string
+  gender?: string
+  password?: string
+  isOAuth?: boolean
+  bookedPackages?: string[]
+  profile_img?: string
 }
 
 export interface HomePageProps {
@@ -16,26 +20,25 @@ export interface TripsPageProps {
 }
 
 export type Activity = {
-  _id?: string
+  id?: string
   name?: string
   description?: string
   image?: string
-  campId?: string
 }
 
 export type Trip = {
-  _id?: string
+  id?: string
   location?: string
-  price?: string
+  cost?: string
   activities?: string[]
-  duration?: string
+  contact: string
   image?: string
   name?: string
   description?: string
 }
 
 export type Transaction = {
-  nid?: number
+  id?: number
   img?: string
   place?: string
   date?: string
