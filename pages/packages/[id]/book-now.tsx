@@ -67,7 +67,10 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
     formParams['to'] = new Date(formParams?.to).toISOString()
     console.log(formParams)
     axios
-      .post(`${process.env.NEXT_PUBLIC_KITE_BACKEND}/book/package`, formParams)
+      .post(
+        `${process.env.NEXT_PUBLIC_KITE_BACKEND}/packageregistration`,
+        formParams
+      )
       .then(response => console.log(response.data))
       .catch(err => console.log(err))
   }
