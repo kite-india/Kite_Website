@@ -52,39 +52,38 @@ const Transaction: NextPage = () => {
 
   return (
     <Layout title="Transactions">
-      <Container alignItems={'center'} mt={'80px'}>
-        <Text
-          fontFamily={'Poppins'}
-          fontSize={{ sm: '20px', md: '28px', lg: '35px' }}
-          fontWeight="500"
-          lineHeight={'53px'}
-          textAlign="center"
-        >
-          Transaction Info
-        </Text>
-      </Container>
       <Container
-        mt={'40px'}
-        border={'3px solid #D9D9D9'}
-        borderRadius={'38px'}
         maxW={'1000px'}
-        alignItems="center"
-        mb="100px"
+        paddingX={{ base: '35px', md: '70px', lg: '100px' }}
       >
-        <Tabs
-          fontFamily={'Poppins'}
-          fontSize={'20px'}
-          fontWeight={'500'}
-          my={'15px'}
-          lineHeight={'38px'}
-          letterSpacing={'-0.005em'}
-          variant="soft-rounded"
-          colorScheme="green"
+        <Container alignItems={'center'} mt={'80px'}>
+          <Text
+            fontFamily={'Poppins'}
+            fontSize={{ sm: '20px', md: '28px', lg: '35px' }}
+            fontWeight="500"
+            lineHeight={'53px'}
+            textAlign="center"
+          >
+            Transaction Info
+          </Text>
+        </Container>
+        <Container
+          mt={'40px'}
+          border={'3px solid #D9D9D9'}
+          borderRadius={'38px'}
+          maxW={'1000px'}
+          alignItems="center"
+          mb="100px"
         >
-          <TabList
-            ml={{ sm: '12px', md: '25px', lg: '40px' }}
-            mb={'15px'}
-            gap={{ sm: '12px', md: '25px', lg: '40px' }}
+          <Tabs
+            fontFamily={'Poppins'}
+            fontSize={'20px'}
+            fontWeight={'500'}
+            my={'15px'}
+            lineHeight={'38px'}
+            letterSpacing={'-0.005em'}
+            variant="soft-rounded"
+            colorScheme="green"
           >
             <Tab px="25px" borderRadius={'30px'}>
               All
