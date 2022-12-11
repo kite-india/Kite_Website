@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Layout from '../components/layouts/main'
 import Section from '../components/Section'
 import {
@@ -14,12 +14,56 @@ import {
   Avatar,
   AvatarBadge,
   Select,
-  Spacer
+  Spacer,
+  InputGroup,
+  InputRightElement,
+  IconButton
 } from '@chakra-ui/react'
 import { NextPage } from 'next'
 import { maxHeaderSize } from 'http'
+import { FiEdit2 } from 'react-icons/fi'
 
 const Info: NextPage = () => {
+  const [data, setData] = useState({
+    firstName: 'john',
+    lastName: 'smith',
+    location: 'USA',
+    email: 'john@gmail.com',
+    mobile: '99889988',
+    date: '2013-01-08',
+    gender: 'Female'
+  })
+  const [isEdit, setIsEdit] = useState({
+    firstName: true,
+    lastName: true,
+    location: true,
+    email: true,
+    gender: true,
+    mobile: true,
+    date: true,
+    changes: true
+  })
+  const handleSubmit = () => {
+    console.log(data)
+  }
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setData(prevState => ({
+      ...prevState,
+      [e.target.name]: e.target.value
+    }))
+    setIsEdit({ ...isEdit, changes: false })
+  }
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setData(prevState => ({
+      ...prevState,
+      [e.target.name]: e.target.value
+    }))
+    setIsEdit({ ...isEdit, changes: false })
+  }
+  const handleMouseDownPassword = event => {
+    event.preventDefault()
+  }
+
   return (
     <Layout title="Info">
       <Text
@@ -34,7 +78,7 @@ const Info: NextPage = () => {
       </Text>
       <Container
         maxW={{ base: 'container.sm', lg: 'container.lg' }}
-        my={12}
+        my={14}
         borderWidth={3}
         borderRadius="38px"
         boxShadow="lg"
@@ -61,12 +105,12 @@ const Info: NextPage = () => {
                 fontSize={{ base: '18px', sm: '25px', lg: '30px' }}
                 lineHeight="45px"
                 color="#464646"
-                m={{ base: '0', sm: '5' }}
+                mx={{ base: '0', sm: '5' }}
                 visibility={{ base: 'visible', lg: 'collapse' }}
               >
                 Basic information
               </Text>
-              <Spacer></Spacer>
+              <Spacer display={{ base: 'flex', lg: 'none' }} />
 
               <Flex
                 direction="column"
@@ -102,10 +146,10 @@ const Info: NextPage = () => {
             <Center>
               <Divider
                 orientation="vertical"
-                visibility={{ base: 'hidden', lg: 'inherit' }}
+                display={{ base: 'none', lg: 'flex' }}
               />
             </Center>
-            <Flex px="50px" flexDirection="column" gap="9px">
+            <Flex px="50px" flexDirection="column" gap="20px">
               <Flex flexDirection={{ base: 'column', sm: 'row' }} gap={10}>
                 <Flex
                   flexDirection="column"
@@ -121,12 +165,33 @@ const Info: NextPage = () => {
                   >
                     First Name
                   </Text>
-                  <Input
-                    width="100%"
-                    boxShadow="md"
-                    borderRadius="6px"
-                    backgroundColor="white"
-                  />
+                  <InputGroup>
+                    <Input
+                      value={data.firstName}
+                      name="firstName"
+                      width="100%"
+                      boxShadow="md"
+                      borderRadius="6px"
+                      backgroundColor="white"
+                      disabled={isEdit.firstName}
+                      onChange={handleChange}
+                    />
+                    <InputRightElement>
+                      <IconButton
+                        aria-label="Edit"
+                        variant="none"
+                        onMouseDown={handleMouseDownPassword}
+                        onClick={() => {
+                          setIsEdit({
+                            ...isEdit,
+                            ['firstName']: !isEdit.firstName
+                          })
+                        }}
+                      >
+                        <FiEdit2 />
+                      </IconButton>
+                    </InputRightElement>
+                  </InputGroup>
                 </Flex>
                 <Flex
                   flexDirection="column"
@@ -142,12 +207,33 @@ const Info: NextPage = () => {
                   >
                     Last Name
                   </Text>
-                  <Input
-                    width="100%"
-                    boxShadow="md"
-                    borderRadius="6px"
-                    backgroundColor="white"
-                  />
+                  <InputGroup>
+                    <Input
+                      value={data.lastName}
+                      name="lastName"
+                      width="100%"
+                      boxShadow="md"
+                      borderRadius="6px"
+                      backgroundColor="white"
+                      disabled={isEdit.lastName}
+                      onChange={handleChange}
+                    />
+                    <InputRightElement>
+                      <IconButton
+                        aria-label="Edit"
+                        variant="none"
+                        onMouseDown={handleMouseDownPassword}
+                        onClick={() => {
+                          setIsEdit({
+                            ...isEdit,
+                            ['lastName']: !isEdit.lastName
+                          })
+                        }}
+                      >
+                        <FiEdit2 />
+                      </IconButton>
+                    </InputRightElement>
+                  </InputGroup>
                 </Flex>
               </Flex>
               <Flex flexDirection={{ base: 'column', sm: 'row' }} gap={10}>
@@ -165,13 +251,34 @@ const Info: NextPage = () => {
                   >
                     Birthday
                   </Text>
-                  <Input
-                    type="date"
-                    width="100%"
-                    boxShadow="md"
-                    borderRadius="6px"
-                    backgroundColor="white"
-                  />
+                  <InputGroup>
+                    <Input
+                      type="date"
+                      name="date"
+                      width="100%"
+                      boxShadow="md"
+                      borderRadius="6px"
+                      backgroundColor="white"
+                      value={data.date}
+                      disabled={isEdit.date}
+                      onChange={handleChange}
+                    />
+                    <InputRightElement>
+                      <IconButton
+                        aria-label="Edit"
+                        variant="none"
+                        onMouseDown={handleMouseDownPassword}
+                        onClick={() => {
+                          setIsEdit({
+                            ...isEdit,
+                            ['date']: !isEdit.date
+                          })
+                        }}
+                      >
+                        <FiEdit2 />
+                      </IconButton>
+                    </InputRightElement>
+                  </InputGroup>
                 </Flex>
                 <Flex
                   flexDirection="column"
@@ -187,11 +294,37 @@ const Info: NextPage = () => {
                   >
                     Gender
                   </Text>
-                  <Select>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Unknown">Unknown</option>
-                  </Select>
+                  <InputGroup>
+                    <Select
+                      width="100%"
+                      name="gender"
+                      value={data.gender}
+                      boxShadow="md"
+                      borderRadius="6px"
+                      backgroundColor="white"
+                      disabled={isEdit.gender}
+                      onChange={handleSelectChange}
+                    >
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Unknown">Unknown</option>
+                    </Select>
+                    <InputRightElement>
+                      <IconButton
+                        aria-label="Edit"
+                        variant="none"
+                        onMouseDown={handleMouseDownPassword}
+                        onClick={() => {
+                          setIsEdit({
+                            ...isEdit,
+                            ['gender']: !isEdit.gender
+                          })
+                        }}
+                      >
+                        <FiEdit2 />
+                      </IconButton>
+                    </InputRightElement>
+                  </InputGroup>
                 </Flex>
               </Flex>
 
@@ -209,21 +342,29 @@ const Info: NextPage = () => {
                 >
                   Location
                 </Text>
-                <Flex flexDirection="row" gap={10}>
+                <InputGroup>
                   <Input
-                    type="country"
-                    width="268px"
+                    value={data.location}
+                    name="location"
                     boxShadow="md"
                     borderRadius="6px"
                     backgroundColor="white"
+                    disabled={isEdit.location}
+                    onChange={handleChange}
                   />
-                  <Input
-                    width="100%"
-                    boxShadow="md"
-                    borderRadius="6px"
-                    backgroundColor="white"
-                  />
-                </Flex>
+                  <InputRightElement>
+                    <IconButton
+                      aria-label="Edit"
+                      variant="none"
+                      onMouseDown={handleMouseDownPassword}
+                      onClick={() => {
+                        setIsEdit({ ...isEdit, ['location']: !isEdit.location })
+                      }}
+                    >
+                      <FiEdit2 />
+                    </IconButton>
+                  </InputRightElement>
+                </InputGroup>
               </Flex>
 
               <Flex
@@ -240,33 +381,93 @@ const Info: NextPage = () => {
                 >
                   Email
                 </Text>
-                <Input
-                  type="email"
-                  width="100%"
-                  boxShadow="md"
-                  borderRadius="6px"
-                  backgroundColor="white"
-                />
+                <InputGroup>
+                  <Input
+                    value={data.email}
+                    name="email"
+                    type="email"
+                    width="100%"
+                    boxShadow="md"
+                    borderRadius="6px"
+                    backgroundColor="white"
+                    disabled={isEdit.email}
+                    onChange={handleChange}
+                  />
+                  <InputRightElement>
+                    <IconButton
+                      aria-label="Edit"
+                      variant="none"
+                      onMouseDown={handleMouseDownPassword}
+                      onClick={() => {
+                        setIsEdit({ ...isEdit, ['email']: !isEdit.email })
+                      }}
+                    >
+                      <FiEdit2 />
+                    </IconButton>
+                  </InputRightElement>
+                </InputGroup>
+              </Flex>
+              <Flex
+                flexDirection="column"
+                justifyContent="center"
+                width="100%"
+                gap={15}
+              >
+                <Text
+                  fontFamily="'Poppins'"
+                  fontWeight="400"
+                  fontSize={{ base: '10px', lg: '20px' }}
+                  lineHeight="30px"
+                >
+                  Mobile
+                </Text>
+                <InputGroup>
+                  <Input
+                    value={data.mobile}
+                    name="mobile"
+                    type="number"
+                    width="100%"
+                    boxShadow="md"
+                    borderRadius="6px"
+                    backgroundColor="white"
+                    disabled={isEdit.mobile}
+                    onChange={handleChange}
+                  />
+                  <InputRightElement>
+                    <IconButton
+                      aria-label="Edit"
+                      variant="none"
+                      onMouseDown={handleMouseDownPassword}
+                      onClick={() => {
+                        setIsEdit({ ...isEdit, ['mobile']: !isEdit.mobile })
+                      }}
+                    >
+                      <FiEdit2 />
+                    </IconButton>
+                  </InputRightElement>
+                </InputGroup>
+              </Flex>
+              <Flex>
+                <Spacer />
+                <Button
+                  width="30%"
+                  borderRadius="10px"
+                  color="white"
+                  backgroundColor="#A4C15E"
+                  boxShadow="lg"
+                  fontFamily="'Poppins'"
+                  height="56px"
+                  disabled={isEdit.changes}
+                  onClick={handleSubmit}
+                >
+                  Save Changes
+                </Button>
               </Flex>
             </Flex>
           </Flex>
         </Section>
       </Container>
-      <Container float="right" mb={8}>
-        <Center>
-          <Button
-            width={{ base: '50%', lg: '75%' }}
-            borderRadius="10px"
-            color="white"
-            backgroundColor="#A4C15E"
-            boxShadow="lg"
-            fontFamily="'Poppins'"
-            height="56px"
-          >
-            Save Changes
-          </Button>
-        </Center>
-      </Container>
+      <Container float="right" mb={8}></Container>
     </Layout>
   )
 }
