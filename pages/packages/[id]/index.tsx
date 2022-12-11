@@ -6,6 +6,7 @@ import { Section } from '@components/index'
 import Layout from '@components/layouts/main'
 import type { NextPage } from 'next'
 import type { Trip } from '@utils/types'
+import CustomImageComponent from '@components/CustomImageComponent'
 
 interface PackagesPageProps {
   packages_data: Trip
@@ -19,7 +20,7 @@ const Page: NextPage<PackagesPageProps> = ({ packages_data }) => {
       <Container w="100%" pt={8} maxWidth="container.xl">
         <Section delay={0.2}>
           <Flex gap={6}>
-            <Image src={image} alt={_id} />
+            <CustomImageComponent src={image} alt={_id} />
             <Box p={6}>
               <Heading fontWeight="semibold" fontSize="72px">
                 {name}

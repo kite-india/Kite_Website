@@ -15,8 +15,12 @@ import Section from '@components/Section'
 import Layout from '@components/layouts/main'
 import type { NextPage } from 'next'
 import type { TripsPageProps } from '@utils/types'
+import CustomImageComponent from '@components/CustomImageComponent'
 
-const Trips: NextPage<TripsPageProps> = ({ packages_data = null, activities_data = null }) => {
+const Trips: NextPage<TripsPageProps> = ({
+  packages_data = null,
+  activities_data = null
+}) => {
   return (
     <Layout title="Trips">
       <Container w="100%" pt={8} maxW="container.xl">
@@ -35,7 +39,7 @@ const Trips: NextPage<TripsPageProps> = ({ packages_data = null, activities_data
             w="100%"
             gap={{ base: 8, lg: 16 }}
           >
-            <Image
+            <CustomImageComponent
               src="/images/trips.png"
               alt="trips"
               objectFit="cover"

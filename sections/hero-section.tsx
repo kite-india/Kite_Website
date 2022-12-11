@@ -11,6 +11,7 @@ import Section from '@components/Section'
 import { BiSearchAlt } from 'react-icons/bi'
 import Image from 'next/image'
 import HeroImage from '../public/images/hero1.jpg'
+import CustomImageComponent from '@components/CustomImageComponent'
 
 const HeroSection: React.FC = () => {
   return (
@@ -28,7 +29,7 @@ const HeroSection: React.FC = () => {
       // bgRepeat="no-repeat"
       // bgPosition="center"
     >
-      <Image
+      <CustomImageComponent
         src={HeroImage}
         alt="hero"
         priority

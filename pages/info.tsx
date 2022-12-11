@@ -18,6 +18,7 @@ import {
 } from '@chakra-ui/react'
 import { NextPage } from 'next'
 import { maxHeaderSize } from 'http'
+import CustomImageComponent from '@components/CustomImageComponent'
 
 const Info: NextPage = () => {
   return (
@@ -80,7 +81,10 @@ const Info: NextPage = () => {
                       bg="#8A8888"
                       boxSize={{ base: '20px', lg: '50px' }}
                     >
-                      <Image src="./Vector.png" alt="vector-img" />
+                      <CustomImageComponent
+                        src="./Vector.png"
+                        alt="vector-img"
+                      />
                     </AvatarBadge>
                   </Avatar>
                 </Center>

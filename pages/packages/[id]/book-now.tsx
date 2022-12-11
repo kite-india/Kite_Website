@@ -19,6 +19,7 @@ import axios from 'axios'
 import { Section } from '@components/index'
 import Layout from '@components/layouts/main'
 import type { NextPage } from 'next'
+import CustomImageComponent from '@components/CustomImageComponent'
 
 const ExtraPassenger: React.FC<any> = ({
   onToggle,
@@ -161,7 +162,7 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
         <Box mt={12} maxW="container.xl">
           <Section delay={0.3}>
             <Flex align="center" direction={{ base: 'column', lg: 'row' }}>
-              <Image
+              <CustomImageComponent
                 alt={_id}
                 src={image}
                 w={{ base: '80vw', lg: '100%' }}

@@ -1,12 +1,13 @@
 import Image from 'next/image'
 import { Box, Center, Heading, Text, Stack } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
+import CustomImageComponent from './CustomImageComponent'
 
-interface BlogProps { 
-  blog: any;
+interface BlogProps {
+  blog: any
 }
 
-const BlogCard:React.FC<BlogProps> = ({ blog }) => {
+const BlogCard: React.FC<BlogProps> = ({ blog }) => {
   const { _id, name, image, description } = blog
   return (
     <Center as={motion.div} whileHover={{ scale: 1.1 }} cursor="pointer">
@@ -17,7 +18,7 @@ const BlogCard:React.FC<BlogProps> = ({ blog }) => {
         rounded="md"
       >
         <Box borderRadius="lg" overflow={'hidden'}>
-          <Image
+          <CustomImageComponent
             src={image}
             alt={_id}
             layout="responsive"

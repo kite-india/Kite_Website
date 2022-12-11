@@ -16,6 +16,7 @@ import { IoIosMail } from 'react-icons/io'
 import { NextPage } from 'next'
 import Layout from '@components/layouts/main'
 import { Section } from '@components/index'
+import CustomImageComponent from '@components/CustomImageComponent'
 
 const Contact: NextPage = () => {
   const [contactDetails, setContactDetails] = useState({})
@@ -144,7 +145,7 @@ const Contact: NextPage = () => {
                   Submit
                 </Button>
               </Flex>
-              <Image
+              <CustomImageComponent
                 as={motion.img}
                 src="/contact-us.svg"
                 alt="contact"
