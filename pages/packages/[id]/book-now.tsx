@@ -40,7 +40,7 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
     return null
   }
 
-  const { _id, name, image, location, price, duration } = packages_data
+  const { id, name, image, location, cost, duration } = packages_data
   const [days, nights] = duration.split('/')
   const handleExtraPassengers = (
     num: number,
@@ -60,7 +60,7 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
   }
 
   const handleSubmit = () => {
-    formParams['packageid'] = _id
+    formParams['packageid'] = id
     formParams['persons'] = Object.values(extraPassengers)
     formParams['dob'] = new Date(formParams?.dob).toISOString()
     formParams['from'] = new Date(formParams?.from).toISOString()
@@ -87,7 +87,7 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
           <Section delay={0.3}>
             <Flex align="center" direction={{ base: 'column', lg: 'row' }}>
               <Image
-                alt={_id}
+                alt={id}
                 src={image}
                 w={{ base: '80vw', lg: '100%' }}
                 h={{ base: '80vw', lg: '32vh' }}
@@ -114,7 +114,7 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
                   </Text>
                   <Text>{location}</Text>
                   <Text>
-                    Rs {price}/
+                    Rs {cost}/
                     <Text as="span" fontSize="12px">
                       per person
                     </Text>

@@ -4,12 +4,12 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import type { Activity } from '@utils/types'
 
-interface IProps { 
-  data: Activity;
+interface IProps {
+  data: Activity
 }
 
 const ActivityCard: React.FC<IProps> = ({ data }) => {
-  const { name, description, image } = data
+  const { id, name, description, image } = data
   if (!data) return null
   return (
     <Flex

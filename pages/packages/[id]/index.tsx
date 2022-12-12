@@ -15,7 +15,7 @@ interface PackagesPageProps {
 
 const Page: NextPage<PackagesPageProps> = ({ packages_data }) => {
   if (!packages_data) return null
-  const { name, _id, image } = packages_data
+  const { name, id, image } = packages_data
   return (
     <Layout title={name}>
       <Container w="100%" pt={8} maxWidth="container.xl">
@@ -28,7 +28,7 @@ const Page: NextPage<PackagesPageProps> = ({ packages_data }) => {
               overflow={'hidden'}
               position="relative"
             >
-              <Image src={image} alt={_id} layout="fill" priority />
+              <Image src={image} alt={id} layout="fill" priority />
             </Box>
             <Box p={6} maxWidth="50%">
               <Heading fontWeight="semibold" fontSize="72px">
@@ -55,7 +55,7 @@ export async function getStaticPaths() {
 
   const paths = data.map((trip: Trip) => {
     return {
-      params: { id: `${trip._id}` }
+      params: { id: `${trip.id}` }
     }
   })
   return {
