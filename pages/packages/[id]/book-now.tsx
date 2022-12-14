@@ -40,8 +40,8 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
     return null
   }
 
-  const { id, name, image, location, cost, duration } = packages_data
-  const [days, nights] = duration.split('/')
+  const { id, name, image, location, cost, description } = packages_data
+  // const [days, nights] = duration.split('/')
   const handleExtraPassengers = (
     num: number,
     passenger: ExtraPassengersType
@@ -110,7 +110,8 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
                   justifyContent="center"
                 >
                   <Text>
-                    {days} Days / {nights} Nights
+                    {description}
+                    {/* {days} Days / {nights} Nights */}
                   </Text>
                   <Text>{location}</Text>
                   <Text>

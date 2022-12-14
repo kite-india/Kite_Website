@@ -19,7 +19,7 @@ interface PackageProps {
 
 const PackageCard: React.FC<PackageProps> = ({ data }) => {
   const router = useRouter()
-  const { id, location, cost, activities, duration, image } = data
+  const { id, location, cost, activities, description, image } = data
   const bookNow = () => {
     router.push(`/packages/${id}/book-now`)
   }
@@ -53,7 +53,7 @@ const PackageCard: React.FC<PackageProps> = ({ data }) => {
           {location}
         </Text>
         <Text fontFamily="'Poppins'" fontWeight="normal" fontSize="16px">
-          Duration: {duration}
+          Description: {description}
         </Text>
       </Flex>
       <SimpleGrid
