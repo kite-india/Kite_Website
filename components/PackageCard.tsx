@@ -14,14 +14,14 @@ import Image from 'next/image'
 import type { Trip } from '@utils/types'
 
 interface PackageProps {
-  data: Trip;
+  data: Trip
 }
 
 const PackageCard: React.FC<PackageProps> = ({ data }) => {
   const router = useRouter()
-  const { _id, location, price, activities, duration, image } = data
+  const { id, location, cost, activities, description, image } = data
   const bookNow = () => {
-    router.push(`/packages/${_id}/book-now`)
+    router.push(`/packages/${id}/book-now`)
   }
   return (
     <Box as="div" boxShadow="lg" borderRadius="lg" maxW="container.sm" p={3}>
@@ -53,7 +53,7 @@ const PackageCard: React.FC<PackageProps> = ({ data }) => {
           {location}
         </Text>
         <Text fontFamily="'Poppins'" fontWeight="normal" fontSize="16px">
-          Duration: {duration}
+          Description: {description}
         </Text>
       </Flex>
       <SimpleGrid
@@ -90,7 +90,7 @@ const PackageCard: React.FC<PackageProps> = ({ data }) => {
         gap={{ base: 2, lg: 0 }}
       >
         <Text fontFamily="'Poppins'" fontSize="18px">
-          Rs {price}/{' '}
+          Rs {cost}/{' '}
           <Text as="span" fontFamily="'Poppins'" fontSize="12px">
             person
           </Text>

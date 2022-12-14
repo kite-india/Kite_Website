@@ -26,6 +26,11 @@ export type Activity = {
   image?: string
 }
 
+export type FeaturedDestination = Trip & {
+  video_link?: String
+  is_premium?: boolean
+}
+
 export type Trip = {
   id?: string
   location?: string
