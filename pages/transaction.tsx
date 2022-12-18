@@ -85,35 +85,37 @@ const Transaction: NextPage = () => {
             variant="soft-rounded"
             colorScheme="green"
           >
-            <Tab px="25px" borderRadius={'30px'}>
-              All
-            </Tab>
-            <Tab borderRadius={'30px'}>Booked</Tab>
-            <Tab px="20px" borderRadius={'30px'}>
-              Cancelled
-            </Tab>
-          </TabList>
-          <hr />
-          <TabPanels pb={'30px'}>
-            <TabPanel>
-              <TransactionCardGroup data={data} />
-            </TabPanel>
-            <TabPanel>
-              {booked[0] ? (
-                <TransactionCardGroup data={booked} />
-              ) : (
-                <p>No upcoming!</p>
-              )}
-            </TabPanel>
-            <TabPanel>
-              {cancelled[0] ? (
-                <TransactionCardGroup data={cancelled} />
-              ) : (
-                <p>No Cancelled!</p>
-              )}
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
+            <TabList mb="2">
+              <Tab px="25px" borderRadius={'30px'}>
+                All
+              </Tab>
+              <Tab borderRadius={'30px'}>Booked</Tab>
+              <Tab px="20px" borderRadius={'30px'}>
+                Cancelled
+              </Tab>
+            </TabList>
+            <hr />
+            <TabPanels pb={'30px'}>
+              <TabPanel>
+                <TransactionCardGroup data={data} />
+              </TabPanel>
+              <TabPanel>
+                {booked[0] ? (
+                  <TransactionCardGroup data={booked} />
+                ) : (
+                  <p>No upcoming!</p>
+                )}
+              </TabPanel>
+              <TabPanel>
+                {cancelled[0] ? (
+                  <TransactionCardGroup data={cancelled} />
+                ) : (
+                  <p>No Cancelled!</p>
+                )}
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
+        </Container>
       </Container>
     </Layout>
   )
