@@ -12,6 +12,7 @@ import Section from './Section'
 
 import { BsPlayCircleFill } from 'react-icons/bs'
 import { FeaturedDestination } from '@utils/types'
+import CustomImage from './CustomImage'
 
 interface FeaturedDataProps {
   data: FeaturedDestination
@@ -30,14 +31,20 @@ const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
       my={8}
     >
       <Section delay={0.3}>
-        <Stack direction={{ base: 'column', lg: 'row' }} spacing="2.18rem">
-          <Image
+        <Stack
+          direction={{ base: 'column', lg: 'row' }}
+          spacing="2.18rem"
+          borderRadius="xl"
+          borderColor="blackAlpha.300"
+          p={{ base: 2, md: 8 }}
+          borderWidth={{ base: '0', md: '2px' }}
+        >
+          <CustomImage
             src={image}
             alt={name}
-            borderRadius="xl"
-            objectFit="cover"
-            w="600px"
-            h="400px"
+            width="600px"
+            height="400px"
+            style={{ borderRadius: '10px' }}
           />
           <Box pt={{ base: 0, md: 6 }} w={{ base: '95vw', md: '38rem' }}>
             <Flex direction="column" gap="1.2rem" align="left">
