@@ -11,13 +11,14 @@ import {
 import Section from './Section'
 
 import { BsPlayCircleFill } from 'react-icons/bs'
+import { FeaturedDestination } from '@utils/types'
 
 interface FeaturedDataProps {
-  data: any;
+  data: FeaturedDestination
 }
 
 const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
-  const { title, description, image } = data
+  const { name, description, image } = data
   return (
     <Box
       w="100%"
@@ -32,7 +33,7 @@ const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
         <Stack direction={{ base: 'column', lg: 'row' }} spacing="2.18rem">
           <Image
             src={image}
-            alt={title}
+            alt={name}
             borderRadius="xl"
             objectFit="cover"
             w="600px"
@@ -51,7 +52,7 @@ const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
               >
                 Featured Destination
               </Heading>
-              <Heading fontSize="35px">{title}</Heading>
+              <Heading fontSize="35px">{name}</Heading>
               <Text fontFamily="'Roboto'" fontWeight="normal" fontSize="18px">
                 {description}
               </Text>

@@ -12,6 +12,7 @@ import {
 import { FiMap } from 'react-icons/fi'
 import Image from 'next/image'
 import type { Trip } from '@utils/types'
+import CustomImage from './CustomImage'
 
 interface PackageProps {
   data: Trip
@@ -32,7 +33,7 @@ const PackageCard: React.FC<PackageProps> = ({ data }) => {
         borderRadius="xl"
         overflow="hidden"
       >
-        <Image
+        <CustomImage
           src={image}
           alt="card"
           objectFit="cover"

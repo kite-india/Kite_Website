@@ -8,6 +8,7 @@ import Layout from '@components/layouts/main'
 import type { NextPage } from 'next'
 import type { Trip } from '@utils/types'
 import { useTripsStore } from '@utils/hooks/useTripsStore'
+import CustomImage from '@components/CustomImage'
 
 interface PackagesPageProps {
   packages_data: Trip
@@ -28,7 +29,7 @@ const Page: NextPage<PackagesPageProps> = ({ packages_data }) => {
               overflow={'hidden'}
               position="relative"
             >
-              <Image src={image} alt={id} layout="fill" priority />
+              <CustomImage src={image} alt={id} layout="fill" priority />
             </Box>
             <Box p={6} maxWidth="50%">
               <Heading fontWeight="semibold" fontSize="72px">

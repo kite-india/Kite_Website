@@ -40,7 +40,7 @@ const Page: NextPage<HomePageProps> = ({
 
 export async function getStaticProps() {
   const { data: featured_data } = await axios.get(
-    `${process.env.NEXT_PUBLIC_KITE_BACKEND}/home`
+    `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package/premium`
   )
 
   const { data: activities_data } = await axios.get(
