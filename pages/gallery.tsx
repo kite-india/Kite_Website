@@ -4,7 +4,7 @@ import Layout from '@components/layouts/main'
 import Image from 'next/image'
 import Section from '@components/Section'
 import { NextPage } from 'next'
-
+import CustomImage from '@components/CustomImage'
 
 const Gallery: NextPage = () => {
   return (
@@ -28,9 +28,9 @@ const Gallery: NextPage = () => {
               </Heading>
             </Box>
             <Box>
-              <Image
+              <CustomImage
                 priority
-                src="/Saly-44.svg"
+                src="static-public/Saly-44.svg"
                 layout="fixed"
                 width="280px"
                 height="280px"

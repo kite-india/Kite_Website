@@ -9,8 +9,7 @@ import {
 } from '@chakra-ui/react'
 import Section from '@components/Section'
 import { BiSearchAlt } from 'react-icons/bi'
-import Image from 'next/image'
-import HeroImage from '../public/images/hero1.jpg'
+import CustomImage from '@components/CustomImage'
 
 const HeroSection: React.FC = () => {
   return (
@@ -28,8 +27,8 @@ const HeroSection: React.FC = () => {
       // bgRepeat="no-repeat"
       // bgPosition="center"
     >
-      <Image
-        src={HeroImage}
+      <CustomImage
+        src="static-public/hero1.jpg"
         alt="hero"
         priority
         layout="fill"

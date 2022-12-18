@@ -148,7 +148,7 @@ const Contact: NextPage = () => {
                 as={motion.img}
                 src="/contact-us.svg"
                 alt="contact"
-                layout="fixed"
+                // layout="fixed"
                 w={{ base: '320px', lg: '600px' }}
               />
             </Flex>

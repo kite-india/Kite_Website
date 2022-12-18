@@ -19,9 +19,8 @@ import {
   InputRightElement,
   IconButton
 } from '@chakra-ui/react'
-import { NextPage } from 'next'
-import { maxHeaderSize } from 'http'
-import { FiEdit2 } from 'react-icons/fi'
+import { GetServerSidePropsContext, NextPage } from 'next'
+import { requireAuth } from '@utils/helpers/requireAuth'
 
 const Info: NextPage = () => {
   const [data, setData] = useState({
@@ -472,3 +471,11 @@ const Info: NextPage = () => {
   )
 }
 export default Info
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  return requireAuth(context, session => {
+    return {
+      props: { session }
+    }
+  })
+}

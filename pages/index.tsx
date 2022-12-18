@@ -8,10 +8,14 @@ import {
 import Layout from '@components/layouts/main'
 import axios from 'axios'
 import type { NextPage } from 'next'
+import { useSession } from 'next-auth/react'
 import type { HomePageProps } from '@utils/types'
 
-
-const Page: NextPage<HomePageProps> = ({ featured_data = null, activities_data = null }) => {
+const Page: NextPage<HomePageProps> = ({
+  featured_data = null,
+  activities_data = null
+}) => {
+  const { data: session } = useSession()
   return (
     <Layout title="Home">
       <HeroSection />
@@ -36,7 +40,7 @@ const Page: NextPage<HomePageProps> = ({ featured_data = null, activities_data =
 
 export async function getStaticProps() {
   const { data: featured_data } = await axios.get(
-    `${process.env.NEXT_PUBLIC_KITE_BACKEND}/home`
+    `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package/premium`
   )
 
   const { data: activities_data } = await axios.get(

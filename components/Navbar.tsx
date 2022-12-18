@@ -24,7 +24,8 @@ import {
   MenuList,
   MenuItem,
   IconButton,
-  Text
+  Text,
+  Image
 } from '@chakra-ui/react'
 import { AiOutlineMenu } from 'react-icons/ai'
 import {
@@ -36,6 +37,7 @@ import {
 import { GrGallery, GrContact } from 'react-icons/gr'
 import { FaRegUserCircle } from 'react-icons/fa'
 import { motion } from 'framer-motion'
+import { useSession } from 'next-auth/react'
 
 const links = [
   { name: 'Home', href: '/', icon: <BiHomeHeart /> },
@@ -44,31 +46,29 @@ const links = [
   { name: 'Contact Us', href: '/contact', icon: <GrContact /> }
 ]
 
-// const BookBtn = () => (
-//   <Button
-//     as={motion.button}
-//     whileHover={{ scale: 1.1 }}
-//     whileTap={{ scale: 0.9 }}
-//     size="sm"
-//     rounded="full"
-//     px={3}
-//     fontSize="16px"
-//     bg="color5"
-//     color="white"
-//     fontFamily="'Roboto'"
-//     _hover={{
-//       bg: 'green.400'
-//     }}
-//     fontWeight="normal"
-//     display={{ base: 'none', md: 'flex' }}
-//     onClick={() => {
-//       ;('')
-//     }}
-//     variant="outline"
-//   >
-//     Book now
-//   </Button>
-// )
+const BookBtn = () => (
+  <Button
+    as={motion.button}
+    whileHover={{ scale: 1.1 }}
+    whileTap={{ scale: 0.9 }}
+    size="sm"
+    rounded="full"
+    px={3}
+    fontSize="16px"
+    bg="color5"
+    color="white"
+    fontFamily="'Roboto'"
+    _hover={{
+      bg: 'green.400'
+    }}
+    fontWeight="normal"
+    display={{ base: 'none', md: 'flex' }}
+    onClick={() => {}}
+    variant="outline"
+  >
+    Book now
+  </Button>
+)
 
 const LinkItem = ({ href, children }) => (
   <NextLink href={href}>
@@ -108,6 +108,7 @@ interface NavProps {
 
 const Navbar: React.FC<NavProps> = () => {
   // const [isOpen, setOpen] = useState(false)
+  const { data: session } = useSession()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = useRef()
   const [isSmallerThanMd] = useMediaQuery('(max-width:768px)')
@@ -159,16 +160,28 @@ const Navbar: React.FC<NavProps> = () => {
             aria-label="settings"
             _hover={{ backgroundColor: 'transparent', outline: 'none' }}
           >
-            <Avatar
-              icon={<FaRegUserCircle />}
-              color="color5"
-              bg="white"
-              w="25px"
-              h="25px"
-              size="lg"
-              _hover={{ color: 'green.400' }}
-              cursor="pointer"
-            />
+            {session ? (
+              <Image
+                borderRadius="full"
+                boxSize="25px"
+                bg="white"
+                color="color5"
+                src={session.user.email}
+                alt="profile-photo"
+                cursor="pointer"
+              />
+            ) : (
+              <Avatar
+                icon={<FaRegUserCircle />}
+                color="color5"
+                bg="white"
+                w="25px"
+                h="25px"
+                size="lg"
+                _hover={{ color: 'green.400' }}
+                cursor="pointer"
+              />
+            )}
           </MenuButton>
           <MenuList border={'2px solid rgba(199, 213, 159, 1)'}>
             <Link

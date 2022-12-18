@@ -22,7 +22,8 @@ module.exports = {
       'i0.wp.com',
       'rajaampatbiodiversity.com',
       'www.tripsavvy.com',
-      'cdn.pixabay.com'
+      'cdn.pixabay.com',
+      'kite2022.sgp1.digitaloceanspaces.com'
     ],
     minimumCacheTTL: convertDaysToSecs(7)
   }
