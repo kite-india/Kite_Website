@@ -14,10 +14,14 @@ import {
 import { signIn, useSession } from 'next-auth/react'
 import Section from '@components/Section'
 import type { NextPage } from 'next'
+import { useRouter } from 'next/router'
 
 const Login: NextPage = () => {
   const { status } = useSession()
   const [loginParams, setLoginParams] = useState({})
+  const router = useRouter()
+
+  console.log(router.query && router.query?.from)
 
   if (status === 'loading') {
     return <h1>Loading....</h1>

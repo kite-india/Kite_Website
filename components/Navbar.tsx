@@ -24,8 +24,7 @@ import {
   MenuList,
   MenuItem,
   IconButton,
-  Text,
-  Image
+  Text
 } from '@chakra-ui/react'
 import { AiOutlineMenu } from 'react-icons/ai'
 import {
@@ -160,30 +159,23 @@ const Navbar: React.FC<NavProps> = () => {
             aria-label="settings"
             _hover={{ backgroundColor: 'transparent', outline: 'none' }}
           >
-            {session ? (
-              <Image
-                borderRadius="full"
-                boxSize="25px"
-                bg="white"
-                color="color5"
-                src={session.user.email}
-                alt="profile-photo"
-                cursor="pointer"
-              />
-            ) : (
-              <Avatar
-                icon={<FaRegUserCircle />}
-                color="color5"
-                bg="white"
-                w="25px"
-                h="25px"
-                size="lg"
-                _hover={{ color: 'green.400' }}
-                cursor="pointer"
-              />
-            )}
+            <Avatar
+              src={session ? session.user.image : undefined}
+              icon={<FaRegUserCircle />}
+              color="color5"
+              bg="white"
+              w="30px"
+              h="30px"
+              size="lg"
+              _hover={{ color: 'green.400' }}
+              cursor="pointer"
+            />
           </MenuButton>
-          <MenuList border={'2px solid rgba(199, 213, 159, 1)'}>
+          <MenuList
+            p="2"
+            border={'2px solid rgba(199, 213, 159, 1)'}
+            borderRadius="2xl"
+          >
             <Link
               href="/info"
               _focus={{ textDecoration: 'none' }}
@@ -192,11 +184,11 @@ const Navbar: React.FC<NavProps> = () => {
               <MenuItem
                 minH={'48px'}
                 _hover={{
-                  borderRadius: '20px',
+                  borderRadius: '15px',
                   backgroundColor: 'rgba(199, 213, 159, 1)'
                 }}
                 _focus={{
-                  borderRadius: '20px',
+                  borderRadius: '15px',
                   backgroundColor: 'rgba(199, 213, 159, 1)'
                 }}
               >
@@ -228,11 +220,11 @@ const Navbar: React.FC<NavProps> = () => {
               <MenuItem
                 minH={'48px'}
                 _hover={{
-                  borderRadius: '20px',
+                  borderRadius: '15px',
                   backgroundColor: 'rgba(199, 213, 159, 1)'
                 }}
                 _focus={{
-                  borderRadius: '20px',
+                  borderRadius: '15px',
                   backgroundColor: 'rgba(199, 213, 159, 1)'
                 }}
               >
@@ -264,11 +256,11 @@ const Navbar: React.FC<NavProps> = () => {
               <MenuItem
                 minH={'48px'}
                 _hover={{
-                  borderRadius: '20px',
+                  borderRadius: '15px',
                   backgroundColor: 'rgba(199, 213, 159, 1)'
                 }}
                 _focus={{
-                  borderRadius: '20px',
+                  borderRadius: '15px',
                   backgroundColor: 'rgba(199, 213, 159, 1)'
                 }}
               >

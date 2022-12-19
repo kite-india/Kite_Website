@@ -10,7 +10,7 @@ export type User = {
 }
 
 export interface HomePageProps {
-  featured_data?: FeaturedDestination | null
+  featured_data?: FeaturedDestination[] | null
   activities_data?: Activity[] | null
 }
 

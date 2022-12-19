@@ -8,14 +8,12 @@ import {
 import Layout from '@components/layouts/main'
 import axios from 'axios'
 import type { NextPage } from 'next'
-import { useSession } from 'next-auth/react'
 import type { HomePageProps } from '@utils/types'
 
 const Page: NextPage<HomePageProps> = ({
   featured_data = null,
   activities_data = null
 }) => {
-  const { data: session } = useSession()
   return (
     <Layout title="Home">
       <HeroSection />

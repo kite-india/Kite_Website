@@ -18,7 +18,7 @@ import {
 import axios from 'axios'
 import { Section } from '@components/index'
 import Layout from '@components/layouts/main'
-import type { NextPage } from 'next'
+import type { GetServerSidePropsContext, NextPage } from 'next'
 import type {
   BookNowFormType,
   BookNowProps,
@@ -27,8 +27,17 @@ import type {
 } from '@utils/types'
 import { useTripsStore } from '@utils/hooks/useTripsStore'
 import { ExtraPassenger } from '@sections/index'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 
 const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
+  const { status } = useSession()
+  const router = useRouter()
+
+  if (status != 'authenticated') {
+    router.push('/login', { query: { from: router.pathname } })
+  }
+
   const { isOpen, onToggle } = useDisclosure()
   const [formParams, setFormParams] = useState<BookNowFormType>({})
   const [passengers, setPassengers] = useState<number>(1)
@@ -88,7 +97,7 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
             <Flex align="center" direction={{ base: 'column', lg: 'row' }}>
               <Image
                 alt={id}
-                src={image}
+                src={`${process.env.NEXT_PUBLIC_S3_ENDPOINT}${image}`}
                 w={{ base: '80vw', lg: '100%' }}
                 h={{ base: '80vw', lg: '32vh' }}
                 objectFit="cover"
@@ -101,9 +110,10 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
               />
               <Box align="center" w="100%">
                 <Heading fontSize="48px" fontWeight="semibold" mb={2}>
-                  {name}
+                  {name.replaceAll('Package', '')}
                 </Heading>
                 <Flex
+                  direction="column-reverse"
                   gap={6}
                   fontSize="20px"
                   fontFamily="'Poppins'"
@@ -113,7 +123,7 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
                     {description}
                     {/* {days} Days / {nights} Nights */}
                   </Text>
-                  <Text>{location}</Text>
+                  {/* <Text>{location}</Text> */}
                   <Text>
                     Rs {cost}/
                     <Text as="span" fontSize="12px">
@@ -277,10 +287,10 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
 
 export default BookNow
 
-export async function getServerSideProps(context: { params: { id: string } }) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { id } = context.params
 
-  await useTripsStore.getState().fetchSingleTripById(id)
+  await useTripsStore.getState().fetchSingleTripById(id as string)
 
   const data = useTripsStore.getState().singleTripById
 
