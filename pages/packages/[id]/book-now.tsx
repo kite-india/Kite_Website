@@ -29,6 +29,7 @@ import { useTripsStore } from '@utils/hooks/useTripsStore'
 import { ExtraPassenger } from '@sections/index'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
+import { requireAuth } from '@utils/helpers/requireAuth'
 
 const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
   const { status } = useSession()
@@ -110,7 +111,7 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
               />
               <Box align="center" w="100%">
                 <Heading fontSize="48px" fontWeight="semibold" mb={2}>
-                  {name.replaceAll('Package', '')}
+                  {location}
                 </Heading>
                 <Flex
                   direction="column-reverse"
@@ -294,5 +295,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   const data = useTripsStore.getState().singleTripById
 
-  return { props: { packages_data: data as Trip } }
+  return requireAuth(context, session => {
+    return {
+      props: { session, packages_data: data as Trip }
+    }
+  })
 }

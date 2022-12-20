@@ -36,7 +36,7 @@ export type Trip = {
   location?: string
   cost?: string
   activities?: string[]
-  contact: string
+  contact?: string
   image?: string
   name?: string
   description?: string
