@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import NextLink from 'next/link'
+import { useRouter } from 'next/router'
 import {
   Flex,
   Box,
@@ -110,6 +111,8 @@ const Navbar: React.FC<NavProps> = () => {
   // const [isOpen, setOpen] = useState(false)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = useRef()
+  const router = useRouter()
+  console.log(router.pathname)
   const [isSmallerThanMd] = useMediaQuery('(max-width:768px)')
   return (
     <Box
@@ -182,10 +185,14 @@ const Navbar: React.FC<NavProps> = () => {
                   borderRadius: '20px',
                   backgroundColor: 'rgba(199, 213, 159, 1)'
                 }}
-                _focus={{
-                  borderRadius: '20px',
-                  backgroundColor: 'rgba(199, 213, 159, 1)'
-                }}
+                style={
+                  router.pathname === '/info'
+                    ? {
+                        backgroundColor: 'rgba(199, 213, 159, 1)',
+                        borderRadius: '20px'
+                      }
+                    : { backgroundColor: '#FFF' }
+                }
               >
                 <Avatar
                   icon={<FaRegUserCircle color="black" />}
@@ -218,10 +225,14 @@ const Navbar: React.FC<NavProps> = () => {
                   borderRadius: '20px',
                   backgroundColor: 'rgba(199, 213, 159, 1)'
                 }}
-                _focus={{
-                  borderRadius: '20px',
-                  backgroundColor: 'rgba(199, 213, 159, 1)'
-                }}
+                style={
+                  router.pathname === '/passwordReset'
+                    ? {
+                        backgroundColor: 'rgba(199, 213, 159, 1)',
+                        borderRadius: '20px'
+                      }
+                    : { backgroundColor: '#FFF' }
+                }
               >
                 <Avatar
                   icon={<BiShieldQuarter color="black" />}
@@ -254,10 +265,14 @@ const Navbar: React.FC<NavProps> = () => {
                   borderRadius: '20px',
                   backgroundColor: 'rgba(199, 213, 159, 1)'
                 }}
-                _focus={{
-                  borderRadius: '20px',
-                  backgroundColor: 'rgba(199, 213, 159, 1)'
-                }}
+                style={
+                  router.pathname === '/transaction'
+                    ? {
+                        backgroundColor: 'rgba(199, 213, 159, 1)',
+                        borderRadius: '20px'
+                      }
+                    : { backgroundColor: '#FFF' }
+                }
               >
                 <Avatar
                   icon={<BiCreditCard color="black" />}

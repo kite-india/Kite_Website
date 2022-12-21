@@ -6,18 +6,43 @@ import {
   Image,
   Flex,
   Button,
-  ButtonGroup
+  ButtonGroup,
+  Modal,
+  ModalContent,
+  ModalOverlay,
+  ModalBody,
+  AspectRatio,
+  useDisclosure
 } from '@chakra-ui/react'
 import Section from './Section'
 
 import { BsPlayCircleFill } from 'react-icons/bs'
 
 interface FeaturedDataProps {
-  data: any;
+  data: any
 }
 
 const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
   const { title, description, image } = data
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const Video: React.FC = () => {
+    return (
+      <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent maxW="1000px">
+          <ModalBody>
+            <AspectRatio ratio={2}>
+              <iframe
+                title="naruto"
+                src={`${process.env.NEXT_PUBLIC_S3_ENDPOINT}videos/default.MOV`}
+                allowFullScreen
+              />
+            </AspectRatio>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+    )
+  }
   return (
     <Box
       w="100%"
@@ -65,9 +90,11 @@ const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
                   mt={3}
                   _hover={{ bg: 'white', color: '#B7CE63' }}
                   leftIcon={<BsPlayCircleFill fontSize="2.5rem" />}
+                  onClick={onOpen}
                 >
                   Watch Now
                 </Button>
+                <Video />
               </Box>
               <ButtonGroup spacing={6} mt={6} fontFamily="'Roboto'">
                 <Button
