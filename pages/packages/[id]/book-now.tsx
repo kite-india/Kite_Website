@@ -18,118 +18,50 @@ import {
 import axios from 'axios'
 import { Section } from '@components/index'
 import Layout from '@components/layouts/main'
-import type { NextPage } from 'next'
-
-const ExtraPassenger: React.FC<any> = ({
-  onToggle,
-  num,
-  handleExtraPassengers
-}) => {
-  const [passengerDetails, setPassengerDetails] = useState({})
-
-  const handleChange = e => {
-    setPassengerDetails(prevState => ({
-      ...prevState,
-      [e.target.name]: e.target.value
-    }))
-    handleExtraPassengers(num - 1, passengerDetails)
-    e.preventDefault()
-  }
-
-  return (
-    <Box mt={8}>
-      <Flex mb={3} alignItems="center" justifyContent="space-between">
-        <Text fontSize="18px" fontWeight="semibold" color="#6E7491">
-          Passenger {num}
-        </Text>
-        <Button
-          onClick={onToggle}
-          display={num !== 2 && 'none'}
-          bg="#E34100"
-          _hover={{ bg: 'red.600', color: 'white' }}
-          color="white"
-          px={6}
-          py={1}
-        >
-          Cancel
-        </Button>
-      </Flex>
-      <Flex gap={{ base: 4, md: 8 }} mb={6} direction="column">
-        <Flex gap={{ base: 2, md: 6 }} w="100%">
-          <Select
-            w="30%"
-            name="suffix"
-            onChange={handleChange}
-            placeholder="Suffix"
-          >
-            <option value="mr">Mr</option>
-            <option value="mrs">Mrs</option>
-          </Select>
-          <Input
-            type="text"
-            name="fname"
-            placeholder="First Name"
-            onChange={handleChange}
-            required
-          />
-          <Input type="text" name="mname" placeholder="Middle" />
-        </Flex>
-        <Flex gap={{ base: 2, md: 6 }} w="100%">
-          <Input
-            type="text"
-            name="lname"
-            placeholder="Last Name"
-            onChange={handleChange}
-            required
-          />
-          <Input
-            type="email"
-            name="email"
-            w="70%"
-            placeholder="Email Address"
-            onChange={handleChange}
-          />
-          <Input
-            type="text"
-            name="phone"
-            w="20%"
-            onChange={handleChange}
-            placeholder="Phone Number"
-          />
-        </Flex>
-      </Flex>
-      <hr
-        style={{
-          backgroundColor: '#3E7C17',
-          height: '4px',
-          borderRadius: '3px'
-        }}
-      />
-    </Box>
-  )
-}
-
-interface BookNowProps {
-  packages_data: any
-}
+import type { GetServerSidePropsContext, NextPage } from 'next'
+import type {
+  BookNowFormType,
+  BookNowProps,
+  ExtraPassengersType,
+  Trip
+} from '@utils/types'
+import { useTripsStore } from '@utils/hooks/useTripsStore'
+import { ExtraPassenger } from '@sections/index'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
+import { requireAuth } from '@utils/helpers/requireAuth'
 
 const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
+  const { status } = useSession()
+  const router = useRouter()
+
+  if (status != 'authenticated') {
+    router.push('/login', { query: { from: router.pathname } })
+  }
+
   const { isOpen, onToggle } = useDisclosure()
-  const [formParams, setFormParams] = useState({})
-  const [passengers, setPassengers] = useState(1)
-  const [extraPassengers, setExtraPassengers] = useState({})
+  const [formParams, setFormParams] = useState<BookNowFormType>({})
+  const [passengers, setPassengers] = useState<number>(1)
+  const [extraPassengers, setExtraPassengers] = useState<{
+    [key: number]: ExtraPassengersType
+  }>({})
 
   if (!packages_data) {
     return null
   }
 
-  const { _id, name, image, location, price, duration } = packages_data
-  const [days, nights] = duration.split('/')
-  const handleExtraPassengers = (num, passenger) => {
+  const { id, name, image, location, cost, description } = packages_data
+  // const [days, nights] = duration.split('/')
+  const handleExtraPassengers = (
+    num: number,
+    passenger: ExtraPassengersType
+  ) => {
     setExtraPassengers(prevState => ({ ...prevState, [num]: passenger }))
   }
 
-  const handleChange = (e: React.ChangeEvent) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
+  ) => {
     setFormParams(prevState => ({
       ...prevState,
       [e.target.name]: e.target.value
@@ -138,14 +70,17 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
   }
 
   const handleSubmit = () => {
-    formParams['packageid'] = _id
+    formParams['packageid'] = id
     formParams['persons'] = Object.values(extraPassengers)
     formParams['dob'] = new Date(formParams?.dob).toISOString()
     formParams['from'] = new Date(formParams?.from).toISOString()
     formParams['to'] = new Date(formParams?.to).toISOString()
     console.log(formParams)
     axios
-      .post(`${process.env.NEXT_PUBLIC_KITE_BACKEND}/book/package`, formParams)
+      .post(
+        `${process.env.NEXT_PUBLIC_KITE_BACKEND}/packageregistration`,
+        formParams
+      )
       .then(response => console.log(response.data))
       .catch(err => console.log(err))
   }
@@ -162,8 +97,8 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
           <Section delay={0.3}>
             <Flex align="center" direction={{ base: 'column', lg: 'row' }}>
               <Image
-                alt={_id}
-                src={image}
+                alt={id}
+                src={`${process.env.NEXT_PUBLIC_S3_ENDPOINT}${image}`}
                 w={{ base: '80vw', lg: '100%' }}
                 h={{ base: '80vw', lg: '32vh' }}
                 objectFit="cover"
@@ -176,20 +111,22 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
               />
               <Box align="center" w="100%">
                 <Heading fontSize="48px" fontWeight="semibold" mb={2}>
-                  {name}
+                  {location}
                 </Heading>
                 <Flex
+                  direction="column-reverse"
                   gap={6}
                   fontSize="20px"
                   fontFamily="'Poppins'"
                   justifyContent="center"
                 >
                   <Text>
-                    {days} Days / {nights} Nights
+                    {description}
+                    {/* {days} Days / {nights} Nights */}
                   </Text>
-                  <Text>{location}</Text>
+                  {/* <Text>{location}</Text> */}
                   <Text>
-                    Rs {price}/
+                    Rs {cost}/
                     <Text as="span" fontSize="12px">
                       per person
                     </Text>
@@ -351,10 +288,16 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
 
 export default BookNow
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { id } = context.params
-  const { data } = await axios.get(
-    `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package/${id}`
-  )
-  return { props: { packages_data: data } }
+
+  await useTripsStore.getState().fetchSingleTripById(id as string)
+
+  const data = useTripsStore.getState().singleTripById
+
+  return requireAuth(context, session => {
+    return {
+      props: { session, packages_data: data as Trip }
+    }
+  })
 }

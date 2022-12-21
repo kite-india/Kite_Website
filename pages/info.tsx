@@ -19,11 +19,13 @@ import {
   InputRightElement,
   IconButton
 } from '@chakra-ui/react'
-import { NextPage } from 'next'
-import { maxHeaderSize } from 'http'
+import { GetServerSidePropsContext, NextPage } from 'next'
+import { requireAuth } from '@utils/helpers/requireAuth'
+import { useSession } from 'next-auth/react'
 import { FiEdit2 } from 'react-icons/fi'
 
 const Info: NextPage = () => {
+  const { data: session } = useSession()
   const [data, setData] = useState({
     firstName: 'john',
     lastName: 'smith',
@@ -118,7 +120,11 @@ const Info: NextPage = () => {
                 alignItems="center"
               >
                 <Center mr={6}>
-                  <Avatar w={{ base: '100px', lg: '137.89px' }} h="auto">
+                  <Avatar
+                    src={session ? session.user.image : undefined}
+                    w={{ base: '100px', lg: '137.89px' }}
+                    h="auto"
+                  >
                     <AvatarBadge
                       borderColor="#FFFFFF"
                       bg="#8A8888"
@@ -472,3 +478,11 @@ const Info: NextPage = () => {
   )
 }
 export default Info
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  return requireAuth(context, session => {
+    return {
+      props: { session }
+    }
+  })
+}

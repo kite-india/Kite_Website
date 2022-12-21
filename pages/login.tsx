@@ -11,11 +11,25 @@ import {
   Input,
   Checkbox
 } from '@chakra-ui/react'
+import { signIn, useSession } from 'next-auth/react'
 import Section from '@components/Section'
-import Link from 'next/link'
+import type { NextPage } from 'next'
+import { useRouter } from 'next/router'
 
-const Login: React.FC = () => {
+const Login: NextPage = () => {
+  const { status } = useSession()
   const [loginParams, setLoginParams] = useState({})
+  const router = useRouter()
+
+  console.log(router.query && router.query?.from)
+
+  if (status === 'loading') {
+    return <h1>Loading....</h1>
+  }
+
+  const handleGoogleLogin = () => {
+    signIn('google', { callbackUrl: `${window.location.origin}` })
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoginParams(prevState => ({
@@ -58,6 +72,7 @@ const Login: React.FC = () => {
               borderRadius="10px"
               backgroundColor="#fcfafa"
               boxShadow="lg"
+              onClick={handleGoogleLogin}
             >
               <Box mr={4}>
                 <Image
@@ -131,16 +146,14 @@ const Login: React.FC = () => {
                 <Text fontWeight="500" fontFamily="'Poppins'">
                   Don&apos;t have an Account ?
                 </Text>
-                <Link href="/signup">
-                  <Text
-                    cursor="pointer"
-                    fontWeight="500"
-                    fontFamily="'Poppins'"
-                    color="green"
-                  >
-                    Sign Up
-                  </Text>
-                </Link>
+                <Text
+                  cursor="pointer"
+                  fontWeight="500"
+                  fontFamily="'Poppins'"
+                  color="green"
+                >
+                  Sign Up
+                </Text>
               </Flex>
             </Flex>
           </Flex>

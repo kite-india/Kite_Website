@@ -1,6 +1,5 @@
 import { useRef } from 'react'
 import NextLink from 'next/link'
-import { useRouter } from 'next/router'
 import {
   Flex,
   Box,
@@ -37,6 +36,7 @@ import {
 import { GrGallery, GrContact } from 'react-icons/gr'
 import { FaRegUserCircle } from 'react-icons/fa'
 import { motion } from 'framer-motion'
+import { useSession } from 'next-auth/react'
 
 const links = [
   { name: 'Home', href: '/', icon: <BiHomeHeart /> },
@@ -45,31 +45,29 @@ const links = [
   { name: 'Contact Us', href: '/contact', icon: <GrContact /> }
 ]
 
-// const BookBtn = () => (
-//   <Button
-//     as={motion.button}
-//     whileHover={{ scale: 1.1 }}
-//     whileTap={{ scale: 0.9 }}
-//     size="sm"
-//     rounded="full"
-//     px={3}
-//     fontSize="16px"
-//     bg="color5"
-//     color="white"
-//     fontFamily="'Roboto'"
-//     _hover={{
-//       bg: 'green.400'
-//     }}
-//     fontWeight="normal"
-//     display={{ base: 'none', md: 'flex' }}
-//     onClick={() => {
-//       ;('')
-//     }}
-//     variant="outline"
-//   >
-//     Book now
-//   </Button>
-// )
+const BookBtn = () => (
+  <Button
+    as={motion.button}
+    whileHover={{ scale: 1.1 }}
+    whileTap={{ scale: 0.9 }}
+    size="sm"
+    rounded="full"
+    px={3}
+    fontSize="16px"
+    bg="color5"
+    color="white"
+    fontFamily="'Roboto'"
+    _hover={{
+      bg: 'green.400'
+    }}
+    fontWeight="normal"
+    display={{ base: 'none', md: 'flex' }}
+    onClick={() => {}}
+    variant="outline"
+  >
+    Book now
+  </Button>
+)
 
 const LinkItem = ({ href, children }) => (
   <NextLink href={href}>
@@ -109,10 +107,9 @@ interface NavProps {
 
 const Navbar: React.FC<NavProps> = () => {
   // const [isOpen, setOpen] = useState(false)
+  const { data: session } = useSession()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = useRef()
-  const router = useRouter()
-  console.log(router.pathname)
   const [isSmallerThanMd] = useMediaQuery('(max-width:768px)')
   return (
     <Box
@@ -163,17 +160,22 @@ const Navbar: React.FC<NavProps> = () => {
             _hover={{ backgroundColor: 'transparent', outline: 'none' }}
           >
             <Avatar
+              src={session ? session.user.image : undefined}
               icon={<FaRegUserCircle />}
               color="color5"
               bg="white"
-              w="25px"
-              h="25px"
+              w="30px"
+              h="30px"
               size="lg"
               _hover={{ color: 'green.400' }}
               cursor="pointer"
             />
           </MenuButton>
-          <MenuList border={'2px solid rgba(199, 213, 159, 1)'}>
+          <MenuList
+            p="2"
+            border={'2px solid rgba(199, 213, 159, 1)'}
+            borderRadius="2xl"
+          >
             <Link
               href="/info"
               _focus={{ textDecoration: 'none' }}
@@ -182,17 +184,13 @@ const Navbar: React.FC<NavProps> = () => {
               <MenuItem
                 minH={'48px'}
                 _hover={{
-                  borderRadius: '20px',
+                  borderRadius: '15px',
                   backgroundColor: 'rgba(199, 213, 159, 1)'
                 }}
-                style={
-                  router.pathname === '/info'
-                    ? {
-                        backgroundColor: 'rgba(199, 213, 159, 1)',
-                        borderRadius: '20px'
-                      }
-                    : { backgroundColor: '#FFF' }
-                }
+                _focus={{
+                  borderRadius: '15px',
+                  backgroundColor: 'rgba(199, 213, 159, 1)'
+                }}
               >
                 <Avatar
                   icon={<FaRegUserCircle color="black" />}
@@ -222,17 +220,13 @@ const Navbar: React.FC<NavProps> = () => {
               <MenuItem
                 minH={'48px'}
                 _hover={{
-                  borderRadius: '20px',
+                  borderRadius: '15px',
                   backgroundColor: 'rgba(199, 213, 159, 1)'
                 }}
-                style={
-                  router.pathname === '/passwordReset'
-                    ? {
-                        backgroundColor: 'rgba(199, 213, 159, 1)',
-                        borderRadius: '20px'
-                      }
-                    : { backgroundColor: '#FFF' }
-                }
+                _focus={{
+                  borderRadius: '15px',
+                  backgroundColor: 'rgba(199, 213, 159, 1)'
+                }}
               >
                 <Avatar
                   icon={<BiShieldQuarter color="black" />}
@@ -262,17 +256,13 @@ const Navbar: React.FC<NavProps> = () => {
               <MenuItem
                 minH={'48px'}
                 _hover={{
-                  borderRadius: '20px',
+                  borderRadius: '15px',
                   backgroundColor: 'rgba(199, 213, 159, 1)'
                 }}
-                style={
-                  router.pathname === '/transaction'
-                    ? {
-                        backgroundColor: 'rgba(199, 213, 159, 1)',
-                        borderRadius: '20px'
-                      }
-                    : { backgroundColor: '#FFF' }
-                }
+                _focus={{
+                  borderRadius: '15px',
+                  backgroundColor: 'rgba(199, 213, 159, 1)'
+                }}
               >
                 <Avatar
                   icon={<BiCreditCard color="black" />}

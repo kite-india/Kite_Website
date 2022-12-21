@@ -52,69 +52,70 @@ const Transaction: NextPage = () => {
 
   return (
     <Layout title="Transactions">
-      <Container alignItems={'center'} mt={'80px'}>
-        <Text
-          fontFamily={'Poppins'}
-          fontSize={{ sm: '20px', md: '28px', lg: '35px' }}
-          fontWeight="500"
-          lineHeight={'53px'}
-          textAlign="center"
-        >
-          Transaction Info
-        </Text>
-      </Container>
       <Container
-        mt={'40px'}
-        border={'3px solid #D9D9D9'}
-        borderRadius={'38px'}
         maxW={'1000px'}
-        alignItems="center"
-        mb="100px"
+        paddingX={{ base: '35px', md: '70px', lg: '100px' }}
       >
-        <Tabs
-          fontFamily={'Poppins'}
-          fontSize={'20px'}
-          fontWeight={'500'}
-          my={'15px'}
-          lineHeight={'38px'}
-          letterSpacing={'-0.005em'}
-          variant="soft-rounded"
-          colorScheme="green"
-        >
-          <TabList
-            ml={{ sm: '12px', md: '25px', lg: '40px' }}
-            mb={'15px'}
-            gap={{ sm: '12px', md: '25px', lg: '40px' }}
+        <Container alignItems={'center'} mt={'80px'}>
+          <Text
+            fontFamily={'Poppins'}
+            fontSize={{ sm: '20px', md: '28px', lg: '35px' }}
+            fontWeight="500"
+            lineHeight={'53px'}
+            textAlign="center"
           >
-            <Tab px="25px" borderRadius={'30px'}>
-              All
-            </Tab>
-            <Tab borderRadius={'30px'}>Booked</Tab>
-            <Tab px="20px" borderRadius={'30px'}>
-              Cancelled
-            </Tab>
-          </TabList>
-          <hr />
-          <TabPanels pb={'30px'}>
-            <TabPanel>
-              <TransactionCardGroup data={data} />
-            </TabPanel>
-            <TabPanel>
-              {booked[0] ? (
-                <TransactionCardGroup data={booked} />
-              ) : (
-                <p>No upcoming!</p>
-              )}
-            </TabPanel>
-            <TabPanel>
-              {cancelled[0] ? (
-                <TransactionCardGroup data={cancelled} />
-              ) : (
-                <p>No Cancelled!</p>
-              )}
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
+            Transaction Info
+          </Text>
+        </Container>
+        <Container
+          mt={'40px'}
+          border={'3px solid #D9D9D9'}
+          borderRadius={'38px'}
+          maxW={'1000px'}
+          alignItems="center"
+          mb="100px"
+        >
+          <Tabs
+            fontFamily={'Poppins'}
+            fontSize={'20px'}
+            fontWeight={'500'}
+            my={'15px'}
+            lineHeight={'38px'}
+            letterSpacing={'-0.005em'}
+            variant="soft-rounded"
+            colorScheme="green"
+          >
+            <TabList mb="2">
+              <Tab px="25px" borderRadius={'30px'}>
+                All
+              </Tab>
+              <Tab borderRadius={'30px'}>Booked</Tab>
+              <Tab px="20px" borderRadius={'30px'}>
+                Cancelled
+              </Tab>
+            </TabList>
+            <hr />
+            <TabPanels pb={'30px'}>
+              <TabPanel>
+                <TransactionCardGroup data={data} />
+              </TabPanel>
+              <TabPanel>
+                {booked[0] ? (
+                  <TransactionCardGroup data={booked} />
+                ) : (
+                  <p>No upcoming!</p>
+                )}
+              </TabPanel>
+              <TabPanel>
+                {cancelled[0] ? (
+                  <TransactionCardGroup data={cancelled} />
+                ) : (
+                  <p>No Cancelled!</p>
+                )}
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
+        </Container>
       </Container>
     </Layout>
   )

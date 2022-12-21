@@ -6,43 +6,20 @@ import {
   Image,
   Flex,
   Button,
-  ButtonGroup,
-  Modal,
-  ModalContent,
-  ModalOverlay,
-  ModalBody,
-  AspectRatio,
-  useDisclosure
+  ButtonGroup
 } from '@chakra-ui/react'
 import Section from './Section'
 
 import { BsPlayCircleFill } from 'react-icons/bs'
+import { FeaturedDestination } from '@utils/types'
+import CustomImage from './CustomImage'
 
 interface FeaturedDataProps {
-  data: any
+  data: FeaturedDestination
 }
 
 const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
-  const { title, description, image } = data
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const Video: React.FC = () => {
-    return (
-      <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent maxW="1000px">
-          <ModalBody>
-            <AspectRatio ratio={2}>
-              <iframe
-                title="naruto"
-                src={`${process.env.NEXT_PUBLIC_S3_ENDPOINT}videos/default.MOV`}
-                allowFullScreen
-              />
-            </AspectRatio>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
-    )
-  }
+  const { name, description, image } = data
   return (
     <Box
       w="100%"
@@ -54,14 +31,20 @@ const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
       my={8}
     >
       <Section delay={0.3}>
-        <Stack direction={{ base: 'column', lg: 'row' }} spacing="2.18rem">
-          <Image
+        <Stack
+          direction={{ base: 'column', lg: 'row' }}
+          spacing="2.18rem"
+          borderRadius="xl"
+          borderColor="blackAlpha.300"
+          p={{ base: 2, md: 8 }}
+          borderWidth={{ base: '0', md: '2px' }}
+        >
+          <CustomImage
             src={image}
-            alt={title}
-            borderRadius="xl"
-            objectFit="cover"
-            w="600px"
-            h="400px"
+            alt={name}
+            width="600px"
+            height="400px"
+            style={{ borderRadius: '10px' }}
           />
           <Box pt={{ base: 0, md: 6 }} w={{ base: '95vw', md: '38rem' }}>
             <Flex direction="column" gap="1.2rem" align="left">
@@ -76,7 +59,7 @@ const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
               >
                 Featured Destination
               </Heading>
-              <Heading fontSize="35px">{title}</Heading>
+              <Heading fontSize="35px">{name}</Heading>
               <Text fontFamily="'Roboto'" fontWeight="normal" fontSize="18px">
                 {description}
               </Text>
@@ -90,11 +73,9 @@ const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
                   mt={3}
                   _hover={{ bg: 'white', color: '#B7CE63' }}
                   leftIcon={<BsPlayCircleFill fontSize="2.5rem" />}
-                  onClick={onOpen}
                 >
                   Watch Now
                 </Button>
-                <Video />
               </Box>
               <ButtonGroup spacing={6} mt={6} fontFamily="'Roboto'">
                 <Button
