@@ -19,6 +19,7 @@ import axios from 'axios'
 import { Section } from '@components/index'
 import Layout from '@components/layouts/main'
 import type { NextPage } from 'next'
+<<<<<<< HEAD
 import CustomImageComponent from '@components/CustomImageComponent'
 
 const ExtraPassenger: React.FC<any> = ({
@@ -113,24 +114,41 @@ const ExtraPassenger: React.FC<any> = ({
 interface BookNowProps {
   packages_data: any
 }
+=======
+import type {
+  BookNowFormType,
+  BookNowProps,
+  ExtraPassengersType,
+  Trip
+} from '@utils/types'
+import { useTripsStore } from '@utils/hooks/useTripsStore'
+import { ExtraPassenger } from '@sections/index'
+>>>>>>> c48cbec5ddd89d1bc74a9c42bf29002b6dd34d15
 
 const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
   const { isOpen, onToggle } = useDisclosure()
-  const [formParams, setFormParams] = useState({})
-  const [passengers, setPassengers] = useState(1)
-  const [extraPassengers, setExtraPassengers] = useState({})
+  const [formParams, setFormParams] = useState<BookNowFormType>({})
+  const [passengers, setPassengers] = useState<number>(1)
+  const [extraPassengers, setExtraPassengers] = useState<{
+    [key: number]: ExtraPassengersType
+  }>({})
 
   if (!packages_data) {
     return null
   }
 
-  const { _id, name, image, location, price, duration } = packages_data
-  const [days, nights] = duration.split('/')
-  const handleExtraPassengers = (num, passenger) => {
+  const { id, name, image, location, cost, description } = packages_data
+  // const [days, nights] = duration.split('/')
+  const handleExtraPassengers = (
+    num: number,
+    passenger: ExtraPassengersType
+  ) => {
     setExtraPassengers(prevState => ({ ...prevState, [num]: passenger }))
   }
 
-  const handleChange = (e: React.ChangeEvent) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
+  ) => {
     setFormParams(prevState => ({
       ...prevState,
       [e.target.name]: e.target.value
@@ -139,14 +157,17 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
   }
 
   const handleSubmit = () => {
-    formParams['packageid'] = _id
+    formParams['packageid'] = id
     formParams['persons'] = Object.values(extraPassengers)
     formParams['dob'] = new Date(formParams?.dob).toISOString()
     formParams['from'] = new Date(formParams?.from).toISOString()
     formParams['to'] = new Date(formParams?.to).toISOString()
     console.log(formParams)
     axios
-      .post(`${process.env.NEXT_PUBLIC_KITE_BACKEND}/book/package`, formParams)
+      .post(
+        `${process.env.NEXT_PUBLIC_KITE_BACKEND}/packageregistration`,
+        formParams
+      )
       .then(response => console.log(response.data))
       .catch(err => console.log(err))
   }
@@ -162,8 +183,13 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
         <Box mt={12} maxW="container.xl">
           <Section delay={0.3}>
             <Flex align="center" direction={{ base: 'column', lg: 'row' }}>
+<<<<<<< HEAD
               <CustomImageComponent
                 alt={_id}
+=======
+              <Image
+                alt={id}
+>>>>>>> c48cbec5ddd89d1bc74a9c42bf29002b6dd34d15
                 src={image}
                 w={{ base: '80vw', lg: '100%' }}
                 h={{ base: '80vw', lg: '32vh' }}
@@ -186,11 +212,12 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
                   justifyContent="center"
                 >
                   <Text>
-                    {days} Days / {nights} Nights
+                    {description}
+                    {/* {days} Days / {nights} Nights */}
                   </Text>
                   <Text>{location}</Text>
                   <Text>
-                    Rs {price}/
+                    Rs {cost}/
                     <Text as="span" fontSize="12px">
                       per person
                     </Text>
@@ -352,10 +379,12 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
 
 export default BookNow
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: { params: { id: string } }) {
   const { id } = context.params
-  const { data } = await axios.get(
-    `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package/${id}`
-  )
-  return { props: { packages_data: data } }
+
+  await useTripsStore.getState().fetchSingleTripById(id)
+
+  const data = useTripsStore.getState().singleTripById
+
+  return { props: { packages_data: data as Trip } }
 }

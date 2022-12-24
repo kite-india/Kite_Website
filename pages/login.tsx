@@ -11,11 +11,25 @@ import {
   Input,
   Checkbox
 } from '@chakra-ui/react'
+import { signIn, useSession } from 'next-auth/react'
 import Section from '@components/Section'
+<<<<<<< HEAD
 import CustomImageComponent from '@components/CustomImageComponent'
+=======
+import type { NextPage } from 'next'
+>>>>>>> c48cbec5ddd89d1bc74a9c42bf29002b6dd34d15
 
-const Login: React.FC = () => {
+const Login: NextPage = () => {
+  const { status } = useSession()
   const [loginParams, setLoginParams] = useState({})
+
+  if (status === 'loading') {
+    return <h1>Loading....</h1>
+  }
+
+  const handleGoogleLogin = () => {
+    signIn('google', { callbackUrl: `${window.location.origin}` })
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoginParams(prevState => ({
@@ -58,6 +72,7 @@ const Login: React.FC = () => {
               borderRadius="10px"
               backgroundColor="#fcfafa"
               boxShadow="lg"
+              onClick={handleGoogleLogin}
             >
               <Box mr={4}>
                 <CustomImageComponent

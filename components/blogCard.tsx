@@ -8,7 +8,11 @@ interface BlogProps {
 }
 
 const BlogCard: React.FC<BlogProps> = ({ blog }) => {
+<<<<<<< HEAD
   const { _id, name, image, description } = blog
+=======
+  const { id, name, image, description } = blog
+>>>>>>> c48cbec5ddd89d1bc74a9c42bf29002b6dd34d15
   return (
     <Center as={motion.div} whileHover={{ scale: 1.1 }} cursor="pointer">
       <Box
@@ -20,7 +24,7 @@ const BlogCard: React.FC<BlogProps> = ({ blog }) => {
         <Box borderRadius="lg" overflow={'hidden'}>
           <CustomImageComponent
             src={image}
-            alt={_id}
+            alt={id}
             layout="responsive"
             width={368.67}
             height={317.05}

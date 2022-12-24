@@ -8,11 +8,11 @@ interface IProps {
 }
 
 const TransactCard: React.FC<IProps> = ({ transaction }) => {
-  const { nid, img, place, date, guest, cost, status } = transaction
+  const { id, img, place, date, guest, cost, status } = transaction
   return (
     <Box
       py={'15px'}
-      key={nid}
+      key={id}
       maxWidth={{ base: '2000px', md: '800px' }}
       _hover={{ border: '3px solid #9ca75c' }}
       border={'3px solid #D9D9D9'}
@@ -23,7 +23,7 @@ const TransactCard: React.FC<IProps> = ({ transaction }) => {
         backgroundColor={'rgba(217, 217, 217, 0.22)'}
         fontSize={'12px'}
       >
-        id : {nid}
+        id : {id}
       </Text>
       <Box>
         <Flex

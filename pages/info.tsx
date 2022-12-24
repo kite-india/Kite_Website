@@ -16,9 +16,14 @@ import {
   Select,
   Spacer
 } from '@chakra-ui/react'
+<<<<<<< HEAD
 import { NextPage } from 'next'
 import { maxHeaderSize } from 'http'
 import CustomImageComponent from '@components/CustomImageComponent'
+=======
+import { GetServerSidePropsContext, NextPage } from 'next'
+import { requireAuth } from '@utils/helpers/requireAuth'
+>>>>>>> c48cbec5ddd89d1bc74a9c42bf29002b6dd34d15
 
 const Info: NextPage = () => {
   return (
@@ -275,3 +280,11 @@ const Info: NextPage = () => {
   )
 }
 export default Info
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  return requireAuth(context, session => {
+    return {
+      props: { session }
+    }
+  })
+}

@@ -10,7 +10,7 @@ interface IProps {
 }
 
 const ActivityCard: React.FC<IProps> = ({ data }) => {
-  const { name, description, image } = data
+  const { id, name, description, image } = data
   if (!data) return null
   return (
     <Flex

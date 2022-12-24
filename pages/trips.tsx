@@ -15,7 +15,11 @@ import Section from '@components/Section'
 import Layout from '@components/layouts/main'
 import type { NextPage } from 'next'
 import type { TripsPageProps } from '@utils/types'
+<<<<<<< HEAD
 import CustomImageComponent from '@components/CustomImageComponent'
+=======
+import { useTripsStore } from '@utils/hooks/useTripsStore'
+>>>>>>> c48cbec5ddd89d1bc74a9c42bf29002b6dd34d15
 
 const Trips: NextPage<TripsPageProps> = ({
   packages_data = null,
@@ -102,19 +106,23 @@ const Trips: NextPage<TripsPageProps> = ({
 }
 
 export async function getStaticProps() {
-  const { data: packages_data } = await axios.get(
-    `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package`
-  )
+  // const { data: packages_data } = await axios.get(
+  //   `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package`
+  // )
 
   const { data: activities_data } = await axios.get(
     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/activity`
   )
 
-  if (!packages_data || !activities_data) {
-    return {
-      notFound: true
-    }
-  }
+  // if (!packages_data || !activities_data) {
+  //   return {
+  //     notFound: true
+  //   }
+  // }
+
+  await useTripsStore.getState().fetchTrips()
+
+  const packages_data = useTripsStore.getState().trips
 
   return { props: { packages_data, activities_data } }
 }
