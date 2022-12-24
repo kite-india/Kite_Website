@@ -6,6 +6,7 @@ import 'swiper/css/pagination'
 import 'swiper/css/autoplay'
 
 import FeaturedCard from '@components/FeaturedCard'
+import { FeaturedDestination } from '@utils/types'
 
 /* const dummyData = [
   {
@@ -39,7 +40,7 @@ import FeaturedCard from '@components/FeaturedCard'
 */
 
 interface Props {
-  data: any;
+  data: FeaturedDestination[]
 }
 
 const FeaturedSection: React.FC<Props> = ({ data }) => {

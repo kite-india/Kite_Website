@@ -3,7 +3,11 @@ import { Box, Heading, Text, Button, Flex } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import type { Activity } from '@utils/types'
+<<<<<<< HEAD
 import CustomImageComponent from './CustomImageComponent'
+=======
+import CustomImage from './CustomImage'
+>>>>>>> 1adfaf9c068548ea5bb4181892b5868d47136290
 
 interface IProps {
   data: Activity
@@ -30,7 +34,11 @@ const ActivityCard: React.FC<IProps> = ({ data }) => {
         overflow="hidden"
         position="relative"
       >
+<<<<<<< HEAD
         <CustomImageComponent
+=======
+        <CustomImage
+>>>>>>> 1adfaf9c068548ea5bb4181892b5868d47136290
           src={image}
           alt="activity"
           layout="fill"

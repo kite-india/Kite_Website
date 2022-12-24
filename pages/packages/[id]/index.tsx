@@ -11,7 +11,11 @@ import type { Trip } from '@utils/types'
 import CustomImageComponent from '@components/CustomImageComponent'
 =======
 import { useTripsStore } from '@utils/hooks/useTripsStore'
+<<<<<<< HEAD
 >>>>>>> c48cbec5ddd89d1bc74a9c42bf29002b6dd34d15
+=======
+import CustomImage from '@components/CustomImage'
+>>>>>>> 1adfaf9c068548ea5bb4181892b5868d47136290
 
 interface PackagesPageProps {
   packages_data: Trip
@@ -36,7 +40,7 @@ const Page: NextPage<PackagesPageProps> = ({ packages_data }) => {
               overflow={'hidden'}
               position="relative"
             >
-              <Image src={image} alt={id} layout="fill" priority />
+              <CustomImage src={image} alt={id} layout="fill" priority />
             </Box>
             <Box p={6} maxWidth="50%">
 >>>>>>> c48cbec5ddd89d1bc74a9c42bf29002b6dd34d15

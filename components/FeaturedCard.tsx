@@ -11,14 +11,22 @@ import {
 import Section from './Section'
 
 import { BsPlayCircleFill } from 'react-icons/bs'
+<<<<<<< HEAD
 import CustomImageComponent from './CustomImageComponent'
 
 interface FeaturedDataProps {
   data: any
+=======
+import { FeaturedDestination } from '@utils/types'
+import CustomImage from './CustomImage'
+
+interface FeaturedDataProps {
+  data: FeaturedDestination
+>>>>>>> 1adfaf9c068548ea5bb4181892b5868d47136290
 }
 
 const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
-  const { title, description, image } = data
+  const { name, description, image } = data
   return (
     <Box
       w="100%"
@@ -30,14 +38,25 @@ const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
       my={8}
     >
       <Section delay={0.3}>
+<<<<<<< HEAD
         <Stack direction={{ base: 'column', lg: 'row' }} spacing="2.18rem">
           <CustomImageComponent
+=======
+        <Stack
+          direction={{ base: 'column', lg: 'row' }}
+          spacing="2.18rem"
+          borderRadius="xl"
+          borderColor="blackAlpha.300"
+          p={{ base: 2, md: 8 }}
+          borderWidth={{ base: '0', md: '2px' }}
+        >
+          <CustomImage
+>>>>>>> 1adfaf9c068548ea5bb4181892b5868d47136290
             src={image}
-            alt={title}
-            borderRadius="xl"
-            objectFit="cover"
-            w="600px"
-            h="400px"
+            alt={name}
+            width="600px"
+            height="400px"
+            style={{ borderRadius: '10px' }}
           />
           <Box pt={{ base: 0, md: 6 }} w={{ base: '95vw', md: '38rem' }}>
             <Flex direction="column" gap="1.2rem" align="left">
@@ -52,7 +71,7 @@ const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
               >
                 Featured Destination
               </Heading>
-              <Heading fontSize="35px">{title}</Heading>
+              <Heading fontSize="35px">{name}</Heading>
               <Text fontFamily="'Roboto'" fontWeight="normal" fontSize="18px">
                 {description}
               </Text>

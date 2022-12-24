@@ -10,7 +10,7 @@ export type User = {
 }
 
 export interface HomePageProps {
-  featured_data?: any | null
+  featured_data?: FeaturedDestination[] | null
   activities_data?: Activity[] | null
 }
 
@@ -27,8 +27,8 @@ export type Activity = {
 }
 
 export type FeaturedDestination = Trip & {
-  video_link?: String
-  is_premium?: boolean
+  video_link?: string
+  is_premium_flag?: boolean
 }
 
 export type Trip = {
@@ -36,7 +36,7 @@ export type Trip = {
   location?: string
   cost?: string
   activities?: string[]
-  contact: string
+  contact?: string
   image?: string
   name?: string
   description?: string

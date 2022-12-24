@@ -9,9 +9,13 @@ import {
 } from '@chakra-ui/react'
 import Section from '@components/Section'
 import { BiSearchAlt } from 'react-icons/bi'
+<<<<<<< HEAD
 import Image from 'next/image'
 import HeroImage from '../public/images/hero1.jpg'
 import CustomImageComponent from '@components/CustomImageComponent'
+=======
+import CustomImage from '@components/CustomImage'
+>>>>>>> 1adfaf9c068548ea5bb4181892b5868d47136290
 
 const HeroSection: React.FC = () => {
   return (
@@ -29,8 +33,13 @@ const HeroSection: React.FC = () => {
       // bgRepeat="no-repeat"
       // bgPosition="center"
     >
+<<<<<<< HEAD
       <CustomImageComponent
         src={HeroImage}
+=======
+      <CustomImage
+        src="static-public/hero1.jpg"
+>>>>>>> 1adfaf9c068548ea5bb4181892b5868d47136290
         alt="hero"
         priority
         layout="fill"
@@ -79,7 +88,7 @@ const HeroSection: React.FC = () => {
             Share your favorite travel destination and we will feature it in our
             next blog!
           </Text>
-          <InputGroup w={{ md: '25rem' }} mt={8}>
+          {/* <InputGroup w={{ md: '25rem' }} mt={8}>
             <InputLeftElement pointerEvents="none">
               <BiSearchAlt color="#3E7C17" fontSize="1.3rem" />
             </InputLeftElement>
@@ -89,7 +98,7 @@ const HeroSection: React.FC = () => {
               fontSize="1.1rem"
               color="#e4e4e4"
             />
-          </InputGroup>
+          </InputGroup> */}
         </Section>
       </Box>
     </Box>

@@ -1,11 +1,16 @@
 /* eslint-disable no-unused-vars */
 import axios from 'axios'
-import create from 'zustand'
+import create, { StateCreator } from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
 import type { Trip } from '../types'
 import type { TripStore } from '../store.types'
 
-const TripsStore = set => ({
+const TripsStore: StateCreator<
+  TripStore,
+  [['zustand/devtools', 'never'], ['zustand/persist', unknown]],
+  [],
+  TripStore
+> = set => ({
   trips: [],
   singleTripById: {},
   fetchTrips: async () => {

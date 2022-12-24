@@ -1,6 +1,10 @@
 import React from 'react'
 import { Flex, Box, Heading, Stack } from '@chakra-ui/react'
 import { BlogCard, Section } from '@components/index'
+import { Autoplay } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
+import 'swiper/css/autoplay'
 
 interface Props {
   data: any
@@ -34,11 +38,34 @@ const DiscoverTheWorld: React.FC<Props> = ({ data }) => {
         </Box>
 
         <Flex p={4} align={'center'} justify="center">
-          <Stack spacing="36px" direction={{ base: 'column', lg: 'row' }}>
+          <Swiper
+            modules={[Autoplay]}
+            breakpoints={{
+              1200: {
+                slidesPerView: 4
+              },
+
+              768: {
+                slidesPerView: 2
+              },
+              640: {
+                slidesPerView: 1
+              }
+            }}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true
+            }}
+            loop={true}
+            spaceBetween={40}
+          >
             {data.map(blog => (
-              <BlogCard blog={blog} key={blog.name} />
+              <SwiperSlide key={data.id}>
+                <BlogCard blog={blog} key={blog.name} />
+              </SwiperSlide>
             ))}
-          </Stack>
+          </Swiper>
         </Flex>
       </Section>
     </Box>

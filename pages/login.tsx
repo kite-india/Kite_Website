@@ -17,11 +17,18 @@ import Section from '@components/Section'
 import CustomImageComponent from '@components/CustomImageComponent'
 =======
 import type { NextPage } from 'next'
+<<<<<<< HEAD
 >>>>>>> c48cbec5ddd89d1bc74a9c42bf29002b6dd34d15
+=======
+import { useRouter } from 'next/router'
+>>>>>>> 1adfaf9c068548ea5bb4181892b5868d47136290
 
 const Login: NextPage = () => {
   const { status } = useSession()
   const [loginParams, setLoginParams] = useState({})
+  const router = useRouter()
+
+  console.log(router.query && router.query?.from)
 
   if (status === 'loading') {
     return <h1>Loading....</h1>
