@@ -31,16 +31,17 @@ const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
   const WatchNow = () => (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent minW="1000px">
-        <ModalCloseButton />
+      <ModalContent maxW="80%">
+        <ModalCloseButton size="lg" zIndex="2" />
         <ModalBody>
           <Box
             as="video"
             controls
-            src="https://kite2022.sgp1.digitaloceanspaces.com/videos/default.MOV"
+            src={`${process.env.NEXT_PUBLIC_S3_ENDPOINT}videos/default.MOV`}
             objectFit="contain"
+            autoPlay={true}
             sx={{
-              aspectRatio: '21/9'
+              aspectRatio: '16/9'
             }}
           />
         </ModalBody>
