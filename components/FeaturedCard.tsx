@@ -31,15 +31,18 @@ const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
   const WatchNow = () => (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent minW="1000px">
         <ModalCloseButton />
         <ModalBody>
-          <AspectRatio maxW="560px" ratio={1}>
-            <iframe
-              src={`${process.env.NEXT_PUBLIC_S3_ENDPOINT}videos/default.MOV`}
-              allowFullScreen
-            />
-          </AspectRatio>
+          <Box
+            as="video"
+            controls
+            src="https://kite2022.sgp1.digitaloceanspaces.com/videos/default.MOV"
+            objectFit="contain"
+            sx={{
+              aspectRatio: '21/9'
+            }}
+          />
         </ModalBody>
       </ModalContent>
     </Modal>
