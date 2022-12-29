@@ -53,32 +53,23 @@ const ExtraPassenger: React.FC<ExtraPassengerProps> = ({
           </Select>
           <Input
             type="text"
-            name="fname"
-            placeholder="First Name"
-            onChange={handleChange}
-            required
-          />
-          <Input type="text" name="mname" placeholder="Middle" />
-        </Flex>
-        <Flex gap={{ base: 2, md: 6 }} w="100%">
-          <Input
-            type="text"
-            name="lname"
-            placeholder="Last Name"
+            name="name"
+            placeholder="Username"
             onChange={handleChange}
             required
           />
           <Input
             type="email"
             name="email"
-            w="70%"
             placeholder="Email Address"
             onChange={handleChange}
           />
+        </Flex>
+        <Flex justifyContent={'center'} gap={{ base: 2, md: 6 }} w="100%">
           <Input
             type="text"
             name="phone"
-            w="20%"
+            w="45%"
             onChange={handleChange}
             placeholder="Phone Number"
           />

@@ -12,6 +12,7 @@ import {
   Select,
   InputRightElement,
   Collapse,
+  Tooltip,
   useDisclosure,
   Image
 } from '@chakra-ui/react'
@@ -164,36 +165,30 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
                       <option value="mr">Mr</option>
                       <option value="mrs">Mrs</option>
                     </Select>
+
                     <Input
                       type="text"
-                      name="fname"
-                      placeholder="First Name"
+                      name="name"
+                      placeholder="Username"
                       onChange={handleChange}
                       required
                     />
-                    <Input
-                      type="text"
-                      name="mname"
-                      placeholder="Middle"
-                      onChange={handleChange}
-                    />
+
+                    <Tooltip
+                      label={'Date of Birth'}
+                      hasArrow
+                      placement="bottom-start"
+                    >
+                      <Input
+                        type="date"
+                        name="dob"
+                        placeholder="Date of Birth"
+                        required
+                        onChange={handleChange}
+                      />
+                    </Tooltip>
                   </Flex>
-                  <Flex gap={{ base: 4, md: 12 }}>
-                    <Input
-                      type="text"
-                      name="lname"
-                      placeholder="Last Name"
-                      required
-                      onChange={handleChange}
-                    />
-                    <Input
-                      type="date"
-                      name="dob"
-                      placeholder="Date of Birth"
-                      required
-                      onChange={handleChange}
-                    />
-                  </Flex>
+
                   <Flex gap={{ base: 4, md: 12 }}>
                     <Input
                       type="email"
@@ -211,20 +206,32 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
                     />
                   </Flex>
                   <Flex gap={{ base: 2, md: 6 }}>
-                    <Input
-                      type="datetime-local"
-                      name="from"
-                      placeholder="Start Date"
-                      required
-                      onChange={handleChange}
-                    />
-                    <Input
-                      type="datetime-local"
-                      name="to"
-                      placeholder="End Date"
-                      required
-                      onChange={handleChange}
-                    />
+                    <Tooltip
+                      label={'Start Date'}
+                      hasArrow
+                      placement="bottom-start"
+                    >
+                      <Input
+                        type="datetime-local"
+                        name="from"
+                        placeholder="Start Date"
+                        required
+                        onChange={handleChange}
+                      />
+                    </Tooltip>
+                    <Tooltip
+                      label={'End Date'}
+                      hasArrow
+                      placement="bottom-start"
+                    >
+                      <Input
+                        type="datetime-local"
+                        name="to"
+                        placeholder="End Date"
+                        required
+                        onChange={handleChange}
+                      />
+                    </Tooltip>
                     <InputGroup>
                       <InputRightElement>
                         <Button
