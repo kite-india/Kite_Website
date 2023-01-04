@@ -24,6 +24,9 @@ const PackageCard: React.FC<PackageProps> = ({ data }) => {
   const bookNow = () => {
     router.push(`/packages/${id}/book-now`)
   }
+  const knowMore = () => {
+    router.push(`#`)
+  }
   return (
     <Box as="div" boxShadow="lg" borderRadius="lg" maxW="container.sm" p={3}>
       <Box
@@ -44,7 +47,7 @@ const PackageCard: React.FC<PackageProps> = ({ data }) => {
         />
       </Box>
       <Flex
-        direction={{ base: 'column', md: 'row' }}
+        direction={'column'}
         align="center"
         justify="space-between"
         w="100%"
@@ -67,20 +70,28 @@ const PackageCard: React.FC<PackageProps> = ({ data }) => {
         mb={6}
       >
         <Box w="100%">
-          {activities.map(tag => (
-            <Text key={tag} w="100%">
-              <Icon as={FiMap} mr={2} />
-              {tag}
-            </Text>
-          ))}
+          {activities.map((tag, i) => {
+            if (i < 3) {
+              return (
+                <Text key={tag} w="100%">
+                  <Icon as={FiMap} mr={2} />
+                  {tag}
+                </Text>
+              )
+            }
+          })}
         </Box>
         <Box w="100%">
-          {activities.map(tag => (
-            <Text key={tag} w="100%">
-              <Icon as={FiMap} mr={2} />
-              {tag}
-            </Text>
-          ))}
+          {activities.map((tag, i) => {
+            if (i < 3) {
+              return (
+                <Text key={tag} w="100%">
+                  <Icon as={FiMap} mr={2} />
+                  {tag}
+                </Text>
+              )
+            }
+          })}
         </Box>
       </SimpleGrid>
       <Flex
@@ -102,7 +113,12 @@ const PackageCard: React.FC<PackageProps> = ({ data }) => {
           w={{ base: '100%', lg: '60%' }}
           justifyContent="center"
         >
-          <Button bg="#125C13" _hover={{ bg: '#8FB339' }} px={8}>
+          <Button
+            bg="#125C13"
+            onClick={knowMore}
+            _hover={{ bg: '#8FB339' }}
+            px={8}
+          >
             More Info
           </Button>
           <Button
