@@ -44,7 +44,6 @@ export async function getStaticProps() {
   const { data: activities_data } = await axios.get(
     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/activity`
   )
-
   if (!featured_data || !activities_data) {
     return {
       notFound: true
