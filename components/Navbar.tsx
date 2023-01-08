@@ -149,7 +149,7 @@ const Navbar: React.FC<NavProps> = () => {
             </LinkItem>
           ))}
         </HStack>
-        {status == 'authenticated' ? (
+        {status != 'unauthenticated' ? (
           <Menu>
             <MenuButton
               backgroundColor={'transparent'} //---------------------------------------------------->here
