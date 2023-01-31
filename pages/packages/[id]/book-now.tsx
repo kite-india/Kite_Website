@@ -34,6 +34,7 @@ import { requireAuth } from '@utils/helpers/requireAuth'
 const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
   const { status } = useSession()
   const router = useRouter()
+  const { data: session } = useSession()
 
   if (status != 'authenticated') {
     router.push('/login', { query: { from: router.pathname } })
@@ -167,8 +168,9 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
                     <Input
                       type="text"
                       name="fname"
+                      value={session ? session.user.name : undefined}
                       placeholder="First Name"
-                      onChange={handleChange}
+                      onChange={handleChange} //here
                       required
                     />
                     <Input
@@ -198,6 +200,7 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
                     <Input
                       type="email"
                       name="email"
+                      value={session ? session.user.email : undefined}
                       placeholder="Email Address"
                       required
                       onChange={handleChange}

@@ -27,10 +27,10 @@ import { FiEdit2 } from 'react-icons/fi'
 const Info: NextPage = () => {
   const { data: session } = useSession()
   const [data, setData] = useState({
-    firstName: 'john',
+    firstName: session.user.name,
     lastName: 'smith',
-    location: 'USA',
-    email: 'john@gmail.com',
+    location: 'usa',
+    email: session.user.email,
     mobile: '99889988',
     date: '2013-01-08',
     gender: 'Female'
