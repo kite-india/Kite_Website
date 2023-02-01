@@ -22,7 +22,9 @@ const Login: NextPage = () => {
   const router = useRouter()
 
   console.log(router.query && router.query?.from)
-
+  if (status == 'authenticated') {
+    router.push('/')
+  }
   if (status === 'loading') {
     return <h1>Loading....</h1>
   }
