@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import NextLink from 'next/link'
 import Section from '../Section'
 import {
@@ -224,7 +224,22 @@ const SideBar: React.FC<SectionProps> = ({ data }) => {
   const [checkBox, setCheckBox] = useState({
     id: []
   })
+  console.log(checkBox.id.length)
   const [edit, setEdit] = useState('gray')
+  const [sorting, setSorting] = useState({ key: 'name', ascending: true })
+  const [sortedData, setSortedData] = useState(data)
+
+  useEffect(() => {
+    const dataCopy = [...filteredData]
+    const sorteddata = dataCopy.sort((a, b) => {
+      return a[sorting.key].localeCompare(b[sorting.key])
+    })
+    setSortedData(sorting.ascending ? sorteddata : sorteddata.reverse())
+  }, [filteredData, sorting])
+
+  function applySorting(key, ascending) {
+    setSorting({ key: key, ascending: ascending })
+  }
   const onEdit = () => {
     if (checkBox.id.length == 1) {
       console.log('you are ok')
@@ -234,7 +249,6 @@ const SideBar: React.FC<SectionProps> = ({ data }) => {
       setEdit('red')
     }
   }
-  console.log(filteredData)
 
   return (
     <Box w="100%">
@@ -302,14 +316,23 @@ const SideBar: React.FC<SectionProps> = ({ data }) => {
               </MenuButton>
               <MenuList>
                 {Object.keys(data[0]).map((oneKey, i) => {
-                  return <MenuItem key={i}>{oneKey}</MenuItem>
+                  return (
+                    <MenuItem
+                      key={i}
+                      onClick={() => applySorting(oneKey, !sorting.ascending)}
+                    >
+                      {oneKey}
+                    </MenuItem>
+                  )
                 })}
               </MenuList>
             </Menu>
             <Button>Filter</Button>
           </Flex>
           <Flex direction="row" gap={4} py="8">
-            <Button onClick={() => console.log(checkBox)}>Delete</Button>
+            <Button onClick={() => console.log(checkBox)}>{`Delete ${
+              checkBox.id.length > 0 ? `(${checkBox.id.length})` : ' '
+            }`}</Button>
             <Button onClick={onEdit} colorScheme={edit}>
               Edit
             </Button>
@@ -319,7 +342,7 @@ const SideBar: React.FC<SectionProps> = ({ data }) => {
             <>loading</> // loading function
           ) : (
             <TableComponent
-              data={filteredData}
+              data={sortedData}
               checkBox={checkBox}
               setCheckBox={setCheckBox}
             />

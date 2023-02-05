@@ -123,7 +123,7 @@ export const data1 = [
 ]
 export const data = [
   {
-    id: 1,
+    id: '1',
     name: 'Shanan Martinson',
     dob: '10/24/2022',
     phone: '410-771-8380',
@@ -135,7 +135,7 @@ export const data = [
     role: 'user'
   },
   {
-    id: 2,
+    id: '2',
     name: "Artair O'Mahoney",
     dob: '6/21/2022',
     phone: '555-797-4658',
@@ -147,7 +147,7 @@ export const data = [
     role: 'user'
   },
   {
-    id: 3,
+    id: '3',
     name: 'Coleman Barthel',
     dob: '1/13/2023',
     phone: '709-753-2312',
@@ -159,7 +159,7 @@ export const data = [
     role: 'admin'
   },
   {
-    id: 4,
+    id: '4',
     name: 'Tanitansy Janaway',
     dob: '6/22/2022',
     phone: '604-388-4328',
@@ -171,7 +171,7 @@ export const data = [
     role: 'user'
   },
   {
-    id: 5,
+    id: '5',
     name: 'Friedrick Raddon',
     dob: '4/2/2022',
     phone: '916-825-3333',
@@ -183,7 +183,7 @@ export const data = [
     role: 'user᠎'
   },
   {
-    id: 6,
+    id: '6',
     name: 'Julienne Cockshutt',
     dob: '7/14/2022',
     phone: '324-680-2296',
@@ -195,7 +195,7 @@ export const data = [
     role: 'user'
   },
   {
-    id: 7,
+    id: '7',
     name: 'Gottfried Stollman',
     dob: '5/9/2022',
     phone: '544-676-5354',
@@ -207,7 +207,7 @@ export const data = [
     role: 'user'
   },
   {
-    id: 8,
+    id: '8',
     name: 'Dalia Summersett',
     dob: '5/8/2022',
     phone: '773-347-2732',
@@ -219,7 +219,7 @@ export const data = [
     role: 'user'
   },
   {
-    id: 9,
+    id: '9',
     name: 'Laureen Hebbard',
     dob: '9/3/2022',
     phone: '836-752-2834',
@@ -231,7 +231,7 @@ export const data = [
     role: 'user'
   },
   {
-    id: 10,
+    id: '10',
     name: 'Shell Spickett',
     dob: '1/6/2023',
     phone: '124-943-3362',
@@ -243,7 +243,7 @@ export const data = [
     role: 'user'
   },
   {
-    id: 11,
+    id: '11',
     name: 'Ignace Pawsey',
     dob: '3/13/2022',
     phone: '444-786-7789',
@@ -255,7 +255,7 @@ export const data = [
     role: 'user'
   },
   {
-    id: 12,
+    id: '12',
     name: 'Con Dawidman',
     dob: '2/27/2022',
     phone: '148-589-4945',
@@ -267,7 +267,7 @@ export const data = [
     role: 'user'
   },
   {
-    id: 13,
+    id: '13',
     name: 'Nappie Dyster',
     dob: '5/28/2022',
     phone: '328-102-6316',
@@ -279,7 +279,7 @@ export const data = [
     role: 'user'
   },
   {
-    id: 14,
+    id: '14',
     name: 'Dylan Hurkett',
     dob: '1/10/2023',
     phone: '130-245-6979',
@@ -291,7 +291,7 @@ export const data = [
     role: 'user'
   },
   {
-    id: 15,
+    id: '15',
     name: 'Cherri Havenhand',
     dob: '9/17/2022',
     phone: '452-446-5629',
@@ -303,7 +303,7 @@ export const data = [
     role: 'user'
   },
   {
-    id: 16,
+    id: '16',
     name: 'Barbara-anne Chable',
     dob: '8/7/2022',
     phone: '351-968-2007',
@@ -315,7 +315,7 @@ export const data = [
     role: 'admin'
   },
   {
-    id: 17,
+    id: '17',
     name: 'Zolly Hanby',
     dob: '1/15/2023',
     phone: '105-540-7636',
@@ -327,7 +327,7 @@ export const data = [
     role: 'user'
   },
   {
-    id: 18,
+    id: '18',
     name: 'Ariel Bowbrick',
     dob: '11/21/2022',
     phone: '146-958-9172',
@@ -339,7 +339,7 @@ export const data = [
     role: 'user'
   },
   {
-    id: 19,
+    id: '19',
     name: 'Lev Lambie',
     dob: '12/10/2022',
     phone: '405-252-7798',
@@ -351,7 +351,7 @@ export const data = [
     role: 'user'
   },
   {
-    id: 20,
+    id: '23',
     name: 'Cecelia Gyford',
     dob: '7/7/2022',
     phone: '415-384-9432',
