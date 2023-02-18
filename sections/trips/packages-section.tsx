@@ -43,7 +43,7 @@ const Packages: React.FC<PackageProps> = ({ data }) => {
           }}
           spaceBetween={20}
           autoplay={{
-            delay: 3000,
+            delay: 6000,
             disableOnInteraction: false
           }}
           pagination={{ clickable: true }}
