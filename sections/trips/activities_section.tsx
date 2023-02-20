@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Heading, Text, Flex } from '@chakra-ui/react'
+import { Box, Heading, Text, Flex, Center } from '@chakra-ui/react'
 import { ActivityCard } from '@components/index'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -16,12 +16,7 @@ interface ActivityProps {
 
 const Activities: React.FC<ActivityProps> = ({ data }) => {
   return (
-    <Box
-      w="100%"
-      bg="#F7F8F9"
-      borderRadius="lg"
-      p={{ base: 3, lg: 6 }}
-    >
+    <Box w="100%" bg="#F7F8F9" borderRadius="lg" p={{ base: 3, lg: 6 }}>
       <Flex
         direction={{ base: 'column', lg: 'row' }}
         alignItems={{ base: 'center', lg: 'flex-end' }}

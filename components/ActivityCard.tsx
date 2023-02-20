@@ -15,6 +15,7 @@ const ActivityCard: React.FC<IProps> = ({ data }) => {
   return (
     <Flex
       gap={4}
+      height={{ base: '360px', lg: '230px' }}
       bg="white"
       borderRadius="lg"
       boxShadow="md"
@@ -40,17 +41,20 @@ const ActivityCard: React.FC<IProps> = ({ data }) => {
         />
       </Box>
       <Box w="100%">
-        <Box mb={4}>
+        <Flex
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="center"
+          mb={4}
+        >
           <Heading fontWeight="semibold" fontSize="24px">
             {name}
           </Heading>
           <Text as="p" fontFamily="'Poppins'" fontSize="16px">
-            {description.length > 120
-              ? description.slice(0, 120) + '...'
-              : description}
+            {description.slice(0, 100) + '...'}
           </Text>
-        </Box>
-        <Flex justify="space-between" alignItems="center" p={1}>
+        </Flex>
+        <Flex justify="space-between" gap={4} alignItems="center" p={1}>
           <Text fontFamily="'Poppins'" fontSize="18px">
             Rs 20,000 /{' '}
             <Text as="span" fontSize="12px">
