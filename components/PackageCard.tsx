@@ -29,13 +29,17 @@ const PackageCard: React.FC<PackageProps> = ({ data }) => {
     <Box
       _hover={{ scale: 1.1 }}
       as="div"
-      height="fit-content"
       boxShadow="2xl"
       borderRadius="lg"
       maxW="container.sm"
       p={3}
     >
-      <Flex flexDirection="column" justify="space-evenly" gap="11px">
+      <Flex
+        flexDirection="column"
+        align="center"
+        justify="space-between"
+        gap="11px"
+      >
         <Flex flexDirection="column">
           <Box
             w={{ base: '100%', lg: '380px' }}
@@ -70,8 +74,15 @@ const PackageCard: React.FC<PackageProps> = ({ data }) => {
               >
                 {location}
               </Text>
-              <Text fontFamily="'Poppins'" fontWeight="normal" fontSize="16px">
-                Description: {description}
+              <Text
+                height="56px"
+                fontFamily="'Poppins'"
+                fontWeight="normal"
+                fontSize="16px"
+                marginBottom="22px"
+              >
+                <Text>Description: </Text>
+                {description.slice(0, 80) + '....'}
               </Text>
             </Flex>
           </Flex>
@@ -97,7 +108,6 @@ const PackageCard: React.FC<PackageProps> = ({ data }) => {
           direction={{ base: 'column', md: 'row' }}
           align="center"
           justify="space-between"
-          marginBottom="12px"
           w="100%"
           gap={{ base: 2, lg: 0 }}
         >
@@ -112,6 +122,8 @@ const PackageCard: React.FC<PackageProps> = ({ data }) => {
             color="white"
             w={{ base: '100%', lg: '60%' }}
             justifyContent="center"
+            alignItems="center"
+            height="66px"
           >
             <Button bg="#125C13" _hover={{ bg: '#8FB339' }} px={8}>
               More Info
