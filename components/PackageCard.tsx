@@ -7,7 +7,8 @@ import {
   SimpleGrid,
   Icon,
   ButtonGroup,
-  Button
+  Button,
+  Spacer
 } from '@chakra-ui/react'
 import { FiMap } from 'react-icons/fi'
 import Image from 'next/image'
@@ -25,10 +26,10 @@ const PackageCard: React.FC<PackageProps> = ({ data }) => {
     router.push(`/packages/${id}/book-now`)
   }
   return (
-    <Box as="div" boxShadow="lg" borderRadius="lg" maxW="container.sm" p={3}>
+    <Box as="div" boxShadow="lg" borderRadius="lg" maxW="600px" p={6} h="full">
       <Box
-        w={{ base: '100%', lg: '380px' }}
-        h={{ base: '100%', lg: '240px' }}
+        // w={{ base: '100%', lg: '380px' }}
+        // h={{ base: '100%', lg: '240px' }}
         mb={3}
         borderRadius="xl"
         overflow="hidden"
@@ -53,11 +54,24 @@ const PackageCard: React.FC<PackageProps> = ({ data }) => {
         <Text fontFamily="'Poppins'" fontWeight="semibold" fontSize="24px">
           {location}
         </Text>
-        <Text fontFamily="'Poppins'" fontWeight="normal" fontSize="16px">
+        {/* <Text fontFamily="'Poppins'" fontWeight="normal" fontSize="16px">
           Description: {description}
+        </Text> */}
+        <Spacer />
+        <Text fontFamily="'Poppins'" fontWeight={500} fontSize="16px">
+          Duration:{` 5 Days / 4 Nights`}
         </Text>
       </Flex>
+      <Text
+        fontFamily="'Poppins'"
+        fontWeight={500}
+        fontSize="18px"
+        lineHeight="24px"
+      >
+        Plan Includes:
+      </Text>
       <SimpleGrid
+        mt={3}
         fontFamily="'Poppins'"
         columns={2}
         alignItems={{ base: 'center', lg: 'left' }}
