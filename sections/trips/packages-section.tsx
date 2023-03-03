@@ -70,14 +70,17 @@ const Packages: React.FC<PackageProps> = ({ data }) => {
           }}
           spaceBetween={20}
           autoplay={{
-            delay: 3000,
+            delay: 6000,
             disableOnInteraction: false
           }}
           pagination={{ clickable: true }}
           slidesPerView={1}
         >
           {data.map(data => (
-            <SwiperSlide key={data.id} style={{ paddingBottom: '55px' }}>
+            <SwiperSlide
+              key={data.id}
+              style={{ paddingBottom: '55px', height: '800px' }}
+            >
               <PackageCard data={data} />
             </SwiperSlide>
           ))}
