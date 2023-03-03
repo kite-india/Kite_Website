@@ -152,7 +152,7 @@ const Navbar: React.FC<NavProps> = () => {
         {status != 'unauthenticated' ? (
           <Menu>
             <MenuButton
-              backgroundColor={'transparent'} //---------------------------------------------------->here
+              backgroundColor={'transparent'}
               as={IconButton}
               borderRadius="full"
               ml={8}
@@ -331,7 +331,7 @@ const Navbar: React.FC<NavProps> = () => {
         ) : (
           <NextLink href="/login">
             <Link
-              ml={8} //-------------------------------------------->
+              ml={8}
               mr={4}
               fontSize="16px"
               fontFamily="'Roboto'"

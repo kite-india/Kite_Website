@@ -7,7 +7,8 @@ import {
   SimpleGrid,
   Icon,
   ButtonGroup,
-  Button
+  Button,
+  Spacer
 } from '@chakra-ui/react'
 import { FiMap } from 'react-icons/fi'
 import Image from 'next/image'
@@ -26,19 +27,60 @@ const PackageCard: React.FC<PackageProps> = ({ data }) => {
     router.push(`/packages/${id}/book-now`)
   }
   return (
-    <Box
-      _hover={{ scale: 1.1 }}
-      as="div"
-      boxShadow="2xl"
-      borderRadius="lg"
-      maxW="container.sm"
-      p={3}
-    >
+    <Box as="div" boxShadow="lg" borderRadius="lg" maxW="600px" p={6} h="full">
+      <Box
+        // w={{ base: '100%', lg: '380px' }}
+        // h={{ base: '100%', lg: '240px' }}
+        mb={3}
+        borderRadius="xl"
+        overflow="hidden"
+      >
+        <CustomImage
+          src={image}
+          alt="card"
+          objectFit="cover"
+          layout="responsive"
+          sizes="100vw"
+          width={380}
+          height={240}
+        />
+      </Box>
       <Flex
         flexDirection="column"
         align="center"
         justify="space-between"
-        gap="11px"
+        w="100%"
+        mb={3}
+      >
+        <Text fontFamily="'Poppins'" fontWeight="semibold" fontSize="24px">
+          {location}
+        </Text>
+        {/* <Text fontFamily="'Poppins'" fontWeight="normal" fontSize="16px">
+          Description: {description}
+        </Text> */}
+        <Spacer />
+        <Text fontFamily="'Poppins'" fontWeight={500} fontSize="16px">
+          Duration:{` 5 Days / 4 Nights`}
+        </Text>
+      </Flex>
+      <Text
+        fontFamily="'Poppins'"
+        fontWeight={500}
+        fontSize="18px"
+        lineHeight="24px"
+      >
+        Plan Includes:
+      </Text>
+      <SimpleGrid
+        mt={3}
+        fontFamily="'Poppins'"
+        columns={2}
+        alignItems={{ base: 'center', lg: 'left' }}
+        w="100%"
+        spacingX="40px"
+        px={1}
+        mb={6}
+
       >
         <Flex flexDirection="column">
           <Box
