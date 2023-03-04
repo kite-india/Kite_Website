@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Text, Link } from '@chakra-ui/react'
+import { Box, Flex, Heading, Text, Link, Tooltip } from '@chakra-ui/react'
 import React from 'react'
 import { FiLinkedin, FiFacebook, FiTwitter, FiInstagram } from 'react-icons/fi'
 
@@ -39,6 +39,27 @@ const WebsiteLinks = () => {
     </Flex>
   )
 }
+const TeamLinks = () => {
+  return (
+    <Flex
+      gap={{ base: 2, md: 3, lg: 4 }}
+      fontFamily="'Poppins'"
+      fontSize="14px"
+      fontWeight="regular"
+      my={4}
+    >
+      <Tooltip label="Coming soon!" cursor="pointer">
+        <Link href="#">Our Team</Link>
+      </Tooltip>
+      <Tooltip label="Coming soon!" cursor="pointer">
+        <Link href="#">Our Policy</Link>
+      </Tooltip>
+      <Tooltip label="Coming soon!" cursor="pointer">
+        <Link href="#">Our Vison</Link>
+      </Tooltip>
+    </Flex>
+  )
+}
 
 const Footer: React.FC = () => {
   return (
@@ -54,6 +75,7 @@ const Footer: React.FC = () => {
           <Heading fontSize="24px" fontWeight="bold">
             Kite India
           </Heading>
+          <TeamLinks />
         </Box>
         <Box w="100%" px={12} borderX={{ base: 0, md: '2px' }}>
           <Heading fontSize="24px" fontWeight="bold">

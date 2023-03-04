@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Text, Heading, Flex, Container } from '@chakra-ui/react'
+import { Box, Text, Heading, Flex, Container, Grid } from '@chakra-ui/react'
 import Layout from '@components/layouts/main'
 import Image from 'next/image'
 import Section from '@components/Section'
@@ -53,6 +53,78 @@ const Gallery: NextPage = () => {
             architecto libero in adipisci dolore officia corporis aperiam quia
             nulla. A, neque.
           </Text>
+          <Flex
+            direction="column"
+            my={5}
+            justifyContent="center"
+            maxW={{ xl: '1200px' }}
+          >
+            <Grid
+              w="full"
+              gridTemplateColumns={{
+                sm: 'repeat( auto-fit, minmax(350px, 1fr) )',
+                md: 'repeat( auto-fit, minmax(400px, 1fr) )',
+                lg: 'repeat( auto-fit, minmax(350px, 1fr) )'
+              }}
+              gap={8}
+              px={3}
+            >
+              <CustomImage
+                src="package/kashmirpackage.jpg"
+                alt="card"
+                objectFit="cover"
+                layout="responsive"
+                sizes="100vw"
+                width={380}
+                height={240}
+              />
+              <CustomImage
+                src="package/lehladakh.webp"
+                alt="card"
+                objectFit="cover"
+                layout="responsive"
+                sizes="100vw"
+                width={380}
+                height={240}
+              />
+              <CustomImage
+                src="package/nepalpackage.jpg"
+                alt="card"
+                objectFit="cover"
+                layout="responsive"
+                sizes="100vw"
+                width={380}
+                height={240}
+              />
+              <CustomImage
+                src="package/rajasthanpackage.jpg"
+                alt="card"
+                objectFit="cover"
+                layout="responsive"
+                sizes="100vw"
+                width={380}
+                height={240}
+              />
+              <CustomImage
+                src="package/lehladakh.webp"
+                alt="card"
+                objectFit="cover"
+                layout="responsive"
+                sizes="100vw"
+                width={380}
+                height={240}
+              />
+              <CustomImage
+                src="package/nepalpackage.jpg"
+                alt="card"
+                objectFit="cover"
+                layout="responsive"
+                sizes="100vw"
+                width={380}
+                height={240}
+              />
+            </Grid>
+          </Flex>
           <hr
             style={{
               width: '100%',

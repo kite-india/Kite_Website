@@ -13,9 +13,11 @@ import {
   ModalBody,
   ModalCloseButton,
   AspectRatio,
-  useDisclosure
+  useDisclosure,
+  Link
 } from '@chakra-ui/react'
 import Section from './Section'
+import NextLink from 'next/link'
 
 import { BsPlayCircleFill } from 'react-icons/bs'
 import { FeaturedDestination } from '@utils/types'
@@ -26,7 +28,7 @@ interface FeaturedDataProps {
 }
 
 const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
-  const { name, description, image } = data
+  const { name, description, image, id } = data
   const { isOpen, onOpen, onClose } = useDisclosure()
   const WatchNow = () => (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -109,7 +111,11 @@ const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
                 <WatchNow />
               </Box>
               <ButtonGroup spacing={6} mt={6} fontFamily="'Roboto'">
-                <Button
+                <Link
+                  //  as={NextLink}
+                  href={`/package/${id}/book-now`}
+                  p={3}
+                  textAlign="center"
                   color="white"
                   bg="#B7CE63"
                   size="lg"
@@ -118,8 +124,11 @@ const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
                   _hover={{ bg: '#3E7C17' }}
                 >
                   Book now
-                </Button>
-                <Button
+                </Link>
+                <Link
+                  href={`/package/${id}`}
+                  p={3}
+                  textAlign="center"
                   color="white"
                   bg="#B7CE63"
                   size="lg"
@@ -128,7 +137,7 @@ const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
                   _hover={{ bg: '#3E7C17' }}
                 >
                   Know More
-                </Button>
+                </Link>
               </ButtonGroup>
             </Flex>
           </Box>
