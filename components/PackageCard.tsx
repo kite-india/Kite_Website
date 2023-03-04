@@ -80,7 +80,6 @@ const PackageCard: React.FC<PackageProps> = ({ data }) => {
         spacingX="40px"
         px={1}
         mb={6}
-
       >
         <Flex flexDirection="column">
           <Box
@@ -175,7 +174,7 @@ const PackageCard: React.FC<PackageProps> = ({ data }) => {
             </Button>
           </ButtonGroup>
         </Flex>
-      </Flex>
+      </SimpleGrid>
     </Box>
   )
 }
