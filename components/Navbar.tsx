@@ -138,16 +138,25 @@ const Navbar: React.FC<NavProps> = () => {
         animate={{ y: [-200, 0], opacity: [0, 1] }}
         transition={{ duration: 3, delay: 3, ease: 'linear' }}
       >
-        <Heading as="h4" fontSize="24px" color="navbarLogo">
-          Kite India
-        </Heading>
+        <Link
+          href="/"
+          _focus={{ textDecoration: 'none' }}
+          _hover={{ textDecoration: 'none' }}
+        >
+          <Heading as="h4" fontSize="24px" color="navbarLogo">
+            Kite India
+          </Heading>
+        </Link>
         <Spacer />
         <HStack gap={{ base: 4, lg: 8 }} display={{ base: 'none', md: 'flex' }}>
-          {links.map(({ name, href }) => (
-            <LinkItem key={name} href={href}>
-              {name}
-            </LinkItem>
-          ))}
+          {links.map(
+            ({ name, href }) =>
+              name !== 'Home' && (
+                <LinkItem key={name} href={href}>
+                  {name}
+                </LinkItem>
+              )
+          )}
         </HStack>
         {status != 'unauthenticated' ? (
           <Menu>
