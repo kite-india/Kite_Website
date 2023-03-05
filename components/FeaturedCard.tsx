@@ -6,7 +6,14 @@ import {
   Image,
   Flex,
   Button,
-  ButtonGroup
+  ButtonGroup,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalBody,
+  ModalCloseButton,
+  AspectRatio,
+  useDisclosure
 } from '@chakra-ui/react'
 import Section from './Section'
 
@@ -20,6 +27,28 @@ interface FeaturedDataProps {
 
 const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
   const { name, description, image } = data
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const WatchNow = () => (
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <ModalOverlay />
+      <ModalContent maxW="80%">
+        <ModalCloseButton size="lg" zIndex="2" />
+        <ModalBody>
+          <Box
+            as="video"
+            controls
+            src={`${process.env.NEXT_PUBLIC_S3_ENDPOINT}videos/default.MOV`}
+            objectFit="contain"
+            autoPlay={true}
+            sx={{
+              aspectRatio: '16/9'
+            }}
+          />
+        </ModalBody>
+      </ModalContent>
+    </Modal>
+  )
+
   return (
     <Box
       w="100%"
@@ -73,9 +102,11 @@ const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
                   mt={3}
                   _hover={{ bg: 'white', color: '#B7CE63' }}
                   leftIcon={<BsPlayCircleFill fontSize="2.5rem" />}
+                  onClick={onOpen}
                 >
                   Watch Now
                 </Button>
+                <WatchNow />
               </Box>
               <ButtonGroup spacing={6} mt={6} fontFamily="'Roboto'">
                 <Button

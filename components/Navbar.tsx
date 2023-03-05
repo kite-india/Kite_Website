@@ -31,12 +31,13 @@ import {
   BiHomeHeart,
   BiTrip,
   BiShieldQuarter,
-  BiCreditCard
+  BiCreditCard,
+  BiLogOut
 } from 'react-icons/bi'
 import { GrGallery, GrContact } from 'react-icons/gr'
 import { FaRegUserCircle } from 'react-icons/fa'
 import { motion } from 'framer-motion'
-import { useSession } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 
 const links = [
   { name: 'Home', href: '/', icon: <BiHomeHeart /> },
@@ -107,7 +108,7 @@ interface NavProps {
 
 const Navbar: React.FC<NavProps> = () => {
   // const [isOpen, setOpen] = useState(false)
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = useRef()
   const [isSmallerThanMd] = useMediaQuery('(max-width:768px)')
@@ -148,144 +149,204 @@ const Navbar: React.FC<NavProps> = () => {
             </LinkItem>
           ))}
         </HStack>
-        <Menu>
-          <MenuButton
-            backgroundColor={'transparent'}
-            as={IconButton}
-            borderRadius="full"
-            ml={8}
-            mr={4}
-            p={'0px'}
-            aria-label="settings"
-            _hover={{ backgroundColor: 'transparent', outline: 'none' }}
-          >
-            <Avatar
-              src={session ? session.user.image : undefined}
-              icon={<FaRegUserCircle />}
-              color="color5"
-              bg="white"
-              w="30px"
-              h="30px"
-              size="lg"
-              _hover={{ color: 'green.400' }}
-              cursor="pointer"
-            />
-          </MenuButton>
-          <MenuList
-            p="2"
-            border={'2px solid rgba(199, 213, 159, 1)'}
-            borderRadius="2xl"
-          >
-            <Link
-              href="/info"
-              _focus={{ textDecoration: 'none' }}
-              _hover={{ textDecoration: 'none' }}
+        {status != 'unauthenticated' ? (
+          <Menu>
+            <MenuButton
+              backgroundColor={'transparent'}
+              as={IconButton}
+              borderRadius="full"
+              ml={8}
+              mr={4}
+              p={'0px'}
+              aria-label="settings"
+              _hover={{ backgroundColor: 'transparent', outline: 'none' }}
             >
-              <MenuItem
-                minH={'48px'}
-                _hover={{
-                  borderRadius: '15px',
-                  backgroundColor: 'rgba(199, 213, 159, 1)'
-                }}
-                _focus={{
-                  borderRadius: '15px',
-                  backgroundColor: 'rgba(199, 213, 159, 1)'
+              <Avatar
+                src={session ? session.user.image : undefined}
+                icon={<FaRegUserCircle />}
+                color="color5"
+                bg="white"
+                w="30px"
+                h="30px"
+                size="lg"
+                _hover={{ color: 'green.400' }}
+                cursor="pointer"
+              />
+            </MenuButton>
+            <MenuList
+              p="2"
+              border={'2px solid rgba(199, 213, 159, 1)'}
+              borderRadius="2xl"
+            >
+              <Link
+                href="/info"
+                _focus={{ textDecoration: 'none' }}
+                _hover={{ textDecoration: 'none' }}
+              >
+                <MenuItem
+                  minH={'48px'}
+                  _hover={{
+                    borderRadius: '15px',
+                    backgroundColor: 'rgba(199, 213, 159, 1)'
+                  }}
+                  _focus={{
+                    borderRadius: '15px',
+                    backgroundColor: 'rgba(199, 213, 159, 1)'
+                  }}
+                >
+                  <Avatar
+                    icon={<FaRegUserCircle color="black" />}
+                    color="color5"
+                    bg="white"
+                    w="30px"
+                    h="30px"
+                    mr="23px"
+                    size="lg"
+                    _hover={{ color: 'green.400' }}
+                    cursor="pointer"
+                  />
+                  <Text
+                    fontFamily={'Poppins'}
+                    fontWeight="500"
+                    fontSize={{ sm: '14px', md: '16px', lg: '18px' }}
+                  >
+                    Personal Info
+                  </Text>
+                </MenuItem>
+              </Link>
+              <Link
+                href="/passwordReset"
+                _focus={{ textDecoration: 'none' }}
+                _hover={{ textDecoration: 'none' }}
+              >
+                <MenuItem
+                  minH={'48px'}
+                  _hover={{
+                    borderRadius: '15px',
+                    backgroundColor: 'rgba(199, 213, 159, 1)'
+                  }}
+                  _focus={{
+                    borderRadius: '15px',
+                    backgroundColor: 'rgba(199, 213, 159, 1)'
+                  }}
+                >
+                  <Avatar
+                    icon={<BiShieldQuarter color="black" />}
+                    color="color5"
+                    bg="white"
+                    w="30px"
+                    h="30px"
+                    mr="23px"
+                    size="lg"
+                    _hover={{ color: 'green.400' }}
+                    cursor="pointer"
+                  />
+                  <Text
+                    fontFamily={'Poppins'}
+                    fontWeight="500"
+                    fontSize={{ sm: '14px', md: '16px', lg: '18px' }}
+                  >
+                    Security
+                  </Text>
+                </MenuItem>
+              </Link>
+              <Link
+                href="/transaction"
+                _focus={{ textDecoration: 'none' }}
+                _hover={{ textDecoration: 'none' }}
+              >
+                <MenuItem
+                  minH={'48px'}
+                  _hover={{
+                    borderRadius: '15px',
+                    backgroundColor: 'rgba(199, 213, 159, 1)'
+                  }}
+                  _focus={{
+                    borderRadius: '15px',
+                    backgroundColor: 'rgba(199, 213, 159, 1)'
+                  }}
+                >
+                  <Avatar
+                    icon={<BiCreditCard color="black" />}
+                    color="color5"
+                    bg="white"
+                    w="30px"
+                    h="30px"
+                    mr="23px"
+                    size="lg"
+                    _hover={{ color: 'green.400' }}
+                    cursor="pointer"
+                  />
+                  <Text
+                    fontFamily={'Poppins'}
+                    fontWeight="500"
+                    fontSize={{ sm: '14px', md: '16px', lg: '18px' }}
+                  >
+                    Transaction Info
+                  </Text>
+                </MenuItem>
+              </Link>
+              <Link
+                href="/login"
+                _focus={{ textDecoration: 'none' }}
+                _hover={{ textDecoration: 'none' }}
+                onClick={e => {
+                  e.preventDefault()
+                  signOut()
                 }}
               >
-                <Avatar
-                  icon={<FaRegUserCircle color="black" />}
-                  color="color5"
-                  bg="white"
-                  w="30px"
-                  h="30px"
-                  mr="23px"
-                  size="lg"
-                  _hover={{ color: 'green.400' }}
-                  cursor="pointer"
-                />
-                <Text
-                  fontFamily={'Poppins'}
-                  fontWeight="500"
-                  fontSize={{ sm: '14px', md: '16px', lg: '18px' }}
+                <MenuItem
+                  minH={'48px'}
+                  _hover={{
+                    borderRadius: '15px',
+                    backgroundColor: 'rgba(199, 213, 159, 1)'
+                  }}
+                  _focus={{
+                    borderRadius: '15px',
+                    backgroundColor: 'rgba(199, 213, 159, 1)'
+                  }}
                 >
-                  Personal Info
-                </Text>
-              </MenuItem>
-            </Link>
+                  <Avatar
+                    icon={<BiLogOut color="black" />}
+                    color="color5"
+                    bg="white"
+                    w="30px"
+                    h="30px"
+                    mr="23px"
+                    size="lg"
+                    _hover={{ color: 'green.400' }}
+                    cursor="pointer"
+                  />
+                  <Text
+                    fontFamily={'Poppins'}
+                    fontWeight="500"
+                    fontSize={{ sm: '14px', md: '16px', lg: '18px' }}
+                  >
+                    Sign out
+                  </Text>
+                </MenuItem>
+              </Link>
+            </MenuList>
+          </Menu>
+        ) : (
+          <NextLink href="/login">
             <Link
-              href="/passwordReset"
-              _focus={{ textDecoration: 'none' }}
-              _hover={{ textDecoration: 'none' }}
+              ml={8}
+              mr={4}
+              fontSize="16px"
+              fontFamily="'Roboto'"
+              color="black"
+              _hover={{ color: 'color5' }}
+              _active={{ color: 'color5' }}
+              fontWeight="normal"
             >
-              <MenuItem
-                minH={'48px'}
-                _hover={{
-                  borderRadius: '15px',
-                  backgroundColor: 'rgba(199, 213, 159, 1)'
-                }}
-                _focus={{
-                  borderRadius: '15px',
-                  backgroundColor: 'rgba(199, 213, 159, 1)'
-                }}
-              >
-                <Avatar
-                  icon={<BiShieldQuarter color="black" />}
-                  color="color5"
-                  bg="white"
-                  w="30px"
-                  h="30px"
-                  mr="23px"
-                  size="lg"
-                  _hover={{ color: 'green.400' }}
-                  cursor="pointer"
-                />
-                <Text
-                  fontFamily={'Poppins'}
-                  fontWeight="500"
-                  fontSize={{ sm: '14px', md: '16px', lg: '18px' }}
-                >
-                  Security
-                </Text>
-              </MenuItem>
+              <Flex direction="row" gap={2}>
+                <FaRegUserCircle size={20} />
+                <Text>Sign in</Text>
+              </Flex>
             </Link>
-            <Link
-              href="/transaction"
-              _focus={{ textDecoration: 'none' }}
-              _hover={{ textDecoration: 'none' }}
-            >
-              <MenuItem
-                minH={'48px'}
-                _hover={{
-                  borderRadius: '15px',
-                  backgroundColor: 'rgba(199, 213, 159, 1)'
-                }}
-                _focus={{
-                  borderRadius: '15px',
-                  backgroundColor: 'rgba(199, 213, 159, 1)'
-                }}
-              >
-                <Avatar
-                  icon={<BiCreditCard color="black" />}
-                  color="color5"
-                  bg="white"
-                  w="30px"
-                  h="30px"
-                  mr="23px"
-                  size="lg"
-                  _hover={{ color: 'green.400' }}
-                  cursor="pointer"
-                />
-                <Text
-                  fontFamily={'Poppins'}
-                  fontWeight="500"
-                  fontSize={{ sm: '14px', md: '16px', lg: '18px' }}
-                >
-                  Transaction Info
-                </Text>
-              </MenuItem>
-            </Link>
-          </MenuList>
-        </Menu>
+          </NextLink>
+        )}
 
         {/* <BookBtn /> */}
         {isSmallerThanMd && (
