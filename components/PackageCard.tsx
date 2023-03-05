@@ -91,7 +91,7 @@ const PackageCard: React.FC<PackageProps> = ({ data }) => {
             w="100%"
             mb={4}
             columns={2}
-            height="80px"
+            height="100px"
           >
             {activities.map(tag => (
               <Text key={tag} w="100%">

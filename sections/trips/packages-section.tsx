@@ -52,7 +52,7 @@ const Packages: React.FC<PackageProps> = ({ data }) => {
           {data.map(data => (
             <SwiperSlide
               key={data.id}
-              style={{ paddingBottom: '55px', height: '800px' }}
+              style={{ paddingBottom: '55px', height: '750px' }}
             >
               <PackageCard data={data} />
             </SwiperSlide>
