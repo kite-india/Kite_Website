@@ -27,7 +27,7 @@ const PackageCard: React.FC<PackageProps> = ({ data }) => {
     router.push(`/packages/${id}/book-now`)
   }
   return (
-    <Box as="div" boxShadow="lg" borderRadius="lg" maxW="600px" p={6} h="full">
+    <Box as="div" boxShadow="lg" borderRadius="lg" maxW="600px" p={6}>
       <Box
         // w={{ base: '100%', lg: '380px' }}
         // h={{ base: '100%', lg: '240px' }}
@@ -50,29 +50,56 @@ const PackageCard: React.FC<PackageProps> = ({ data }) => {
         align="center"
         justify="space-between"
         w="100%"
-        mb={3}
+        mb={6}
       >
         <Text fontFamily="'Poppins'" fontWeight="semibold" fontSize="24px">
           {location}
         </Text>
-        {/* <Text fontFamily="'Poppins'" fontWeight="normal" fontSize="16px">
-          Description: {description}
-        </Text> */}
         <Spacer />
-        <Text fontFamily="'Poppins'" fontWeight={500} fontSize="16px">
+        <Text fontFamily="'Poppins'" fontWeight={500} p={3} fontSize="16px">
           Duration:{` 5 Days / 4 Nights`}
         </Text>
       </Flex>
       <Text
         fontFamily="'Poppins'"
-        fontWeight={500}
+        fontWeight={700}
         fontSize="18px"
-        lineHeight="24px"
+        lineHeight="10px"
       >
         Plan Includes:
       </Text>
+
+      <Text
+        height="56px"
+        fontFamily="'Poppins'"
+        fontWeight="normal"
+        fontSize="16px"
+        marginBottom="22px"
+        pt={'3'}
+      >
+        {description}
+      </Text>
+
       <SimpleGrid
-        mt={3}
+        mt={2}
+        fontFamily="'Poppins'"
+        columns={2}
+        alignItems={{ base: 'center', lg: 'left' }}
+        w="full"
+        mb={4}
+        pt={3}
+      >
+        {activities.map(tag => (
+          <Box w="100%">
+            <Text key={tag}>
+              <Icon as={FiMap} mr={2} />
+              {tag}
+            </Text>
+          </Box>
+        ))}
+      </SimpleGrid>
+      <SimpleGrid
+        mt={5}
         fontFamily="'Poppins'"
         columns={2}
         alignItems={{ base: 'center', lg: 'left' }}
@@ -81,70 +108,17 @@ const PackageCard: React.FC<PackageProps> = ({ data }) => {
         px={1}
         mb={6}
       >
-        <Flex flexDirection="column">
-          <Box
-            w={{ base: '100%', lg: '380px' }}
-            h={{ base: '100%', lg: '240px' }}
-            mb={3}
-            borderRadius="xl"
-            overflow="hidden"
-          >
-            <CustomImage
-              src={image}
-              alt="card"
-              objectFit="cover"
-              layout="responsive"
-              sizes="100vw"
-              width={380}
-              height={240}
-            />
-          </Box>
-          <Flex
-            direction={{ base: 'column', md: 'row' }}
-            align="center"
-            justify="space-between"
-            w="100%"
-            mb={3}
-          >
-            <Flex direction={'column'}>
-              <Text
-                textAlign="center"
-                fontFamily="'Poppins'"
-                fontWeight="semibold"
-                fontSize="24px"
-              >
-                {location}
-              </Text>
-              <Text
-                height="56px"
-                fontFamily="'Poppins'"
-                fontWeight="normal"
-                fontSize="16px"
-                marginBottom="22px"
-              >
-                <Text>Description: </Text>
-                {description.slice(0, 80) + '....'}
-              </Text>
-            </Flex>
-          </Flex>
-          <SimpleGrid
+        <Text fontFamily="'Poppins'" fontSize="18px" fontWeight={'bold'}>
+          Rs {cost}/{' '}
+          <Text
+            as="span"
+            fontWeight={'normal'}
             fontFamily="'Poppins'"
-            height="150px"
-            columns={2}
-            alignItems={{ base: 'center', lg: 'left' }}
-            w="100%"
-            mb={4}
+            fontSize="12px"
           >
-            <Box w="100%">
-              {activities.map(tag => (
-                <Text key={tag} w="100%">
-                  <Icon as={FiMap} mr={2} />
-                  {tag}
-                </Text>
-              ))}
-            </Box>
-          </SimpleGrid>
-        </Flex>
+            person
+          </Text>
+        </Text>
         <Flex
           direction={{ base: 'column', md: 'row' }}
           align="center"
@@ -152,24 +126,26 @@ const PackageCard: React.FC<PackageProps> = ({ data }) => {
           w="100%"
           gap={{ base: 2, lg: 0 }}
         >
-          <Text fontFamily="'Poppins'" fontSize="18px">
-            Rs {cost}/{' '}
-            <Text as="span" fontFamily="'Poppins'" fontSize="12px">
-              person
-            </Text>
-          </Text>
-          <ButtonGroup
-            fontFamily="'Roboto'"
-            color="white"
-            w={{ base: '100%', lg: '60%' }}
-            justifyContent="center"
-            alignItems="center"
-            height="66px"
-          >
-            <Button bg="#125C13" _hover={{ bg: '#8FB339' }} px={8}>
+          <ButtonGroup gap={2}>
+            <Button
+              color="white"
+              textAlign="center"
+              px={4}
+              pt={2}
+              bg="#125C13"
+              _hover={{ bg: '#8FB339' }}
+            >
               More Info
             </Button>
-            <Button bg="#8FB339" _hover={{ bg: '#125C13' }} onClick={bookNow}>
+            <Button
+              textAlign="center"
+              color="white"
+              bg="#8FB339"
+              px={4}
+              pt={2}
+              _hover={{ bg: '#125C13' }}
+              onClick={bookNow}
+            >
               Book Now
             </Button>
           </ButtonGroup>
