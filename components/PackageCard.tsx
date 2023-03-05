@@ -88,20 +88,17 @@ const PackageCard: React.FC<PackageProps> = ({ data }) => {
           </Flex>
           <SimpleGrid
             fontFamily="'Poppins'"
-            height="150px"
-            columns={2}
-            alignItems={{ base: 'center', lg: 'left' }}
             w="100%"
             mb={4}
+            columns={2}
+            height="80px"
           >
-            <Box w="100%">
-              {activities.map(tag => (
-                <Text key={tag} w="100%">
-                  <Icon as={FiMap} mr={2} />
-                  {tag}
-                </Text>
-              ))}
-            </Box>
+            {activities.map(tag => (
+              <Text key={tag} w="100%">
+                <Icon as={FiMap} mr={2} />
+                {tag}
+              </Text>
+            ))}
           </SimpleGrid>
         </Flex>
         <Flex
