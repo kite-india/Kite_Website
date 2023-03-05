@@ -1,10 +1,20 @@
 import React from 'react'
-import { Box, Text, Heading, Flex, Container, Grid } from '@chakra-ui/react'
+import {
+  Box,
+  Text,
+  Heading,
+  Flex,
+  Container,
+  Grid,
+  UnorderedList,
+  ListItem,
+  Image
+} from '@chakra-ui/react'
 import Layout from '@components/layouts/main'
-import Image from 'next/image'
 import Section from '@components/Section'
 import { NextPage } from 'next'
 import CustomImage from '@components/CustomImage'
+import GalleryCard from '@components/GalleryCard'
 
 const Gallery: NextPage = () => {
   return (
@@ -53,78 +63,7 @@ const Gallery: NextPage = () => {
             architecto libero in adipisci dolore officia corporis aperiam quia
             nulla. A, neque.
           </Text>
-          <Flex
-            direction="column"
-            my={5}
-            justifyContent="center"
-            maxW={{ xl: '1200px' }}
-          >
-            <Grid
-              w="full"
-              gridTemplateColumns={{
-                sm: 'repeat( auto-fit, minmax(350px, 1fr) )',
-                md: 'repeat( auto-fit, minmax(400px, 1fr) )',
-                lg: 'repeat( auto-fit, minmax(350px, 1fr) )'
-              }}
-              gap={8}
-              px={3}
-            >
-              <CustomImage
-                src="package/kashmirpackage.jpg"
-                alt="card"
-                objectFit="cover"
-                layout="responsive"
-                sizes="100vw"
-                width={380}
-                height={240}
-              />
-              <CustomImage
-                src="package/lehladakh.webp"
-                alt="card"
-                objectFit="cover"
-                layout="responsive"
-                sizes="100vw"
-                width={380}
-                height={240}
-              />
-              <CustomImage
-                src="package/nepalpackage.jpg"
-                alt="card"
-                objectFit="cover"
-                layout="responsive"
-                sizes="100vw"
-                width={380}
-                height={240}
-              />
-              <CustomImage
-                src="package/rajasthanpackage.jpg"
-                alt="card"
-                objectFit="cover"
-                layout="responsive"
-                sizes="100vw"
-                width={380}
-                height={240}
-              />
-              <CustomImage
-                src="package/lehladakh.webp"
-                alt="card"
-                objectFit="cover"
-                layout="responsive"
-                sizes="100vw"
-                width={380}
-                height={240}
-              />
-              <CustomImage
-                src="package/nepalpackage.jpg"
-                alt="card"
-                objectFit="cover"
-                layout="responsive"
-                sizes="100vw"
-                width={380}
-                height={240}
-              />
-            </Grid>
-          </Flex>
+
           <hr
             style={{
               width: '100%',
@@ -140,6 +79,76 @@ const Gallery: NextPage = () => {
           />
           <hr style={{ backgroundColor: '#8FB339', height: '18px' }} />
           {/* Photos and Videos Section*/}
+          <Box mt={4}>
+            <Flex direction="row" w="100%" justifyContent="center">
+              <Flex direction="column">
+                <GalleryCard
+                  src={
+                    'https://drive.google.com/uc?export=view&id=1Rcq3M1AZQiYoUST2TxTGKgCn_zbkti99'
+                  }
+                />
+                <GalleryCard
+                  src={
+                    'https://drive.google.com/uc?export=view&id=1p9rh_eeFN1gNboPh3zrHMCDYPJRC8g81'
+                  }
+                />
+                <GalleryCard
+                  src={
+                    'https://drive.google.com/uc?export=view&id=19O3WXZVrraPMJaCbFdi5_Hrsc39f8c3W'
+                  }
+                />
+                <GalleryCard
+                  src={
+                    'https://drive.google.com/uc?export=view&id=15ljeIRN9IZ34OtBs_NRr1MFnNsGPwLhW'
+                  }
+                />
+                <GalleryCard
+                  src={
+                    'https://drive.google.com/uc?export=view&id=1nK9r98JgTsLBJwl7H-YmvV_er7MeNJy2'
+                  }
+                />
+              </Flex>
+              <Flex direction="column">
+                <GalleryCard
+                  src={
+                    'https://drive.google.com/uc?export=view&id=1tyfAg5WMfCz8KnpMfwYilLkM3OqqjZNM'
+                  }
+                />
+                <GalleryCard
+                  src={
+                    'https://drive.google.com/uc?export=view&id=1mHmpqX8iBla5ZnaL0PfIsGZs_9ctoLK5'
+                  }
+                />
+                <GalleryCard
+                  src={
+                    'https://drive.google.com/uc?export=view&id=1sMs4S5nmFxVUvRB4fUKOSScpJzbcwo58'
+                  }
+                />
+              </Flex>
+              <Flex direction="column" maxWidth="30%">
+                <GalleryCard
+                  src={
+                    'https://drive.google.com/uc?export=view&id=1yFR7p7JCJhXBnjwJ2RAo6OUVgXPGlhLr'
+                  }
+                />
+                <GalleryCard
+                  src={
+                    'https://drive.google.com/uc?export=view&id=1ukZI7x9W9QcdETPiYdwc_moZmIP1n9I3'
+                  }
+                />
+                <GalleryCard
+                  src={
+                    'https://drive.google.com/uc?export=view&id=1V6ksPOpWGH5aqF1qeYYWVncQjcZHyMIn'
+                  }
+                />
+                <GalleryCard
+                  src={
+                    'https://drive.google.com/uc?export=view&id=17wta27owsGcOzDPXFC073x2MqbxorAeW'
+                  }
+                />
+              </Flex>
+            </Flex>
+          </Box>
         </Section>
       </Container>
     </Layout>
