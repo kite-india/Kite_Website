@@ -37,22 +37,20 @@ interface PackagesPageProps {
 }
 
 const Page: NextPage<PackagesPageProps> = ({ packages_data }) => {
-  // if (!packages_data) return null
+  if (!packages_data) return null
   const data = [0, 0, 0, 0]
-  // const { name, id, image } = packages_data
+  const { name, id, image } = packages_data
   const activities = ['Skiing', 'River Rafting', 'Camp Fire', 'Music']
   return (
-    <Layout
-    // title={name}
-    >
+    <Layout title={name}>
       <Container w="100%" pt={8} maxWidth="container.xl">
         <Section delay={0.2}>
           <Flex direction={{ base: 'column', md: 'row' }} w="100%">
             <Box w={{ sm: '100%', md: '50%' }}>
               <CustomImage
-                // src={image}
-                src="static-public/Saly-44.svg"
-                // alt={id}
+                src={image}
+                // src="static-public/Saly-44.svg"
+                alt={id}
                 layout="responsive"
                 width={240}
                 height={200}
@@ -71,7 +69,7 @@ const Page: NextPage<PackagesPageProps> = ({ packages_data }) => {
                 fontSize={{ base: '30', md: '64' }}
                 textAlign={{ base: 'center', md: 'left' }}
               >
-                Name
+                {name}
               </Heading>
               <Flex
                 direction="row"
@@ -235,33 +233,33 @@ const Page: NextPage<PackagesPageProps> = ({ packages_data }) => {
   )
 }
 
-// export async function getStaticPaths() {
-//   const { data }: { data: Trip[] } = await axios.get(
-//     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package`
-//   )
+export async function getStaticPaths() {
+  const { data }: { data: Trip[] } = await axios.get(
+    `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package`
+  )
 
-//   const paths = data.map((trip: Trip) => {
-//     return {
-//       params: { id: `${trip.id}` }
-//     }
-//   })
-//   return {
-//     paths,
-//     fallback: false
-//   }
-// }
+  const paths = data.map((trip: Trip) => {
+    return {
+      params: { id: `${trip.id}` }
+    }
+  })
+  return {
+    paths,
+    fallback: false
+  }
+}
 
-// export async function getStaticProps(context: { params: { id: string } }) {
-//   const { id } = context.params
-//   // const { data }: { data: Trip } = await axios.get(
-//   //   `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package/${id}`
-//   // )
+export async function getStaticProps(context: { params: { id: string } }) {
+  const { id } = context.params
+  // const { data }: { data: Trip } = await axios.get(
+  //   `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package/${id}`
+  // )
 
-//   await useTripsStore.getState().fetchSingleTripById(id)
+  await useTripsStore.getState().fetchSingleTripById(id)
 
-//   const data = useTripsStore.getState().singleTripById
+  const data = useTripsStore.getState().singleTripById
 
-//   return { props: { packages_data: data as Trip } }
-// }
+  return { props: { packages_data: data as Trip } }
+}
 
 export default Page
