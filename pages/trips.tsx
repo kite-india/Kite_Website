@@ -62,12 +62,14 @@ const Trips: NextPage<TripsPageProps> = ({
                   textAlign="justify"
                   my={1}
                 >
-                  Volutpat at sit curabitur duis tristique est. Pharetra vel,
-                  arcu ultrices fringilla. Eu arcu dolor neque enim ac lectus
-                  adipiscing proin. Neque, senectus tellus lectus molestie
-                  tortor ut leo. Justo tellus a mattis nascetur condimentum
-                  purus orci lobortis. Habitasse suscipit vivamus cras a
-                  tristique in.
+                  Experience the pristine beauty and serenity of Kashmir - the
+                  land of picturesque landscapes, snow-capped mountains, and
+                  tranquil lakes. Immerse yourself in the warm hospitality of
+                  the locals and explore the rich culture and heritage of the
+                  region. From the vibrant markets of Srinagar to the
+                  breathtaking views of the Himalayas, there's something for
+                  everyone in Kashmir. Come, indulge in a soulful journey to one
+                  of the most enchanting destinations on earth.
                 </Text>
                 <Button
                   size="xl"

@@ -37,19 +37,22 @@ interface PackagesPageProps {
 }
 
 const Page: NextPage<PackagesPageProps> = ({ packages_data }) => {
-  if (!packages_data) return null
+  // if (!packages_data) return null
   const data = [0, 0, 0, 0]
-  const { name, id, image } = packages_data
+  // const { name, id, image } = packages_data
   const activities = ['Skiing', 'River Rafting', 'Camp Fire', 'Music']
   return (
-    <Layout title={name}>
+    <Layout
+    // title={name}
+    >
       <Container w="100%" pt={8} maxWidth="container.xl">
         <Section delay={0.2}>
-          <Flex direction={{ sm: 'column', md: 'row' }} w="100%">
+          <Flex direction={{ base: 'column', md: 'row' }} w="100%">
             <Box w={{ sm: '100%', md: '50%' }}>
               <CustomImage
-                src={image}
-                alt={id}
+                // src={image}
+                src="static-public/Saly-44.svg"
+                // alt={id}
                 layout="responsive"
                 width={240}
                 height={200}
@@ -59,17 +62,26 @@ const Page: NextPage<PackagesPageProps> = ({ packages_data }) => {
               w={{ sm: '100%', md: '50%' }}
               direction="column"
               gap={4}
-              p={12}
-              ml={4}
+              p={{ sm: 6, md: 12 }}
+              ml={{ sm: 0, md: 4 }}
               fontSize={20}
               fontFamily="'Poppins'"
             >
-              <Heading fontSize={{ sm: '30', md: '64' }}>{name}</Heading>
-              <Flex direction="row" gap={4}>
-                <Text>5Days/ 4Nights</Text>
+              <Heading
+                fontSize={{ base: '30', md: '64' }}
+                textAlign={{ base: 'center', md: 'left' }}
+              >
+                Name
+              </Heading>
+              <Flex
+                direction="row"
+                gap={4}
+                fontSize={{ base: '15', sm: '20', md: '25' }}
+              >
+                <Text>5Days / 4Nights</Text>
                 <Text>Kashmir</Text>
               </Flex>
-              <Text>
+              <Text fontSize={{ base: '15', sm: '20', md: '25' }}>
                 Volutpat at sit curabitur duis tristique est. Pharetra vel, arcu
                 ultrices fringilla. Eu arcu dolor neque enim ac lectus
                 adipiscing proin. Neque, senectus tellus lectus molestie tortor
@@ -109,22 +121,26 @@ const Page: NextPage<PackagesPageProps> = ({ packages_data }) => {
           </Flex>
           <Box fontSize={20} mt={6}>
             <Flex
-              direction={{ sm: 'column', md: 'row' }}
+              direction={{ base: 'column', md: 'row' }}
               justify="space-evenly"
               w="100%"
+              gap={4}
             >
               <Flex
                 direction="column"
                 borderRight={{ base: 0, md: '2px' }}
                 pr={6}
-                w="50%"
+                w={{ sm: '100%', md: '50%' }}
               >
-                <Heading>Plan Includes:</Heading>
+                <Heading fontSize={{ base: '20', md: '35' }}>
+                  Plan Includes:
+                </Heading>
                 <SimpleGrid
                   fontFamily="'Poppins'"
                   height="150px"
                   columns={2}
                   alignItems={{ base: 'center', lg: 'left' }}
+                  fontSize={{ base: '15', md: '20' }}
                   w="100%"
                   mb={4}
                   gap={3}
@@ -148,9 +164,22 @@ const Page: NextPage<PackagesPageProps> = ({ packages_data }) => {
                   </Box>
                 </SimpleGrid>
               </Flex>
-              <Flex direction="column" fontSize={20} gap={4} w="50%" px={8}>
-                <Heading>Extra Info:</Heading>
-                <Box border="2px" borderRadius="20px" borderColor="gray.200">
+              <Flex
+                direction="column"
+                fontSize={20}
+                gap={4}
+                w={{ sm: '100%', md: '50%' }}
+                pr={6}
+              >
+                <Heading fontSize={{ base: '20', md: '35' }}>
+                  Extra Info:
+                </Heading>
+                <Box
+                  border="2px"
+                  borderRadius="20px"
+                  borderColor="gray.200"
+                  fontSize={{ base: '15', md: '20' }}
+                >
                   <Flex p={8} direction="row" gap={6}>
                     <GrDocumentPdf size={60} />
                     <Flex direction="column" gap={2}>
@@ -165,7 +194,7 @@ const Page: NextPage<PackagesPageProps> = ({ packages_data }) => {
             </Flex>
           </Box>
           <Box mt={8}>
-            <Heading>Gallery:</Heading>
+            <Heading fontSize={{ base: '20', md: '35' }}>Gallery</Heading>
             <Swiper
               modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
               breakpoints={{
@@ -206,33 +235,33 @@ const Page: NextPage<PackagesPageProps> = ({ packages_data }) => {
   )
 }
 
-export async function getStaticPaths() {
-  const { data }: { data: Trip[] } = await axios.get(
-    `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package`
-  )
+// export async function getStaticPaths() {
+//   const { data }: { data: Trip[] } = await axios.get(
+//     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package`
+//   )
 
-  const paths = data.map((trip: Trip) => {
-    return {
-      params: { id: `${trip.id}` }
-    }
-  })
-  return {
-    paths,
-    fallback: false
-  }
-}
+//   const paths = data.map((trip: Trip) => {
+//     return {
+//       params: { id: `${trip.id}` }
+//     }
+//   })
+//   return {
+//     paths,
+//     fallback: false
+//   }
+// }
 
-export async function getStaticProps(context: { params: { id: string } }) {
-  const { id } = context.params
-  // const { data }: { data: Trip } = await axios.get(
-  //   `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package/${id}`
-  // )
+// export async function getStaticProps(context: { params: { id: string } }) {
+//   const { id } = context.params
+//   // const { data }: { data: Trip } = await axios.get(
+//   //   `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package/${id}`
+//   // )
 
-  await useTripsStore.getState().fetchSingleTripById(id)
+//   await useTripsStore.getState().fetchSingleTripById(id)
 
-  const data = useTripsStore.getState().singleTripById
+//   const data = useTripsStore.getState().singleTripById
 
-  return { props: { packages_data: data as Trip } }
-}
+//   return { props: { packages_data: data as Trip } }
+// }
 
 export default Page

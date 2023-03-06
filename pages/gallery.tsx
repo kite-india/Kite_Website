@@ -58,10 +58,13 @@ const Gallery: NextPage = () => {
             textAlign="justify"
             mb={3}
           >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo
-            assumenda, cum minus veritatis eveniet ut itaque repudiandae ducimus
-            architecto libero in adipisci dolore officia corporis aperiam quia
-            nulla. A, neque.
+            Welcome to our gallery page, showcasing the captivating destinations
+            and experiences we offer throughout India and Nepal. Browse through
+            our collection of pictures taken by our team during our camping and
+            travel adventures. Let us help you create a personalized itinerary
+            that caters to your interests and allows you to explore the wonders
+            of these diverse regions. Embark on a journey with Kite India and
+            make unforgettable memories.
           </Text>
 
           <hr
@@ -71,13 +74,7 @@ const Gallery: NextPage = () => {
               height: '12px'
             }}
           />
-          <hr
-            style={{
-              backgroundColor: '#3E7C17',
-              height: '12px'
-            }}
-          />
-          <hr style={{ backgroundColor: '#8FB339', height: '18px' }} />
+
           {/* Photos and Videos Section*/}
           <Box mt={4}>
             <Flex direction="row" w="100%" justifyContent="center">
@@ -149,6 +146,13 @@ const Gallery: NextPage = () => {
               </Flex>
             </Flex>
           </Box>
+          <hr
+            style={{
+              backgroundColor: '#3E7C17',
+              height: '12px'
+            }}
+          />
+          <hr style={{ backgroundColor: '#8FB339', height: '18px' }} />
         </Section>
       </Container>
     </Layout>
