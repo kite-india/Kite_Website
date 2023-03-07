@@ -19,13 +19,14 @@ import axios from 'axios'
 import { Section } from '@components/index'
 import Layout from '@components/layouts/main'
 import type { NextPage } from 'next'
-import type { Trip } from '@utils/types'
+import type { Activity, Trip } from '@utils/types'
 import { useTripsStore } from '@utils/hooks/useTripsStore'
 import CustomImage from '@components/CustomImage'
 import { GrDocumentPdf } from 'react-icons/gr'
 import Packages from '@sections/trips/packages-section'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper'
+import { Activities } from '@sections/index'
 
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -34,9 +35,13 @@ import 'swiper/css/scrollbar'
 
 interface PackagesPageProps {
   packages_data: Trip
+  activities_data: Activity[]
 }
 
-const Page: NextPage<PackagesPageProps> = ({ packages_data }) => {
+const Page: NextPage<PackagesPageProps> = ({
+  packages_data,
+  activities_data
+}) => {
   if (!packages_data) return null
   const data = [0, 0, 0, 0]
   const { name, id, image } = packages_data
@@ -228,6 +233,9 @@ const Page: NextPage<PackagesPageProps> = ({ packages_data }) => {
             </Swiper>
           </Box>
         </Section>
+        <Section delay={0.4}>
+          <Activities data={activities_data} />
+        </Section>
       </Container>
     </Layout>
   )
@@ -254,12 +262,15 @@ export async function getStaticProps(context: { params: { id: string } }) {
   // const { data }: { data: Trip } = await axios.get(
   //   `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package/${id}`
   // )
+  const { data: activities_data } = await axios.get(
+    `${process.env.NEXT_PUBLIC_KITE_BACKEND}/activity`
+  )
 
   await useTripsStore.getState().fetchSingleTripById(id)
 
   const data = useTripsStore.getState().singleTripById
 
-  return { props: { packages_data: data as Trip } }
+  return { props: { packages_data: data as Trip, activities_data } }
 }
 
 export default Page
