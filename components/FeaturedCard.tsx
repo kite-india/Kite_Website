@@ -113,7 +113,7 @@ const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
               <ButtonGroup spacing={6} mt={6} fontFamily="'Roboto'">
                 <Link
                   //  as={NextLink}
-                  href={`/package/${id}/book-now`}
+                  href={`/packages/${id}/book-now`}
                   p={3}
                   textAlign="center"
                   color="white"
@@ -126,7 +126,7 @@ const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
                   Book now
                 </Link>
                 <Link
-                  href={`/package/${id}`}
+                  href={`/packages/${id}`}
                   p={3}
                   textAlign="center"
                   color="white"

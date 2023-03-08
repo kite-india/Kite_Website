@@ -16,6 +16,7 @@ import Layout from '@components/layouts/main'
 import type { NextPage } from 'next'
 import type { TripsPageProps } from '@utils/types'
 import { useTripsStore } from '@utils/hooks/useTripsStore'
+import Link from 'next/link'
 
 const Trips: NextPage<TripsPageProps> = ({ packages_data = null }) => {
   return (
@@ -68,23 +69,25 @@ const Trips: NextPage<TripsPageProps> = ({ packages_data = null }) => {
                   everyone in Kashmir. Come, indulge in a soulful journey to one
                   of the most enchanting destinations on earth.
                 </Text>
-                <Button
-                  size="xl"
-                  mt={3}
-                  py={4}
-                  px={16}
-                  bg="#B7CE63"
-                  color="white"
-                  fontFamily="'Roboto', serif"
-                  borderRadius="full"
-                  _hover={{ bg: 'green.400' }}
-                  fontSize="2xl"
-                  as={motion.button}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  Explore Packages
-                </Button>
+                <Link href={`/packages/clevhuj91000ovqsci1zpw8rc`}>
+                  <Button
+                    size="xl"
+                    mt={3}
+                    py={4}
+                    px={16}
+                    bg="#B7CE63"
+                    color="white"
+                    fontFamily="'Roboto', serif"
+                    borderRadius="full"
+                    _hover={{ bg: 'green.400' }}
+                    fontSize="2xl"
+                    as={motion.button}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    Explore Packages
+                  </Button>
+                </Link>
               </Box>
             </Section>
           </Flex>

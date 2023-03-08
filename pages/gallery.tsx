@@ -22,7 +22,7 @@ const Gallery: NextPage = () => {
       <Container maxW="container.xl" my={8} w="100%">
         <Section delay={0.2}>
           <Flex
-            my={8}
+            my={{ base: 4, sm: 8 }}
             direction={{ base: 'column-reverse', md: 'row' }}
             justify="space-evenly"
             align="center"
@@ -53,7 +53,7 @@ const Gallery: NextPage = () => {
           <Text
             px={6}
             fontFamily="'Poppins'"
-            fontSize="22px"
+            fontSize={{ base: 15, sm: '22px' }}
             fontWeight="light"
             textAlign="justify"
             mb={3}
@@ -64,7 +64,7 @@ const Gallery: NextPage = () => {
             travel adventures. Let us help you create a personalized itinerary
             that caters to your interests and allows you to explore the wonders
             of these diverse regions. Embark on a journey with Kite India and
-            make unforgettable memories.
+            make unforgettable memories.
           </Text>
 
           <hr

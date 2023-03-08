@@ -72,7 +72,7 @@ const Info: NextPage = () => {
         fontFamily="'Poppins'"
         fontWeight="500"
         fontSize={{ base: '20px', sm: '25px', lg: '35px' }}
-        m={{ base: '20px', sm: '100px' }}
+        m={{ base: '5px', sm: '100px' }}
         lineHeight="52px"
         align="center"
       >
@@ -80,10 +80,10 @@ const Info: NextPage = () => {
       </Text>
       <Container
         maxW={{ base: 'container.sm', lg: 'container.lg' }}
-        my={14}
-        borderWidth={3}
+        my={{ base: 0, sm: 14 }}
+        borderWidth={{ base: 0, sm: 3 }}
         borderRadius="38px"
-        boxShadow="lg"
+        boxShadow={{ base: 'none', sm: 'lg' }}
       >
         <Section>
           <Text
@@ -93,14 +93,18 @@ const Info: NextPage = () => {
             lineHeight="45px"
             color="#464646"
             visibility={{ base: 'collapse', lg: 'visible' }}
-            mt="29px"
+            m="29px"
             ml="50px"
           >
             Basic information
           </Text>
           <Flex direction={{ base: 'column', lg: 'row' }} gap="3">
-            <Flex direction={{ base: 'column', sm: 'row', lg: 'column' }}>
+            <Flex
+              direction={{ base: 'column', sm: 'row', lg: 'column' }}
+              textAlign="center"
+            >
               <Text
+                my={{ base: 4, sm: 0 }}
                 fontFamily="'Poppins'"
                 ml="50px"
                 fontWeight="500"
@@ -156,7 +160,11 @@ const Info: NextPage = () => {
               />
             </Center>
             <Flex px="50px" flexDirection="column" gap="20px">
-              <Flex flexDirection={{ base: 'column', sm: 'row' }} gap={10}>
+              <Flex
+                flexDirection={{ base: 'column', sm: 'row' }}
+                gap={10}
+                fontSize={{ base: '15px', lg: '20px' }}
+              >
                 <Flex
                   flexDirection="column"
                   justifyContent="center"
@@ -166,7 +174,6 @@ const Info: NextPage = () => {
                   <Text
                     fontFamily="'Poppins'"
                     fontWeight="400"
-                    fontSize={{ base: '10px', lg: '20px' }}
                     lineHeight="30px"
                   >
                     First Name
@@ -208,7 +215,6 @@ const Info: NextPage = () => {
                   <Text
                     fontFamily="'Poppins'"
                     fontWeight="400"
-                    fontSize={{ base: '10px', lg: '20px' }}
                     lineHeight="30px"
                   >
                     Last Name
@@ -252,7 +258,6 @@ const Info: NextPage = () => {
                   <Text
                     fontFamily="'Poppins'"
                     fontWeight="400"
-                    fontSize={{ base: '10px', lg: '20px' }}
                     lineHeight="30px"
                   >
                     Birthday
@@ -295,7 +300,6 @@ const Info: NextPage = () => {
                   <Text
                     fontFamily="'Poppins'"
                     fontWeight="400"
-                    fontSize={{ base: '10px', lg: '20px' }}
                     lineHeight="30px"
                   >
                     Gender
@@ -340,12 +344,7 @@ const Info: NextPage = () => {
                 width="100%"
                 gap={15}
               >
-                <Text
-                  fontFamily="'Poppins'"
-                  fontWeight="400"
-                  fontSize={{ base: '10px', lg: '20px' }}
-                  lineHeight="30px"
-                >
+                <Text fontFamily="'Poppins'" fontWeight="400" lineHeight="30px">
                   Location
                 </Text>
                 <InputGroup>
@@ -379,12 +378,7 @@ const Info: NextPage = () => {
                 width="100%"
                 gap={15}
               >
-                <Text
-                  fontFamily="'Poppins'"
-                  fontWeight="400"
-                  fontSize={{ base: '10px', lg: '20px' }}
-                  lineHeight="30px"
-                >
+                <Text fontFamily="'Poppins'" fontWeight="400" lineHeight="30px">
                   Email
                 </Text>
                 <InputGroup>
@@ -419,12 +413,7 @@ const Info: NextPage = () => {
                 width="100%"
                 gap={15}
               >
-                <Text
-                  fontFamily="'Poppins'"
-                  fontWeight="400"
-                  fontSize={{ base: '10px', lg: '20px' }}
-                  lineHeight="30px"
-                >
+                <Text fontFamily="'Poppins'" fontWeight="400" lineHeight="30px">
                   Mobile
                 </Text>
                 <InputGroup>
@@ -456,14 +445,18 @@ const Info: NextPage = () => {
               <Flex>
                 <Spacer />
                 <Button
-                  width="30%"
-                  borderRadius="10px"
+                  bg="#8FB339"
+                  _hover={{ bg: 'green.400' }}
+                  _focus={{ bg: 'green.400' }}
+                  isDisabled={isEdit.changes}
                   color="white"
-                  backgroundColor="#A4C15E"
-                  boxShadow="lg"
-                  fontFamily="'Poppins'"
-                  height="56px"
-                  disabled={isEdit.changes}
+                  fontFamily="'Roboto'"
+                  borderRadius="10px"
+                  fontSize={{ base: '15', sm: '20', md: '20' }}
+                  px={{ base: 6, lg: 12 }}
+                  py={{ base: 3, lg: 6 }}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
                   onClick={handleSubmit}
                 >
                   Save Changes

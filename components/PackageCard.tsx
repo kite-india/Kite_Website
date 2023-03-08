@@ -15,6 +15,7 @@ import Image from 'next/image'
 import type { Trip } from '@utils/types'
 import CustomImage from './CustomImage'
 import { transform } from 'framer-motion'
+import Link from 'next/link'
 
 interface PackageProps {
   data: Trip
@@ -140,16 +141,18 @@ const PackageCard: React.FC<PackageProps> = ({ data }) => {
             gap={{ base: 2, lg: 0 }}
           >
             <ButtonGroup gap={2}>
-              <Button
-                color="white"
-                textAlign="center"
-                px={4}
-                py={2}
-                bg="#125C13"
-                _hover={{ bg: '#8FB339' }}
-              >
-                More Info
-              </Button>
+              <Link href={`/packages/${id}`}>
+                <Button
+                  color="white"
+                  textAlign="center"
+                  px={4}
+                  py={2}
+                  bg="#125C13"
+                  _hover={{ bg: '#8FB339' }}
+                >
+                  More Info
+                </Button>
+              </Link>
               <Button
                 textAlign="center"
                 color="white"
