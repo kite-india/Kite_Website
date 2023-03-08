@@ -26,6 +26,7 @@ const PackageCard: React.FC<PackageProps> = ({ data }) => {
   const bookNow = () => {
     router.push(`/packages/${id}/book-now`)
   }
+  console.log(activities)
   return (
     <Box
       display={'flex'}

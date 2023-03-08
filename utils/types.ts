@@ -15,7 +15,6 @@ export interface HomePageProps {
 }
 
 export interface TripsPageProps {
-  activities_data?: Activity[] | null
   packages_data?: Trip[] | null
 }
 

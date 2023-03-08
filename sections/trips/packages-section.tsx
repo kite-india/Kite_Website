@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Box,
   Flex,
@@ -9,7 +9,9 @@ import {
   InputGroup,
   InputRightElement,
   Spacer,
-  Icon
+  Icon,
+  Select,
+  Tooltip
 } from '@chakra-ui/react'
 import { BiSearch } from 'react-icons/bi'
 import { HiArrowsUpDown } from 'react-icons/hi2'
@@ -30,9 +32,29 @@ interface PackageProps {
 }
 
 const Packages: React.FC<PackageProps> = ({ data }) => {
+  const [sort, setSort] = useState(1)
+  const allParams = ['cost', 'location', 'description', 'activities']
+  const [search, setSearch] = useState('')
+  const [searchParam, setSearchParam] = useState(allParams)
+  function compare(a, b) {
+    if (a.cost > b.cost) return sort
+    if (b.cost > a.cost) return -1 * sort
+
+    return 0
+  }
+  data.sort(compare)
+  data = data.filter(item => {
+    return searchParam.some(newItem => {
+      return (
+        item[newItem].toString().toLowerCase().indexOf(search.toLowerCase()) >
+        -1
+      )
+    })
+  })
+
   return (
     <Box w="100%" mt={12}>
-      <Flex direction="row" alignItems="center">
+      <Flex direction={{ base: 'column', md: 'row' }} alignItems="center">
         <Heading
           w="100%"
           as="h1"
@@ -44,47 +66,45 @@ const Packages: React.FC<PackageProps> = ({ data }) => {
           Packages
         </Heading>
         <Spacer />
-        <Box as="button" mx={6}>
-          <HiArrowsUpDown size={35} />
-        </Box>
 
-        <InputGroup w="30%">
-          <Input placeholder="Search" variant="flushed" />
-          <InputRightElement>
-            <BiSearch />
-          </InputRightElement>
-        </InputGroup>
+        <Flex
+          direction="row"
+          gap={3}
+          w={{ base: '100%', md: '80%', lg: '50%' }}
+        >
+          <Tooltip label="Sort" cursor="pointer">
+            <Box as="button" mx={6} onClick={() => setSort(-sort)}>
+              <HiArrowsUpDown size={35} />
+            </Box>
+          </Tooltip>
+          <InputGroup>
+            <Input
+              placeholder="Search"
+              variant="flushed"
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+            />
+            <InputRightElement>
+              <BiSearch />
+            </InputRightElement>
+          </InputGroup>
+          <Select
+            onChange={e => {
+              setSearchParam([e.target.value])
+            }}
+            className="custom-select"
+            aria-label="Filter Countries By Region"
+          >
+            <option value={allParams}>All</option>
+            <option value="cost">Cost</option>
+            <option value="location">Location</option>
+            <option value="activities">Activities</option>
+            <option value="description">Description</option>
+          </Select>
+        </Flex>
       </Flex>
 
       <Box>
-        {/* TODO: Add a vertical slide for each state by multiple carousel */}
-        {/* <Swiper
-          modules={[Pagination, Autoplay, Grid]}
-          breakpoints={{
-            768: {
-              slidesPerView: 2
-            },
-            1024: {
-              slidesPerView: 3
-            }
-          }}
-          spaceBetween={20}
-          autoplay={{
-            delay: 6000,
-            disableOnInteraction: false
-          }}
-          pagination={{ clickable: true }}
-          slidesPerView={1}
-        >
-          {data.map(data => (
-            <SwiperSlide
-              key={data.id}
-              style={{ paddingBottom: '55px', height: '800px' }}
-            >
-              <PackageCard data={data} />
-            </SwiperSlide>
-          ))}
-        </Swiper> */}
         <Flex
           direction="column"
           mt={5}
