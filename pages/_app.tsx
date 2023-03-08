@@ -4,6 +4,7 @@ import Fonts from '@libs/fonts'
 import theme from '@libs/theme'
 import { SessionProvider } from 'next-auth/react'
 import { Session } from 'next-auth'
+import '../public/gallery.css'
 
 const Website = ({
   Component,

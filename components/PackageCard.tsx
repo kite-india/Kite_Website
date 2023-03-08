@@ -26,8 +26,19 @@ const PackageCard: React.FC<PackageProps> = ({ data }) => {
   const bookNow = () => {
     router.push(`/packages/${id}/book-now`)
   }
+  console.log(activities)
   return (
-    <Box as="div" boxShadow="lg" borderRadius="lg" maxW="600px" p={6}>
+    <Box
+      display={'flex'}
+      flexDirection={'column'}
+      // justifyContent={'space-around'}
+      // gap={2}
+      as="div"
+      boxShadow="lg"
+      borderRadius="lg"
+      maxW="600px"
+      p={6}
+    >
       <Box
         // w={{ base: '100%', lg: '380px' }}
         // h={{ base: '100%', lg: '240px' }}
@@ -70,87 +81,90 @@ const PackageCard: React.FC<PackageProps> = ({ data }) => {
       </Text>
 
       <Text
-        height="56px"
+        // height="56px"
         fontFamily="'Poppins'"
         fontWeight="normal"
         fontSize="16px"
-        marginBottom="22px"
+        // marginBottom="22px"
         pt={'3'}
       >
         {description}
       </Text>
-
-      <SimpleGrid
-        mt={2}
-        fontFamily="'Poppins'"
-        columns={2}
-        alignItems={{ base: 'center', lg: 'left' }}
-        w="full"
-        mb={4}
-        pt={3}
+      <Flex
+        justifyContent={'space-between'}
+        flexDirection={'column'}
+        flexGrow={1}
       >
-        {activities.map(tag => (
-          <Box w="100%">
-            <Text key={tag}>
-              <Icon as={FiMap} mr={2} />
-              {tag}
-            </Text>
-          </Box>
-        ))}
-      </SimpleGrid>
-      <SimpleGrid
-        mt={5}
-        fontFamily="'Poppins'"
-        columns={2}
-        alignItems={{ base: 'center', lg: 'left' }}
-        w="100%"
-        spacingX="40px"
-        px={1}
-        mb={6}
-      >
-        <Text fontFamily="'Poppins'" fontSize="18px" fontWeight={'bold'}>
-          Rs {cost}/{' '}
-          <Text
-            as="span"
-            fontWeight={'normal'}
-            fontFamily="'Poppins'"
-            fontSize="12px"
-          >
-            person
-          </Text>
-        </Text>
-        <Flex
-          direction={{ base: 'column', md: 'row' }}
-          align="center"
-          justify="space-between"
-          w="100%"
-          gap={{ base: 2, lg: 0 }}
+        <SimpleGrid
+          mt={2}
+          fontFamily="'Poppins'"
+          columns={2}
+          alignItems={{ base: 'center', lg: 'left' }}
+          w="full"
+          pt={3}
         >
-          <ButtonGroup gap={2}>
-            <Button
-              color="white"
-              textAlign="center"
-              px={4}
-              pt={2}
-              bg="#125C13"
-              _hover={{ bg: '#8FB339' }}
+          {activities.map(tag => (
+            <Box w="100%">
+              <Text key={tag}>
+                <Icon as={FiMap} mr={2} />
+                {tag}
+              </Text>
+            </Box>
+          ))}
+        </SimpleGrid>
+        <SimpleGrid
+          mt={3}
+          fontFamily="'Poppins'"
+          columns={2}
+          alignItems={{ base: 'center', lg: 'left' }}
+          w="100%"
+          spacingX="40px"
+          px={1}
+        >
+          <Text fontFamily="'Poppins'" fontSize="18px" fontWeight={'bold'}>
+            Rs {cost}/{' '}
+            <Text
+              as="span"
+              fontWeight={'normal'}
+              fontFamily="'Poppins'"
+              fontSize="12px"
             >
-              More Info
-            </Button>
-            <Button
-              textAlign="center"
-              color="white"
-              bg="#8FB339"
-              px={4}
-              pt={2}
-              _hover={{ bg: '#125C13' }}
-              onClick={bookNow}
-            >
-              Book Now
-            </Button>
-          </ButtonGroup>
-        </Flex>
-      </SimpleGrid>
+              person
+            </Text>
+          </Text>
+          <Flex
+            direction={{ base: 'column', md: 'row' }}
+            align="center"
+            justify="space-between"
+            w="100%"
+            gap={{ base: 2, lg: 0 }}
+          >
+            <ButtonGroup gap={2}>
+              <Button
+                color="white"
+                textAlign="center"
+                px={4}
+                py={2}
+                bg="#125C13"
+                _hover={{ bg: '#8FB339' }}
+              >
+                More Info
+              </Button>
+              <Button
+                textAlign="center"
+                color="white"
+                bg="#8FB339"
+                px={4}
+                py={2}
+                _hover={{ bg: '#125C13' }}
+                onClick={bookNow}
+              >
+                Book Now
+              </Button>
+            </ButtonGroup>
+          </Flex>
+        </SimpleGrid>
+      </Flex>
     </Box>
   )
 }
