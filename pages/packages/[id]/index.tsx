@@ -21,7 +21,7 @@ import { Section } from '@components/index'
 import Layout from '@components/layouts/main'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import type { Activity, Trip } from '@utils/types'
+import type { Activity, Gallery, Trip } from '@utils/types'
 import { useTripsStore } from '@utils/hooks/useTripsStore'
 import CustomImage from '@components/CustomImage'
 import { GrDocumentPdf } from 'react-icons/gr'
@@ -38,15 +38,16 @@ import 'swiper/css/scrollbar'
 interface PackagesPageProps {
   packages_data: Trip
   activities_data: Activity[]
+  gallery_data: Gallery[]
 }
 
 const Page: NextPage<PackagesPageProps> = ({
   packages_data,
-  activities_data
+  activities_data,
+  gallery_data
 }) => {
   const router = useRouter()
   if (!packages_data) return null
-  const data = [0, 0, 0, 0]
   const {
     name,
     id,
@@ -72,6 +73,7 @@ const Page: NextPage<PackagesPageProps> = ({
               overflow="hidden"
             >
               <CustomImage
+                priority
                 src={image}
                 // src="static-public/Saly-44.svg"
                 alt={id}
@@ -173,7 +175,7 @@ const Page: NextPage<PackagesPageProps> = ({
                   pt={3}
                 >
                   {activities.map(tag => (
-                    <Box w="100%">
+                    <Box key={tag} w="100%">
                       <Text key={tag}>
                         <Icon as={FiMap} mr={2} />
                         {tag}
@@ -228,6 +230,9 @@ const Page: NextPage<PackagesPageProps> = ({
                 },
                 1024: {
                   slidesPerView: 3
+                },
+                1200: {
+                  slidesPerView: 4
                 }
               }}
               spaceBetween={20}
@@ -238,18 +243,19 @@ const Page: NextPage<PackagesPageProps> = ({
               pagination={{ clickable: true }}
               slidesPerView={1}
             >
-              {data.map((key, i) => (
+              {gallery_data.slice(0, gallery_data.length / 2).map(item => (
                 <SwiperSlide
-                  key={i}
-                  style={{ paddingBottom: '55px', height: '400px' }}
+                  key={item.id}
+                  style={{ paddingBottom: '55px', height: '350px' }}
                 >
                   <Box borderRadius="xl" overflow="hidden">
                     <CustomImage
-                      src={image}
-                      alt="image"
+                      loading="lazy"
+                      src={item.image}
+                      alt={item.image}
                       layout="responsive"
                       width={240}
-                      height={200}
+                      height={240}
                     />
                   </Box>
                 </SwiperSlide>
@@ -289,12 +295,17 @@ export async function getStaticProps(context: { params: { id: string } }) {
   const { data: activities_data } = await axios.get(
     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/activity`
   )
+  const { data: gallery_data } = await axios.get(
+    `${process.env.NEXT_PUBLIC_KITE_BACKEND}/gallery`
+  )
 
   await useTripsStore.getState().fetchSingleTripById(id)
 
   const data = useTripsStore.getState().singleTripById
 
-  return { props: { packages_data: data as Trip, activities_data } }
+  return {
+    props: { packages_data: data as Trip, activities_data, gallery_data }
+  }
 }
 
 export default Page

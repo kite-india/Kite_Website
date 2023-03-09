@@ -1,22 +1,19 @@
 import React from 'react'
-import {
-  Box,
-  Text,
-  Heading,
-  Flex,
-  Container,
-  Grid,
-  UnorderedList,
-  ListItem,
-  Image
-} from '@chakra-ui/react'
+import { Box, Text, Heading, Flex, Container } from '@chakra-ui/react'
 import Layout from '@components/layouts/main'
 import Section from '@components/Section'
 import { NextPage } from 'next'
 import CustomImage from '@components/CustomImage'
 import GalleryCard from '@components/GalleryCard'
+import axios from 'axios'
+import { GalleryPageProps, Gallery } from '@utils/types'
 
-const Gallery: NextPage = () => {
+const GalleryPage: NextPage = (props: GalleryPageProps) => {
+  const { data } = props || {}
+  const section1 = data.slice(0, 5)
+  const section2 = data.slice(6, 9)
+  const section3 = data.slice(10, 14)
+  console.log({ section1, section2, section3 })
   return (
     <Layout title="Gallery">
       <Container maxW="container.xl" my={8} w="100%">
@@ -79,70 +76,28 @@ const Gallery: NextPage = () => {
           <Box mt={4}>
             <Flex direction="row" w="100%" justifyContent="center">
               <Flex direction="column">
-                <GalleryCard
-                  src={
-                    'https://drive.google.com/uc?export=view&id=1Rcq3M1AZQiYoUST2TxTGKgCn_zbkti99'
-                  }
-                />
-                <GalleryCard
-                  src={
-                    'https://drive.google.com/uc?export=view&id=1p9rh_eeFN1gNboPh3zrHMCDYPJRC8g81'
-                  }
-                />
-                <GalleryCard
-                  src={
-                    'https://drive.google.com/uc?export=view&id=19O3WXZVrraPMJaCbFdi5_Hrsc39f8c3W'
-                  }
-                />
-                <GalleryCard
-                  src={
-                    'https://drive.google.com/uc?export=view&id=15ljeIRN9IZ34OtBs_NRr1MFnNsGPwLhW'
-                  }
-                />
-                <GalleryCard
-                  src={
-                    'https://drive.google.com/uc?export=view&id=1nK9r98JgTsLBJwl7H-YmvV_er7MeNJy2'
-                  }
-                />
+                {section1.map(item => (
+                  <GalleryCard
+                    key={item.id}
+                    src={`${process.env.NEXT_PUBLIC_S3_ENDPOINT}${item.image}`}
+                  />
+                ))}
               </Flex>
               <Flex direction="column">
-                <GalleryCard
-                  src={
-                    'https://drive.google.com/uc?export=view&id=1tyfAg5WMfCz8KnpMfwYilLkM3OqqjZNM'
-                  }
-                />
-                <GalleryCard
-                  src={
-                    'https://drive.google.com/uc?export=view&id=1mHmpqX8iBla5ZnaL0PfIsGZs_9ctoLK5'
-                  }
-                />
-                <GalleryCard
-                  src={
-                    'https://drive.google.com/uc?export=view&id=1sMs4S5nmFxVUvRB4fUKOSScpJzbcwo58'
-                  }
-                />
+                {section2.map(item => (
+                  <GalleryCard
+                    key={item.id}
+                    src={`${process.env.NEXT_PUBLIC_S3_ENDPOINT}${item.image}`}
+                  />
+                ))}
               </Flex>
               <Flex direction="column" maxWidth="30%">
-                <GalleryCard
-                  src={
-                    'https://drive.google.com/uc?export=view&id=1yFR7p7JCJhXBnjwJ2RAo6OUVgXPGlhLr'
-                  }
-                />
-                <GalleryCard
-                  src={
-                    'https://drive.google.com/uc?export=view&id=1ukZI7x9W9QcdETPiYdwc_moZmIP1n9I3'
-                  }
-                />
-                <GalleryCard
-                  src={
-                    'https://drive.google.com/uc?export=view&id=1V6ksPOpWGH5aqF1qeYYWVncQjcZHyMIn'
-                  }
-                />
-                <GalleryCard
-                  src={
-                    'https://drive.google.com/uc?export=view&id=17wta27owsGcOzDPXFC073x2MqbxorAeW'
-                  }
-                />
+                {section3.map(item => (
+                  <GalleryCard
+                    key={item.id}
+                    src={`${process.env.NEXT_PUBLIC_S3_ENDPOINT}${item.image}`}
+                  />
+                ))}
               </Flex>
             </Flex>
           </Box>
@@ -159,4 +114,11 @@ const Gallery: NextPage = () => {
   )
 }
 
-export default Gallery
+export default GalleryPage
+
+export const getServerSideProps = async () => {
+  const { data } = await axios.get(
+    `${process.env.NEXT_PUBLIC_KITE_BACKEND}/gallery`
+  )
+  return { props: { data: data as Gallery[] } }
+}
