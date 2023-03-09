@@ -11,7 +11,8 @@ import {
   Divider,
   Link,
   Grid,
-  Image
+  Image,
+  Badge
 } from '@chakra-ui/react'
 import { FiMap } from 'react-icons/fi'
 import axios from 'axios'
@@ -19,6 +20,7 @@ import axios from 'axios'
 import { Section } from '@components/index'
 import Layout from '@components/layouts/main'
 import type { NextPage } from 'next'
+import { useRouter } from 'next/router'
 import type { Activity, Trip } from '@utils/types'
 import { useTripsStore } from '@utils/hooks/useTripsStore'
 import CustomImage from '@components/CustomImage'
@@ -42,16 +44,33 @@ const Page: NextPage<PackagesPageProps> = ({
   packages_data,
   activities_data
 }) => {
+  const router = useRouter()
   if (!packages_data) return null
   const data = [0, 0, 0, 0]
-  const { name, id, image } = packages_data
-  const activities = ['Skiing', 'River Rafting', 'Camp Fire', 'Music']
+  const {
+    name,
+    id,
+    image,
+    description,
+    activities,
+    cost,
+    details_file,
+    location,
+    is_premium_flag
+  } = packages_data
+  const bookNow = () => {
+    router.push(`/packages/${id}/book-now`)
+  }
   return (
     <Layout title={name}>
       <Container w="100%" pt={8} maxWidth="container.xl">
         <Section delay={0.2}>
           <Flex direction={{ base: 'column', md: 'row' }} w="100%">
-            <Box w={{ sm: '100%', md: '50%' }}>
+            <Box
+              w={{ sm: '100%', md: '50%' }}
+              borderRadius="xl"
+              overflow="hidden"
+            >
               <CustomImage
                 src={image}
                 // src="static-public/Saly-44.svg"
@@ -71,8 +90,9 @@ const Page: NextPage<PackagesPageProps> = ({
               fontFamily="'Poppins'"
             >
               <Heading
-                fontSize={{ base: '30', md: '64' }}
+                fontSize={{ base: '25', md: '64' }}
                 textAlign={{ base: 'center', md: 'left' }}
+                p={{ base: 4, sm: 0 }}
               >
                 {name}
               </Heading>
@@ -81,17 +101,18 @@ const Page: NextPage<PackagesPageProps> = ({
                 gap={4}
                 fontSize={{ base: '15', sm: '20', md: '25' }}
               >
-                <Text>5Days / 4Nights</Text>
-                <Text>Kashmir</Text>
+                {is_premium_flag ? (
+                  <Badge colorScheme="purple" fontSize="0.6em">
+                    Premium
+                  </Badge>
+                ) : (
+                  <Badge colorScheme="green">New</Badge>
+                )}
               </Flex>
-              <Text fontSize={{ base: '15', sm: '20', md: '25' }}>
-                Volutpat at sit curabitur duis tristique est. Pharetra vel, arcu
-                ultrices fringilla. Eu arcu dolor neque enim ac lectus
-                adipiscing proin. Neque, senectus tellus lectus molestie tortor
-                ut leo. Justo tellus a mattis nascetur condimentum purus orci
-                lobortis. Habitasse suscipit vivamus cras a tristique in.
+              <Text fontSize={{ base: '15', sm: '20', md: '22' }}>
+                {description}
               </Text>
-              <Text>$ XX,XXX</Text>
+              <Text>{`₹ ${cost}`}</Text>
               <Flex direction="row" gap={4}>
                 <Button
                   bg="#8FB339"
@@ -100,9 +121,12 @@ const Page: NextPage<PackagesPageProps> = ({
                   color="white"
                   fontFamily="'Roboto'"
                   borderRadius="10px"
+                  fontSize={{ base: '15', sm: '20', md: '20' }}
                   px={{ base: 6, lg: 12 }}
+                  py={{ base: 3, lg: 6 }}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
+                  onClick={bookNow}
                 >
                   Book now
                 </Button>
@@ -113,7 +137,9 @@ const Page: NextPage<PackagesPageProps> = ({
                   color="white"
                   fontFamily="'Roboto'"
                   borderRadius="10px"
+                  fontSize={{ base: '15', sm: '20', md: '20' }}
                   px={{ base: 6, lg: 12 }}
+                  py={{ base: 3, lg: 6 }}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                 >
@@ -122,7 +148,7 @@ const Page: NextPage<PackagesPageProps> = ({
               </Flex>
             </Flex>
           </Flex>
-          <Box fontSize={20} mt={6}>
+          <Box fontSize={20} mt={10}>
             <Flex
               direction={{ base: 'column', md: 'row' }}
               justify="space-evenly"
@@ -139,32 +165,21 @@ const Page: NextPage<PackagesPageProps> = ({
                   Plan Includes:
                 </Heading>
                 <SimpleGrid
+                  mt={2}
                   fontFamily="'Poppins'"
-                  height="150px"
                   columns={2}
                   alignItems={{ base: 'center', lg: 'left' }}
-                  fontSize={{ base: '15', md: '20' }}
-                  w="100%"
-                  mb={4}
-                  gap={3}
-                  p={4}
+                  w="full"
+                  pt={3}
                 >
-                  <Box w="100%">
-                    {activities.map(tag => (
-                      <Text key={tag} w="100%" p={1}>
+                  {activities.map(tag => (
+                    <Box w="100%">
+                      <Text key={tag}>
                         <Icon as={FiMap} mr={2} />
                         {tag}
                       </Text>
-                    ))}
-                  </Box>
-                  <Box w="100%">
-                    {activities.map(tag => (
-                      <Text key={tag} w="100%" p={1}>
-                        <Icon as={FiMap} mr={2} />
-                        {tag}
-                      </Text>
-                    ))}
-                  </Box>
+                    </Box>
+                  ))}
                 </SimpleGrid>
               </Flex>
               <Flex
@@ -187,7 +202,12 @@ const Page: NextPage<PackagesPageProps> = ({
                     <GrDocumentPdf size={60} />
                     <Flex direction="column" gap={2}>
                       <Text>Camping Information</Text>
-                      <Link color="#8FB339" href="#">
+                      <Link
+                        color="#8FB339"
+                        href={
+                          process.env.NEXT_PUBLIC_S3_ENDPOINT + details_file
+                        }
+                      >
                         Download
                       </Link>
                     </Flex>
@@ -197,7 +217,9 @@ const Page: NextPage<PackagesPageProps> = ({
             </Flex>
           </Box>
           <Box mt={8}>
-            <Heading fontSize={{ base: '20', md: '35' }}>Gallery</Heading>
+            <Heading fontSize={{ base: '20', md: '35' }} mb={3}>
+              Gallery
+            </Heading>
             <Swiper
               modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
               breakpoints={{
@@ -221,13 +243,15 @@ const Page: NextPage<PackagesPageProps> = ({
                   key={i}
                   style={{ paddingBottom: '55px', height: '400px' }}
                 >
-                  <CustomImage
-                    src="static-public/Saly-44.svg"
-                    alt="image"
-                    layout="responsive"
-                    width={240}
-                    height={200}
-                  />
+                  <Box borderRadius="xl" overflow="hidden">
+                    <CustomImage
+                      src={image}
+                      alt="image"
+                      layout="responsive"
+                      width={240}
+                      height={200}
+                    />
+                  </Box>
                 </SwiperSlide>
               ))}
             </Swiper>

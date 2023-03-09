@@ -39,6 +39,8 @@ export type Trip = {
   image?: string
   name?: string
   description?: string
+  details_file?: string
+  is_premium_flag?: boolean
 }
 
 export type Transaction = {

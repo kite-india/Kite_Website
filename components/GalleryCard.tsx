@@ -7,7 +7,7 @@ const GalleryCard = ({ src }) => {
       maxW="100%"
       height="100%"
       verticalAlign="middle"
-      p={2}
+      p={{ base: 1, sm: 2 }}
       src={src}
     />
   )
