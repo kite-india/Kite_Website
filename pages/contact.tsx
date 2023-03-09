@@ -16,6 +16,7 @@ import { IoIosMail } from 'react-icons/io'
 import { NextPage } from 'next'
 import Layout from '@components/layouts/main'
 import { Section } from '@components/index'
+import axios from 'axios'
 
 const Contact: NextPage = () => {
   const [contactDetails, setContactDetails] = useState({})
@@ -27,7 +28,11 @@ const Contact: NextPage = () => {
     }))
   }
   const handleSubmit = () => {
-    console.table(contactDetails)
+    console.log(contactDetails)
+    axios
+      .post(`${process.env.NEXT_PUBLIC_KITE_BACKEND}/feedback`, contactDetails)
+      .then(response => console.log(response.data))
+      .catch(err => console.log(err))
   }
   return (
     <Layout title="Contact US">
@@ -57,7 +62,7 @@ const Contact: NextPage = () => {
                   Contact Us
                 </Heading>
                 <Flex direction="column" gap={1} w="100%">
-                  <Text as="label" fontWeight="semibold" htmlFor="firstName">
+                  <Text as="label" fontWeight="semibold" htmlFor="first_name">
                     Your Name
                   </Text>
                   <Flex gap="4" direction={{ base: 'column', md: 'row' }}>
@@ -68,7 +73,7 @@ const Contact: NextPage = () => {
                       placeholder="First Name"
                       rounded="full"
                       bg="white"
-                      name="firstName"
+                      name="first_name"
                       type="text"
                       onChange={handleChange}
                     />
@@ -79,7 +84,7 @@ const Contact: NextPage = () => {
                       placeholder="Last Name"
                       rounded="full"
                       bg="white"
-                      name="lastName"
+                      name="last_name"
                       type="text"
                       onChange={handleChange}
                     />
@@ -108,7 +113,7 @@ const Contact: NextPage = () => {
                   </InputGroup>
                 </Flex>
                 <Flex direction="column" gap={1} w="100%">
-                  <Text as="label" fontWeight="semibold" htmlFor="email">
+                  <Text as="label" fontWeight="semibold" htmlFor="review">
                     Message
                   </Text>
                   <Input
@@ -119,7 +124,7 @@ const Contact: NextPage = () => {
                     placeholder="Please enter your comments... "
                     rounded="xl"
                     bg="white"
-                    name="comment"
+                    name="review"
                     type="text"
                     as="textarea"
                     h="120px"

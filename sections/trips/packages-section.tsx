@@ -105,37 +105,6 @@ const Packages: React.FC<PackageProps> = ({ data }) => {
       </Flex>
 
       <Box>
-<<<<<<< HEAD
-        {/* TODO: Add a vertical slide for each state by multiple carousel */}
-        {/* <Swiper
-          modules={[Pagination, Autoplay, Grid]}
-          breakpoints={{
-            768: {
-              slidesPerView: 2
-            },
-            1024: {
-              slidesPerView: 3
-            }
-          }}
-          spaceBetween={20}
-          autoplay={{
-            delay: 6000,
-            disableOnInteraction: false
-          }}
-          pagination={{ clickable: true }}
-          slidesPerView={1}
-        >
-          {data.map(data => (
-            <SwiperSlide
-              key={data.id}
-              style={{ paddingBottom: '55px', height: '750px' }}
-            >
-              <PackageCard data={data} />
-            </SwiperSlide>
-          ))}
-        </Swiper> */}
-=======
->>>>>>> 96e4710455a448408d0dbbed98513ec64b457d8b
         <Flex
           direction="column"
           mt={5}
