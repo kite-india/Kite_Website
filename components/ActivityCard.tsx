@@ -15,7 +15,7 @@ const ActivityCard: React.FC<IProps> = ({ data }) => {
   return (
     <Flex
       gap={4}
-      height={{ base: '360px', lg: '230px' }}
+      height={{ base: '360px', lg: '200px' }}
       bg="white"
       borderRadius="lg"
       boxShadow="md"

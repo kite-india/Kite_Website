@@ -88,3 +88,11 @@ export interface ExtraPassengersType {
   email?: string
   phone?: string
 }
+export interface GalleryPageProps {
+  data: Gallery[] | []
+}
+
+export type Gallery = {
+  id?: string
+  image?: string
+}

@@ -56,14 +56,18 @@ const Activities: React.FC<ActivityProps> = ({ data }) => {
           }}
           slidesPerView={1}
         >
-          {data.map(activity => (
-            <SwiperSlide key={activity.name}>
-              <Flex direction="column" gap={4} mb={4}>
-                <ActivityCard data={activity} />
-                <ActivityCard data={activity} />
-              </Flex>
-            </SwiperSlide>
-          ))}
+          {data.map((activity, idx) => {
+            if (idx % 2 !== 0) return
+            else
+              return (
+                <SwiperSlide key={activity.name}>
+                  <Flex direction="column" gap={4} mb={4}>
+                    <ActivityCard data={activity} />
+                    <ActivityCard data={data.at(idx + 1)} />
+                  </Flex>
+                </SwiperSlide>
+              )
+          })}
         </Swiper>
       </Box>
     </Box>
