@@ -10,8 +10,9 @@ import {
 } from '@chakra-ui/react'
 import TransactionCardGroup from '../components/transaction/TransactionCardGroup'
 import Layout from '../components/layouts/main'
-import type { NextPage } from 'next'
+import type { GetServerSidePropsContext, NextPage } from 'next'
 import { FaLessThanEqual } from 'react-icons/fa'
+import { requireAuth } from '@utils/helpers/requireAuth'
 const data = [
   {
     nid: 1234567890,
@@ -122,3 +123,11 @@ const Transaction: NextPage = () => {
 }
 
 export default Transaction
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  return requireAuth(context, session => {
+    return {
+      props: { session }
+    }
+  })
+}

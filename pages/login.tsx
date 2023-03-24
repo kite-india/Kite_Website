@@ -15,6 +15,7 @@ import { signIn, useSession } from 'next-auth/react'
 import Section from '@components/Section'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
+import Axios from 'axios'
 
 const Login: NextPage = () => {
   const { status } = useSession()
@@ -40,8 +41,20 @@ const Login: NextPage = () => {
     }))
   }
 
-  const handleLogin = () => {
-    console.log(loginParams)
+  const handleLogin = async () => {
+    try {
+      console.log(loginParams)
+      const response = await Axios.post(
+        `${process.env.NEXT_PUBLIC_KITE_BACKEND}/user/login`,
+        loginParams
+      )
+      console.log(response)
+      if (response.status == 200) console.log('welcome')
+    } catch (err) {
+      console.log(err)
+    }
+
+    // console.log(loginParams)
   }
 
   return (
@@ -99,6 +112,7 @@ const Login: NextPage = () => {
                 Email
               </Text>
               <Input
+                name="email"
                 value={loginParams['email']}
                 onChange={handleChange}
                 width="100%"
@@ -112,6 +126,7 @@ const Login: NextPage = () => {
                 Password
               </Text>
               <Input
+                name="password"
                 value={loginParams['password']}
                 onChange={handleChange}
                 type="password"

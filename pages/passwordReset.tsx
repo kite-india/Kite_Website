@@ -13,7 +13,8 @@ import {
   InputGroup,
   IconButton
 } from '@chakra-ui/react'
-import type { NextPage } from 'next'
+import type { GetServerSidePropsContext, NextPage } from 'next'
+import { requireAuth } from '@utils/helpers/requireAuth'
 
 const PasswordChange: NextPage = () => {
   const [data, setData] = useState([
@@ -222,3 +223,11 @@ const PasswordChange: NextPage = () => {
   )
 }
 export default PasswordChange
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  return requireAuth(context, session => {
+    return {
+      props: { session }
+    }
+  })
+}
