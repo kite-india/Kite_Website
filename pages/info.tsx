@@ -28,12 +28,12 @@ const Info: NextPage = () => {
   const { data: session } = useSession()
   const [data, setData] = useState({
     firstName: session.user.name,
-    lastName: 'smith',
-    location: 'usa',
+    lastName: '',
+    location: '',
     email: session.user.email,
-    mobile: '99889988',
-    date: '2013-01-08',
-    gender: 'Female'
+    mobile: '',
+    date: '',
+    gender: ''
   })
   const [isEdit, setIsEdit] = useState({
     firstName: true,
@@ -48,20 +48,18 @@ const Info: NextPage = () => {
   const handleSubmit = () => {
     console.log(data)
   }
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
+  ) => {
     setData(prevState => ({
       ...prevState,
       [e.target.name]: e.target.value
     }))
     setIsEdit({ ...isEdit, changes: false })
   }
-  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setData(prevState => ({
-      ...prevState,
-      [e.target.name]: e.target.value
-    }))
-    setIsEdit({ ...isEdit, changes: false })
-  }
+
   const handleMouseDownPassword = event => {
     event.preventDefault()
   }
@@ -91,7 +89,7 @@ const Info: NextPage = () => {
             fontWeight="500"
             fontSize={{ base: '18px', lg: '30px' }}
             lineHeight="45px"
-            color="#464646"
+            color="white"
             visibility={{ base: 'collapse', lg: 'visible' }}
             m="29px"
             ml="50px"
@@ -159,10 +157,11 @@ const Info: NextPage = () => {
                 display={{ base: 'none', lg: 'flex' }}
               />
             </Center>
-            <Flex px="50px" flexDirection="column" gap="20px">
+            <Flex px="50px" flexDirection="column" gap="20px" color={'black'}>
               <Flex
                 flexDirection={{ base: 'column', sm: 'row' }}
                 gap={10}
+                color={'black'}
                 fontSize={{ base: '15px', lg: '20px' }}
               >
                 <Flex
@@ -313,7 +312,7 @@ const Info: NextPage = () => {
                       borderRadius="6px"
                       backgroundColor="white"
                       disabled={isEdit.gender}
-                      onChange={handleSelectChange}
+                      onChange={handleChange}
                     >
                       <option value="Male">Male</option>
                       <option value="Female">Female</option>
