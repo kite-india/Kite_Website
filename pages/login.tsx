@@ -18,7 +18,10 @@ import { useRouter } from 'next/router'
 
 const Login: NextPage = () => {
   const { status } = useSession()
-  const [loginParams, setLoginParams] = useState({})
+  const [loginParams, setLoginParams] = useState({
+    email: '',
+    password: ''
+  })
   const router = useRouter()
 
   console.log(router.query && router.query?.from)
@@ -41,7 +44,11 @@ const Login: NextPage = () => {
   }
 
   const handleLogin = () => {
-    console.log(loginParams)
+    signIn('credentials', {
+      email: loginParams.email,
+      password: loginParams.password,
+      callbackUrl: `${window.location.origin}`
+    })
   }
 
   return (

@@ -22,7 +22,7 @@ import Layout from '@components/layouts/main'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import type { Activity, Gallery, Trip } from '@utils/types'
-import { useTripsStore } from '@utils/hooks/useTripsStore'
+import { useTripsStore } from '@utils/redux/useTripsStore'
 import CustomImage from '@components/CustomImage'
 import { GrDocumentPdf } from 'react-icons/gr'
 import Packages from '@sections/trips/packages-section'
@@ -273,7 +273,7 @@ const Page: NextPage<PackagesPageProps> = ({
 
 export async function getStaticPaths() {
   const { data }: { data: Trip[] } = await axios.get(
-    `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package`
+    `${process.env.NEXT_PUBLIC_KITE_BACKEND}/packages`
   )
 
   const paths = data.map((trip: Trip) => {
@@ -289,11 +289,9 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context: { params: { id: string } }) {
   const { id } = context.params
-  // const { data }: { data: Trip } = await axios.get(
-  //   `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package/${id}`
-  // )
+
   const { data: activities_data } = await axios.get(
-    `${process.env.NEXT_PUBLIC_KITE_BACKEND}/activity`
+    `${process.env.NEXT_PUBLIC_KITE_BACKEND}/activities`
   )
   const { data: gallery_data } = await axios.get(
     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/gallery`

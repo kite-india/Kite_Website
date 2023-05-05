@@ -9,11 +9,10 @@ import axios from 'axios'
 import { GalleryPageProps, Gallery } from '@utils/types'
 
 const GalleryPage: NextPage = (props: GalleryPageProps) => {
-  const { data } = props || {}
+  const { data } = props ?? {}
   const section1 = data.slice(0, 5)
   const section2 = data.slice(6, 9)
   const section3 = data.slice(10, 14)
-  console.log({ section1, section2, section3 })
   return (
     <Layout title="Gallery">
       <Container maxW="container.xl" my={8} w="100%">
@@ -116,7 +115,7 @@ const GalleryPage: NextPage = (props: GalleryPageProps) => {
 
 export default GalleryPage
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   const { data } = await axios.get(
     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/gallery`
   )
