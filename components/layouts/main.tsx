@@ -5,8 +5,8 @@ import Footer from '../Footer'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 
-interface Props { 
-  children: React.ReactNode,
+interface Props {
+  children: React.ReactNode
   title: string
 }
 
@@ -15,9 +15,7 @@ const Layout: React.FC<Props> = ({ children, title }) => {
   return (
     <Box w="100%" as="main">
       <Head>
-        <title>
-          Kite India - {title}
-        </title>
+        <title>Kite India - {title}</title>
         <meta name="viewport" content="width=device-width" />
       </Head>
       <Navbar path={router.asPath} />

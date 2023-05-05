@@ -15,7 +15,7 @@ import Section from '@components/Section'
 import Layout from '@components/layouts/main'
 import type { NextPage } from 'next'
 import type { TripsPageProps } from '@utils/types'
-import { useTripsStore } from '@utils/hooks/useTripsStore'
+import { useTripsStore } from '@utils/redux/useTripsStore'
 import Link from 'next/link'
 
 const Trips: NextPage<TripsPageProps> = ({ packages_data = null }) => {
@@ -65,9 +65,9 @@ const Trips: NextPage<TripsPageProps> = ({ packages_data = null }) => {
                   tranquil lakes. Immerse yourself in the warm hospitality of
                   the locals and explore the rich culture and heritage of the
                   region. From the vibrant markets of Srinagar to the
-                  breathtaking views of the Himalayas, there's something for
-                  everyone in Kashmir. Come, indulge in a soulful journey to one
-                  of the most enchanting destinations on earth.
+                  breathtaking views of the Himalayas, there&apos;s something
+                  for everyone in Kashmir. Come, indulge in a soulful journey to
+                  one of the most enchanting destinations on earth.
                 </Text>
                 <Link href={`/packages/clevhuj91000ovqsci1zpw8rc`}>
                   <Button
