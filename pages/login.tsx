@@ -16,6 +16,9 @@ import Section from '@components/Section'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
+var bcrypt = require('bcryptjs')
+var salt = bcrypt.genSaltSync(10)
+
 const Login: NextPage = () => {
   const { status } = useSession()
   const [loginParams, setLoginParams] = useState({})
@@ -42,6 +45,12 @@ const Login: NextPage = () => {
 
   const handleLogin = () => {
     console.log(loginParams)
+    console.log(loginParams['Password'])
+    bcrypt.genSalt(10, function (err, salt) {
+      bcrypt.hash(loginParams['Password'], salt, function (err, hashVal) {
+        console.log(hashVal)
+      })
+    })
   }
 
   return (
@@ -99,6 +108,7 @@ const Login: NextPage = () => {
                 Email
               </Text>
               <Input
+                name="Email"
                 value={loginParams['email']}
                 onChange={handleChange}
                 width="100%"
@@ -112,6 +122,7 @@ const Login: NextPage = () => {
                 Password
               </Text>
               <Input
+                name="Password"
                 value={loginParams['password']}
                 onChange={handleChange}
                 type="password"
