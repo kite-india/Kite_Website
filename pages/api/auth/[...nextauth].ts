@@ -1,12 +1,9 @@
 import NextAuth, { type NextAuthOptions } from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 import CredentialsProvider from 'next-auth/providers/credentials'
-<<<<<<< HEAD
-=======
 import axios from 'axios'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { db } from '@libs/db'
->>>>>>> 6e8725cce7742efece4fef5ff575b71e1b2c1622
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db),

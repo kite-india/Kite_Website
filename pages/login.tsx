@@ -47,19 +47,10 @@ const Login: NextPage = () => {
   }
 
   const handleLogin = () => {
-<<<<<<< HEAD
-    console.log(loginParams)
-    console.log(loginParams['Password'])
-    bcrypt.genSalt(10, function (err, salt) {
-      bcrypt.hash(loginParams['Password'], salt, function (err, hashVal) {
-        console.log(hashVal)
-      })
-=======
     signIn('credentials', {
       email: loginParams.email,
       password: loginParams.password,
       callbackUrl: `${window.location.origin}`
->>>>>>> 6e8725cce7742efece4fef5ff575b71e1b2c1622
     })
   }
 
