@@ -25,11 +25,13 @@ import type {
   ExtraPassengersType,
   Trip
 } from '@utils/types'
-import { useTripsStore } from '@utils/hooks/useTripsStore'
+import { useTripsStore } from '@utils/redux/useTripsStore'
 import { ExtraPassenger } from '@sections/index'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { requireAuth } from '@utils/helpers/requireAuth'
+
+const composeBookTrip = () => () => {}
 
 const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
   const { status } = useSession()
@@ -61,7 +63,7 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
   }
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     setFormParams(prevState => ({
       ...prevState,
@@ -70,21 +72,7 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
     e.preventDefault()
   }
 
-  const handleSubmit = () => {
-    formParams['packageid'] = id
-    formParams['persons'] = Object.values(extraPassengers)
-    formParams['dob'] = new Date(formParams?.dob).toISOString()
-    formParams['from'] = new Date(formParams?.from).toISOString()
-    formParams['to'] = new Date(formParams?.to).toISOString()
-    console.log(formParams)
-    axios
-      .post(
-        `${process.env.NEXT_PUBLIC_KITE_BACKEND}/packageregistration`,
-        formParams
-      )
-      .then(response => console.log(response.data))
-      .catch(err => console.log(err))
-  }
+  const handleSubmit = () => {}
 
   return (
     <Layout title="Book Now">

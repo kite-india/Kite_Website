@@ -38,11 +38,11 @@ const Page: NextPage<HomePageProps> = ({
 
 export async function getStaticProps() {
   const { data: featured_data } = await axios.get(
-    `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package/premium`
+    `${process.env.NEXT_PUBLIC_KITE_BACKEND}/packages/premium`
   )
 
   const { data: activities_data } = await axios.get(
-    `${process.env.NEXT_PUBLIC_KITE_BACKEND}/activity`
+    `${process.env.NEXT_PUBLIC_KITE_BACKEND}/activities`
   )
   if (!featured_data || !activities_data) {
     return {

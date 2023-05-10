@@ -15,13 +15,13 @@ const TripsStore: StateCreator<
   singleTripById: {},
   fetchTrips: async () => {
     const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package`
+      `${process.env.NEXT_PUBLIC_KITE_BACKEND}/packages`
     )
     set({ trips: data })
   },
   fetchSingleTripById: async (id: string) => {
     const { data }: { data: Trip } = await axios.get(
-      `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package/${id}`
+      `${process.env.NEXT_PUBLIC_KITE_BACKEND}/packages/${id}`
     )
     set({ singleTripById: data })
   }

@@ -1,8 +1,15 @@
 import NextAuth, { type NextAuthOptions } from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 import CredentialsProvider from 'next-auth/providers/credentials'
+<<<<<<< HEAD
+=======
+import axios from 'axios'
+import { PrismaAdapter } from '@next-auth/prisma-adapter'
+import { db } from '@libs/db'
+>>>>>>> 6e8725cce7742efece4fef5ff575b71e1b2c1622
 
 export const authOptions: NextAuthOptions = {
+  adapter: PrismaAdapter(db),
   providers: [
     GoogleProvider({
       clientId: process.env.NEXT_PUBLIC_GOOGLE_ID,
@@ -24,12 +31,40 @@ export const authOptions: NextAuthOptions = {
     strategy: 'jwt'
   },
   callbacks: {
-    signIn: async () => {
-      return Promise.resolve(true)
+    jwt: async ({ token, user }) => {
+      const dbUser = await db.user.findFirst({
+        where: {
+          email: token.email
+        }
+      })
+
+      if (!dbUser) {
+        token.id = user!.id
+        return token
+      }
+
+      return {
+        id: dbUser.id,
+        name: dbUser.name,
+        email: dbUser.email,
+        picture: dbUser.image,
+        role: dbUser.role
+      }
     },
-    session: ({ session }) => {
+    session: ({ session, token }) => {
+      if (token) {
+        session.user.id = token.id
+        session.user.name = token.name
+        session.user.email = token.email
+        session.user.image = token.picture
+        session.user.role = token.role
+      }
+
       return session
     }
+  },
+  redirect() {
+    return '/'
   }
 }
 
