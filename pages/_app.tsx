@@ -5,6 +5,9 @@ import theme from '@libs/theme'
 import { SessionProvider } from 'next-auth/react'
 import { Session } from 'next-auth'
 import '../public/gallery.css'
+import { Amplify, API, graphqlOperation } from 'aws-amplify';
+import awsconfig from 'src/aws-exports.js';
+Amplify.configure(awsconfig);
 
 const Website = ({
   Component,

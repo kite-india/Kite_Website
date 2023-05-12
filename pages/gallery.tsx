@@ -7,6 +7,10 @@ import CustomImage from '@components/CustomImage'
 import GalleryCard from '@components/GalleryCard'
 import axios from 'axios'
 import { GalleryPageProps, Gallery } from '@utils/types'
+import { API } from 'aws-amplify';
+import { GraphQLQuery } from '@aws-amplify/api';
+import {ListGalleriesQuery} from "src/API";
+
 
 const GalleryPage: NextPage = (props: GalleryPageProps) => {
   const { data } = props ?? {}
@@ -36,7 +40,7 @@ const GalleryPage: NextPage = (props: GalleryPageProps) => {
             <Box>
               <CustomImage
                 priority
-                src="static-public/Saly-44.svg"
+                src="" //static-public/Saly-44.svg
                 layout="fixed"
                 width="280px"
                 height="280px"
@@ -78,7 +82,7 @@ const GalleryPage: NextPage = (props: GalleryPageProps) => {
                 {section1.map(item => (
                   <GalleryCard
                     key={item.id}
-                    src={`${process.env.NEXT_PUBLIC_S3_ENDPOINT}${item.image}`}
+                    src={`https://kite-storage-backend.s3.ap-south-1.amazonaws.com/Untitled.jpg`}
                   />
                 ))}
               </Flex>
@@ -86,7 +90,7 @@ const GalleryPage: NextPage = (props: GalleryPageProps) => {
                 {section2.map(item => (
                   <GalleryCard
                     key={item.id}
-                    src={`${process.env.NEXT_PUBLIC_S3_ENDPOINT}${item.image}`}
+                    src={`https://kite-storage-backend.s3.ap-south-1.amazonaws.com/Untitled.jpg`}
                   />
                 ))}
               </Flex>
@@ -94,7 +98,7 @@ const GalleryPage: NextPage = (props: GalleryPageProps) => {
                 {section3.map(item => (
                   <GalleryCard
                     key={item.id}
-                    src={`${process.env.NEXT_PUBLIC_S3_ENDPOINT}${item.image}`}
+                    src={"https://kite-storage-backend.s3.ap-south-1.amazonaws.com/Untitled.jpg"}
                   />
                 ))}
               </Flex>
@@ -116,8 +120,24 @@ const GalleryPage: NextPage = (props: GalleryPageProps) => {
 export default GalleryPage
 
 export const getStaticProps = async () => {
-  const { data } = await axios.get(
-    `${process.env.NEXT_PUBLIC_KITE_BACKEND}/gallery`
-  )
-  return { props: { data: data as Gallery[] } }
+  // const { data } = await axios.get(
+  //   `${process.env.NEXT_PUBLIC_KITE_BACKEND}/gallery`
+  // )
+  // return { props: { data: data as Gallery[] } }
+
+  const allTodos = await API.graphql<GraphQLQuery<ListGalleriesQuery>>({
+    query: `query Query{
+    listGalleries {
+     items {
+       id,
+      image
+     }
+    }
+  }`})
+
+  console.log(allTodos)
+
+  return {props:{data: allTodos.data.listGalleries.items}}
+
+
 }
