@@ -1,0 +1,71 @@
+type Gallery @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  image: String!
+}
+
+type Registration @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  total_cost: Float
+  userinfoID: ID! @index(name: "byUserInfo")
+  Package: Package @hasOne
+}
+
+type Review @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  name: String
+  email: String
+  review: String
+}
+
+type Package
+  @model
+  @auth(
+    rules: [
+      { allow: public, operations: [read] }
+      { allow: private, operations: [read] }
+      {
+        allow: groups
+        groups: ["ap-south-1_GnEmuWInD_Google"]
+        operations: [read]
+      }
+      {
+        allow: groups
+        groups: ["admin"]
+        operations: [read, create, update, delete]
+      }
+    ]
+  ) {
+  id: ID!
+  name: String!
+  contact: String!
+  description: String!
+  location: String!
+  cost: Float!
+  image: String!
+  details_file: String!
+  is_premium_flag: String
+  video_link: String
+}
+
+type UserInfo
+  @model
+  @auth(
+    rules: [
+      { allow: public, operations: [read] }
+      { allow: private }
+      {
+        allow: groups
+        groups: ["ap-south-1_GnEmuWInD_Google"]
+        operations: [read, create, update, delete]
+      }
+    ]
+  ) {
+  id: ID!
+  dob: String
+  phone_number: String
+  primary_phone: String
+  secondary_phone: String
+  email: String
+  Registrations: [Registration]
+    @hasMany(indexName: "byUserInfo", fields: ["id"])
+}
