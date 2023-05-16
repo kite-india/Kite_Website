@@ -16,12 +16,64 @@ import {
 } from '@chakra-ui/react'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import Section from '@components/Section'
+import { Auth } from "aws-amplify";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Signup: React.FC = () => {
   const [flag, setFlag] = useState(true)
 
+  const [signUparams, setSignUpParams] = useState({
+    email: '',
+    password: '',
+    firstName: '',
+    lastName: '',
+    phone: '',
+    birthdate: ''
+  })
+
+  async function registerHandler() {
+
+    console.log(signUparams)
+    try {
+      const { user } = await Auth.signUp({
+        username: signUparams.email,
+        password: signUparams.password,
+        attributes: {
+          picture: "fds",
+          birthdate: "rgfthgrhyd",
+          phone_number: signUparams.phone,
+          email: signUparams.email,
+          name: signUparams.firstName+" "+signUparams.lastName
+
+        }
+      })
+
+      console.log(user)
+
+    }
+    catch (e) {
+
+      toast("Account Already Exist")
+    }
+
+
+
+
+
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value)
+    setSignUpParams(prevState => ({
+      ...prevState,
+      [e.target.name]: e.target.value
+    }))
+  }
+
   return (
     <Layout title="Login">
+      <ToastContainer></ToastContainer>
       <Container
         maxW={{ base: 'container.sm', lg: 'container.sm' }}
         my={12}
@@ -72,7 +124,10 @@ const Signup: React.FC = () => {
                 gap={4}
               >
                 <Input
-                  placeholder="Firt name"
+                  name="firstName"
+                  onChange={handleChange}
+                  value={signUparams["firstName"]}
+                  placeholder="First name"
                   width="100%"
                   height="53px"
                   boxShadow="md"
@@ -80,6 +135,9 @@ const Signup: React.FC = () => {
                   backgroundColor="white"
                 />
                 <Input
+                  name="lastName"
+                  onChange={handleChange}
+                  value={signUparams["lastName"]}
                   placeholder="Last name"
                   width="100%"
                   height="53px"
@@ -89,6 +147,9 @@ const Signup: React.FC = () => {
                 />
               </Flex>
               <Input
+                name="email"
+                value={signUparams["email"]}
+                onChange={handleChange}
                 placeholder="Email"
                 width="100%"
                 height="53px"
@@ -103,6 +164,9 @@ const Signup: React.FC = () => {
                 gap={4}
               >
                 <Input
+                  name="password"
+                  value={signUparams["password"]}
+                  onChange={handleChange}
                   placeholder="Password"
                   width="100%"
                   height="53px"
@@ -111,6 +175,7 @@ const Signup: React.FC = () => {
                   backgroundColor="white"
                 />
                 <Input
+                   onChange={handleChange}
                   placeholder="Confirm"
                   width="100%"
                   height="53px"
@@ -173,6 +238,9 @@ const Signup: React.FC = () => {
                 </Flex>
               </Flex>
               <Input
+                name="phone"
+                onChange={handleChange}
+                value={signUparams["phone"]}
                 placeholder="Phone"
                 width="100%"
                 height="53px"
@@ -181,6 +249,9 @@ const Signup: React.FC = () => {
                 backgroundColor="white"
               />
               <Input
+                name="birthdate"
+                onChange={handleChange}
+                value={signUparams["birthdate"]}
                 type="date"
                 width="100%"
                 height="53px"
@@ -228,6 +299,7 @@ const Signup: React.FC = () => {
                     backgroundColor="#A4C15E"
                     boxShadow="lg"
                     fontFamily="'Poppins'"
+                    onClick={registerHandler}
                   >
                     Submit
                   </Button>

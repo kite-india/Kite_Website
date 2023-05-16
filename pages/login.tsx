@@ -15,6 +15,9 @@ import { signIn, useSession } from 'next-auth/react'
 import Section from '@components/Section'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
+import { Auth } from "aws-amplify";
+import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth';
+
 
 const Login: NextPage = () => {
   const { status } = useSession()
@@ -37,18 +40,39 @@ const Login: NextPage = () => {
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value)
     setLoginParams(prevState => ({
       ...prevState,
       [e.target.name]: e.target.value
     }))
+
+    console.log(loginParams)
   }
 
-  const handleLogin = () => {
-    signIn('credentials', {
-      email: loginParams.email,
-      password: loginParams.password,
-      callbackUrl: `${window.location.origin}`
-    })
+  const handleLogin = async () => {
+    // signIn('credentials', {
+    //   email: loginParams.email,
+    //   password: loginParams.password,
+    //   callbackUrl: `${window.location.origin}`
+    // })
+    try {
+
+      // const user = await Auth.signIn({
+      //   username:"athulrithu123@gmail.com",
+      //   password:"aA@12345678"
+      // })
+
+      const code = await Auth.resendSignUp("athulrithu123@gmail.com");
+      // const user = await Auth.confirmSignUp("athulrithu123@gmail.com",code);
+      console.log(code)
+      Auth.federatedSignIn({ provider: CognitoHostedUIIdentityProvider.Google })
+
+    }
+    catch (e) {
+
+      console.log(e)
+    }
+
   }
 
   return (
