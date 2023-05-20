@@ -2,27 +2,27 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateEnquiryInput = {
+export type CreateActivityInput = {
   id?: string | null,
-  destination_name?: string | null,
   name?: string | null,
-  email?: string | null,
-  number_of_people?: number | null,
-  vacation_type?: string | null,
-  phone_number?: string | null,
+  description?: string | null,
+  image?: string | null,
+  link?: string | null,
+  packageId?: string | null,
+  packageID: string,
   _version?: number | null,
 };
 
-export type ModelEnquiryConditionInput = {
-  destination_name?: ModelStringInput | null,
+export type ModelActivityConditionInput = {
   name?: ModelStringInput | null,
-  email?: ModelStringInput | null,
-  number_of_people?: ModelIntInput | null,
-  vacation_type?: ModelStringInput | null,
-  phone_number?: ModelStringInput | null,
-  and?: Array< ModelEnquiryConditionInput | null > | null,
-  or?: Array< ModelEnquiryConditionInput | null > | null,
-  not?: ModelEnquiryConditionInput | null,
+  description?: ModelStringInput | null,
+  image?: ModelStringInput | null,
+  link?: ModelStringInput | null,
+  packageId?: ModelStringInput | null,
+  packageID?: ModelIDInput | null,
+  and?: Array< ModelActivityConditionInput | null > | null,
+  or?: Array< ModelActivityConditionInput | null > | null,
+  not?: ModelActivityConditionInput | null,
 };
 
 export type ModelStringInput = {
@@ -63,6 +63,77 @@ export type ModelSizeInput = {
   ge?: number | null,
   gt?: number | null,
   between?: Array< number | null > | null,
+};
+
+export type ModelIDInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
+};
+
+export type Activity = {
+  __typename: "Activity",
+  id: string,
+  name?: string | null,
+  description?: string | null,
+  image?: string | null,
+  link?: string | null,
+  packageId?: string | null,
+  packageID: string,
+  createdAt: string,
+  updatedAt: string,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
+};
+
+export type UpdateActivityInput = {
+  id: string,
+  name?: string | null,
+  description?: string | null,
+  image?: string | null,
+  link?: string | null,
+  packageId?: string | null,
+  packageID?: string | null,
+  _version?: number | null,
+};
+
+export type DeleteActivityInput = {
+  id: string,
+  _version?: number | null,
+};
+
+export type CreateEnquiryInput = {
+  id?: string | null,
+  destination_name?: string | null,
+  name?: string | null,
+  email?: string | null,
+  number_of_people?: number | null,
+  vacation_type?: string | null,
+  phone_number?: string | null,
+  _version?: number | null,
+};
+
+export type ModelEnquiryConditionInput = {
+  destination_name?: ModelStringInput | null,
+  name?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  number_of_people?: ModelIntInput | null,
+  vacation_type?: ModelStringInput | null,
+  phone_number?: ModelStringInput | null,
+  and?: Array< ModelEnquiryConditionInput | null > | null,
+  or?: Array< ModelEnquiryConditionInput | null > | null,
+  not?: ModelEnquiryConditionInput | null,
 };
 
 export type ModelIntInput = {
@@ -173,22 +244,6 @@ export type ModelFloatInput = {
   attributeType?: ModelAttributeTypes | null,
 };
 
-export type ModelIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
-};
-
 export type Registration = {
   __typename: "Registration",
   id: string,
@@ -215,11 +270,19 @@ export type Package = {
   details_file: string,
   is_premium_flag?: string | null,
   video_link?: string | null,
+  Activities?: ModelActivityConnection | null,
   createdAt: string,
   updatedAt: string,
   _version: number,
   _deleted?: boolean | null,
   _lastChangedAt: number,
+};
+
+export type ModelActivityConnection = {
+  __typename: "ModelActivityConnection",
+  items:  Array<Activity | null >,
+  nextToken?: string | null,
+  startedAt?: number | null,
 };
 
 export type UpdateRegistrationInput = {
@@ -385,6 +448,25 @@ export type DeleteUserInfoInput = {
   _version?: number | null,
 };
 
+export type ModelActivityFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  description?: ModelStringInput | null,
+  image?: ModelStringInput | null,
+  link?: ModelStringInput | null,
+  packageId?: ModelStringInput | null,
+  packageID?: ModelIDInput | null,
+  and?: Array< ModelActivityFilterInput | null > | null,
+  or?: Array< ModelActivityFilterInput | null > | null,
+  not?: ModelActivityFilterInput | null,
+};
+
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
+
 export type ModelEnquiryFilterInput = {
   id?: ModelIDInput | null,
   destination_name?: ModelStringInput | null,
@@ -429,12 +511,6 @@ export type ModelRegistrationFilterInput = {
   not?: ModelRegistrationFilterInput | null,
   registrationPackageId?: ModelIDInput | null,
 };
-
-export enum ModelSortDirection {
-  ASC = "ASC",
-  DESC = "DESC",
-}
-
 
 export type ModelReviewFilterInput = {
   id?: ModelIDInput | null,
@@ -495,16 +571,16 @@ export type ModelUserInfoConnection = {
   startedAt?: number | null,
 };
 
-export type ModelSubscriptionEnquiryFilterInput = {
+export type ModelSubscriptionActivityFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  destination_name?: ModelSubscriptionStringInput | null,
   name?: ModelSubscriptionStringInput | null,
-  email?: ModelSubscriptionStringInput | null,
-  number_of_people?: ModelSubscriptionIntInput | null,
-  vacation_type?: ModelSubscriptionStringInput | null,
-  phone_number?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionEnquiryFilterInput | null > | null,
-  or?: Array< ModelSubscriptionEnquiryFilterInput | null > | null,
+  description?: ModelSubscriptionStringInput | null,
+  image?: ModelSubscriptionStringInput | null,
+  link?: ModelSubscriptionStringInput | null,
+  packageId?: ModelSubscriptionStringInput | null,
+  packageID?: ModelSubscriptionIDInput | null,
+  and?: Array< ModelSubscriptionActivityFilterInput | null > | null,
+  or?: Array< ModelSubscriptionActivityFilterInput | null > | null,
 };
 
 export type ModelSubscriptionIDInput = {
@@ -535,6 +611,18 @@ export type ModelSubscriptionStringInput = {
   beginsWith?: string | null,
   in?: Array< string | null > | null,
   notIn?: Array< string | null > | null,
+};
+
+export type ModelSubscriptionEnquiryFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  destination_name?: ModelSubscriptionStringInput | null,
+  name?: ModelSubscriptionStringInput | null,
+  email?: ModelSubscriptionStringInput | null,
+  number_of_people?: ModelSubscriptionIntInput | null,
+  vacation_type?: ModelSubscriptionStringInput | null,
+  phone_number?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionEnquiryFilterInput | null > | null,
+  or?: Array< ModelSubscriptionEnquiryFilterInput | null > | null,
 };
 
 export type ModelSubscriptionIntInput = {
@@ -609,6 +697,75 @@ export type ModelSubscriptionUserInfoFilterInput = {
   email?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionUserInfoFilterInput | null > | null,
   or?: Array< ModelSubscriptionUserInfoFilterInput | null > | null,
+};
+
+export type CreateActivityMutationVariables = {
+  input: CreateActivityInput,
+  condition?: ModelActivityConditionInput | null,
+};
+
+export type CreateActivityMutation = {
+  createActivity?:  {
+    __typename: "Activity",
+    id: string,
+    name?: string | null,
+    description?: string | null,
+    image?: string | null,
+    link?: string | null,
+    packageId?: string | null,
+    packageID: string,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type UpdateActivityMutationVariables = {
+  input: UpdateActivityInput,
+  condition?: ModelActivityConditionInput | null,
+};
+
+export type UpdateActivityMutation = {
+  updateActivity?:  {
+    __typename: "Activity",
+    id: string,
+    name?: string | null,
+    description?: string | null,
+    image?: string | null,
+    link?: string | null,
+    packageId?: string | null,
+    packageID: string,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type DeleteActivityMutationVariables = {
+  input: DeleteActivityInput,
+  condition?: ModelActivityConditionInput | null,
+};
+
+export type DeleteActivityMutation = {
+  deleteActivity?:  {
+    __typename: "Activity",
+    id: string,
+    name?: string | null,
+    description?: string | null,
+    image?: string | null,
+    link?: string | null,
+    packageId?: string | null,
+    packageID: string,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
 };
 
 export type CreateEnquiryMutationVariables = {
@@ -926,6 +1083,11 @@ export type CreatePackageMutation = {
     details_file: string,
     is_premium_flag?: string | null,
     video_link?: string | null,
+    Activities?:  {
+      __typename: "ModelActivityConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -952,6 +1114,11 @@ export type UpdatePackageMutation = {
     details_file: string,
     is_premium_flag?: string | null,
     video_link?: string | null,
+    Activities?:  {
+      __typename: "ModelActivityConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -978,6 +1145,11 @@ export type DeletePackageMutation = {
     details_file: string,
     is_premium_flag?: string | null,
     video_link?: string | null,
+    Activities?:  {
+      __typename: "ModelActivityConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -1064,6 +1236,118 @@ export type DeleteUserInfoMutation = {
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
+  } | null,
+};
+
+export type GetActivityQueryVariables = {
+  id: string,
+};
+
+export type GetActivityQuery = {
+  getActivity?:  {
+    __typename: "Activity",
+    id: string,
+    name?: string | null,
+    description?: string | null,
+    image?: string | null,
+    link?: string | null,
+    packageId?: string | null,
+    packageID: string,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type ListActivitiesQueryVariables = {
+  filter?: ModelActivityFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListActivitiesQuery = {
+  listActivities?:  {
+    __typename: "ModelActivityConnection",
+    items:  Array< {
+      __typename: "Activity",
+      id: string,
+      name?: string | null,
+      description?: string | null,
+      image?: string | null,
+      link?: string | null,
+      packageId?: string | null,
+      packageID: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncActivitiesQueryVariables = {
+  filter?: ModelActivityFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncActivitiesQuery = {
+  syncActivities?:  {
+    __typename: "ModelActivityConnection",
+    items:  Array< {
+      __typename: "Activity",
+      id: string,
+      name?: string | null,
+      description?: string | null,
+      image?: string | null,
+      link?: string | null,
+      packageId?: string | null,
+      packageID: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type ActivitiesByPackageIDQueryVariables = {
+  packageID: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelActivityFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ActivitiesByPackageIDQuery = {
+  activitiesByPackageID?:  {
+    __typename: "ModelActivityConnection",
+    items:  Array< {
+      __typename: "Activity",
+      id: string,
+      name?: string | null,
+      description?: string | null,
+      image?: string | null,
+      link?: string | null,
+      packageId?: string | null,
+      packageID: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -1421,6 +1705,11 @@ export type GetPackageQuery = {
     details_file: string,
     is_premium_flag?: string | null,
     video_link?: string | null,
+    Activities?:  {
+      __typename: "ModelActivityConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -1574,6 +1863,72 @@ export type SyncUserInfosQuery = {
     } | null >,
     nextToken?: string | null,
     startedAt?: number | null,
+  } | null,
+};
+
+export type OnCreateActivitySubscriptionVariables = {
+  filter?: ModelSubscriptionActivityFilterInput | null,
+};
+
+export type OnCreateActivitySubscription = {
+  onCreateActivity?:  {
+    __typename: "Activity",
+    id: string,
+    name?: string | null,
+    description?: string | null,
+    image?: string | null,
+    link?: string | null,
+    packageId?: string | null,
+    packageID: string,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnUpdateActivitySubscriptionVariables = {
+  filter?: ModelSubscriptionActivityFilterInput | null,
+};
+
+export type OnUpdateActivitySubscription = {
+  onUpdateActivity?:  {
+    __typename: "Activity",
+    id: string,
+    name?: string | null,
+    description?: string | null,
+    image?: string | null,
+    link?: string | null,
+    packageId?: string | null,
+    packageID: string,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnDeleteActivitySubscriptionVariables = {
+  filter?: ModelSubscriptionActivityFilterInput | null,
+};
+
+export type OnDeleteActivitySubscription = {
+  onDeleteActivity?:  {
+    __typename: "Activity",
+    id: string,
+    name?: string | null,
+    description?: string | null,
+    image?: string | null,
+    link?: string | null,
+    packageId?: string | null,
+    packageID: string,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -1879,6 +2234,11 @@ export type OnCreatePackageSubscription = {
     details_file: string,
     is_premium_flag?: string | null,
     video_link?: string | null,
+    Activities?:  {
+      __typename: "ModelActivityConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -1904,6 +2264,11 @@ export type OnUpdatePackageSubscription = {
     details_file: string,
     is_premium_flag?: string | null,
     video_link?: string | null,
+    Activities?:  {
+      __typename: "ModelActivityConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -1929,6 +2294,11 @@ export type OnDeletePackageSubscription = {
     details_file: string,
     is_premium_flag?: string | null,
     video_link?: string | null,
+    Activities?:  {
+      __typename: "ModelActivityConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,

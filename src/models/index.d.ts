@@ -6,6 +6,44 @@ import { LazyLoading, LazyLoadingDisabled, AsyncItem, AsyncCollection } from "@a
 
 
 
+type EagerActivity = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Activity, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly name?: string | null;
+  readonly description?: string | null;
+  readonly image?: string | null;
+  readonly link?: string | null;
+  readonly packageId?: string | null;
+  readonly packageID: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyActivity = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Activity, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly name?: string | null;
+  readonly description?: string | null;
+  readonly image?: string | null;
+  readonly link?: string | null;
+  readonly packageId?: string | null;
+  readonly packageID: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Activity = LazyLoading extends LazyLoadingDisabled ? EagerActivity : LazyActivity
+
+export declare const Activity: (new (init: ModelInit<Activity>) => Activity) & {
+  copyOf(source: Activity, mutator: (draft: MutableModel<Activity>) => MutableModel<Activity> | void): Activity;
+}
+
 type EagerEnquiry = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<Enquiry, 'id'>;
@@ -153,6 +191,7 @@ type EagerPackage = {
   readonly details_file: string;
   readonly is_premium_flag?: string | null;
   readonly video_link?: string | null;
+  readonly Activities?: (Activity | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -172,6 +211,7 @@ type LazyPackage = {
   readonly details_file: string;
   readonly is_premium_flag?: string | null;
   readonly video_link?: string | null;
+  readonly Activities: AsyncCollection<Activity>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

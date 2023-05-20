@@ -18,9 +18,21 @@ export type AmplifyDependentResourcesAttributes = {
       "UserPoolArn": "string",
       "UserPoolId": "string",
       "UserPoolName": "string"
-    },
-    "userPoolGroups": {
-      "kiteGroupRole": "string"
+    }
+  },
+  "function": {
+    "payment": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    }
+  },
+  "storage": {
+    "s3kitefrontendstorage79e65883": {
+      "BucketName": "string",
+      "Region": "string"
     }
   }
 }

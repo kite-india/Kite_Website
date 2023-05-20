@@ -2,6 +2,60 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateActivity = /* GraphQL */ `
+  subscription OnCreateActivity($filter: ModelSubscriptionActivityFilterInput) {
+    onCreateActivity(filter: $filter) {
+      id
+      name
+      description
+      image
+      link
+      packageId
+      packageID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateActivity = /* GraphQL */ `
+  subscription OnUpdateActivity($filter: ModelSubscriptionActivityFilterInput) {
+    onUpdateActivity(filter: $filter) {
+      id
+      name
+      description
+      image
+      link
+      packageId
+      packageID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteActivity = /* GraphQL */ `
+  subscription OnDeleteActivity($filter: ModelSubscriptionActivityFilterInput) {
+    onDeleteActivity(filter: $filter) {
+      id
+      name
+      description
+      image
+      link
+      packageId
+      packageID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
 export const onCreateEnquiry = /* GraphQL */ `
   subscription OnCreateEnquiry($filter: ModelSubscriptionEnquiryFilterInput) {
     onCreateEnquiry(filter: $filter) {
@@ -255,6 +309,10 @@ export const onCreatePackage = /* GraphQL */ `
       details_file
       is_premium_flag
       video_link
+      Activities {
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -276,6 +334,10 @@ export const onUpdatePackage = /* GraphQL */ `
       details_file
       is_premium_flag
       video_link
+      Activities {
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -297,6 +359,10 @@ export const onDeletePackage = /* GraphQL */ `
       details_file
       is_premium_flag
       video_link
+      Activities {
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version

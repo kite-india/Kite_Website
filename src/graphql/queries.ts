@@ -2,6 +2,116 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getActivity = /* GraphQL */ `
+  query GetActivity($id: ID!) {
+    getActivity(id: $id) {
+      id
+      name
+      description
+      image
+      link
+      packageId
+      packageID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const listActivities = /* GraphQL */ `
+  query ListActivities(
+    $filter: ModelActivityFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listActivities(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        description
+        image
+        link
+        packageId
+        packageID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncActivities = /* GraphQL */ `
+  query SyncActivities(
+    $filter: ModelActivityFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncActivities(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        name
+        description
+        image
+        link
+        packageId
+        packageID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const activitiesByPackageID = /* GraphQL */ `
+  query ActivitiesByPackageID(
+    $packageID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelActivityFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    activitiesByPackageID(
+      packageID: $packageID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        description
+        image
+        link
+        packageId
+        packageID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const getEnquiry = /* GraphQL */ `
   query GetEnquiry($id: ID!) {
     getEnquiry(id: $id) {
@@ -334,6 +444,10 @@ export const getPackage = /* GraphQL */ `
       details_file
       is_premium_flag
       video_link
+      Activities {
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version

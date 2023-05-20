@@ -8,6 +8,8 @@ import '../public/gallery.css'
 import { Amplify, API, graphqlOperation } from 'aws-amplify';
 import awsconfig from 'src/aws-exports.js';
 Amplify.configure(awsconfig);
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Website = ({
   Component,
@@ -18,6 +20,7 @@ const Website = ({
     <ChakraProvider theme={theme}>
       <Fonts />
       <SessionProvider session={pageProps.session}>
+      <ToastContainer></ToastContainer>
         <Component {...pageProps} key={router.route} />
       </SessionProvider>
     </ChakraProvider>

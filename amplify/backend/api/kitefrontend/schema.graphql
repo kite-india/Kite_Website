@@ -1,3 +1,13 @@
+type Activity @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  description: String
+  image: String
+  link: String
+  packageId: String
+  packageID: ID! @index(name: "byPackage")
+}
+
 type Enquiry @model @auth(rules: [{allow: public}]) {
   id: ID!
   destination_name: String
@@ -38,6 +48,7 @@ type Package @model @auth(rules: [{allow: public, operations: [read]}, {allow: p
   details_file: String!
   is_premium_flag: String
   video_link: String
+  Activities: [Activity] @hasMany(indexName: "byPackage", fields: ["id"])
 }
 
 type UserInfo @model @auth(rules: [{allow: public, operations: [read]}, {allow: private}, {allow: groups, groups: ["ap-south-1_GnEmuWInD_Google"], operations: [read, create, update, delete]}]) {

@@ -25,9 +25,8 @@
           ],
           "defaultAuthentication": {
             "apiKeyConfig": {
-              "apiKeyExpirationDate": "2024-05-10T16:42:53.805Z",
-              "apiKeyExpirationDays": 365,
-              "description": "da2-v3fdb7b5f5hclnqzec3bwdsvru"
+              "apiKeyExpirationDays": 30,
+              "description": "api key description"
             },
             "authenticationType": "API_KEY"
           }
@@ -47,12 +46,7 @@
           "SMS"
         ],
         "passwordProtectionSettings": {
-          "passwordPolicyCharacters": [
-            "REQUIRES_LOWERCASE",
-            "REQUIRES_NUMBERS",
-            "REQUIRES_SYMBOLS",
-            "REQUIRES_UPPERCASE"
-          ],
+          "passwordPolicyCharacters": [],
           "passwordPolicyMinLength": 8
         },
         "signupAttributes": [
@@ -74,22 +68,38 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
-    },
-    "userPoolGroups": {
-      "dependsOn": [
-        {
-          "attributes": [
-            "UserPoolId",
-            "AppClientIDWeb",
-            "AppClientID",
-            "IdentityPoolId"
-          ],
-          "category": "auth",
-          "resourceName": "kitefrontend"
-        }
-      ],
+    }
+  },
+  "function": {
+    "payment": {
+      "build": true,
       "providerPlugin": "awscloudformation",
-      "service": "Cognito-UserPool-Groups"
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_payment_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "payment"
+        }
+      ]
+    },
+    "AMPLIFY_function_payment_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "payment"
+        }
+      ]
+    }
+  },
+  "storage": {
+    "s3kitefrontendstorage79e65883": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
     }
   }
 }
