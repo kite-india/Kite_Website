@@ -32,6 +32,7 @@ app.use(function(req, res, next) {
 
 app.get('/item', function(req, res) {
   // Add your code here
+  
   res.json({success: 'get call succeed!', url: req.url});
 });
 
@@ -45,8 +46,10 @@ app.get('/item/*', function(req, res) {
 ****************************/
 
 app.post('/item', function(req, res) {
+
+  console.log(req)
   // Add your code here
-  res.json({success: 'post call succeed!', url: req.url, body: req.body})
+  res.json({success: 'post call succeed!', url: req.url, body: req.apiGateway.event.requestContext.authorizer})
 });
 
 app.post('/item/*', function(req, res) {

@@ -17,6 +17,7 @@ import type { NextPage } from 'next'
 import type { TripsPageProps } from '@utils/types'
 import { useTripsStore } from '@utils/redux/useTripsStore'
 import Link from 'next/link'
+import { API } from "aws-amplify";
 
 const Trips: NextPage<TripsPageProps> = ({ packages_data = null }) => {
   return (
@@ -30,6 +31,10 @@ const Trips: NextPage<TripsPageProps> = ({ packages_data = null }) => {
             mb={{ base: 3, lg: 6 }}
           >
             Plan your trips
+            <div onClick={async () => {
+              let foo = await API.post("kiterestapi", "/item",{body:{rfsd:"fesd"}});
+              console.log(foo)
+            }}>Book</div>
           </Heading>
           <Flex
             direction={{ base: 'column', lg: 'row' }}

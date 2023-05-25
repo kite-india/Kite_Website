@@ -9,14 +9,16 @@
       "UnauthRoleName": "amplify-kitefrontend-staging-162600-unauthRole",
       "StackName": "amplify-kitefrontend-staging-162600",
       "StackId": "arn:aws:cloudformation:ap-south-1:832600023334:stack/amplify-kitefrontend-staging-162600/2f3f9d80-ee86-11ed-b76a-0a1003a05e60",
-      "AmplifyAppId": "d3v46gbvy6d0x3"
+      "AmplifyAppId": "d3v46gbvy6d0x3",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-kitefrontend-staging-162600-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
     },
     "categories": {
       "auth": {
         "kitefrontend": {}
       },
       "api": {
-        "kitefrontend": {}
+        "kitefrontend": {},
+        "kiterestapi": {}
       },
       "storage": {
         "s3kitefrontendstorage79e65883": {}
@@ -24,7 +26,11 @@
       "function": {
         "payment": {
           "deploymentBucketName": "amplify-kitefrontend-staging-162600-deployment",
-          "s3Key": "amplify-builds/payment-47566854566d6e2b7577-build.zip"
+          "s3Key": "amplify-builds/payment-63642b4a4f6f4c507359-build.zip"
+        },
+        "test": {
+          "deploymentBucketName": "amplify-kitefrontend-staging-162600-deployment",
+          "s3Key": "amplify-builds/test-4a74684a4f7030336671-build.zip"
         }
       }
     }

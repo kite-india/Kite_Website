@@ -191,7 +191,7 @@ type EagerPackage = {
   readonly details_file: string;
   readonly is_premium_flag?: string | null;
   readonly video_link?: string | null;
-  readonly Activities?: (Activity | null)[] | null;
+  readonly activities?: (Activity | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -211,7 +211,7 @@ type LazyPackage = {
   readonly details_file: string;
   readonly is_premium_flag?: string | null;
   readonly video_link?: string | null;
-  readonly Activities: AsyncCollection<Activity>;
+  readonly activities: AsyncCollection<Activity>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

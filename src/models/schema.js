@@ -502,8 +502,8 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "Activities": {
-                    "name": "Activities",
+                "activities": {
+                    "name": "activities",
                     "isArray": true,
                     "type": {
                         "model": "Activity"
@@ -715,5 +715,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.4.3",
-    "version": "911e748d3abb706bcfd94b53dbbc0c21"
+    "version": "7339e2674f9127302df37a8d1449d13d"
 };

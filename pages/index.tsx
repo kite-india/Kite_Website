@@ -9,6 +9,10 @@ import Layout from '@components/layouts/main'
 import axios from 'axios'
 import type { NextPage } from 'next'
 import type { HomePageProps } from '@utils/types'
+import { API } from 'aws-amplify'
+import { GraphQLQuery } from '@aws-amplify/api';
+import { ListPackagesQuery } from "src/API";
+import type { Activity } from 'src/API';
 
 const Page: NextPage<HomePageProps> = ({
   featured_data = null,
@@ -37,6 +41,37 @@ const Page: NextPage<HomePageProps> = ({
 // }
 
 export async function getStaticProps() {
+
+
+
+  const allTodos = await API.graphql<GraphQLQuery<any>>({
+    query: `query MyQuery {
+      listPackages(filter: {is_premium_flag: {eq: "true"}}) {
+        items {
+          id
+          image
+          is_premium_flag
+          location
+          name
+          updatedAt
+          details_file
+          description
+          activities{
+            items{
+              name
+              description
+              image
+              packageID
+            }
+          }
+        }
+      }
+    }
+    `})
+
+
+
+
   const { data: featured_data } = await axios.get(
     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/packages/premium`
   )
