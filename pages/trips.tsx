@@ -14,12 +14,15 @@ import { PackagesSection, Activities } from '@sections/index'
 import Section from '@components/Section'
 import Layout from '@components/layouts/main'
 import type { NextPage } from 'next'
-import type { TripsPageProps } from '@utils/types'
+import type { Trip, TripsPageProps } from '@utils/types'
 import { useTripsStore } from '@utils/redux/useTripsStore'
 import Link from 'next/link'
 import { API } from "aws-amplify";
-
+import { GraphQLQuery } from '@aws-amplify/api';
 const Trips: NextPage<TripsPageProps> = ({ packages_data = null }) => {
+
+
+  console.log(packages_data)
   return (
     <Layout title="Trips">
       <Container w="100%" pt={8} maxW="container.xl">
@@ -32,7 +35,7 @@ const Trips: NextPage<TripsPageProps> = ({ packages_data = null }) => {
           >
             Plan your trips
             <div onClick={async () => {
-              let foo = await API.post("kiterestapi", "/item",{body:{rfsd:"fesd"}});
+              let foo = await API.post("kiterestapi", "/item", { body: { rfsd: "fesd" } });
               console.log(foo)
             }}>Book</div>
           </Heading>
@@ -116,9 +119,42 @@ export async function getStaticProps() {
   //   }
   // }
 
-  await useTripsStore.getState().fetchTrips()
+  // await useTripsStore.getState().fetchTrips()
 
-  const packages_data = useTripsStore.getState().trips
+  // const packages_data = useTripsStore.getState().trips
+  // console.log(packages_data)
+  const packagesAndActivities = await API.graphql<GraphQLQuery<any>>({
+    query: `query MyQuery {
+      listPackages {
+        items {
+          contact
+          cost
+          createdAt
+          description
+          details_file
+          id
+          image
+          is_premium_flag
+          location
+          name
+          updatedAt
+          video_link
+          activities {
+            items {
+              id
+              image
+              description
+              name
+            }
+          }
+        }
+      }
+    }
+    
+    `})
+
+  let packages_data = packagesAndActivities.data.listPackages.items as Trip[];
+
 
   return { props: { packages_data } }
 }

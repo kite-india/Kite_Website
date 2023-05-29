@@ -30,18 +30,14 @@ import { ExtraPassenger } from '@sections/index'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { requireAuth } from '@utils/helpers/requireAuth'
+import { Amplify, API, withSSRContext } from "aws-amplify";
+import { GraphQLQuery } from '@aws-amplify/api'
+import { GetPackageQuery } from 'src/API'
 
-const composeBookTrip = () => () => {}
+const composeBookTrip = () => () => { }
 
 const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
-  const { status } = useSession()
-  const router = useRouter()
-  const { data: session } = useSession()
-
-  if (status != 'authenticated') {
-    router.push('/login', { query: { from: router.pathname } })
-  }
-
+ 
   const { isOpen, onToggle } = useDisclosure()
   const [formParams, setFormParams] = useState<BookNowFormType>({})
   const [passengers, setPassengers] = useState<number>(1)
@@ -72,7 +68,7 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
     e.preventDefault()
   }
 
-  const handleSubmit = () => {}
+  const handleSubmit = () => { }
 
   return (
     <Layout title="Book Now">
@@ -156,7 +152,7 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
                     <Input
                       type="text"
                       name="fname"
-                      value={session ? session.user.name : undefined}
+                      // value={session ? session.user.name : undefined}
                       placeholder="First Name"
                       onChange={handleChange} //here
                       required
@@ -188,7 +184,7 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
                     <Input
                       type="email"
                       name="email"
-                      value={session ? session.user.email : undefined}
+                      // value={session ? session.user.email : undefined}
                       placeholder="Email Address"
                       required
                       onChange={handleChange}
@@ -281,14 +277,32 @@ export default BookNow
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { id } = context.params
-
-  await useTripsStore.getState().fetchSingleTripById(id as string)
-
-  const data = useTripsStore.getState().singleTripById
-
-  return requireAuth(context, session => {
-    return {
-      props: { session, packages_data: data as Trip }
+  // const SSR = withSSRContext(context)
+  // console.log(SSR)
+  const data = await API.graphql<GraphQLQuery<GetPackageQuery>>({
+    query: `  query MyQuery {
+      getPackage(id: "${id}") {
+      
+        cost
+        createdAt
+        description
+        details_file
+        image
+        id
+        name
+        contact
+        location
+        is_premium_flag
+        updatedAt
+        video_link
+      }
     }
-  })
+    
+    `})
+
+
+  return {
+    props: { packages_data: data.data.getPackage as Trip }
+  }
 }
+

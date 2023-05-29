@@ -23,11 +23,13 @@ interface PackageProps {
 
 const PackageCard: React.FC<PackageProps> = ({ data }) => {
   const router = useRouter()
-  const { id, location, cost, activities, description, image } = data
+  const { id, location, cost, activities, description, image } = data;
+
+  console.log(activities)
   const bookNow = () => {
     router.push(`/packages/${id}/book-now`)
   }
-  console.log(activities)
+
   return (
     <Box
       display={'flex'}
@@ -104,71 +106,73 @@ const PackageCard: React.FC<PackageProps> = ({ data }) => {
           w="full"
           pt={3}
         >
-          {activities.map(tag => (
-            <Box w="100%">
-              <Text key={tag}>
-                <Icon as={FiMap} mr={2} />
-                {tag}
-              </Text>
+          {activities.items.map(tag => (
+          
+            < Box w = "100%" >
+            <Text key={tag.id}>
+              <Icon as={FiMap} mr={2} />
+
+              {tag.name}
+            </Text>
             </Box>
           ))}
-        </SimpleGrid>
-        <SimpleGrid
-          mt={3}
-          fontFamily="'Poppins'"
-          columns={2}
-          alignItems={{ base: 'center', lg: 'left' }}
-          w="100%"
-          spacingX="40px"
-          px={1}
-        >
-          <Text fontFamily="'Poppins'" fontSize="18px" fontWeight={'bold'}>
-            Rs {cost}/{' '}
-            <Text
-              as="span"
-              fontWeight={'normal'}
-              fontFamily="'Poppins'"
-              fontSize="12px"
-            >
-              person
-            </Text>
-          </Text>
-          <Flex
-            direction={{ base: 'column', md: 'row' }}
-            align="center"
-            justify="space-between"
-            w="100%"
-            gap={{ base: 2, lg: 0 }}
+      </SimpleGrid>
+      <SimpleGrid
+        mt={3}
+        fontFamily="'Poppins'"
+        columns={2}
+        alignItems={{ base: 'center', lg: 'left' }}
+        w="100%"
+        spacingX="40px"
+        px={1}
+      >
+        <Text fontFamily="'Poppins'" fontSize="18px" fontWeight={'bold'}>
+          Rs {cost}/{' '}
+          <Text
+            as="span"
+            fontWeight={'normal'}
+            fontFamily="'Poppins'"
+            fontSize="12px"
           >
-            <ButtonGroup gap={2}>
-              <Link href={`/packages/${id}`}>
-                <Button
-                  color="white"
-                  textAlign="center"
-                  px={4}
-                  py={2}
-                  bg="#125C13"
-                  _hover={{ bg: '#8FB339' }}
-                >
-                  More Info
-                </Button>
-              </Link>
+            person
+          </Text>
+        </Text>
+        <Flex
+          direction={{ base: 'column', md: 'row' }}
+          align="center"
+          justify="space-between"
+          w="100%"
+          gap={{ base: 2, lg: 0 }}
+        >
+          <ButtonGroup gap={2}>
+            <Link href={`/packages/${id}`}>
               <Button
-                textAlign="center"
                 color="white"
-                bg="#8FB339"
+                textAlign="center"
                 px={4}
                 py={2}
-                _hover={{ bg: '#125C13' }}
-                onClick={bookNow}
+                bg="#125C13"
+                _hover={{ bg: '#8FB339' }}
               >
-                Book Now
+                More Info
               </Button>
-            </ButtonGroup>
-          </Flex>
-        </SimpleGrid>
-      </Flex>
-    </Box>
+            </Link>
+            <Button
+              textAlign="center"
+              color="white"
+              bg="#8FB339"
+              px={4}
+              py={2}
+              _hover={{ bg: '#125C13' }}
+              onClick={bookNow}
+            >
+              Book Now
+            </Button>
+          </ButtonGroup>
+        </Flex>
+      </SimpleGrid>
+    </Flex>
+    </Box >
   )
 }
 

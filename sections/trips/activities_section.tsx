@@ -15,6 +15,7 @@ interface ActivityProps {
 }
 
 const Activities: React.FC<ActivityProps> = ({ data }) => {
+  console.log(data)
   return (
     <Box w="100%" bg="#F7F8F9" borderRadius="lg" p={{ base: 3, lg: 6 }}>
       <Flex
@@ -57,13 +58,15 @@ const Activities: React.FC<ActivityProps> = ({ data }) => {
           slidesPerView={1}
         >
           {data.map((activity, idx) => {
-            if (idx % 2 !== 0) return
+            console.log(idx)
+            console.log(data.at(idx + 1))
+            if (idx % 2 !== 0) return <ActivityCard data={activity} />
             else
               return (
                 <SwiperSlide key={activity.name}>
                   <Flex direction="column" gap={4} mb={4}>
                     <ActivityCard data={activity} />
-                    <ActivityCard data={data.at(idx + 1)} />
+
                   </Flex>
                 </SwiperSlide>
               )

@@ -19,10 +19,12 @@ export interface TripsPageProps {
 }
 
 export type Activity = {
-  id?: string
-  name?: string
-  description?: string
-  image?: string
+ 
+    id?: string
+    name?: string
+    description?: string
+    image?: string
+  
 }
 
 export type FeaturedDestination = Trip & {
@@ -33,14 +35,16 @@ export type FeaturedDestination = Trip & {
 export type Trip = {
   id?: string
   location?: string
-  cost?: string
-  activities?: string[]
+  cost?: number
+  activities?: {
+    items: Activity[]
+  }
   contact?: string
   image?: string
   name?: string
   description?: string
   details_file?: string
-  is_premium_flag?: boolean
+  is_premium_flag?: string
 }
 
 export type Transaction = {

@@ -29,21 +29,21 @@ import Packages from '@sections/trips/packages-section'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper'
 import { Activities } from '@sections/index'
-
+import { API } from 'aws-amplify';
+import { GraphQLQuery } from '@aws-amplify/api'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
+import { ListPackagesQuery } from 'src/API'
 
 interface PackagesPageProps {
   packages_data: Trip
-  activities_data: Activity[]
   gallery_data: Gallery[]
 }
 
 const Page: NextPage<PackagesPageProps> = ({
   packages_data,
-  activities_data,
   gallery_data
 }) => {
   const router = useRouter()
@@ -59,6 +59,8 @@ const Page: NextPage<PackagesPageProps> = ({
     location,
     is_premium_flag
   } = packages_data
+
+  console.log(activities)
   const bookNow = () => {
     router.push(`/packages/${id}/book-now`)
   }
@@ -174,11 +176,11 @@ const Page: NextPage<PackagesPageProps> = ({
                   w="full"
                   pt={3}
                 >
-                  {activities.map(tag => (
-                    <Box key={tag} w="100%">
-                      <Text key={tag}>
+                  {activities.items.map(tag => (
+                    <Box key={tag.id} w="100%">
+                      <Text key={tag.id}>
                         <Icon as={FiMap} mr={2} />
-                        {tag}
+                        {tag.name}
                       </Text>
                     </Box>
                   ))}
@@ -264,45 +266,88 @@ const Page: NextPage<PackagesPageProps> = ({
           </Box>
         </Section>
         <Section delay={0.4}>
-          <Activities data={activities_data} />
+          <Activities data={activities.items} />
         </Section>
       </Container>
     </Layout>
   )
 }
 
-export async function getStaticPaths() {
-  const { data }: { data: Trip[] } = await axios.get(
-    `${process.env.NEXT_PUBLIC_KITE_BACKEND}/packages`
-  )
+// export async function getStaticPaths() {
+//   const packagesId = await API.graphql<GraphQLQuery<ListPackagesQuery>>({
+//     query: `query MyQuery {
+//       listPackages {
+//         items {
+//           id
+          
+//         }
+//       }
+//     }
+    
+//     `})
+//   let data = packagesId.data.listPackages.items;
 
-  const paths = data.map((trip: Trip) => {
-    return {
-      params: { id: `${trip.id}` }
-    }
-  })
-  return {
-    paths,
-    fallback: false
-  }
-}
+//   const paths = data.map((id: any) => {
+//     return {
+//       params: { id: `${id}` }
+//     }
+//   })
+//   return {
+//     paths,
+//     fallback: false
+//   }
+// }
 
-export async function getStaticProps(context: { params: { id: string } }) {
+export async function getServerSideProps(context: { params: { id: string } }) {
   const { id } = context.params
 
-  const { data: activities_data } = await axios.get(
-    `${process.env.NEXT_PUBLIC_KITE_BACKEND}/activities`
-  )
+
+
+  const packagesAndActivities = await API.graphql<GraphQLQuery<any>>({
+    query: `  query MyQuery {
+      getPackage(id: "${id}") {
+      
+        cost
+        createdAt
+        description
+        details_file
+        image
+        id
+        name
+        contact
+        location
+        is_premium_flag
+        updatedAt
+        video_link
+
+        activities {
+          items {
+            description
+            id
+            image
+            link
+            name
+
+          }
+        }
+      }
+    }
+    
+    `})
+
+
+  console.log(packagesAndActivities)
+  let data = packagesAndActivities.data.getPackage;
+  // const { data: activities_data } = await axios.get(
+  //   `${process.env.NEXT_PUBLIC_KITE_BACKEND}/activities`
+  // )
   const { data: gallery_data } = await axios.get(
     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/gallery`
   )
 
-  await useTripsStore.getState().fetchSingleTripById(id)
-
-  const data = useTripsStore.getState().singleTripById
 
   return {
-    props: { packages_data: data as Trip, activities_data, gallery_data }
+    props: { packages_data: data as Trip, gallery_data }
   }
 }
 

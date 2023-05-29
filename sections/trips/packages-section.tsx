@@ -32,6 +32,9 @@ interface PackageProps {
 }
 
 const Packages: React.FC<PackageProps> = ({ data }) => {
+
+  console.log("Hi")
+  console.log(data)
   const [sort, setSort] = useState(1)
   const allParams = ['cost', 'location', 'description', 'activities']
   const [search, setSearch] = useState('')
