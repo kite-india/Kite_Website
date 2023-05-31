@@ -1,10 +1,10 @@
-type Activity @model @auth(rules: [{allow: public}]) {
+type Activity @model @auth(rules: [{allow: public}, {allow: groups, groups: ["admin"], operations: [read, create, update, delete]}]) {
   id: ID!
   name: String
   description: String
   image: String
   link: String
-  packageId: String
+  packageName: String
   packageID: ID! @index(name: "byPackage")
 }
 
@@ -46,7 +46,7 @@ type Package @model @auth(rules: [{allow: public, operations: [read]}, {allow: p
   cost: Float!
   image: String!
   details_file: String!
-  is_premium_flag: String
+  is_premium_flag: Boolean
   video_link: String
   activities: [Activity] @hasMany(indexName: "byPackage", fields: ["id"])
 }
@@ -55,9 +55,8 @@ type UserInfo @model @auth(rules: [{allow: public, operations: [read]}, {allow: 
   id: ID!
   dob: String
   phone_number: String
-  primary_phone: String
-  secondary_phone: String
   email: String
   Registrations: [Registration] @hasMany(indexName: "byUserInfo", fields: ["id"])
+  name: String
 }
  

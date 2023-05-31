@@ -90,6 +90,11 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "signUpTrigger": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "test": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -113,6 +118,22 @@
         }
       ]
     },
+    "AMPLIFY_function_signUpTrigger_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "signUpTrigger"
+        }
+      ]
+    },
+    "AMPLIFY_function_signUpTrigger_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "signUpTrigger"
+        }
+      ]
+    },
     "AMPLIFY_function_test_deploymentBucketName": {
       "usedBy": [
         {
@@ -128,7 +149,30 @@
           "resourceName": "test"
         }
       ]
+    },
+    "AMPLIFY_storage_kitefrontendd73ee5fd_bucketName": {
+      "usedBy": [
+        {
+          "category": "storage",
+          "resourceName": "kitefrontendd73ee5fd"
+        }
+      ]
+    },
+    "AMPLIFY_storage_kitefrontendd73ee5fd_region": {
+      "usedBy": [
+        {
+          "category": "storage",
+          "resourceName": "kitefrontendd73ee5fd"
+        }
+      ]
     }
   },
-  "storage": {}
+  "storage": {
+    "kitefrontendd73ee5fd": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3",
+      "serviceType": "imported"
+    }
+  }
 }

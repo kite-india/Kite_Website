@@ -6,7 +6,13 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
+import {
+  Button,
+  Flex,
+  Grid,
+  SwitchField,
+  TextField,
+} from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Package } from "../models";
 import { fetchByPath, validateField } from "./utils";
@@ -30,7 +36,7 @@ export default function PackageCreateForm(props) {
     cost: "",
     image: "",
     details_file: "",
-    is_premium_flag: "",
+    is_premium_flag: false,
     video_link: "",
   };
   const [name, setName] = React.useState(initialValues.name);
@@ -380,13 +386,13 @@ export default function PackageCreateForm(props) {
         hasError={errors.details_file?.hasError}
         {...getOverrideProps(overrides, "details_file")}
       ></TextField>
-      <TextField
+      <SwitchField
         label="Is premium flag"
-        isRequired={false}
-        isReadOnly={false}
-        value={is_premium_flag}
+        defaultChecked={false}
+        isDisabled={false}
+        isChecked={is_premium_flag}
         onChange={(e) => {
-          let { value } = e.target;
+          let value = e.target.checked;
           if (onChange) {
             const modelFields = {
               name,
@@ -411,7 +417,7 @@ export default function PackageCreateForm(props) {
         errorMessage={errors.is_premium_flag?.errorMessage}
         hasError={errors.is_premium_flag?.hasError}
         {...getOverrideProps(overrides, "is_premium_flag")}
-      ></TextField>
+      ></SwitchField>
       <TextField
         label="Video link"
         isRequired={false}

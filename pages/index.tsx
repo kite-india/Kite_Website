@@ -28,18 +28,6 @@ const Page: NextPage<HomePageProps> = ({
   )
 }
 
-// Page.getInitialProps = async () => {
-//   const { data: featured_data } = await axios.get(
-//     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/home`
-//   )
-
-//   const { data: activities_data } = await axios.get(
-//     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/activity`
-//   )
-
-//   return { featured_data, activities_data }
-// }
-
 export async function getStaticProps() {
 
 
@@ -65,6 +53,8 @@ export async function getStaticProps() {
     `})
 
 
+
+
   const activities = await API.graphql<GraphQLQuery<any>>({
     query: `query MyQuery {
       listActivities {
@@ -79,19 +69,12 @@ export async function getStaticProps() {
     
     `})
 
-  console.log(activities.data.listActivities.items)
 
-  // const { data: featured_data } = await axios.get(
-  //   `${process.env.NEXT_PUBLIC_KITE_BACKEND}/packages/premium`
-  // )
 
 
   let featured_data = premiumPackages.data.listPackages.items;
   let activities_data = activities.data.listActivities.items;
-  // console.log(featured_data)
-  // const { data: activities_data } = await axios.get(
-  //   `${process.env.NEXT_PUBLIC_KITE_BACKEND}/activities`
-  // )
+
 
   if (!featured_data || !activities_data) {
     return {

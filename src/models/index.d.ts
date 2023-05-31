@@ -16,7 +16,7 @@ type EagerActivity = {
   readonly description?: string | null;
   readonly image?: string | null;
   readonly link?: string | null;
-  readonly packageId?: string | null;
+  readonly packageName?: string | null;
   readonly packageID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
@@ -32,7 +32,7 @@ type LazyActivity = {
   readonly description?: string | null;
   readonly image?: string | null;
   readonly link?: string | null;
-  readonly packageId?: string | null;
+  readonly packageName?: string | null;
   readonly packageID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
@@ -189,7 +189,7 @@ type EagerPackage = {
   readonly cost: number;
   readonly image: string;
   readonly details_file: string;
-  readonly is_premium_flag?: string | null;
+  readonly is_premium_flag?: boolean | null;
   readonly video_link?: string | null;
   readonly activities?: (Activity | null)[] | null;
   readonly createdAt?: string | null;
@@ -209,7 +209,7 @@ type LazyPackage = {
   readonly cost: number;
   readonly image: string;
   readonly details_file: string;
-  readonly is_premium_flag?: string | null;
+  readonly is_premium_flag?: boolean | null;
   readonly video_link?: string | null;
   readonly activities: AsyncCollection<Activity>;
   readonly createdAt?: string | null;
@@ -230,10 +230,9 @@ type EagerUserInfo = {
   readonly id: string;
   readonly dob?: string | null;
   readonly phone_number?: string | null;
-  readonly primary_phone?: string | null;
-  readonly secondary_phone?: string | null;
   readonly email?: string | null;
   readonly Registrations?: (Registration | null)[] | null;
+  readonly name?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -246,10 +245,9 @@ type LazyUserInfo = {
   readonly id: string;
   readonly dob?: string | null;
   readonly phone_number?: string | null;
-  readonly primary_phone?: string | null;
-  readonly secondary_phone?: string | null;
   readonly email?: string | null;
   readonly Registrations: AsyncCollection<Registration>;
+  readonly name?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

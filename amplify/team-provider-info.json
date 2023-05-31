@@ -13,15 +13,14 @@
       "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-kitefrontend-staging-162600-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
     },
     "categories": {
+      "storage": {
+        "kitefrontendd73ee5fd": {
+          "bucketName": "kite-frontend-storage-79e65883162600-staging",
+          "region": "ap-south-1"
+        }
+      },
       "auth": {
         "kitefrontend": {}
-      },
-      "api": {
-        "kitefrontend": {},
-        "kiterestapi": {}
-      },
-      "storage": {
-        "s3kitefrontendstorage79e65883": {}
       },
       "function": {
         "payment": {
@@ -30,8 +29,17 @@
         },
         "test": {
           "deploymentBucketName": "amplify-kitefrontend-staging-162600-deployment",
-          "s3Key": "amplify-builds/test-4a74684a4f7030336671-build.zip"
+          "s3Key": "amplify-builds/test-744a4a6375345737486d-build.zip"
+        },
+        "kitefrontenda253a59e": {},
+        "signUpTrigger": {
+          "deploymentBucketName": "amplify-kitefrontend-staging-162600-deployment",
+          "s3Key": "amplify-builds/signUpTrigger-42496462764451314a31-build.zip"
         }
+      },
+      "api": {
+        "kitefrontend": {},
+        "kiterestapi": {}
       }
     }
   }

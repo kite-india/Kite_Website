@@ -25,36 +25,28 @@ export default function UserInfoCreateForm(props) {
   const initialValues = {
     dob: "",
     phone_number: "",
-    primary_phone: "",
-    secondary_phone: "",
     email: "",
+    name: "",
   };
   const [dob, setDob] = React.useState(initialValues.dob);
   const [phone_number, setPhone_number] = React.useState(
     initialValues.phone_number
   );
-  const [primary_phone, setPrimary_phone] = React.useState(
-    initialValues.primary_phone
-  );
-  const [secondary_phone, setSecondary_phone] = React.useState(
-    initialValues.secondary_phone
-  );
   const [email, setEmail] = React.useState(initialValues.email);
+  const [name, setName] = React.useState(initialValues.name);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setDob(initialValues.dob);
     setPhone_number(initialValues.phone_number);
-    setPrimary_phone(initialValues.primary_phone);
-    setSecondary_phone(initialValues.secondary_phone);
     setEmail(initialValues.email);
+    setName(initialValues.name);
     setErrors({});
   };
   const validations = {
     dob: [],
     phone_number: [],
-    primary_phone: [],
-    secondary_phone: [],
     email: [],
+    name: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -84,9 +76,8 @@ export default function UserInfoCreateForm(props) {
         let modelFields = {
           dob,
           phone_number,
-          primary_phone,
-          secondary_phone,
           email,
+          name,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -143,9 +134,8 @@ export default function UserInfoCreateForm(props) {
             const modelFields = {
               dob: value,
               phone_number,
-              primary_phone,
-              secondary_phone,
               email,
+              name,
             };
             const result = onChange(modelFields);
             value = result?.dob ?? value;
@@ -171,9 +161,8 @@ export default function UserInfoCreateForm(props) {
             const modelFields = {
               dob,
               phone_number: value,
-              primary_phone,
-              secondary_phone,
               email,
+              name,
             };
             const result = onChange(modelFields);
             value = result?.phone_number ?? value;
@@ -189,62 +178,6 @@ export default function UserInfoCreateForm(props) {
         {...getOverrideProps(overrides, "phone_number")}
       ></TextField>
       <TextField
-        label="Primary phone"
-        isRequired={false}
-        isReadOnly={false}
-        value={primary_phone}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              dob,
-              phone_number,
-              primary_phone: value,
-              secondary_phone,
-              email,
-            };
-            const result = onChange(modelFields);
-            value = result?.primary_phone ?? value;
-          }
-          if (errors.primary_phone?.hasError) {
-            runValidationTasks("primary_phone", value);
-          }
-          setPrimary_phone(value);
-        }}
-        onBlur={() => runValidationTasks("primary_phone", primary_phone)}
-        errorMessage={errors.primary_phone?.errorMessage}
-        hasError={errors.primary_phone?.hasError}
-        {...getOverrideProps(overrides, "primary_phone")}
-      ></TextField>
-      <TextField
-        label="Secondary phone"
-        isRequired={false}
-        isReadOnly={false}
-        value={secondary_phone}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              dob,
-              phone_number,
-              primary_phone,
-              secondary_phone: value,
-              email,
-            };
-            const result = onChange(modelFields);
-            value = result?.secondary_phone ?? value;
-          }
-          if (errors.secondary_phone?.hasError) {
-            runValidationTasks("secondary_phone", value);
-          }
-          setSecondary_phone(value);
-        }}
-        onBlur={() => runValidationTasks("secondary_phone", secondary_phone)}
-        errorMessage={errors.secondary_phone?.errorMessage}
-        hasError={errors.secondary_phone?.hasError}
-        {...getOverrideProps(overrides, "secondary_phone")}
-      ></TextField>
-      <TextField
         label="Email"
         isRequired={false}
         isReadOnly={false}
@@ -255,9 +188,8 @@ export default function UserInfoCreateForm(props) {
             const modelFields = {
               dob,
               phone_number,
-              primary_phone,
-              secondary_phone,
               email: value,
+              name,
             };
             const result = onChange(modelFields);
             value = result?.email ?? value;
@@ -271,6 +203,33 @@ export default function UserInfoCreateForm(props) {
         errorMessage={errors.email?.errorMessage}
         hasError={errors.email?.hasError}
         {...getOverrideProps(overrides, "email")}
+      ></TextField>
+      <TextField
+        label="Name"
+        isRequired={false}
+        isReadOnly={false}
+        value={name}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              dob,
+              phone_number,
+              email,
+              name: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.name ?? value;
+          }
+          if (errors.name?.hasError) {
+            runValidationTasks("name", value);
+          }
+          setName(value);
+        }}
+        onBlur={() => runValidationTasks("name", name)}
+        errorMessage={errors.name?.errorMessage}
+        hasError={errors.name?.hasError}
+        {...getOverrideProps(overrides, "name")}
       ></TextField>
       <Flex
         justifyContent="space-between"

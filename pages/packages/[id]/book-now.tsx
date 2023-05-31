@@ -30,14 +30,16 @@ import { ExtraPassenger } from '@sections/index'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { requireAuth } from '@utils/helpers/requireAuth'
-import { Amplify, API, withSSRContext } from "aws-amplify";
+import { Amplify, API, Auth, withSSRContext } from "aws-amplify";
 import { GraphQLQuery } from '@aws-amplify/api'
 import { GetPackageQuery } from 'src/API'
 
 const composeBookTrip = () => () => { }
 
+import { Authenticator } from "@aws-amplify/ui-react";
+
 const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
- 
+
   const { isOpen, onToggle } = useDisclosure()
   const [formParams, setFormParams] = useState<BookNowFormType>({})
   const [passengers, setPassengers] = useState<number>(1)
@@ -68,9 +70,16 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
     e.preventDefault()
   }
 
-  const handleSubmit = () => { }
+  const handleSubmit = () => { 
+
+    console.log(formParams)
+    console.log(extraPassengers)
+
+
+  }
 
   return (
+
     <Layout title="Book Now">
       <Container w="100%" pt={8} maxWidth="container.xl">
         <Section delay={0.1}>
@@ -270,39 +279,63 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
         </Box>
       </Container>
     </Layout>
+
   )
 }
 
 export default BookNow
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const { id } = context.params
-  // const SSR = withSSRContext(context)
-  // console.log(SSR)
-  const data = await API.graphql<GraphQLQuery<GetPackageQuery>>({
-    query: `  query MyQuery {
-      getPackage(id: "${id}") {
-      
-        cost
-        createdAt
-        description
-        details_file
-        image
-        id
-        name
-        contact
-        location
-        is_premium_flag
-        updatedAt
-        video_link
+
+
+  const { Auth } = withSSRContext(context);
+  try {
+    const user = await Auth.currentAuthenticatedUser();
+    const { id } = context.params
+    // const SSR = withSSRContext(context)
+    // console.log(SSR)
+    const data = await API.graphql<GraphQLQuery<GetPackageQuery>>({
+      query: `  query MyQuery {
+        getPackage(id: "${id}") {
+        
+          cost
+          createdAt
+          description
+          details_file
+          image
+          id
+          name
+          contact
+          location
+          is_premium_flag
+          updatedAt
+          video_link
+        }
       }
+      
+      `})
+
+
+    return {
+      props: { packages_data: data.data.getPackage as Trip }
     }
-    
-    `})
 
+  } catch (err) {
 
-  return {
-    props: { packages_data: data.data.getPackage as Trip }
+    console.log('User is not authenticated');
+    //Redirect to login page
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/login",
+      },
+      props: {},
+    };
+
+    // User is not authenticated
+
   }
+
+
 }
 

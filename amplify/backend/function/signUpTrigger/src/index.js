@@ -1,4 +1,6 @@
 
+
+
 /**
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
  */
@@ -14,9 +16,16 @@ exports.handler = async (event, context) => {
 
         let params = {
             Item: {
+                'id': {S: event.request.userAttributes.sub},
+                '__typename': {S: 'User'},
+                'name': {S: event.request.userAttributes.name},
                 'email': {S: event.request.userAttributes.email},
                 'createdAt': {S: date.toISOString()},
                 'updatedAt': {S: date.toISOString()},
+                'dob':{S: event.request.userAttributes.birthdate},
+                'phone_number':{S: event.request.userAttributes.phone_number},
+                '_version':{S: '1'},
+                '_lastChangedAt':{S:Number(1)}
             },
             TableName: process.env.UserInfoTable
         };

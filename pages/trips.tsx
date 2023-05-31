@@ -22,7 +22,7 @@ import { GraphQLQuery } from '@aws-amplify/api';
 const Trips: NextPage<TripsPageProps> = ({ packages_data = null }) => {
 
 
-  console.log(packages_data)
+  
   return (
     <Layout title="Trips">
       <Container w="100%" pt={8} maxW="container.xl">
@@ -152,10 +152,12 @@ export async function getStaticProps() {
     }
     
     `})
-
+  
   let packages_data = packagesAndActivities.data.listPackages.items as Trip[];
 
-
+  console.log("Hi")
+    console.log(packages_data.length)
+    console.log('end')
   return { props: { packages_data } }
 }
 

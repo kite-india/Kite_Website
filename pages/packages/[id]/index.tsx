@@ -345,7 +345,17 @@ export async function getServerSideProps(context: { params: { id: string } }) {
     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/gallery`
   )
 
+if(data===null){
 
+  return {
+    redirect: {
+      permanent: false,
+      destination: "/trips",
+    },
+    props: {},
+  };
+
+}
   return {
     props: { packages_data: data as Trip, gallery_data }
   }

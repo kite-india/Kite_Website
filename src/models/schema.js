@@ -38,8 +38,8 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "packageId": {
-                    "name": "packageId",
+                "packageName": {
+                    "name": "packageName",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -96,6 +96,20 @@ export const schema = {
                                     "update",
                                     "delete",
                                     "read"
+                                ]
+                            },
+                            {
+                                "groupClaim": "cognito:groups",
+                                "provider": "userPools",
+                                "allow": "groups",
+                                "groups": [
+                                    "admin"
+                                ],
+                                "operations": [
+                                    "read",
+                                    "create",
+                                    "update",
+                                    "delete"
                                 ]
                             }
                         ]
@@ -491,7 +505,7 @@ export const schema = {
                 "is_premium_flag": {
                     "name": "is_premium_flag",
                     "isArray": false,
-                    "type": "String",
+                    "type": "Boolean",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -612,20 +626,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "primary_phone": {
-                    "name": "primary_phone",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "secondary_phone": {
-                    "name": "secondary_phone",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
                 "email": {
                     "name": "email",
                     "isArray": false,
@@ -648,6 +648,13 @@ export const schema = {
                             "userinfoID"
                         ]
                     }
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -715,5 +722,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.4.3",
-    "version": "7339e2674f9127302df37a8d1449d13d"
+    "version": "22f2ffb42574d611cc6c210ef3de8d75"
 };

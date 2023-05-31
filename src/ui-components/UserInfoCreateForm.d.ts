@@ -15,25 +15,22 @@ export declare type ValidationFunction<T> = (value: T, validationResponse: Valid
 export declare type UserInfoCreateFormInputValues = {
     dob?: string;
     phone_number?: string;
-    primary_phone?: string;
-    secondary_phone?: string;
     email?: string;
+    name?: string;
 };
 export declare type UserInfoCreateFormValidationValues = {
     dob?: ValidationFunction<string>;
     phone_number?: ValidationFunction<string>;
-    primary_phone?: ValidationFunction<string>;
-    secondary_phone?: ValidationFunction<string>;
     email?: ValidationFunction<string>;
+    name?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type UserInfoCreateFormOverridesProps = {
     UserInfoCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
     dob?: PrimitiveOverrideProps<TextFieldProps>;
     phone_number?: PrimitiveOverrideProps<TextFieldProps>;
-    primary_phone?: PrimitiveOverrideProps<TextFieldProps>;
-    secondary_phone?: PrimitiveOverrideProps<TextFieldProps>;
     email?: PrimitiveOverrideProps<TextFieldProps>;
+    name?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type UserInfoCreateFormProps = React.PropsWithChildren<{
     overrides?: UserInfoCreateFormOverridesProps | undefined | null;

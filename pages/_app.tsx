@@ -7,9 +7,13 @@ import { Session } from 'next-auth'
 import '../public/gallery.css'
 import { Amplify, API, graphqlOperation } from 'aws-amplify';
 import awsconfig from 'src/aws-exports.js';
-Amplify.configure({...awsconfig,ssr:true});
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+
+Amplify.configure({...awsconfig,ssr:true});
+
 
 const Website = ({
   Component,

@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { GridProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { GridProps, SwitchFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 export declare type ValidationResponse = {
     hasError: boolean;
@@ -20,7 +20,7 @@ export declare type PackageCreateFormInputValues = {
     cost?: number;
     image?: string;
     details_file?: string;
-    is_premium_flag?: string;
+    is_premium_flag?: boolean;
     video_link?: string;
 };
 export declare type PackageCreateFormValidationValues = {
@@ -31,7 +31,7 @@ export declare type PackageCreateFormValidationValues = {
     cost?: ValidationFunction<number>;
     image?: ValidationFunction<string>;
     details_file?: ValidationFunction<string>;
-    is_premium_flag?: ValidationFunction<string>;
+    is_premium_flag?: ValidationFunction<boolean>;
     video_link?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
@@ -44,7 +44,7 @@ export declare type PackageCreateFormOverridesProps = {
     cost?: PrimitiveOverrideProps<TextFieldProps>;
     image?: PrimitiveOverrideProps<TextFieldProps>;
     details_file?: PrimitiveOverrideProps<TextFieldProps>;
-    is_premium_flag?: PrimitiveOverrideProps<TextFieldProps>;
+    is_premium_flag?: PrimitiveOverrideProps<SwitchFieldProps>;
     video_link?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type PackageCreateFormProps = React.PropsWithChildren<{
