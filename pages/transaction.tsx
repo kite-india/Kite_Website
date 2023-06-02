@@ -21,7 +21,7 @@ const Transactions: NextPage = () => {
 
   const [allData, setAllData] = useState<Transaction[]>([])
   const [bookedData, setBookedData] = useState<Transaction[]>([])
-  const [cancelData, setCancelData] = useState<Transaction>([])
+  const [cancelData, setCancelData] = useState<Transaction[]>([])
 
   useEffect(() => {
     (async () => {
