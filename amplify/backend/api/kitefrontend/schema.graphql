@@ -1,14 +1,32 @@
-type Activity @model @auth(rules: [{allow: public}, {allow: groups, groups: ["admin"], operations: [read, create, update, delete]}]) {
+type MainPassenger {
+  firstName: String
+  lastName: String
+  birthdate: String
+  phoneNumber: String
+  email: String
+  starts: AWSDate
+  ends: AWSDate
+}
+
+type PassengerDetails {
+  id: ID!
+  birthdate: Int
+  firstName: String
+  lastName: String
+}
+
+type Activity @model @auth(rules: [{allow: public, operations: [read]}, {allow: groups, groups: ["admin"], operations: [read, create, update, delete]}]) {
   id: ID!
   name: String
   description: String
   image: String
   link: String
   packageName: String
+  cost: Float
   packageID: ID! @index(name: "byPackage")
 }
 
-type Enquiry @model @auth(rules: [{allow: public}]) {
+type Enquiry @model @auth(rules: [{allow: public, operations: [create]}, {allow: groups, groups: ["admin"], operations: [read, create, update, delete]}]) {
   id: ID!
   destination_name: String
   name: String
@@ -23,11 +41,16 @@ type Gallery @model @auth(rules: [{allow: public}]) {
   image: String!
 }
 
-type Registration @model @auth(rules: [{allow: public}]) {
+type Registration @model @auth(rules: [{allow: private, operations: [read, update]}]) {
   id: ID!
   total_cost: Float
   userinfoID: ID! @index(name: "byUserInfo")
-  Package: Package @hasOne
+  Package: Package! @hasOne
+  activitiesId: [String]
+  passengers: [PassengerDetails]
+  mainPassenger: MainPassenger
+  bookingStatus: String
+  packageName: String
 }
 
 type Review @model @auth(rules: [{allow: public}]) {
@@ -51,12 +74,12 @@ type Package @model @auth(rules: [{allow: public, operations: [read]}, {allow: p
   activities: [Activity] @hasMany(indexName: "byPackage", fields: ["id"])
 }
 
-type UserInfo @model @auth(rules: [{allow: public, operations: [read]}, {allow: private}, {allow: groups, groups: ["ap-south-1_GnEmuWInD_Google"], operations: [read, create, update, delete]}]) {
+type UserInfo @model @auth(rules: [{allow: private, operations: [read]}, {allow: groups, groups: ["ap-south-1_GnEmuWInD_Google"], operations: [read]}, {allow: groups, groups: ["admin"], operations: [read, create, update, delete]}]) {
   id: ID!
   dob: String
   phone_number: String
   email: String
-  Registrations: [Registration] @hasMany(indexName: "byUserInfo", fields: ["id"])
+  Registrations: [Registration!] @hasMany(indexName: "byUserInfo", fields: ["id"])
   name: String
 }
  

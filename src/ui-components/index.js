@@ -13,5 +13,3 @@ export { default as ReviewCreateForm } from "./ReviewCreateForm";
 export { default as ReviewUpdateForm } from "./ReviewUpdateForm";
 export { default as PackageCreateForm } from "./PackageCreateForm";
 export { default as PackageUpdateForm } from "./PackageUpdateForm";
-export { default as UserInfoCreateForm } from "./UserInfoCreateForm";
-export { default as UserInfoUpdateForm } from "./UserInfoUpdateForm";

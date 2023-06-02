@@ -23,7 +23,8 @@ export type Activity = {
     id?: string
     name?: string
     description?: string
-    image?: string
+    image?: string,
+    cost?:string | number
   
 }
 
@@ -48,13 +49,15 @@ export type Trip = {
 }
 
 export type Transaction = {
-  id?: number
-  img?: string
-  place?: string
-  date?: string
-  guest?: number
-  cost?: string
-  status?: boolean
+  extraPassenger:[],
+  id:string,
+  mainPassenger:[],
+  packageName:string,
+  userInfoID:string,
+  starts?:string,
+  ends?:string,
+  bookingStatus:string,
+  totalCost:string
 }
 
 export interface TransactionPageProps {
@@ -80,17 +83,16 @@ export interface BookNowFormType {
   email?: string
   phone?: string
   persons?: ExtraPassengersType[]
-  dob?: Date | string
-  from?: Date | string
-  to?: Date | string
+  dob?:   string
+  from?: string
+  to?:string
 }
 
 export interface ExtraPassengersType {
   suffix?: 'mr' | 'mrs'
   fname?: string
   lname?: string
-  email?: string
-  phone?: string
+  birthdate?:string
 }
 export interface GalleryPageProps {
   data: Gallery[] | []

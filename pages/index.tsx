@@ -75,6 +75,7 @@ export async function getStaticProps() {
   let featured_data = premiumPackages.data.listPackages.items;
   let activities_data = activities.data.listActivities.items;
 
+  console.log(activities_data)
 
   if (!featured_data || !activities_data) {
     return {

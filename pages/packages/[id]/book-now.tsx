@@ -13,7 +13,15 @@ import {
   InputRightElement,
   Collapse,
   useDisclosure,
-  Image
+  Image,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalCloseButton,
+  ModalBody,
+  Lorem
 } from '@chakra-ui/react'
 import axios from 'axios'
 import { Section } from '@components/index'
@@ -31,17 +39,19 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { requireAuth } from '@utils/helpers/requireAuth'
 import { Amplify, API, Auth, withSSRContext } from "aws-amplify";
-import { GraphQLQuery } from '@aws-amplify/api'
-import { GetPackageQuery } from 'src/API'
+import { GraphQLQuery, GRAPHQL_AUTH_MODE } from '@aws-amplify/api'
+import { GetPackageQuery, GetRegistrationQuery } from 'src/API'
 
 const composeBookTrip = () => () => { }
 
 import { Authenticator } from "@aws-amplify/ui-react";
+import { toast } from 'react-toastify'
 
 const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
 
-  const { isOpen, onToggle } = useDisclosure()
-  const [formParams, setFormParams] = useState<BookNowFormType>({})
+  let router = useRouter()
+  const { isOpen, onToggle, onOpen, onClose } = useDisclosure()
+  const [mainPassenger, setMainPassenger] = useState<any>({})
   const [passengers, setPassengers] = useState<number>(1)
   const [extraPassengers, setExtraPassengers] = useState<{
     [key: number]: ExtraPassengersType
@@ -63,24 +73,65 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    setFormParams(prevState => ({
+    console.log(e.target.name)
+    setMainPassenger(prevState => ({
       ...prevState,
       [e.target.name]: e.target.value
     }))
     e.preventDefault()
   }
 
-  const handleSubmit = () => { 
+  const handleSubmit = async () => {
 
-    console.log(formParams)
-    console.log(extraPassengers)
+    await Auth.currentAuthenticatedUser({ bypassCache: true })
+    console.log(mainPassenger)
+    console.log(Object.values(extraPassengers))
+    try {
+      const res = await axios.post("/api/register", {
+        packageId: router.query.id,
+        activities: ["97d5a5aa-28d0-4e05-9794-dfd43e8530c5"],
+        mainPassenger,
+        extraPassengers: Object.values(extraPassengers)
+      })
 
+      if(res.data.status === false){
+        toast.error(res.data.message)
+      }
+     else if(res.data.status === true){
+        toast.success(res.data.message)
+      }
+    }
 
+    catch (e) {
+      console.log(e)
+    }
   }
+
+
+
 
   return (
 
     <Layout title="Book Now">
+
+      {/* <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Modal Title</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Lorem count={2} />
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme='blue' mr={3} onClick={onClose}>
+              Close
+            </Button>
+            <Button variant='ghost'>Secondary Action</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+       */}
       <Container w="100%" pt={8} maxWidth="container.xl">
         <Section delay={0.1}>
           <Heading fontSize="72px" fontWeight="semibold" color="#8FB339">
@@ -160,30 +211,26 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
                     </Select>
                     <Input
                       type="text"
-                      name="fname"
+                      name="firstName"
                       // value={session ? session.user.name : undefined}
                       placeholder="First Name"
                       onChange={handleChange} //here
                       required
                     />
-                    <Input
-                      type="text"
-                      name="mname"
-                      placeholder="Middle"
-                      onChange={handleChange}
-                    />
+
                   </Flex>
                   <Flex gap={{ base: 4, md: 12 }}>
                     <Input
                       type="text"
-                      name="lname"
+                      name="lastName"
                       placeholder="Last Name"
                       required
                       onChange={handleChange}
                     />
+                    <Text paddingTop="2">Dob:</Text>
                     <Input
                       type="date"
-                      name="dob"
+                      name="birthdate"
                       placeholder="Date of Birth"
                       required
                       onChange={handleChange}
@@ -200,23 +247,25 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
                     />
                     <Input
                       type="text"
-                      name="phone"
+                      name="phoneNumber"
                       placeholder="Phone Number"
                       required
                       onChange={handleChange}
                     />
                   </Flex>
                   <Flex gap={{ base: 2, md: 6 }}>
+                    <Text>Start Date</Text>
                     <Input
-                      type="datetime-local"
-                      name="from"
+                      type="date"
+                      name="starts"
                       placeholder="Start Date"
                       required
                       onChange={handleChange}
                     />
+                    <Text>End Date</Text>
                     <Input
-                      type="datetime-local"
-                      name="to"
+                      type="date"
+                      name="ends"
                       placeholder="End Date"
                       required
                       onChange={handleChange}
@@ -312,7 +361,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
           video_link
         }
       }
-      
+    
       `})
 
 

@@ -17,12 +17,13 @@ import type { NextPage } from 'next'
 import type { Trip, TripsPageProps } from '@utils/types'
 import { useTripsStore } from '@utils/redux/useTripsStore'
 import Link from 'next/link'
-import { API } from "aws-amplify";
-import { GraphQLQuery } from '@aws-amplify/api';
+import { API} from "aws-amplify";
+import { GraphQLQuery,GRAPHQL_AUTH_MODE } from '@aws-amplify/api';
+import { GetRegistrationQuery } from 'src/API'
 const Trips: NextPage<TripsPageProps> = ({ packages_data = null }) => {
 
 
-  
+
   return (
     <Layout title="Trips">
       <Container w="100%" pt={8} maxW="container.xl">
@@ -34,6 +35,11 @@ const Trips: NextPage<TripsPageProps> = ({ packages_data = null }) => {
             mb={{ base: 3, lg: 6 }}
           >
             Plan your trips
+            <div onClick={async ()=>{
+                const res =  await axios.get("/api/register");
+
+                console.log(res)
+            }}>Hi</div>
             <div onClick={async () => {
               let foo = await API.post("kiterestapi", "/item", { body: { rfsd: "fesd" } });
               console.log(foo)
@@ -152,12 +158,12 @@ export async function getStaticProps() {
     }
     
     `})
-  
+
   let packages_data = packagesAndActivities.data.listPackages.items as Trip[];
 
   console.log("Hi")
-    console.log(packages_data.length)
-    console.log('end')
+  console.log(packages_data.length)
+  console.log('end')
   return { props: { packages_data } }
 }
 

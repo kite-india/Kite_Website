@@ -10,7 +10,8 @@ interface IProps {
 }
 
 const ActivityCard: React.FC<IProps> = ({ data }) => {
-  const { id, name, description, image } = data
+  const { id, name, description, image,cost } = data
+  console.log(data)
   if (!data) return null
   return (
     <Flex
@@ -56,7 +57,7 @@ const ActivityCard: React.FC<IProps> = ({ data }) => {
         </Flex>
         <Flex justify="space-between" gap={4} alignItems="center" p={1}>
           <Text fontFamily="'Poppins'" fontSize="18px">
-            Rs 20,000 /{' '}
+            Rs {cost} /{' '}
             <Text as="span" fontSize="12px">
               person
             </Text>

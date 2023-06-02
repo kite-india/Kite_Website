@@ -327,7 +327,7 @@ export async function getServerSideProps(context: { params: { id: string } }) {
             image
             link
             name
-
+            cost
           }
         }
       }

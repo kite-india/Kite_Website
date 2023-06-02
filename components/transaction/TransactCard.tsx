@@ -7,7 +7,7 @@ interface IProps {
 }
 
 const TransactCard: React.FC<IProps> = ({ transaction }) => {
-  const { id, img, place, date, guest, cost, status } = transaction
+  const { id,extraPassenger,mainPassenger,userInfoID,packageName,totalCost } = transaction
   return (
     <Box
       py={'15px'}
@@ -33,13 +33,13 @@ const TransactCard: React.FC<IProps> = ({ transaction }) => {
           py="15px"
         >
           <div style={{ width: '72px' }}>
-            <Image
+            {/* <Image
               height={'70px'}
               width={'72px'}
               src={img}
               loading="lazy"
-              alt={place}
-            />
+              alt={packageName}
+            /> */}
           </div>
           <Flex
             mt={{ base: '20px', md: '0' }}
@@ -50,19 +50,19 @@ const TransactCard: React.FC<IProps> = ({ transaction }) => {
               fontSize={{ base: '16px', md: '17px', lg: '19px' }}
               fontWeight={'700'}
             >
-              {place}
+              {packageName}
             </Text>
             <Text
               fontSize={{ base: '15px', md: '16px', lg: '18px' }}
               fontWeight={'500'}
             >
-              {date}
+              {}
             </Text>
             <Text
               fontSize={{ base: '16px', md: '17px', lg: '19px' }}
               fontWeight={'700'}
             >
-              {guest} Guests
+              Guests {extraPassenger.length+1}
             </Text>
           </Flex>
           <Text
@@ -71,7 +71,7 @@ const TransactCard: React.FC<IProps> = ({ transaction }) => {
             fontWeight={'400'}
             fontSize={{ base: '24px', md: '28px', lg: '32px' }}
           >
-            Rs : {cost}
+            Rs : {totalCost}
           </Text>
         </Flex>
       </Box>

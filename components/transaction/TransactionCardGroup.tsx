@@ -9,6 +9,9 @@ interface IProps {
 }
 
 const TransactionCardGroup: React.FC<IProps> = ({ data }) => {
+
+  console.log(data)
+
   return (
     <Stack
       mx={{ sm: '10px' }}
@@ -16,6 +19,7 @@ const TransactionCardGroup: React.FC<IProps> = ({ data }) => {
       gap={'20px'}
       ml={{ lg: '60px' }}
     >
+   
       {data.map((transact, idx) => {
         return <TransactCard key={idx} transaction={transact} />
       })}
