@@ -25,7 +25,7 @@ exports.handler = async (event, context) => {
                 'dob':{S: event.request.userAttributes.birthdate},
                 'phone_number':{S: event.request.userAttributes.phone_number},
                 '_version':{S: '1'},
-                '_lastChangedAt':{S:Number(1)}
+                '_lastChangedAt':{S:"345"}
             },
             TableName: process.env.UserInfoTable
         };

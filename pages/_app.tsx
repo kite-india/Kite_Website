@@ -5,10 +5,10 @@ import theme from '@libs/theme'
 import { SessionProvider } from 'next-auth/react'
 import { Session } from 'next-auth'
 import '../public/gallery.css'
-import { Amplify, API, graphqlOperation } from 'aws-amplify';
+import { Amplify } from 'aws-amplify';
 import awsconfig from 'src/aws-exports.js';
 
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 

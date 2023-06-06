@@ -273,30 +273,6 @@ const Page: NextPage<PackagesPageProps> = ({
   )
 }
 
-// export async function getStaticPaths() {
-//   const packagesId = await API.graphql<GraphQLQuery<ListPackagesQuery>>({
-//     query: `query MyQuery {
-//       listPackages {
-//         items {
-//           id
-          
-//         }
-//       }
-//     }
-    
-//     `})
-//   let data = packagesId.data.listPackages.items;
-
-//   const paths = data.map((id: any) => {
-//     return {
-//       params: { id: `${id}` }
-//     }
-//   })
-//   return {
-//     paths,
-//     fallback: false
-//   }
-// }
 
 export async function getServerSideProps(context: { params: { id: string } }) {
   const { id } = context.params

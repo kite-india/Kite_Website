@@ -34,7 +34,7 @@
         "kitefrontenda253a59e": {},
         "signUpTrigger": {
           "deploymentBucketName": "amplify-kitefrontend-staging-162600-deployment",
-          "s3Key": "amplify-builds/signUpTrigger-42496462764451314a31-build.zip"
+          "s3Key": "amplify-builds/signUpTrigger-6f7954416d344f435335-build.zip"
         }
       },
       "api": {

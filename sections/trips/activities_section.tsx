@@ -11,10 +11,11 @@ import 'swiper/css/grid'
 import type { Activity } from '@utils/types'
 
 interface ActivityProps {
-  data: Activity[]
+  data: Activity[],
+  addToCartHandler:Function
 }
 
-const Activities: React.FC<ActivityProps> = ({ data }) => {
+const Activities: React.FC<ActivityProps> = ({ data,addToCartHandler }) => {
   console.log(data)
   return (
     <Box w="100%" bg="#F7F8F9" borderRadius="lg" p={{ base: 3, lg: 6 }}>
@@ -58,18 +59,16 @@ const Activities: React.FC<ActivityProps> = ({ data }) => {
           slidesPerView={1}
         >
           {data.map((activity, idx) => {
-            console.log(idx)
-            console.log(data.at(idx + 1))
-            if (idx % 2 !== 0) return <ActivityCard data={activity} />
-            else
-              return (
-                <SwiperSlide key={activity.name}>
-                  <Flex direction="column" gap={4} mb={4}>
-                    <ActivityCard data={activity} />
 
-                  </Flex>
-                </SwiperSlide>
-              )
+            return (
+              <SwiperSlide key={activity.name}>
+                <Flex direction="column" gap={4} mb={4}>
+                  <ActivityCard addToCartHandler={addToCartHandler} data={activity} />
+
+                </Flex>
+              </SwiperSlide>
+            )
+
           })}
         </Swiper>
       </Box>

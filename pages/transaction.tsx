@@ -41,7 +41,7 @@ const Transactions: NextPage = () => {
           }
         })
         console.log(regPackage)
-        const cancel = regPackage.filter(pkg => pkg.bookingStatus === "Canceled")
+        const cancel = regPackage.filter(pkg => pkg.bookingStatus === "canceled")
         const booked = regPackage.filter(pkg => pkg.bookingStatus === "Booked")
         setAllData(regPackage)
         setCancelData(cancel);

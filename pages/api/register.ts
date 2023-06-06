@@ -46,7 +46,7 @@ interface ExtendedNextApiRequest extends NextApiRequest {
 export default async function handler(req: ExtendedNextApiRequest, res: NextApiResponse) {
 
     const accessToken = req.cookies['CognitoIdentityServiceProvider.17ovl7a0e00fsg578kopumaho2.fced523e-6617-4654-bdc9-c6ecff8fe656.accessToken']
-    const idToken = req.cookies['CognitoIdentityServiceProvider.17ovl7a0e00fsg578kopumaho2.fced523e-6617-4654-bdc9-c6ecff8fe656.idToken']
+    // const idToken = req.cookies['CognitoIdentityServiceProvider.17ovl7a0e00fsg578kopumaho2.fced523e-6617-4654-bdc9-c6ecff8fe656.idToken']
 
     const verifier = CognitoJwtVerifier.create({
         userPoolId: "ap-south-1_GnEmuWInD",
@@ -74,7 +74,7 @@ export default async function handler(req: ExtendedNextApiRequest, res: NextApiR
         }
 
         ///Check if the user already registered the package
-        var param = {
+        const param = {
 
             FilterExpression: "registrationPackageId = :topic AND userinfoID = :userInfoId",
 
@@ -82,13 +82,13 @@ export default async function handler(req: ExtendedNextApiRequest, res: NextApiR
                 ":topic": { S: packageId },
                 ":userInfoId": { S: userId }
             },
-            ProjectionExpression: "id,userinfoID",
+            ProjectionExpression: "id,userinfoID,bookingStatus",
             TableName: "Registration-ay6dl23zrjernjnqmaepjjtnfy-staging",
         };
 
         const checkPackageIsAlreadyReg = await ddb.scan(param).promise()
-        console.log(checkPackageIsAlreadyReg)
-        if (checkPackageIsAlreadyReg.Items.length > 0) {
+
+        if (checkPackageIsAlreadyReg.Items.length > 0 && checkPackageIsAlreadyReg.Items[0].bookingStatus.S === "Booked") {
             res.status(200).json({ status: false, message: "Your already registered this package" });
             return;
         }
@@ -96,17 +96,17 @@ export default async function handler(req: ExtendedNextApiRequest, res: NextApiR
         const activities = req.body.activities;
 
         ///Main Passengers
-        let mainPassenger = req.body.mainPassenger
+        const mainPassenger = req.body.mainPassenger
 
-        let isValid = mainPassengerSchema.safeParse(mainPassenger);
+        const isValid = mainPassengerSchema.safeParse(mainPassenger);
 
         if (!isValid.success) {
             res.status(200).json({ status: false, message: "Enter All field" });
             return;
         }
 
-        let filteredMainPassenger = {}
-        for (let key of Object.keys(mainPassenger)) {
+        const filteredMainPassenger = {}
+        for (const key of Object.keys(mainPassenger)) {
 
             if (typeof mainPassenger[key] === "string") {
                 filteredMainPassenger[key] = { "S": mainPassenger[key] }
@@ -132,8 +132,8 @@ export default async function handler(req: ExtendedNextApiRequest, res: NextApiR
 
             filteredExtraPassenger = extraPassenger.map(pass => {
 
-                let temp = {}
-                for (let key of Object.keys(pass)) {
+                const temp = {}
+                for (const key of Object.keys(pass)) {
 
                     if (typeof pass[key] === "string") {
                         temp[key] = { "S": pass[key] }
@@ -154,12 +154,12 @@ export default async function handler(req: ExtendedNextApiRequest, res: NextApiR
         let total_cost = 0;
 
         ///Check if it is a valid package
-        var paramForPackage = {
+        const paramForPackage = {
             TableName: 'Package-ay6dl23zrjernjnqmaepjjtnfy-staging',
             Key: {
                 'id': { S: packageId }
             },
-            AttributesToGet: ["id","name","cost"]
+            AttributesToGet: ["id", "name", "cost"]
         };
 
 
@@ -185,15 +185,15 @@ export default async function handler(req: ExtendedNextApiRequest, res: NextApiR
 
             //Get all Activities of a this package and check if the activity id is valid
 
-            var paramForActivity = {
-                // Specify which items in the results are returned.
+            const paramForActivity = {
+
                 FilterExpression: "packageID = :topic",
-                // Define the expression attribute value, which are substitutes for the values you want to compare.
+
                 ExpressionAttributeValues: {
                     ":topic": { S: packageId },
 
                 },
-                // Set the projection expression, which are the attributes that you want.
+
                 ProjectionExpression: "cost,id ",
                 TableName: "Activity-ay6dl23zrjernjnqmaepjjtnfy-staging",
             };
@@ -204,7 +204,7 @@ export default async function handler(req: ExtendedNextApiRequest, res: NextApiR
             if (Items.length > 0) {
                 //means there are activities for this packages
                 ///So verify whether the user selected activities are valid
-                let tempAct = Items.filter((items) => {
+                const tempAct = Items.filter((items) => {
 
                     return activities.includes(items.id.S)
                 })
@@ -221,10 +221,10 @@ export default async function handler(req: ExtendedNextApiRequest, res: NextApiR
         }
 
 
-        let actualCost = String(total_cost)
+        const actualCost = String(total_cost)
         //INSERT INTO DYNAMODB
-        let uuid = uuidv4()
-        var registrationParams = {
+        const uuid = uuidv4()
+        const registrationParams = {
             TableName: 'Registration-ay6dl23zrjernjnqmaepjjtnfy-staging',
             Item: {
                 'id': { S: uuid },
@@ -242,7 +242,7 @@ export default async function handler(req: ExtendedNextApiRequest, res: NextApiR
 
         // Call DynamoDB to add the item to the table
         try {
-            const insertIntems = await ddb.putItem(registrationParams).promise()
+            await ddb.putItem(registrationParams).promise()
 
             res.status(200).json({ status: true, message: "Registered" });
             return;

@@ -5,8 +5,7 @@ import Section from '@components/Section'
 import { NextPage } from 'next'
 import CustomImage from '@components/CustomImage'
 import GalleryCard from '@components/GalleryCard'
-import axios from 'axios'
-import { GalleryPageProps, Gallery } from '@utils/types'
+import { GalleryPageProps } from '@utils/types'
 import { API } from 'aws-amplify';
 import { GraphQLQuery } from '@aws-amplify/api';
 import {ListGalleriesQuery} from "src/API";

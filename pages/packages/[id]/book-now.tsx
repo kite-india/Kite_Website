@@ -41,13 +41,14 @@ import { requireAuth } from '@utils/helpers/requireAuth'
 import { Amplify, API, Auth, withSSRContext } from "aws-amplify";
 import { GraphQLQuery, GRAPHQL_AUTH_MODE } from '@aws-amplify/api'
 import { GetPackageQuery, GetRegistrationQuery } from 'src/API'
+import { Activities } from '@sections/index'
 
 const composeBookTrip = () => () => { }
 
 import { Authenticator } from "@aws-amplify/ui-react";
 import { toast } from 'react-toastify'
 
-const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
+const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
 
   let router = useRouter()
   const { isOpen, onToggle, onOpen, onClose } = useDisclosure()
@@ -57,9 +58,31 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
     [key: number]: ExtraPassengersType
   }>({})
 
+  const [activity, setActivity] = useState<string[]>([])
   if (!packages_data) {
     return null
   }
+
+  const addToCartHandler = (activityId: string, action: string) => {
+
+    if (action == "add") {
+
+      setActivity(prevState => ([...prevState, activityId]))
+    }
+    else if (action == "remove") {
+
+      let tempArr = [...activity]
+      let index = activity.indexOf(activityId);
+      if (index !== -1) {
+
+        tempArr.splice(index, 1);
+        setActivity(tempArr);
+
+        console.log(activity)
+      }
+    }
+  }
+
 
   const { id, name, image, location, cost, description } = packages_data
   // const [days, nights] = duration.split('/')
@@ -84,20 +107,19 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
   const handleSubmit = async () => {
 
     await Auth.currentAuthenticatedUser({ bypassCache: true })
-    console.log(mainPassenger)
-    console.log(Object.values(extraPassengers))
+    console.log(activity)
     try {
       const res = await axios.post("/api/register", {
         packageId: router.query.id,
-        activities: ["97d5a5aa-28d0-4e05-9794-dfd43e8530c5"],
+        activities: activity,
         mainPassenger,
         extraPassengers: Object.values(extraPassengers)
       })
 
-      if(res.data.status === false){
+      if (res.data.status === false) {
         toast.error(res.data.message)
       }
-     else if(res.data.status === true){
+      else if (res.data.status === true) {
         toast.success(res.data.message)
       }
     }
@@ -179,6 +201,9 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
                 </Flex>
               </Box>
             </Flex>
+            <Section delay={0.4}>
+              <Activities addToCartHandler={addToCartHandler} data={activities} />
+            </Section>
             <Box mt={8} mb={4} maxW="container.xl">
               <Text
                 color="#3E7C17"
@@ -346,7 +371,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     const data = await API.graphql<GraphQLQuery<GetPackageQuery>>({
       query: `  query MyQuery {
         getPackage(id: "${id}") {
-        
           cost
           createdAt
           description
@@ -365,12 +389,35 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       `})
 
 
+    const getActivities = await API.graphql<GraphQLQuery<any>>({
+      query: `  
+        query MyQuery {
+          activitiesByPackageID(packageID: "${id}") {
+            items {
+              createdAt
+              cost
+              description
+              id
+              image
+              link
+              packageID
+              packageName
+              name
+              updatedAt
+            }
+          }
+        }
+        
+      
+        `})
+
+    let activities = getActivities.data.activitiesByPackageID.items;
     return {
-      props: { packages_data: data.data.getPackage as Trip }
+      props: { packages_data: data.data.getPackage as Trip, activities }
     }
 
   } catch (err) {
-
+    console.log(err)
     console.log('User is not authenticated');
     //Redirect to login page
     return {

@@ -65,7 +65,8 @@ export interface TransactionPageProps {
 }
 
 export interface BookNowProps {
-  packages_data?: Trip
+  packages_data?: Trip,
+  activities?:any
 }
 
 export interface ExtraPassengerProps {

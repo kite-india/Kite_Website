@@ -6,13 +6,10 @@ import {
   NextDestinationForm
 } from '@sections/index'
 import Layout from '@components/layouts/main'
-import axios from 'axios'
 import type { NextPage } from 'next'
 import type { HomePageProps } from '@utils/types'
 import { API } from 'aws-amplify'
 import { GraphQLQuery } from '@aws-amplify/api';
-import { ListPackagesQuery } from "src/API";
-import type { Activity } from 'src/API';
 
 const Page: NextPage<HomePageProps> = ({
   featured_data = null,
@@ -72,8 +69,8 @@ export async function getStaticProps() {
 
 
 
-  let featured_data = premiumPackages.data.listPackages.items;
-  let activities_data = activities.data.listActivities.items;
+  const featured_data = premiumPackages.data.listPackages.items;
+  const activities_data = activities.data.listActivities.items;
 
   console.log(activities_data)
 

@@ -6,7 +6,7 @@ import AWS from 'aws-sdk'
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
     const accessToken = req.cookies['CognitoIdentityServiceProvider.17ovl7a0e00fsg578kopumaho2.fced523e-6617-4654-bdc9-c6ecff8fe656.accessToken']
-    const idToken = req.cookies['CognitoIdentityServiceProvider.17ovl7a0e00fsg578kopumaho2.fced523e-6617-4654-bdc9-c6ecff8fe656.idToken']
+  //  const idToken = req.cookies['CognitoIdentityServiceProvider.17ovl7a0e00fsg578kopumaho2.fced523e-6617-4654-bdc9-c6ecff8fe656.idToken']
 
     const verifier = CognitoJwtVerifier.create({
         userPoolId: "ap-south-1_GnEmuWInD",
@@ -24,7 +24,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         ///UserId
         const userId = payload.sub
 
-        var param = {
+        const param = {
 
             FilterExpression: "userinfoID = :userInfoId",
 
