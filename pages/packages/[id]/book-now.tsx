@@ -14,44 +14,33 @@ import {
   Collapse,
   useDisclosure,
   Image,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalCloseButton,
-  ModalBody,
-  Lorem
 } from '@chakra-ui/react'
 import axios from 'axios'
 import { Section } from '@components/index'
 import Layout from '@components/layouts/main'
 import type { GetServerSidePropsContext, NextPage } from 'next'
 import type {
-  BookNowFormType,
   BookNowProps,
   ExtraPassengersType,
   Trip
 } from '@utils/types'
-import { useTripsStore } from '@utils/redux/useTripsStore'
+
 import { ExtraPassenger } from '@sections/index'
-import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
-import { requireAuth } from '@utils/helpers/requireAuth'
-import { Amplify, API, Auth, withSSRContext } from "aws-amplify";
-import { GraphQLQuery, GRAPHQL_AUTH_MODE } from '@aws-amplify/api'
-import { GetPackageQuery, GetRegistrationQuery } from 'src/API'
+import { API, Auth, withSSRContext } from "aws-amplify";
+import { GraphQLQuery } from '@aws-amplify/api'
+import { GetPackageQuery } from 'src/API'
 import { Activities } from '@sections/index'
 
-const composeBookTrip = () => () => { }
 
-import { Authenticator } from "@aws-amplify/ui-react";
 import { toast } from 'react-toastify'
+import BookedModel from '@components/BookedModel'
+
 
 const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
 
-  let router = useRouter()
-  const { isOpen, onToggle, onOpen, onClose } = useDisclosure()
+  const router = useRouter()
+  const { isOpen, onToggle } = useDisclosure()
   const [mainPassenger, setMainPassenger] = useState<any>({})
   const [passengers, setPassengers] = useState<number>(1)
   const [extraPassengers, setExtraPassengers] = useState<{
@@ -59,8 +48,10 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
   }>({})
 
   const [activity, setActivity] = useState<string[]>([])
+  const [booked, setBooked] = useState(false);
+
   if (!packages_data) {
-    return null
+    return <div>No Package chosen</div>
   }
 
   const addToCartHandler = (activityId: string, action: string) => {
@@ -84,7 +75,7 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
   }
 
 
-  const { id, name, image, location, cost, description } = packages_data
+  const { id, image, location, cost, description } = packages_data
   // const [days, nights] = duration.split('/')
   const handleExtraPassengers = (
     num: number,
@@ -106,9 +97,10 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
 
   const handleSubmit = async () => {
 
-    await Auth.currentAuthenticatedUser({ bypassCache: true })
-    console.log(activity)
+
+
     try {
+      await Auth.currentAuthenticatedUser({ bypassCache: true })
       const res = await axios.post("/api/register", {
         packageId: router.query.id,
         activities: activity,
@@ -117,15 +109,17 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
       })
 
       if (res.data.status === false) {
+
         toast.error(res.data.message)
       }
       else if (res.data.status === true) {
         toast.success(res.data.message)
+        setBooked(true)
       }
     }
 
     catch (e) {
-      console.log(e)
+      toast.error(e)
     }
   }
 
@@ -136,24 +130,7 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
 
     <Layout title="Book Now">
 
-      {/* <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Lorem count={2} />
-          </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={onClose}>
-              Close
-            </Button>
-            <Button variant='ghost'>Secondary Action</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-       */}
+      <BookedModel booked={booked}></BookedModel>
       <Container w="100%" pt={8} maxWidth="container.xl">
         <Section delay={0.1}>
           <Heading fontSize="72px" fontWeight="semibold" color="#8FB339">
@@ -176,7 +153,7 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
                 }}
                 mb={{ base: 6, lg: 0 }}
               />
-              <Box align="center" w="100%">
+              <Box textAlign="center" w="100%">
                 <Heading fontSize="48px" fontWeight="semibold" mb={2}>
                   {location}
                 </Heading>
@@ -201,9 +178,11 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
                 </Flex>
               </Box>
             </Flex>
-            <Section delay={0.4}>
-              <Activities addToCartHandler={addToCartHandler} data={activities} />
-            </Section>
+            <Box mt={20}>
+              <Section delay={0.4} >
+                <Activities addToCartHandler={addToCartHandler} data={activities} />
+              </Section>
+            </Box>
             <Box mt={8} mb={4} maxW="container.xl">
               <Text
                 color="#3E7C17"
@@ -220,13 +199,13 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
                 thhe airport.
               </Text>
             </Box>
-            <Box maxW="container.xl" align="center">
+            <Box maxW="container.xl" alignContent="center">
               <FormControl fontFamily="'Roboto'">
                 <Flex direction="column" gap={{ base: 4, md: 8 }} mb={6}>
                   <Flex gap={{ base: 2, md: 6 }}>
                     <Select
                       w="30%"
-                      type="text"
+                      typeof="text"
                       name="suffix"
                       placeholder="Suffix"
                       onChange={handleChange}
@@ -340,10 +319,12 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
                 <Button
                   bg="#B7CE63"
                   color="white"
-                  w="80%"
+                  w="100%"
                   py={2}
-                  mt={4}
+                  mt={10}
+                  mb={10}
                   onClick={handleSubmit}
+                
                 >
                   Book Now
                 </Button>
@@ -364,10 +345,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   const { Auth } = withSSRContext(context);
   try {
-    const user = await Auth.currentAuthenticatedUser();
+    await Auth.currentAuthenticatedUser();
     const { id } = context.params
-    // const SSR = withSSRContext(context)
-    // console.log(SSR)
+
     const data = await API.graphql<GraphQLQuery<GetPackageQuery>>({
       query: `  query MyQuery {
         getPackage(id: "${id}") {
@@ -411,7 +391,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       
         `})
 
-    let activities = getActivities.data.activitiesByPackageID.items;
+    const activities = getActivities.data.activitiesByPackageID.items;
     return {
       props: { packages_data: data.data.getPackage as Trip, activities }
     }

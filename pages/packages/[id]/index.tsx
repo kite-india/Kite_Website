@@ -8,10 +8,7 @@ import {
   Text,
   SimpleGrid,
   Icon,
-  Divider,
   Link,
-  Grid,
-  Image,
   Badge
 } from '@chakra-ui/react'
 import { FiMap } from 'react-icons/fi'
@@ -21,11 +18,8 @@ import { Section } from '@components/index'
 import Layout from '@components/layouts/main'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import type { Activity, Gallery, Trip } from '@utils/types'
-import { useTripsStore } from '@utils/redux/useTripsStore'
-import CustomImage from '@components/CustomImage'
+import type { Gallery, Trip } from '@utils/types'
 import { GrDocumentPdf } from 'react-icons/gr'
-import Packages from '@sections/trips/packages-section'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper'
 import { Activities } from '@sections/index'
@@ -35,7 +29,9 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
-import { ListPackagesQuery } from 'src/API'
+import CustomImage from '@components/CustomImage'
+import TripsActivityCard from '@components/TripsActivityCard'
+import TripActivityActivities from '@components/TripsActivitySection'
 
 interface PackagesPageProps {
   packages_data: Trip
@@ -56,7 +52,6 @@ const Page: NextPage<PackagesPageProps> = ({
     activities,
     cost,
     details_file,
-    location,
     is_premium_flag
   } = packages_data
 
@@ -321,17 +316,17 @@ export async function getServerSideProps(context: { params: { id: string } }) {
     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/gallery`
   )
 
-if(data===null){
+  if (data === null) {
 
-  return {
-    redirect: {
-      permanent: false,
-      destination: "/trips",
-    },
-    props: {},
-  };
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/trips",
+      },
+      props: {},
+    };
 
-}
+  }
   return {
     props: { packages_data: data as Trip, gallery_data }
   }

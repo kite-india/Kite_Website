@@ -11,7 +11,6 @@ import {
   Input,
   Checkbox
 } from '@chakra-ui/react'
-import { signIn, useSession } from 'next-auth/react'
 import Section from '@components/Section'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
@@ -19,7 +18,7 @@ import { Auth, Hub } from "aws-amplify";
 import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth';
 import Verification from '@components/Verification'
 import Link from 'next/link'
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Login: NextPage = () => {
@@ -31,27 +30,7 @@ const Login: NextPage = () => {
     password: ''
   })
 
-  useEffect(() => {
-    const unsubscribe = Hub.listen("auth", ({ payload: { event, data } }) => {
-      switch (event) {
-        case "signIn":
 
-          break;
-        case "signOut":
-
-          break;
-        case "customOAuthState":
-          console.log(data)
-
-        case 'signIn_failure':
-        case 'cognitoHostedUI_failure':
-          console.log('Sign in failure', data);
-          break;
-      }
-    });
-
-    return unsubscribe;
-  }, [])
 
   async function googleSignIn() {
 

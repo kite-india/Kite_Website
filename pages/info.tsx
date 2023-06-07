@@ -19,9 +19,7 @@ import {
   InputRightElement,
   IconButton
 } from '@chakra-ui/react'
-import { GetServerSidePropsContext, NextPage } from 'next'
-import { requireAuth } from '@utils/helpers/requireAuth'
-import { useSession } from 'next-auth/react'
+import { NextPage } from 'next'
 import { FiEdit2 } from 'react-icons/fi'
 import { getAuthUserName } from '@libs/userAuth'
 
@@ -41,7 +39,7 @@ const Info: NextPage = () => {
     getAuthUserName().then(user => {
 
       console.log(user.attributes.phone_number)
-      let name = user.attributes.name.split(" ");
+      const name = user.attributes.name.split(" ");
       setData({ firstName: name[0], lastName: name[1], location: "usa", email: user.attributes.email, date: user.attributes.birthdate, gender: "male", mobile: user.attributes.phone_number })
     })
   }, [])

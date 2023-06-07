@@ -1,16 +1,12 @@
 
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Layout from '@components/layouts/main'
 import {
-    Box,
-    Heading,
     Text,
     Button,
     Flex,
     Container,
-    Image,
     Input,
-    Checkbox
 } from '@chakra-ui/react'
 import Section from '@components/Section'
 import { Auth } from 'aws-amplify'
@@ -32,10 +28,12 @@ function ForgotPassword() {
 
         }
         catch (e) {
-            if (e.name = "InvalidParameterException") {
+
+            if (e.name == "InvalidParameterException") {
                 toast.error("Please Verify your email first");
                 return;
             }
+
             toast.error(e.message)
 
         }

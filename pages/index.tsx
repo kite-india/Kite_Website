@@ -10,6 +10,7 @@ import type { NextPage } from 'next'
 import type { HomePageProps } from '@utils/types'
 import { API } from 'aws-amplify'
 import { GraphQLQuery } from '@aws-amplify/api';
+import { ListActivitiesQuery, ListPackagesQuery } from 'src/API'
 
 const Page: NextPage<HomePageProps> = ({
   featured_data = null,
@@ -29,7 +30,7 @@ export async function getStaticProps() {
 
 
 
-  const premiumPackages = await API.graphql<GraphQLQuery<any>>({
+  const premiumPackages = await API.graphql<GraphQLQuery<ListPackagesQuery>>({
     query: `query MyQuery {
       listPackages(filter: {is_premium_flag: {eq: true}}) {
         items {
@@ -52,7 +53,7 @@ export async function getStaticProps() {
 
 
 
-  const activities = await API.graphql<GraphQLQuery<any>>({
+  const activities = await API.graphql<GraphQLQuery<ListActivitiesQuery>>({
     query: `query MyQuery {
       listActivities {
         items {
