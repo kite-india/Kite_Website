@@ -1,13 +1,15 @@
-import { Text, Box, Flex, Badge } from '@chakra-ui/react'
+import { Text, Box, Flex, Badge, Button } from '@chakra-ui/react'
 import Image from 'next/image'
 import { Transaction } from '@utils/types'
 import React from 'react'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 interface IProps {
   transaction: Transaction
 }
 
 const TransactCard: React.FC<IProps> = ({ transaction }) => {
-  const { id, img, place, date, guest, cost, status } = transaction
+  const { id, extraPassenger, mainPassenger, userInfoID, packageName, totalCost, bookingStatus } = transaction
   return (
     <Box
       py={'15px'}
@@ -33,13 +35,13 @@ const TransactCard: React.FC<IProps> = ({ transaction }) => {
           py="15px"
         >
           <div style={{ width: '72px' }}>
-            <Image
+            {/* <Image
               height={'70px'}
               width={'72px'}
               src={img}
               loading="lazy"
-              alt={place}
-            />
+              alt={packageName}
+            /> */}
           </div>
           <Flex
             mt={{ base: '20px', md: '0' }}
@@ -50,19 +52,19 @@ const TransactCard: React.FC<IProps> = ({ transaction }) => {
               fontSize={{ base: '16px', md: '17px', lg: '19px' }}
               fontWeight={'700'}
             >
-              {place}
+              {packageName}
             </Text>
             <Text
               fontSize={{ base: '15px', md: '16px', lg: '18px' }}
               fontWeight={'500'}
             >
-              {date}
+              { }
             </Text>
             <Text
               fontSize={{ base: '16px', md: '17px', lg: '19px' }}
               fontWeight={'700'}
             >
-              {guest} Guests
+              Guests {extraPassenger.length + 1}
             </Text>
           </Flex>
           <Text
@@ -71,7 +73,7 @@ const TransactCard: React.FC<IProps> = ({ transaction }) => {
             fontWeight={'400'}
             fontSize={{ base: '24px', md: '28px', lg: '32px' }}
           >
-            Rs : {cost}
+            Rs : {totalCost}
           </Text>
         </Flex>
       </Box>
@@ -83,28 +85,33 @@ const TransactCard: React.FC<IProps> = ({ transaction }) => {
         textTransform={'uppercase'}
       >
         status :
-        {status ? (
-          <Badge
-            fontSize={{ base: '14px', md: '14px', lg: '15px' }}
-            mr={{ base: '10px', md: '40px', lg: '60px' }}
-            ml={'5px'}
-            colorScheme={'white'}
-            color="green"
-          >
-            Booked
-          </Badge>
-        ) : (
-          <Badge
-            fontSize={{ base: '12px', md: '14px', lg: '15px' }}
-            mr={{ base: '10px', md: '40px', lg: '60px' }}
-            ml={'5px'}
-            colorScheme={'white'}
-            color="red"
-          >
-            cancelled
-          </Badge>
-        )}
+        <Badge
+          fontSize={{ base: '14px', md: '14px', lg: '15px' }}
+          mr={{ base: '10px', md: '40px', lg: '60px' }}
+          ml={'5px'}
+          colorScheme={'white'}
+          color="green"
+        >
+          {bookingStatus}
+        </Badge>
       </Text>
+
+      {bookingStatus === "Booked" && <Box textAlign={"right"}>
+        <Button
+          mr={"10"}
+          mt={"2"}
+          bgColor={"red"}
+          onClick={async () => {
+            const res = await axios.put("/api/updateBooking", {
+              bookingId: id
+            })
+
+            toast.success(res.data.message)
+          }}
+        >
+          Cancel Booking
+        </Button>
+      </Box>}
     </Box>
   )
 }

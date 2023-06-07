@@ -14,10 +14,12 @@ const ExtraPassenger: React.FC<ExtraPassengerProps> = ({
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
   ) => {
+    console.log(e.currentTarget.name)
     setPassengerDetails(prevState => ({
       ...prevState,
       [e.target.name]: e.target.value
     }))
+
     handleExtraPassengers(num - 1, passengerDetails)
     e.preventDefault()
   }
@@ -53,36 +55,31 @@ const ExtraPassenger: React.FC<ExtraPassengerProps> = ({
           </Select>
           <Input
             type="text"
-            name="fname"
+            name="firstName"
             placeholder="First Name"
             onChange={handleChange}
             required
           />
-          <Input type="text" name="mname" placeholder="Middle" />
+        
         </Flex>
         <Flex gap={{ base: 2, md: 6 }} w="100%">
           <Input
             type="text"
-            name="lname"
+            name="lastName"
             placeholder="Last Name"
             onChange={handleChange}
             required
           />
+          <Text>DOB:</Text>
           <Input
-            type="email"
-            name="email"
-            w="70%"
-            placeholder="Email Address"
+            type="date"
+            name="birthdate"
             onChange={handleChange}
-          />
-          <Input
-            type="text"
-            name="phone"
-            w="20%"
-            onChange={handleChange}
-            placeholder="Phone Number"
+            required
           />
         </Flex>
+
+        
       </Flex>
       <hr
         style={{

@@ -21,6 +21,7 @@
       "@redux-app/*": ["app/*"],
       "@utils/*": ["utils/*"],
       "@libs/*": ["libs/*"],
+      "@graphql/*":["graphql/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "libs/fonts.js"],
