@@ -1,0 +1,23 @@
+{
+	"root": true,
+	"env":{
+		"browser": true,
+		"es2021": true
+	},
+	"extends": ["next", "eslint:recommended", "plugin:@typescript-eslint/recommended"],
+	"plugins": [
+		"@typescript-eslint",
+		"unused-imports"
+	],
+	"rules": {
+	  "no-unused-vars": [
+		"error",
+		{
+		  "argsIgnorePattern": "^_",
+		  "varsIgnorePattern": "^_"
+		}
+	  ],
+	  "@typescript-eslint/no-unused-vars": 2,
+	  "unused-imports/no-unused-imports-ts": 2
+	}
+  }
