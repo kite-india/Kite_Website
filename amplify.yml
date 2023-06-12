@@ -1,0 +1,57 @@
+version: 1
+# backend:
+#   phases:
+#     build:
+#       commands:
+#         - '# Execute Amplify CLI with the helper script'
+#         - amplifyPush --simple
+# It will build backend no matter what so use the below command
+backend:
+  phases:
+    build:
+      commands:
+        - echo "********* IGNORE BACKEND CHECK/PUSH **********"
+
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - yarn install
+        - yum update -y
+        - yum install -y jq
+        - yum install gettext
+        - export Environment=$(echo ${AWS_BRANCH} | tr "/" "-" | cut -c1-20) # prevent common and long git branch names (feat/something) to create an invalid stack/resource name
+
+        #       Parameters to generate aws-export template
+
+        # - export domain_name="https://${Environment}.${AWS_APP_ID}.techinfinito.com/"
+        # - echo $domain_name
+
+        # - aws ssm put-parameter --name "oauth_redirect_url" --value $domain_name --type "String" --overwrite
+
+        - export NEXT_PUBLIC_ENVIRONMENT=$(echo $Environment)
+        #       END - Parameters to generate aws-export template
+
+        # Other Environment Variables
+
+        - export NEXT_PUBLIC_S3_ENDPOINT=$(aws ssm get-parameter --name /amplify/d3v46gbvy6d0x3/${Environment}/s3/endpoint | jq -r '.Parameter.Value')
+
+        - printenv
+
+        - npm list
+    build:
+      commands:
+        - yarn run build
+
+    postbuild:
+      commands:
+        # - aws ssm put-parameter --name "/ecommerce/${Environment}/frontend/app/version" --value "${NEXT_PUBLIC_APP_VERSION}" --type "String" --overwrite
+        # - aws cognito-idp update-user-pool-client --user-pool-id "${dev_user_pools_id}" --client-id "${dev_user_pools_web_client_id}" --logout-url "${domain_name}" "http://localhost" --callback-urls "${domain_name}" "http://localhost" ----default-redirect-uri "${domain_name}"
+  artifacts:
+    baseDirectory: .next
+    files:
+      - "**/*"
+  cache:
+    paths:
+      - "node_modules/**/*" # Cache `node_modules` for faster `yarn` or `npm i`
+      - ".next/cache/**/*" # Cache Next.js for faster application ezorder
