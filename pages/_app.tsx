@@ -6,7 +6,7 @@ import { SessionProvider } from 'next-auth/react'
 import { Session } from 'next-auth'
 import '../public/gallery.css'
 import { Amplify } from 'aws-amplify';
-import awsconfig from 'src/aws-exports.js';
+import awsconfig from 'baseconfig';
 
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
