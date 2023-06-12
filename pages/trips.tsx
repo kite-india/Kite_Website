@@ -17,10 +17,11 @@ import type { NextPage } from 'next'
 import type { Trip, TripsPageProps } from '@utils/types'
 import { useTripsStore } from '@utils/redux/useTripsStore'
 import Link from 'next/link'
-import { API} from "aws-amplify";
-import { GraphQLQuery,GRAPHQL_AUTH_MODE } from '@aws-amplify/api';
-import { GetRegistrationQuery } from 'src/API'
-const Trips: NextPage<TripsPageProps> = ({ packages_data = null }) => {
+import { API } from "aws-amplify";
+import { GraphQLQuery, GRAPHQL_AUTH_MODE } from '@aws-amplify/api';
+import { GetRegistrationQuery, ListActivitiesQuery, ListPackagesQuery } from 'src/API'
+import { listActivities, listPackages } from 'src/graphql/queries'
+const Trips: NextPage<TripsPageProps> = ({ packages_data , activities_data }) => {
 
 
 
@@ -35,10 +36,10 @@ const Trips: NextPage<TripsPageProps> = ({ packages_data = null }) => {
             mb={{ base: 3, lg: 6 }}
           >
             Plan your trips
-            <div onClick={async ()=>{
-                const res =  await axios.get("/api/register");
+            <div onClick={async () => {
+              const res = await axios.get("/api/register");
 
-                console.log(res)
+              console.log(res)
             }}>Hi</div>
             <div onClick={async () => {
               let foo = await API.post("kiterestapi", "/item", { body: { rfsd: "fesd" } });
@@ -107,7 +108,7 @@ const Trips: NextPage<TripsPageProps> = ({ packages_data = null }) => {
           </Flex>
         </Section>
         <Section delay={0.3}>
-          <PackagesSection data={packages_data} />
+          <PackagesSection activities_data={activities_data} data={packages_data} />
         </Section>
       </Container>
     </Layout>
@@ -115,56 +116,24 @@ const Trips: NextPage<TripsPageProps> = ({ packages_data = null }) => {
 }
 
 export async function getStaticProps() {
-  // const { data: packages_data } = await axios.get(
-  //   `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package`
-  // )
 
-  // if (!packages_data || !activities_data) {
-  //   return {
-  //     notFound: true
-  //   }
-  // }
+  const packagesAndActivities = await API.graphql<GraphQLQuery<ListPackagesQuery>>({
+    query: listPackages
+  })
 
-  // await useTripsStore.getState().fetchTrips()
+  let activities = await API.graphql<GraphQLQuery<ListActivitiesQuery>>({
+    query: listActivities
+  })
 
-  // const packages_data = useTripsStore.getState().trips
-  // console.log(packages_data)
-  const packagesAndActivities = await API.graphql<GraphQLQuery<any>>({
-    query: `query MyQuery {
-      listPackages {
-        items {
-          contact
-          cost
-          createdAt
-          description
-          details_file
-          id
-          image
-          is_premium_flag
-          location
-          name
-          updatedAt
-          video_link
-          Activities {
-            items {
-              id
-              image
-              description
-              name
-            }
-          }
-        }
-      }
-    }
-    
-    `})
+  console.log("Act")
+  console.log(activities.data.listActivities.items)
 
   let packages_data = packagesAndActivities.data.listPackages.items as Trip[];
-
+  let activities_data = activities.data.listActivities.items
   console.log("Hi")
   console.log(packages_data.length)
   console.log('end')
-  return { props: { packages_data } }
+  return { props: { packages_data, activities_data } }
 }
 
 export default Trips

@@ -100,6 +100,7 @@ export const onCreateGallery = /* GraphQL */ `
     onCreateGallery(filter: $filter) {
       id
       image
+      packageID
       createdAt
       updatedAt
     }
@@ -110,6 +111,7 @@ export const onUpdateGallery = /* GraphQL */ `
     onUpdateGallery(filter: $filter) {
       id
       image
+      packageID
       createdAt
       updatedAt
     }
@@ -120,6 +122,7 @@ export const onDeleteGallery = /* GraphQL */ `
     onDeleteGallery(filter: $filter) {
       id
       image
+      packageID
       createdAt
       updatedAt
     }
@@ -315,6 +318,9 @@ export const onCreatePackage = /* GraphQL */ `
       Activities {
         nextToken
       }
+      Galleries {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -336,6 +342,9 @@ export const onUpdatePackage = /* GraphQL */ `
       Activities {
         nextToken
       }
+      Galleries {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -355,6 +364,9 @@ export const onDeletePackage = /* GraphQL */ `
       is_premium_flag
       video_link
       Activities {
+        nextToken
+      }
+      Galleries {
         nextToken
       }
       createdAt

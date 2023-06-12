@@ -28,10 +28,11 @@ import { PackageCard } from '@components/index'
 import type { Trip } from '@utils/types'
 
 interface PackageProps {
-  data: Trip[]
+  data: Trip[],
+  activities_data: any
 }
 
-const Packages: React.FC<PackageProps> = ({ data }) => {
+const Packages: React.FC<PackageProps> = ({ data, activities_data }) => {
 
   console.log("Hi")
   console.log(data)
@@ -125,7 +126,7 @@ const Packages: React.FC<PackageProps> = ({ data }) => {
             px={3}
           >
             {data.map(data => (
-              <PackageCard key={data.id} data={data} />
+              <PackageCard activities_data={activities_data} key={data.id} data={data} />
             ))}
           </Grid>
         </Flex>

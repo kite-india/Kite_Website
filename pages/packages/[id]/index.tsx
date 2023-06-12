@@ -32,8 +32,8 @@ import 'swiper/css/scrollbar'
 import CustomImage from '@components/CustomImage'
 import TripsActivityCard from '@components/TripsActivityCard'
 import TripActivityActivities from '@components/TripsActivitySection'
-import { activitiesByPackageID, getPackage } from 'src/graphql/queries'
-import { ActivitiesByPackageIDQuery } from 'src/API'
+import { activitiesByPackageID, galleriesByPackageID, getPackage } from 'src/graphql/queries'
+import { ActivitiesByPackageIDQuery, GalleriesByPackageIDQuery } from 'src/API'
 
 interface PackagesPageProps {
   packages_data: Trip
@@ -59,6 +59,7 @@ const Page: NextPage<PackagesPageProps> = ({
   } = packages_data
 
 
+  console.log(gallery_data)
   const bookNow = () => {
     router.push(`/packages/${id}/book-now`)
   }
@@ -244,23 +245,30 @@ const Page: NextPage<PackagesPageProps> = ({
               pagination={{ clickable: true }}
               slidesPerView={1}
             >
-              {gallery_data.slice(0, gallery_data.length / 2).map(item => (
-                <SwiperSlide
-                  key={item.id}
-                  style={{ paddingBottom: '55px', height: '350px' }}
-                >
-                  <Box borderRadius="xl" overflow="hidden">
-                    <CustomImage
-                      loading="lazy"
-                      src={item.image}
-                      alt={item.image}
-                      layout="responsive"
-                      width={240}
-                      height={240}
-                    />
-                  </Box>
-                </SwiperSlide>
-              ))}
+              {gallery_data.map(item => {
+
+                console.log(item)
+                return (
+                  <SwiperSlide
+                    key={item.id}
+                    style={{ paddingBottom: '55px', height: '350px' }}
+                  >
+                    <Box borderRadius="xl" overflow="hidden">
+                    
+                      <CustomImage
+                        loading="lazy"
+                        src={item.image}
+                        alt={item.image}
+                        layout="responsive"
+                        width={240}
+                        height={240}
+                      />
+                    </Box>
+                  </SwiperSlide>
+                )
+              }
+
+              )}
             </Swiper>
           </Box>
         </Section>
@@ -294,13 +302,22 @@ export async function getServerSideProps(context: { params: { id: string } }) {
     }
   })
 
-  console.log(activities.data.activitiesByPackageID.items)
+
   let data = packages.data.getPackage;
 
-  const { data: gallery_data } = await axios.get(
-    `${process.env.NEXT_PUBLIC_KITE_BACKEND}/gallery`
-  )
 
+  let gallery = await API.graphql<GraphQLQuery<GalleriesByPackageIDQuery>>({
+    query: galleriesByPackageID,
+    variables: {
+
+      packageID: id
+
+    }
+  })
+
+  console.log(gallery.data.galleriesByPackageID.items)
+
+  const gallery_data = gallery.data.galleriesByPackageID.items
   if (data === null) {
 
     return {

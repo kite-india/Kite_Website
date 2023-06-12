@@ -15,14 +15,17 @@ export declare type ValidationResponse = {
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type GalleryUpdateFormInputValues = {
     image?: string;
+    packageID?: string;
 };
 export declare type GalleryUpdateFormValidationValues = {
     image?: ValidationFunction<string>;
+    packageID?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type GalleryUpdateFormOverridesProps = {
     GalleryUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
     image?: PrimitiveOverrideProps<TextFieldProps>;
+    packageID?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type GalleryUpdateFormProps = React.PropsWithChildren<{
     overrides?: GalleryUpdateFormOverridesProps | undefined | null;

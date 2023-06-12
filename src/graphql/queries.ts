@@ -114,6 +114,7 @@ export const getGallery = /* GraphQL */ `
     getGallery(id: $id) {
       id
       image
+      packageID
       createdAt
       updatedAt
     }
@@ -129,6 +130,33 @@ export const listGalleries = /* GraphQL */ `
       items {
         id
         image
+        packageID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const galleriesByPackageID = /* GraphQL */ `
+  query GalleriesByPackageID(
+    $packageID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelGalleryFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    galleriesByPackageID(
+      packageID: $packageID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        image
+        packageID
         createdAt
         updatedAt
       }
@@ -277,6 +305,9 @@ export const getPackage = /* GraphQL */ `
       is_premium_flag
       video_link
       Activities {
+        nextToken
+      }
+      Galleries {
         nextToken
       }
       createdAt

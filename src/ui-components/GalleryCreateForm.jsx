@@ -24,15 +24,19 @@ export default function GalleryCreateForm(props) {
   } = props;
   const initialValues = {
     image: "",
+    packageID: "",
   };
   const [image, setImage] = React.useState(initialValues.image);
+  const [packageID, setPackageID] = React.useState(initialValues.packageID);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setImage(initialValues.image);
+    setPackageID(initialValues.packageID);
     setErrors({});
   };
   const validations = {
     image: [{ type: "Required" }],
+    packageID: [{ type: "Required" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -61,6 +65,7 @@ export default function GalleryCreateForm(props) {
         event.preventDefault();
         let modelFields = {
           image,
+          packageID,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -116,6 +121,7 @@ export default function GalleryCreateForm(props) {
           if (onChange) {
             const modelFields = {
               image: value,
+              packageID,
             };
             const result = onChange(modelFields);
             value = result?.image ?? value;
@@ -129,6 +135,31 @@ export default function GalleryCreateForm(props) {
         errorMessage={errors.image?.errorMessage}
         hasError={errors.image?.hasError}
         {...getOverrideProps(overrides, "image")}
+      ></TextField>
+      <TextField
+        label="Package id"
+        isRequired={true}
+        isReadOnly={false}
+        value={packageID}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              image,
+              packageID: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.packageID ?? value;
+          }
+          if (errors.packageID?.hasError) {
+            runValidationTasks("packageID", value);
+          }
+          setPackageID(value);
+        }}
+        onBlur={() => runValidationTasks("packageID", packageID)}
+        errorMessage={errors.packageID?.errorMessage}
+        hasError={errors.packageID?.hasError}
+        {...getOverrideProps(overrides, "packageID")}
       ></TextField>
       <Flex
         justifyContent="space-between"

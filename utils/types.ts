@@ -15,7 +15,8 @@ export interface HomePageProps {
 }
 
 export interface TripsPageProps {
-  packages_data?: Trip[] | null
+  packages_data?: Trip[] | null,
+  activities_data?:any
 }
 
 export type Activity = {
@@ -93,7 +94,7 @@ export interface ExtraPassengersType {
   birthdate?:string
 }
 export interface GalleryPageProps {
-  data: Gallery[] | []
+  data: Gallery[] 
 }
 
 export type Gallery = {

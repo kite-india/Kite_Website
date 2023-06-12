@@ -18,12 +18,13 @@ import { transform } from 'framer-motion'
 import Link from 'next/link'
 
 interface PackageProps {
-  data: Trip
+  data: Trip,
+  activities_data: any
 }
 
-const PackageCard: React.FC<PackageProps> = ({ data }) => {
+const PackageCard: React.FC<PackageProps> = ({ data, activities_data }) => {
   const router = useRouter()
-  const { id, location, cost, Activities, description, image } = data;
+  const { id, location, cost, description, image } = data;
 
 
   const bookNow = () => {
@@ -106,72 +107,77 @@ const PackageCard: React.FC<PackageProps> = ({ data }) => {
           w="full"
           pt={3}
         >
-          {Activities.items.map(tag => (
-          
-            < Box w = "100%" >
-            <Text key={tag.id}>
-              <Icon as={FiMap} mr={2} />
+          {activities_data.map(tag => {
 
-              {tag.name}
-            </Text>
-            </Box>
-          ))}
-      </SimpleGrid>
-      <SimpleGrid
-        mt={3}
-        fontFamily="'Poppins'"
-        columns={2}
-        alignItems={{ base: 'center', lg: 'left' }}
-        w="100%"
-        spacingX="40px"
-        px={1}
-      >
-        <Text fontFamily="'Poppins'" fontSize="18px" fontWeight={'bold'}>
-          Rs {cost}/{' '}
-          <Text
-            as="span"
-            fontWeight={'normal'}
-            fontFamily="'Poppins'"
-            fontSize="12px"
-          >
-            person
-          </Text>
-        </Text>
-        <Flex
-          direction={{ base: 'column', md: 'row' }}
-          align="center"
-          justify="space-between"
+            if (tag.packageID === id) {
+              return (<>
+
+                < Box w="100%" >
+                  <Text key={tag.id}>
+                    <Icon as={FiMap} mr={2} />
+
+                    {tag.name}
+                  </Text>
+                </Box>
+              </>)
+            }
+          })}
+        </SimpleGrid>
+        <SimpleGrid
+          mt={3}
+          fontFamily="'Poppins'"
+          columns={2}
+          alignItems={{ base: 'center', lg: 'left' }}
           w="100%"
-          gap={{ base: 2, lg: 0 }}
+          spacingX="40px"
+          px={1}
         >
-          <ButtonGroup gap={2}>
-            <Link href={`/packages/${id}`}>
+          <Text fontFamily="'Poppins'" fontSize="18px" fontWeight={'bold'}>
+            Rs {cost}/{' '}
+            <Text
+              as="span"
+              fontWeight={'normal'}
+              fontFamily="'Poppins'"
+              fontSize="12px"
+            >
+              person
+            </Text>
+          </Text>
+          <Flex
+            direction={{ base: 'column', md: 'row' }}
+            align="center"
+            justify="space-between"
+            w="100%"
+            gap={{ base: 2, lg: 0 }}
+          >
+            <ButtonGroup gap={2}>
+              <Link href={`/packages/${id}`}>
+                <Button
+                  color="white"
+                  textAlign="center"
+                  px={4}
+                  py={2}
+                  bg="#125C13"
+                  _hover={{ bg: '#8FB339' }}
+                >
+                  More Info
+                </Button>
+              </Link>
               <Button
-                color="white"
                 textAlign="center"
+                color="white"
+                bg="#8FB339"
                 px={4}
                 py={2}
-                bg="#125C13"
-                _hover={{ bg: '#8FB339' }}
+                _hover={{ bg: '#125C13' }}
+                onClick={bookNow}
               >
-                More Info
+                Book Now
               </Button>
-            </Link>
-            <Button
-              textAlign="center"
-              color="white"
-              bg="#8FB339"
-              px={4}
-              py={2}
-              _hover={{ bg: '#125C13' }}
-              onClick={bookNow}
-            >
-              Book Now
-            </Button>
-          </ButtonGroup>
-        </Flex>
-      </SimpleGrid>
-    </Flex>
+            </ButtonGroup>
+          </Flex>
+        </SimpleGrid>
+      </Flex>
     </Box >
   )
 }

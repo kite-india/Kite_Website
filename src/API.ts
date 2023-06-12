@@ -187,10 +187,12 @@ export type DeleteEnquiryInput = {
 export type CreateGalleryInput = {
   id?: string | null,
   image: string,
+  packageID: string,
 };
 
 export type ModelGalleryConditionInput = {
   image?: ModelStringInput | null,
+  packageID?: ModelIDInput | null,
   and?: Array< ModelGalleryConditionInput | null > | null,
   or?: Array< ModelGalleryConditionInput | null > | null,
   not?: ModelGalleryConditionInput | null,
@@ -200,6 +202,7 @@ export type Gallery = {
   __typename: "Gallery",
   id: string,
   image: string,
+  packageID: string,
   createdAt: string,
   updatedAt: string,
 };
@@ -207,6 +210,7 @@ export type Gallery = {
 export type UpdateGalleryInput = {
   id: string,
   image?: string | null,
+  packageID?: string | null,
 };
 
 export type DeleteGalleryInput = {
@@ -283,6 +287,7 @@ export type Package = {
   is_premium_flag?: boolean | null,
   video_link?: string | null,
   Activities?: ModelActivityConnection | null,
+  Galleries?: ModelActivityConnection | null,
   createdAt: string,
   updatedAt: string,
 };
@@ -507,6 +512,7 @@ export type ModelEnquiryConnection = {
 export type ModelGalleryFilterInput = {
   id?: ModelIDInput | null,
   image?: ModelStringInput | null,
+  packageID?: ModelIDInput | null,
   and?: Array< ModelGalleryFilterInput | null > | null,
   or?: Array< ModelGalleryFilterInput | null > | null,
   not?: ModelGalleryFilterInput | null,
@@ -668,6 +674,7 @@ export type ModelSubscriptionIntInput = {
 export type ModelSubscriptionGalleryFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   image?: ModelSubscriptionStringInput | null,
+  packageID?: ModelSubscriptionIDInput | null,
   and?: Array< ModelSubscriptionGalleryFilterInput | null > | null,
   or?: Array< ModelSubscriptionGalleryFilterInput | null > | null,
 };
@@ -855,6 +862,7 @@ export type CreateGalleryMutation = {
     __typename: "Gallery",
     id: string,
     image: string,
+    packageID: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -870,6 +878,7 @@ export type UpdateGalleryMutation = {
     __typename: "Gallery",
     id: string,
     image: string,
+    packageID: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -885,6 +894,7 @@ export type DeleteGalleryMutation = {
     __typename: "Gallery",
     id: string,
     image: string,
+    packageID: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1119,6 +1129,10 @@ export type CreatePackageMutation = {
       __typename: "ModelActivityConnection",
       nextToken?: string | null,
     } | null,
+    Galleries?:  {
+      __typename: "ModelActivityConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1146,6 +1160,10 @@ export type UpdatePackageMutation = {
       __typename: "ModelActivityConnection",
       nextToken?: string | null,
     } | null,
+    Galleries?:  {
+      __typename: "ModelActivityConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1170,6 +1188,10 @@ export type DeletePackageMutation = {
     is_premium_flag?: boolean | null,
     video_link?: string | null,
     Activities?:  {
+      __typename: "ModelActivityConnection",
+      nextToken?: string | null,
+    } | null,
+    Galleries?:  {
       __typename: "ModelActivityConnection",
       nextToken?: string | null,
     } | null,
@@ -1371,6 +1393,7 @@ export type GetGalleryQuery = {
     __typename: "Gallery",
     id: string,
     image: string,
+    packageID: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1389,6 +1412,30 @@ export type ListGalleriesQuery = {
       __typename: "Gallery",
       id: string,
       image: string,
+      packageID: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GalleriesByPackageIDQueryVariables = {
+  packageID: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelGalleryFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type GalleriesByPackageIDQuery = {
+  galleriesByPackageID?:  {
+    __typename: "ModelGalleryConnection",
+    items:  Array< {
+      __typename: "Gallery",
+      id: string,
+      image: string,
+      packageID: string,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -1555,6 +1602,10 @@ export type GetPackageQuery = {
     is_premium_flag?: boolean | null,
     video_link?: string | null,
     Activities?:  {
+      __typename: "ModelActivityConnection",
+      nextToken?: string | null,
+    } | null,
+    Galleries?:  {
       __typename: "ModelActivityConnection",
       nextToken?: string | null,
     } | null,
@@ -1761,6 +1812,7 @@ export type OnCreateGallerySubscription = {
     __typename: "Gallery",
     id: string,
     image: string,
+    packageID: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1775,6 +1827,7 @@ export type OnUpdateGallerySubscription = {
     __typename: "Gallery",
     id: string,
     image: string,
+    packageID: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1789,6 +1842,7 @@ export type OnDeleteGallerySubscription = {
     __typename: "Gallery",
     id: string,
     image: string,
+    packageID: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -2016,6 +2070,10 @@ export type OnCreatePackageSubscription = {
       __typename: "ModelActivityConnection",
       nextToken?: string | null,
     } | null,
+    Galleries?:  {
+      __typename: "ModelActivityConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -2042,6 +2100,10 @@ export type OnUpdatePackageSubscription = {
       __typename: "ModelActivityConnection",
       nextToken?: string | null,
     } | null,
+    Galleries?:  {
+      __typename: "ModelActivityConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -2065,6 +2127,10 @@ export type OnDeletePackageSubscription = {
     is_premium_flag?: boolean | null,
     video_link?: string | null,
     Activities?:  {
+      __typename: "ModelActivityConnection",
+      nextToken?: string | null,
+    } | null,
+    Galleries?:  {
       __typename: "ModelActivityConnection",
       nextToken?: string | null,
     } | null,

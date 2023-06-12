@@ -8,7 +8,8 @@ import GalleryCard from '@components/GalleryCard'
 import { GalleryPageProps } from '@utils/types'
 import { API } from 'aws-amplify';
 import { GraphQLQuery } from '@aws-amplify/api';
-import {ListGalleriesQuery} from "src/API";
+import { ListGalleriesQuery } from "src/API";
+import { listGalleries } from 'src/graphql/queries'
 
 
 const GalleryPage: NextPage = (props: GalleryPageProps) => {
@@ -81,26 +82,11 @@ const GalleryPage: NextPage = (props: GalleryPageProps) => {
                 {section1.map(item => (
                   <GalleryCard
                     key={item.id}
-                    src={`https://kite-storage-backend.s3.ap-south-1.amazonaws.com/Untitled.jpg`}
+                    src={`https://kite-storage-backend.s3.ap-south-1.amazonaws.com/${item.image}`}
                   />
                 ))}
               </Flex>
-              <Flex direction="column">
-                {section2.map(item => (
-                  <GalleryCard
-                    key={item.id}
-                    src={`https://kite-storage-backend.s3.ap-south-1.amazonaws.com/Untitled.jpg`}
-                  />
-                ))}
-              </Flex>
-              <Flex direction="column" maxWidth="30%">
-                {section3.map(item => (
-                  <GalleryCard
-                    key={item.id}
-                    src={"https://kite-storage-backend.s3.ap-south-1.amazonaws.com/Untitled.jpg"}
-                  />
-                ))}
-              </Flex>
+
             </Flex>
           </Box>
           <hr
@@ -119,24 +105,15 @@ const GalleryPage: NextPage = (props: GalleryPageProps) => {
 export default GalleryPage
 
 export const getStaticProps = async () => {
-  // const { data } = await axios.get(
-  //   `${process.env.NEXT_PUBLIC_KITE_BACKEND}/gallery`
-  // )
-  // return { props: { data: data as Gallery[] } }
+
 
   const allTodos = await API.graphql<GraphQLQuery<ListGalleriesQuery>>({
-    query: `query Query{
-    listGalleries {
-     items {
-       id,
-      image
-     }
-    }
-  }`})
+    query: listGalleries
+  })
 
-  console.log(allTodos)
 
-  return {props:{data: allTodos.data.listGalleries.items}}
+
+  return { props: { data: allTodos.data.listGalleries.items } }
 
 
 }
