@@ -5,6 +5,13 @@ import theme from '@libs/theme'
 import { SessionProvider } from 'next-auth/react'
 import { Session } from 'next-auth'
 import '../public/gallery.css'
+import { Amplify } from 'aws-amplify'
+import awsconfig from 'baseconfig'
+
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
+Amplify.configure({ ...awsconfig, ssr: true })
 
 const Website = ({
   Component,
@@ -15,6 +22,7 @@ const Website = ({
     <ChakraProvider theme={theme}>
       <Fonts />
       <SessionProvider session={pageProps.session}>
+        <ToastContainer></ToastContainer>
         <Component {...pageProps} key={router.route} />
       </SessionProvider>
     </ChakraProvider>

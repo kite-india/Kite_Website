@@ -16,58 +16,79 @@ import {
 } from '@chakra-ui/react'
 import { Section } from '../components'
 import { motion } from 'framer-motion'
+import { API } from 'aws-amplify'
+import { GraphQLQuery } from '@aws-amplify/api'
+
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { CreateEnquiryInput } from 'src/API'
 
 const NextDestinationForm: React.FC = () => {
   function validateDestinationName(value) {
-    let error
+    let error = ''
     if (!value) {
       error = 'Destination name is required'
-    } else if (value.toLowerCase() !== 'naruto') {
-      error = "Jeez! You're not a fan 😱"
     }
     return error
   }
-  function validateCountry(value) {
-    let error
+
+  function validateNumberOfPeople(value) {
+    let error = ''
     if (!value) {
-      error = 'Country is required'
-    } else if (value.toLowerCase() !== 'nepal') {
-      error = "Jeez! You're not a tourist 😱"
+      error = 'Number of people is Required'
+    } else if (isNaN(value)) {
+      error = 'Enter a Valid Number'
     }
     return error
   }
+
   function validateName(value) {
-    let error
+    let error = ''
     if (!value) {
       error = 'Name is required'
-    } else if (value.toLowerCase() !== 'naruto') {
-      error = "Jeez! You're not a fan 😱"
     }
     return error
   }
+
+  function validateEmail(value) {
+    let error = ''
+    if (!value) {
+      error = 'Email is required'
+    }
+    return error
+  }
+
+  function validatePhone(value) {
+    let error = ''
+    if (!value) {
+      error = 'Phone is required'
+    } else if (isNaN(value)) {
+      error = 'Enter phone number'
+    }
+    return error
+  }
+
   function validateShootingCategory(value) {
-    let error
+    let error = ''
     if (!value) {
       error = 'ShootingCategory is required'
-    } else if (value.toLowerCase() !== 'blog') {
-      error = "Jeez! You're not a blogger 😱"
     }
     return error
   }
   function validateDescription(value) {
-    let error
+    let error = ''
     if (!value) {
       error = 'Description is required'
-    } else if (value.length < 5) {
-      error = "Jeez! You're not a blogger 😱"
     }
     return error
   }
   const initialValues = {
     destinationName: '',
-    country: '',
     name: '',
-    shootingCategory: ''
+    shootingCategory: '',
+    numberOfPeople: 0,
+    email: '',
+    phone: ''
   }
   return (
     <Box
@@ -76,6 +97,7 @@ const NextDestinationForm: React.FC = () => {
       py={{ base: '3', lg: '6' }}
       px="4"
     >
+      <ToastContainer></ToastContainer>
       <Box textAlign="center" gap={{ base: 2, lg: 4 }} pt={4}>
         <Section>
           <Heading
@@ -114,7 +136,7 @@ const NextDestinationForm: React.FC = () => {
             fontSize={{ base: 'xl', sm: '2xl' }}
             as="h2"
           >
-            Share your travels
+            Enquiry Form
           </Heading>
           <Text fontFamily="'Roboto'">
             Suggest a new travel destination that you want to see and we will
@@ -122,11 +144,38 @@ const NextDestinationForm: React.FC = () => {
           </Text>
           <Formik
             initialValues={initialValues}
-            onSubmit={(values, actions) => {
-              setTimeout(() => {
-                alert(JSON.stringify(values, null, 2))
-                actions.setSubmitting(false)
-              }, 1000)
+            onSubmit={async (values, actions) => {
+              values.numberOfPeople = Number(values.numberOfPeople)
+              console.log(values)
+
+              try {
+                const createEnq = await API.graphql<
+                  GraphQLQuery<CreateEnquiryInput>
+                >({
+                  query: `
+                mutation MyMutation {
+                  createEnquiry(input: {number_of_people: ${Number(
+                    values.numberOfPeople
+                  )}, name: "${values.name}", phone_number: "${
+                    values.phone
+                  }" vacation_type: "${values.shootingCategory}", email: "${
+                    values.email
+                  }", destination_name: "${values.destinationName}"}) {
+                    email
+                    id
+                    name
+                    number_of_people
+                    phone_number
+                    vacation_type
+                  }
+                }
+                `
+                })
+
+                toast('Success')
+              } catch (e) {
+                toast('Error')
+              }
             }}
           >
             {props => (
@@ -154,7 +203,7 @@ const NextDestinationForm: React.FC = () => {
                       </FormControl>
                     )}
                   </Field>
-                  <Field name="country" validate={validateCountry}>
+                  {/* <Field name="country" validate={validateCountry}>
                     {({ field, form }) => (
                       <FormControl
                         isInvalid={form.errors.country && form.touched.country}
@@ -177,7 +226,7 @@ const NextDestinationForm: React.FC = () => {
                         </FormErrorMessage>
                       </FormControl>
                     )}
-                  </Field>
+                  </Field> */}
                   <Field name="name" validate={validateName}>
                     {({ field, form }) => (
                       <FormControl
@@ -188,6 +237,33 @@ const NextDestinationForm: React.FC = () => {
                       </FormControl>
                     )}
                   </Field>
+
+                  <Field name="email" validate={validateEmail}>
+                    {({ field, form }) => (
+                      <FormControl
+                        isInvalid={form.errors.email && form.touched.email}
+                      >
+                        <Input {...field} id="email" placeholder="Email" />
+                        <FormErrorMessage>{form.errors.email}</FormErrorMessage>
+                      </FormControl>
+                    )}
+                  </Field>
+
+                  <Field name="phone" validate={validatePhone}>
+                    {({ field, form }) => (
+                      <FormControl
+                        isInvalid={form.errors.phone && form.touched.phone}
+                      >
+                        <Input
+                          {...field}
+                          id="phone"
+                          placeholder="Phone Number"
+                        />
+                        <FormErrorMessage>{form.errors.phone}</FormErrorMessage>
+                      </FormControl>
+                    )}
+                  </Field>
+
                   <Field
                     name="shootingCategory"
                     validate={validateShootingCategory}
@@ -202,10 +278,10 @@ const NextDestinationForm: React.FC = () => {
                         <Select
                           {...field}
                           id="shootingCategory"
-                          placeholder="Shooting Category"
+                          placeholder="Vacation Type"
                         >
-                          <option>Blog</option>
-                          <option>option2</option>
+                          <option>Couples</option>
+                          <option>Single</option>
                           <option>option3</option>
                           <option>option4</option>
                           <option>option5</option>
@@ -216,7 +292,31 @@ const NextDestinationForm: React.FC = () => {
                       </FormControl>
                     )}
                   </Field>
-                  <Field name="description" validate={validateDescription}>
+
+                  <Field
+                    name="numberOfPeople"
+                    validate={validateNumberOfPeople}
+                  >
+                    {({ field, form }) => (
+                      <FormControl
+                        isInvalid={
+                          form.errors.numberOfPeople &&
+                          form.touched.numberOfPeople
+                        }
+                      >
+                        <Input
+                          {...field}
+                          id="numberOfPeople"
+                          placeholder="No. Of People"
+                        />
+                        <FormErrorMessage>
+                          {form.errors.numberOfPeople}
+                        </FormErrorMessage>
+                      </FormControl>
+                    )}
+                  </Field>
+
+                  {/* <Field name="description" validate={validateDescription}>
                     {({ field, form }) => (
                       <FormControl
                         isInvalid={
@@ -233,7 +333,7 @@ const NextDestinationForm: React.FC = () => {
                         </FormErrorMessage>
                       </FormControl>
                     )}
-                  </Field>
+                  </Field> */}
                   <Button
                     isLoading={props.isSubmitting}
                     type="submit"

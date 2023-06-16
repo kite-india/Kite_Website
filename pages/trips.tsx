@@ -14,11 +14,21 @@ import { PackagesSection, Activities } from '@sections/index'
 import Section from '@components/Section'
 import Layout from '@components/layouts/main'
 import type { NextPage } from 'next'
-import type { TripsPageProps } from '@utils/types'
-import { useTripsStore } from '@utils/hooks/useTripsStore'
+import type { Trip, TripsPageProps } from '@utils/types'
+import { useTripsStore } from '@utils/redux/useTripsStore'
 import Link from 'next/link'
-
-const Trips: NextPage<TripsPageProps> = ({ packages_data = null }) => {
+import { API } from 'aws-amplify'
+import { GraphQLQuery, GRAPHQL_AUTH_MODE } from '@aws-amplify/api'
+import {
+  GetRegistrationQuery,
+  ListActivitiesQuery,
+  ListPackagesQuery
+} from 'src/API'
+import { listActivities, listPackages } from 'src/graphql/queries'
+const Trips: NextPage<TripsPageProps> = ({
+  packages_data,
+  activities_data
+}) => {
   return (
     <Layout title="Trips">
       <Container w="100%" pt={8} maxW="container.xl">
@@ -30,6 +40,25 @@ const Trips: NextPage<TripsPageProps> = ({ packages_data = null }) => {
             mb={{ base: 3, lg: 6 }}
           >
             Plan your trips
+            <div
+              onClick={async () => {
+                const res = await axios.get('/api/register')
+
+                console.log(res)
+              }}
+            >
+              Hi
+            </div>
+            <div
+              onClick={async () => {
+                let foo = await API.post('kiterestapi', '/item', {
+                  body: { rfsd: 'fesd' }
+                })
+                console.log(foo)
+              }}
+            >
+              Book
+            </div>
           </Heading>
           <Flex
             direction={{ base: 'column', lg: 'row' }}
@@ -65,9 +94,9 @@ const Trips: NextPage<TripsPageProps> = ({ packages_data = null }) => {
                   tranquil lakes. Immerse yourself in the warm hospitality of
                   the locals and explore the rich culture and heritage of the
                   region. From the vibrant markets of Srinagar to the
-                  breathtaking views of the Himalayas, there's something for
-                  everyone in Kashmir. Come, indulge in a soulful journey to one
-                  of the most enchanting destinations on earth.
+                  breathtaking views of the Himalayas, there&apos;s something
+                  for everyone in Kashmir. Come, indulge in a soulful journey to
+                  one of the most enchanting destinations on earth.
                 </Text>
                 <Link href={`/packages/clevhuj91000ovqsci1zpw8rc`}>
                   <Button
@@ -93,7 +122,10 @@ const Trips: NextPage<TripsPageProps> = ({ packages_data = null }) => {
           </Flex>
         </Section>
         <Section delay={0.3}>
-          <PackagesSection data={packages_data} />
+          <PackagesSection
+            activities_data={activities_data}
+            data={packages_data}
+          />
         </Section>
       </Container>
     </Layout>
@@ -101,21 +133,25 @@ const Trips: NextPage<TripsPageProps> = ({ packages_data = null }) => {
 }
 
 export async function getStaticProps() {
-  // const { data: packages_data } = await axios.get(
-  //   `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package`
-  // )
+  const packagesAndActivities = await API.graphql<
+    GraphQLQuery<ListPackagesQuery>
+  >({
+    query: listPackages
+  })
 
-  // if (!packages_data || !activities_data) {
-  //   return {
-  //     notFound: true
-  //   }
-  // }
+  let activities = await API.graphql<GraphQLQuery<ListActivitiesQuery>>({
+    query: listActivities
+  })
 
-  await useTripsStore.getState().fetchTrips()
+  console.log('Act')
+  console.log(activities.data.listActivities.items)
 
-  const packages_data = useTripsStore.getState().trips
-
-  return { props: { packages_data } }
+  let packages_data = packagesAndActivities.data.listPackages.items as Trip[]
+  let activities_data = activities.data.listActivities.items
+  console.log('Hi')
+  console.log(packages_data.length)
+  console.log('end')
+  return { props: { packages_data, activities_data } }
 }
 
 export default Trips

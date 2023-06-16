@@ -19,15 +19,17 @@ import Link from 'next/link'
 
 interface PackageProps {
   data: Trip
+  activities_data: any
 }
 
-const PackageCard: React.FC<PackageProps> = ({ data }) => {
+const PackageCard: React.FC<PackageProps> = ({ data, activities_data }) => {
   const router = useRouter()
-  const { id, location, cost, activities, description, image } = data
+  const { id, location, cost, description, image } = data
+
   const bookNow = () => {
     router.push(`/packages/${id}/book-now`)
   }
-  console.log(activities)
+
   return (
     <Box
       display={'flex'}
@@ -104,14 +106,21 @@ const PackageCard: React.FC<PackageProps> = ({ data }) => {
           w="full"
           pt={3}
         >
-          {activities.map(tag => (
-            <Box w="100%">
-              <Text key={tag}>
-                <Icon as={FiMap} mr={2} />
-                {tag}
-              </Text>
-            </Box>
-          ))}
+          {activities_data.map(tag => {
+            if (tag.packageID === id) {
+              return (
+                <>
+                  <Box w="100%">
+                    <Text key={tag.id}>
+                      <Icon as={FiMap} mr={2} />
+
+                      {tag.name}
+                    </Text>
+                  </Box>
+                </>
+              )
+            }
+          })}
         </SimpleGrid>
         <SimpleGrid
           mt={3}

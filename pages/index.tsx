@@ -6,9 +6,12 @@ import {
   NextDestinationForm
 } from '@sections/index'
 import Layout from '@components/layouts/main'
-import axios from 'axios'
 import type { NextPage } from 'next'
 import type { HomePageProps } from '@utils/types'
+import { API } from 'aws-amplify'
+import { GraphQLQuery } from '@aws-amplify/api'
+import { ListActivitiesQuery, ListPackagesQuery } from 'src/API'
+import { listPackages, listActivities } from 'src/graphql/queries'
 
 const Page: NextPage<HomePageProps> = ({
   featured_data = null,
@@ -24,26 +27,21 @@ const Page: NextPage<HomePageProps> = ({
   )
 }
 
-// Page.getInitialProps = async () => {
-//   const { data: featured_data } = await axios.get(
-//     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/home`
-//   )
+export async function getServerSideProps() {
+  const premiumPackages = await API.graphql<GraphQLQuery<ListPackagesQuery>>({
+    query: listPackages,
+    variables: { filter: { is_premium_flag: { eq: true } } }
+  })
 
-//   const { data: activities_data } = await axios.get(
-//     `${process.env.NEXT_PUBLIC_KITE_BACKEND}/activity`
-//   )
+  const activities = await API.graphql<GraphQLQuery<ListActivitiesQuery>>({
+    query: listActivities
+  })
 
-//   return { featured_data, activities_data }
-// }
+  const featured_data = premiumPackages.data.listPackages.items
+  const activities_data = activities.data.listActivities.items
 
-export async function getStaticProps() {
-  const { data: featured_data } = await axios.get(
-    `${process.env.NEXT_PUBLIC_KITE_BACKEND}/package/premium`
-  )
+  console.log(activities_data)
 
-  const { data: activities_data } = await axios.get(
-    `${process.env.NEXT_PUBLIC_KITE_BACKEND}/activity`
-  )
   if (!featured_data || !activities_data) {
     return {
       notFound: true

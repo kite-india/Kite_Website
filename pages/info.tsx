@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../components/layouts/main'
 import Section from '../components/Section'
 import {
@@ -19,22 +19,37 @@ import {
   InputRightElement,
   IconButton
 } from '@chakra-ui/react'
-import { GetServerSidePropsContext, NextPage } from 'next'
-import { requireAuth } from '@utils/helpers/requireAuth'
-import { useSession } from 'next-auth/react'
+import { NextPage } from 'next'
 import { FiEdit2 } from 'react-icons/fi'
+import { getAuthUserName } from '@libs/userAuth'
 
 const Info: NextPage = () => {
-  const { data: session } = useSession()
   const [data, setData] = useState({
-    firstName: session.user.name,
-    lastName: 'smith',
+    firstName: '',
+    lastName: '',
     location: 'usa',
-    email: session.user.email,
-    mobile: '99889988',
-    date: '2013-01-08',
-    gender: 'Female'
+    email: '',
+    mobile: '',
+    date: '',
+    gender: ''
   })
+
+  useEffect(() => {
+    getAuthUserName().then(user => {
+      console.log(user.attributes.phone_number)
+      const name = user.attributes.name.split(' ')
+      setData({
+        firstName: name[0],
+        lastName: name[1],
+        location: 'usa',
+        email: user.attributes.email,
+        date: user.attributes.birthdate,
+        gender: 'male',
+        mobile: user.attributes.phone_number
+      })
+    })
+  }, [])
+
   const [isEdit, setIsEdit] = useState({
     firstName: true,
     lastName: true,
@@ -125,7 +140,7 @@ const Info: NextPage = () => {
               >
                 <Center mr={6}>
                   <Avatar
-                    src={session ? session.user.image : undefined}
+                    // src={session ? session.user.image : undefined}
                     w={{ base: '100px', lg: '137.89px' }}
                     h="auto"
                   >
@@ -471,11 +486,3 @@ const Info: NextPage = () => {
   )
 }
 export default Info
-
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  return requireAuth(context, session => {
-    return {
-      props: { session }
-    }
-  })
-}

@@ -9,6 +9,8 @@ interface IProps {
 }
 
 const TransactionCardGroup: React.FC<IProps> = ({ data }) => {
+  console.log(data)
+
   return (
     <Stack
       mx={{ sm: '10px' }}

@@ -16,6 +16,7 @@ export interface HomePageProps {
 
 export interface TripsPageProps {
   packages_data?: Trip[] | null
+  activities_data?: any
 }
 
 export type Activity = {
@@ -23,6 +24,7 @@ export type Activity = {
   name?: string
   description?: string
   image?: string
+  cost?: string | number
 }
 
 export type FeaturedDestination = Trip & {
@@ -33,8 +35,7 @@ export type FeaturedDestination = Trip & {
 export type Trip = {
   id?: string
   location?: string
-  cost?: string
-  activities?: string[]
+  cost?: number
   contact?: string
   image?: string
   name?: string
@@ -44,13 +45,15 @@ export type Trip = {
 }
 
 export type Transaction = {
-  id?: number
-  img?: string
-  place?: string
-  date?: string
-  guest?: number
-  cost?: string
-  status?: boolean
+  passengers: []
+  id: string
+  mainPassenger: []
+  packageName: string
+  userInfoID: string
+  starts?: string
+  ends?: string
+  bookingStatus: string
+  total_cost: string
 }
 
 export interface TransactionPageProps {
@@ -59,6 +62,7 @@ export interface TransactionPageProps {
 
 export interface BookNowProps {
   packages_data?: Trip
+  activities?: any
 }
 
 export interface ExtraPassengerProps {
@@ -76,20 +80,19 @@ export interface BookNowFormType {
   email?: string
   phone?: string
   persons?: ExtraPassengersType[]
-  dob?: Date | string
-  from?: Date | string
-  to?: Date | string
+  dob?: string
+  from?: string
+  to?: string
 }
 
 export interface ExtraPassengersType {
   suffix?: 'mr' | 'mrs'
   fname?: string
   lname?: string
-  email?: string
-  phone?: string
+  birthdate?: string
 }
 export interface GalleryPageProps {
-  data: Gallery[] | []
+  data: Gallery[]
 }
 
 export type Gallery = {

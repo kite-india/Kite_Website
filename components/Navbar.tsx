@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import NextLink from 'next/link'
 import {
   Flex,
@@ -38,6 +38,9 @@ import { GrGallery, GrContact } from 'react-icons/gr'
 import { FaRegUserCircle } from 'react-icons/fa'
 import { motion } from 'framer-motion'
 import { signOut, useSession } from 'next-auth/react'
+import { getAuthUserName, ionViewCanEnter } from '@libs/userAuth'
+import { Auth } from 'aws-amplify'
+import { useRouter } from 'next/router'
 
 const links = [
   { name: 'Home', href: '/', icon: <BiHomeHeart /> },
@@ -107,10 +110,27 @@ interface NavProps {
 }
 
 const Navbar: React.FC<NavProps> = () => {
-  // const [isOpen, setOpen] = useState(false)
-  const { data: session, status } = useSession()
+  const router = useRouter()
+  const [username, setUsername] = useState('Sign In')
+  const [status, setStatus] = useState('unauthenticated')
   const { isOpen, onOpen, onClose } = useDisclosure()
+
+  useEffect(() => {
+    getAuthUserName()
+      .then(e => {
+        setUsername(e.attributes.name)
+        setStatus('authenticated')
+      })
+      .catch(e => {
+        console.log(e.message)
+        setStatus(e.message)
+      })
+  }, [])
+
+  // const [isOpen, setOpen] = useState(false)
+
   const btnRef = useRef()
+
   const [isSmallerThanMd] = useMediaQuery('(max-width:768px)')
   return (
     <Box
@@ -171,7 +191,6 @@ const Navbar: React.FC<NavProps> = () => {
               _hover={{ backgroundColor: 'transparent', outline: 'none' }}
             >
               <Avatar
-                src={session ? session.user.image : undefined}
                 icon={<FaRegUserCircle />}
                 color="color5"
                 bg="white"
@@ -296,12 +315,17 @@ const Navbar: React.FC<NavProps> = () => {
                 </MenuItem>
               </Link>
               <Link
-                href="/login"
                 _focus={{ textDecoration: 'none' }}
                 _hover={{ textDecoration: 'none' }}
                 onClick={e => {
                   e.preventDefault()
-                  signOut()
+                  Auth.signOut()
+                    .then(e => {
+                      router.push('/login')
+                    })
+                    .catch(e => {
+                      console.log('Failed to logout')
+                    })
                 }}
               >
                 <MenuItem
@@ -351,7 +375,7 @@ const Navbar: React.FC<NavProps> = () => {
             >
               <Flex direction="row" gap={2}>
                 <FaRegUserCircle size={20} />
-                <Text>Sign in</Text>
+                <Text>Sign In</Text>
               </Flex>
             </Link>
           </NextLink>

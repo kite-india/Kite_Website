@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Box, Heading, Text, Button, Flex } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
@@ -7,10 +7,19 @@ import CustomImage from './CustomImage'
 
 interface IProps {
   data: Activity
+  addToCartHandler: Function
+  updateTotalCost: Function
 }
 
-const ActivityCard: React.FC<IProps> = ({ data }) => {
-  const { id, name, description, image } = data
+const ActivityCard: React.FC<IProps> = ({
+  data,
+  addToCartHandler,
+  updateTotalCost
+}) => {
+  const { id, name, description, image, cost } = data
+
+  const [showAddToCart, setShowAddToCard] = useState(true)
+
   if (!data) return null
   return (
     <Flex
@@ -56,25 +65,56 @@ const ActivityCard: React.FC<IProps> = ({ data }) => {
         </Flex>
         <Flex justify="space-between" gap={4} alignItems="center" p={1}>
           <Text fontFamily="'Poppins'" fontSize="18px">
-            Rs 20,000 /{' '}
+            Rs {cost} /{' '}
             <Text as="span" fontSize="12px">
               person
             </Text>
           </Text>
-          <Button
-            bg="#8FB339"
-            _hover={{ bg: 'green.400' }}
-            _focus={{ bg: 'green.400' }}
-            color="white"
-            fontFamily="'Roboto'"
-            borderRadius="full"
-            px={{ base: 6, lg: 12 }}
-            as={motion.button}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            Add to Cart
-          </Button>
+          {showAddToCart && (
+            <Button
+              bg="#8FB339"
+              _hover={{ bg: 'green.400' }}
+              _focus={{ bg: 'green.400' }}
+              color="white"
+              fontFamily="'Roboto'"
+              borderRadius="full"
+              px={{ base: 6, lg: 12 }}
+              as={motion.button}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              id={id}
+              onClick={e => {
+                addToCartHandler(e.currentTarget.id, 'add')
+                updateTotalCost(Number(cost), 'add')
+                setShowAddToCard(false)
+              }}
+            >
+              Add to Cart
+            </Button>
+          )}
+
+          {!showAddToCart && (
+            <Button
+              bg="#8FB339"
+              _hover={{ bg: 'green.400' }}
+              _focus={{ bg: 'green.400' }}
+              color="white"
+              fontFamily="'Roboto'"
+              borderRadius="full"
+              px={{ base: 6, lg: 12 }}
+              as={motion.button}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              id={id}
+              onClick={e => {
+                addToCartHandler(e.currentTarget.id, 'remove')
+                updateTotalCost(Number(cost), 'remove')
+                setShowAddToCard(true)
+              }}
+            >
+              Remove From Cart
+            </Button>
+          )}
         </Flex>
       </Box>
     </Flex>

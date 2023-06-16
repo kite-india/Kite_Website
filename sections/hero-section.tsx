@@ -28,7 +28,7 @@ const HeroSection: React.FC = () => {
       // bgPosition="center"
     >
       <CustomImage
-        src="static-public/hero1.jpg"
+        src="hero1.jpg"
         alt="hero"
         priority
         layout="fill"

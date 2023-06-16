@@ -23,7 +23,8 @@ module.exports = {
       'rajaampatbiodiversity.com',
       'www.tripsavvy.com',
       'cdn.pixabay.com',
-      'kite2022.sgp1.digitaloceanspaces.com'
+      'kite2022.sgp1.digitaloceanspaces.com',
+      'kite-frontend-storage-79e65883162600-staging.s3.ap-south-1.amazonaws.com'
     ],
     minimumCacheTTL: convertDaysToSecs(7)
   }

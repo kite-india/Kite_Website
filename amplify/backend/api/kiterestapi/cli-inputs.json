@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "paths": {
+    "/item": {
+      "name": "/item",
+      "lambdaFunction": "payment",
+      "permissions": {
+        "setting": "private",
+        "auth": ["create", "read"]
+      }
+    }
+  }
+}

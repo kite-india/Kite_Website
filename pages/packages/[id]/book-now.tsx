@@ -19,39 +19,72 @@ import axios from 'axios'
 import { Section } from '@components/index'
 import Layout from '@components/layouts/main'
 import type { GetServerSidePropsContext, NextPage } from 'next'
-import type {
-  BookNowFormType,
-  BookNowProps,
-  ExtraPassengersType,
-  Trip
-} from '@utils/types'
-import { useTripsStore } from '@utils/hooks/useTripsStore'
+import type { BookNowProps, ExtraPassengersType, Trip } from '@utils/types'
+
 import { ExtraPassenger } from '@sections/index'
-import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
-import { requireAuth } from '@utils/helpers/requireAuth'
+import { API, Auth, withSSRContext } from 'aws-amplify'
+import { GraphQLQuery, GRAPHQL_AUTH_MODE } from '@aws-amplify/api'
+import {
+  GetPackageQuery,
+  CreateRegistrationMutation,
+  GetPackageQueryVariables,
+  ActivitiesByPackageIDQuery
+} from 'src/API'
+import { createRegistration } from 'src/graphql/mutations'
+import { Activities } from '@sections/index'
+import { ToastContainer } from 'react-toastify'
 
-const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
-  const { status } = useSession()
+import { toast } from 'react-toastify'
+import BookedModel from '@components/BookedModel'
+import 'react-toastify/dist/ReactToastify.css'
+import { activitiesByPackageID, getPackage } from 'src/graphql/queries'
+
+const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
   const router = useRouter()
-  const { data: session } = useSession()
-
-  if (status != 'authenticated') {
-    router.push('/login', { query: { from: router.pathname } })
-  }
-
   const { isOpen, onToggle } = useDisclosure()
-  const [formParams, setFormParams] = useState<BookNowFormType>({})
+  const [mainPassenger, setMainPassenger] = useState<any>({})
   const [passengers, setPassengers] = useState<number>(1)
   const [extraPassengers, setExtraPassengers] = useState<{
     [key: number]: ExtraPassengersType
   }>({})
 
-  if (!packages_data) {
-    return null
+  const [activity, setActivity] = useState<string[]>([])
+  const [booked, setBooked] = useState(false)
+  const [totalCost, setTotalCost] = useState(packages_data.cost)
+
+  function updateTotalCost(cost: number, state: string) {
+    if (state === 'add') {
+      setTotalCost(prevState => {
+        return prevState + Number(cost)
+      })
+    } else {
+      setTotalCost(prevState => {
+        return prevState - Number(cost)
+      })
+    }
   }
 
-  const { id, name, image, location, cost, description } = packages_data
+  if (!packages_data) {
+    return <div>No Package chosen</div>
+  }
+
+  const addToCartHandler = (activityId: string, action: string) => {
+    if (action == 'add') {
+      setActivity(prevState => [...prevState, activityId])
+    } else if (action == 'remove') {
+      let tempArr = [...activity]
+      let index = activity.indexOf(activityId)
+      if (index !== -1) {
+        tempArr.splice(index, 1)
+        setActivity(tempArr)
+
+        console.log(activity)
+      }
+    }
+  }
+
+  const { id, image, location, cost, description, name } = packages_data
   // const [days, nights] = duration.split('/')
   const handleExtraPassengers = (
     num: number,
@@ -61,33 +94,78 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
   }
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    setFormParams(prevState => ({
+    console.log(e.target.name)
+    setMainPassenger(prevState => ({
       ...prevState,
       [e.target.name]: e.target.value
     }))
     e.preventDefault()
   }
 
-  const handleSubmit = () => {
-    formParams['packageid'] = id
-    formParams['persons'] = Object.values(extraPassengers)
-    formParams['dob'] = new Date(formParams?.dob).toISOString()
-    formParams['from'] = new Date(formParams?.from).toISOString()
-    formParams['to'] = new Date(formParams?.to).toISOString()
-    console.log(formParams)
-    axios
-      .post(
-        `${process.env.NEXT_PUBLIC_KITE_BACKEND}/packageregistration`,
-        formParams
-      )
-      .then(response => console.log(response.data))
-      .catch(err => console.log(err))
+  const handleSubmit = async () => {
+    // try {
+    //   await Auth.currentAuthenticatedUser({ bypassCache: true })
+    //   const res = await axios.post("/api/register", {
+    //     packageId: router.query.id,
+    //     activities: activity,
+    //     mainPassenger,
+    //     extraPassengers: Object.values(extraPassengers)
+    //   })
+
+    //   if (res.data.status === false) {
+
+    //     toast.error(res.data.message)
+    //   }
+    //   else if (res.data.status === true) {
+    //     toast.success(res.data.message)
+    //     setBooked(true)
+    //   }
+    // }
+
+    // catch (e) {
+    //   toast.error(e)
+    // }
+
+    try {
+      let totalPassengers = Object.keys(extraPassengers)
+      let cost = totalCost
+
+      cost = cost * (totalPassengers.length + 1)
+
+      const user = await Auth.currentUserInfo()
+      console.log(user)
+      const reg = await API.graphql<GraphQLQuery<CreateRegistrationMutation>>({
+        query: createRegistration,
+        variables: {
+          input: {
+            userinfoID: user.username,
+            registrationPackageId: router.query.id,
+            activitiesId: activity,
+            bookingStatus: 'Booked',
+            mainPassenger: mainPassenger,
+            passengers: Object.values(extraPassengers),
+            packageName: name,
+            total_cost: cost
+          }
+        },
+        authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS
+      })
+
+      setBooked(true)
+      console.log(reg)
+    } catch (e) {
+      console.log(e)
+      console.log('Inside')
+      toast.error('Fill all the fields properly')
+    }
   }
 
   return (
     <Layout title="Book Now">
+      <ToastContainer></ToastContainer>
+      <BookedModel booked={booked}></BookedModel>
       <Container w="100%" pt={8} maxWidth="container.xl">
         <Section delay={0.1}>
           <Heading fontSize="72px" fontWeight="semibold" color="#8FB339">
@@ -110,7 +188,7 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
                 }}
                 mb={{ base: 6, lg: 0 }}
               />
-              <Box align="center" w="100%">
+              <Box textAlign="center" w="100%">
                 <Heading fontSize="48px" fontWeight="semibold" mb={2}>
                   {location}
                 </Heading>
@@ -135,6 +213,15 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
                 </Flex>
               </Box>
             </Flex>
+            <Box mt={20}>
+              <Section delay={0.4}>
+                <Activities
+                  updateTotalCost={updateTotalCost}
+                  addToCartHandler={addToCartHandler}
+                  data={activities}
+                />
+              </Section>
+            </Box>
             <Box mt={8} mb={4} maxW="container.xl">
               <Text
                 color="#3E7C17"
@@ -151,13 +238,13 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
                 thhe airport.
               </Text>
             </Box>
-            <Box maxW="container.xl" align="center">
+            <Box maxW="container.xl" alignContent="center">
               <FormControl fontFamily="'Roboto'">
                 <Flex direction="column" gap={{ base: 4, md: 8 }} mb={6}>
                   <Flex gap={{ base: 2, md: 6 }}>
                     <Select
                       w="30%"
-                      type="text"
+                      typeof="text"
                       name="suffix"
                       placeholder="Suffix"
                       onChange={handleChange}
@@ -167,30 +254,25 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
                     </Select>
                     <Input
                       type="text"
-                      name="fname"
-                      value={session ? session.user.name : undefined}
+                      name="firstName"
+                      // value={session ? session.user.name : undefined}
                       placeholder="First Name"
                       onChange={handleChange} //here
                       required
-                    />
-                    <Input
-                      type="text"
-                      name="mname"
-                      placeholder="Middle"
-                      onChange={handleChange}
                     />
                   </Flex>
                   <Flex gap={{ base: 4, md: 12 }}>
                     <Input
                       type="text"
-                      name="lname"
+                      name="lastName"
                       placeholder="Last Name"
                       required
                       onChange={handleChange}
                     />
+                    <Text paddingTop="2">Dob:</Text>
                     <Input
                       type="date"
-                      name="dob"
+                      name="birthdate"
                       placeholder="Date of Birth"
                       required
                       onChange={handleChange}
@@ -200,30 +282,32 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
                     <Input
                       type="email"
                       name="email"
-                      value={session ? session.user.email : undefined}
+                      // value={session ? session.user.email : undefined}
                       placeholder="Email Address"
                       required
                       onChange={handleChange}
                     />
                     <Input
                       type="text"
-                      name="phone"
+                      name="phoneNumber"
                       placeholder="Phone Number"
                       required
                       onChange={handleChange}
                     />
                   </Flex>
                   <Flex gap={{ base: 2, md: 6 }}>
+                    <Text>Start Date</Text>
                     <Input
-                      type="datetime-local"
-                      name="from"
+                      type="date"
+                      name="starts"
                       placeholder="Start Date"
                       required
                       onChange={handleChange}
                     />
+                    <Text>End Date</Text>
                     <Input
-                      type="datetime-local"
-                      name="to"
+                      type="date"
+                      name="ends"
                       placeholder="End Date"
                       required
                       onChange={handleChange}
@@ -273,9 +357,10 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
                 <Button
                   bg="#B7CE63"
                   color="white"
-                  w="80%"
+                  w="100%"
                   py={2}
-                  mt={4}
+                  mt={10}
+                  mb={10}
                   onClick={handleSubmit}
                 >
                   Book Now
@@ -292,15 +377,45 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data }) => {
 export default BookNow
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const { id } = context.params
+  const { Auth } = withSSRContext(context)
+  try {
+    await Auth.currentAuthenticatedUser()
+    const { id } = context.params
+    // const SSR = withSSRContext(context)
+    // console.log(SSR)
+    const fetchPackage = await API.graphql<GraphQLQuery<GetPackageQuery>>({
+      query: getPackage,
+      variables: {
+        id: `${id}`
+      }
+    })
 
-  await useTripsStore.getState().fetchSingleTripById(id as string)
+    const getActivities = await API.graphql<
+      GraphQLQuery<ActivitiesByPackageIDQuery>
+    >({
+      query: activitiesByPackageID,
+      variables: {
+        packageID: id
+      }
+    })
 
-  const data = useTripsStore.getState().singleTripById
+    const activities = getActivities.data.activitiesByPackageID.items
 
-  return requireAuth(context, session => {
     return {
-      props: { session, packages_data: data as Trip }
+      props: { packages_data: fetchPackage.data.getPackage as Trip, activities }
     }
-  })
+  } catch (err) {
+    console.log(err)
+    console.log('User is not authenticated')
+    //Redirect to login page
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/login'
+      },
+      props: {}
+    }
+
+    // User is not authenticated
+  }
 }
