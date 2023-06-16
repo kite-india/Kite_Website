@@ -41,6 +41,7 @@ frontend:
         - npm list
     build:
       commands:
+        - env | grep -e NEXT_PUBLIC_ >> .env.production
         - yarn run build
 
     postbuild:

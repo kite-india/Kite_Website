@@ -27,7 +27,7 @@ const Page: NextPage<HomePageProps> = ({
   )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
 
 
 
