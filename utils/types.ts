@@ -41,7 +41,8 @@ export type Trip = {
   name?: string
   description?: string
   details_file?: string
-  is_premium_flag?: boolean
+  is_premium_flag?: boolean,
+  video_link?:string,
 }
 
 export type Transaction = {

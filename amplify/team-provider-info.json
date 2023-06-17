@@ -27,19 +27,14 @@
           "deploymentBucketName": "amplify-kitefrontend-staging-162600-deployment",
           "s3Key": "amplify-builds/payment-63642b4a4f6f4c507359-build.zip"
         },
-        "test": {
-          "deploymentBucketName": "amplify-kitefrontend-staging-162600-deployment",
-          "s3Key": "amplify-builds/test-744a4a6375345737486d-build.zip"
-        },
-        "kitefrontenda253a59e": {},
         "signUpTrigger": {
           "deploymentBucketName": "amplify-kitefrontend-staging-162600-deployment",
           "s3Key": "amplify-builds/signUpTrigger-6f7954416d344f435335-build.zip"
+        },
+        "test": {
+          "deploymentBucketName": "amplify-kitefrontend-staging-162600-deployment",
+          "s3Key": "amplify-builds/test-744a4a6375345737486d-build.zip"
         }
-      },
-      "api": {
-        "kitefrontend": {},
-        "kiterestapi": {}
       }
     }
   }

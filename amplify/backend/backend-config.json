@@ -3,7 +3,9 @@
     "kitefrontend": {
       "dependsOn": [
         {
-          "attributes": ["UserPoolId"],
+          "attributes": [
+            "UserPoolId"
+          ],
           "category": "auth",
           "resourceName": "kitefrontend"
         }
@@ -36,7 +38,10 @@
     "kiterestapi": {
       "dependsOn": [
         {
-          "attributes": ["Name", "Arn"],
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
           "category": "function",
           "resourceName": "payment"
         }
@@ -51,7 +56,9 @@
       "dependsOn": [],
       "frontendAuthConfig": {
         "mfaConfiguration": "OFF",
-        "mfaTypes": ["SMS"],
+        "mfaTypes": [
+          "SMS"
+        ],
         "passwordProtectionSettings": {
           "passwordPolicyCharacters": [],
           "passwordPolicyMinLength": 8
@@ -63,9 +70,15 @@
           "PHONE_NUMBER",
           "PICTURE"
         ],
-        "socialProviders": ["GOOGLE"],
-        "usernameAttributes": ["EMAIL"],
-        "verificationMechanisms": ["EMAIL"]
+        "socialProviders": [
+          "GOOGLE"
+        ],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"

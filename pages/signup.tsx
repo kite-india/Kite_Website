@@ -41,7 +41,7 @@ const Signup: React.FC = () => {
         attributes: {
           picture: 'fds',
           birthdate: signUparams.birthdate,
-          phone_number: signUparams.phone,
+          phone_number: signUparams.phone.includes("+") ? signUparams.phone : "+" + signUparams.phone,
           email: signUparams.email,
           name: signUparams.firstName + ' ' + signUparams.lastName
         }
@@ -50,7 +50,14 @@ const Signup: React.FC = () => {
       //If signUp success enable confirmation page
       setConfirmation(true)
     } catch (e) {
-      console.log(e)
+      console.log(e);
+      if (e.message === "Invalid phone number format.") {
+        toast.error("Include your country code with phone number/Check your phone number correctly")
+      }
+      else {
+        toast.error(e.message);
+      }
+
     }
   }
 
@@ -239,19 +246,22 @@ const Signup: React.FC = () => {
                 borderRadius="6px"
                 backgroundColor="white"
               />
-              <Input
-                name="birthdate"
-                onChange={handleChange}
-                value={signUparams['birthdate']}
-                type="date"
-                width="100%"
-                height="53px"
-                boxShadow="md"
-                borderRadius="6px"
-                backgroundColor="white"
-              />
+              <Flex >
+                <Text width="30%" paddingTop={3}>Date of Birth: </Text>
+                <Input
+                  name="birthdate"
+                  onChange={handleChange}
+                  value={signUparams['birthdate']}
+                  type="date"
+                  width="100%"
+                  height="53px"
+                  boxShadow="md"
+                  borderRadius="6px"
+                  backgroundColor="white"
+                />
 
-              <Input
+              </Flex>
+              {/* <Input
                 name="image"
                 onChange={async e => {
                   const file = e.target.files[0]
@@ -269,7 +279,7 @@ const Signup: React.FC = () => {
                 boxShadow="md"
                 borderRadius="6px"
                 backgroundColor="white"
-              />
+              /> */}
               <Select
                 width="100%"
                 height="53px"

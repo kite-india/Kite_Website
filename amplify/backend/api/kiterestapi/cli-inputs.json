@@ -6,7 +6,10 @@
       "lambdaFunction": "payment",
       "permissions": {
         "setting": "private",
-        "auth": ["create", "read"]
+        "auth": [
+          "create",
+          "read"
+        ]
       }
     }
   }

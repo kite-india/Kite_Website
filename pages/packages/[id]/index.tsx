@@ -52,10 +52,10 @@ const Page: NextPage<PackagesPageProps> = ({
 }) => {
   const router = useRouter()
   if (!packages_data) return null
-  const { name, id, image, description, cost, details_file, is_premium_flag } =
+  const { name, id, image, description, cost, details_file, is_premium_flag, video_link } =
     packages_data
 
-  console.log(gallery_data)
+  console.log(video_link)
   const bookNow = () => {
     router.push(`/packages/${id}/book-now`)
   }
@@ -73,7 +73,6 @@ const Page: NextPage<PackagesPageProps> = ({
               <CustomImage
                 priority
                 src={image}
-                // src="static-public/Saly-44.svg"
                 alt={id}
                 layout="responsive"
                 width={240}

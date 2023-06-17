@@ -22,6 +22,7 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 const Login: NextPage = () => {
+
   const router = useRouter()
   const [confirmation, setConfirmation] = useState(false)
   const [loginParams, setLoginParams] = useState({
@@ -33,6 +34,7 @@ const Login: NextPage = () => {
     const data = await Auth.federatedSignIn({
       provider: CognitoHostedUIIdentityProvider.Google
     })
+    console.log(data)
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -88,10 +90,14 @@ const Login: NextPage = () => {
           setConfirmation(true)
           break
         }
+        case 'UsernameExistsException': {
+          toast.error("Email Already exist");
+          break;
+        }
 
         default:
           toast.error(e.message)
-          break
+
       }
     }
   }
