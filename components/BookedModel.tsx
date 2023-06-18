@@ -30,7 +30,7 @@ export default function BookedModel(props) {
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
+        {/* <ModalOverlay /> */}
         <ModalContent mt={'25%'}>
           <ModalHeader>Booking Status</ModalHeader>
           <ModalCloseButton />

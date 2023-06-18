@@ -105,28 +105,7 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
   }
 
   const handleSubmit = async () => {
-    // try {
-    //   await Auth.currentAuthenticatedUser({ bypassCache: true })
-    //   const res = await axios.post("/api/register", {
-    //     packageId: router.query.id,
-    //     activities: activity,
-    //     mainPassenger,
-    //     extraPassengers: Object.values(extraPassengers)
-    //   })
 
-    //   if (res.data.status === false) {
-
-    //     toast.error(res.data.message)
-    //   }
-    //   else if (res.data.status === true) {
-    //     toast.success(res.data.message)
-    //     setBooked(true)
-    //   }
-    // }
-
-    // catch (e) {
-    //   toast.error(e)
-    // }
 
     try {
       let totalPassengers = Object.keys(extraPassengers)

@@ -71,10 +71,11 @@ const NextDestinationForm: React.FC = () => {
   function validateShootingCategory(value) {
     let error = ''
     if (!value) {
-      error = 'ShootingCategory is required'
+      error = 'Vacaction Type is required'
     }
     return error
   }
+
   function validateDescription(value) {
     let error = ''
     if (!value) {
@@ -86,7 +87,7 @@ const NextDestinationForm: React.FC = () => {
     destinationName: '',
     name: '',
     shootingCategory: '',
-    numberOfPeople: 0,
+    numberOfPeople: '',
     email: '',
     phone: ''
   }
@@ -156,11 +157,9 @@ const NextDestinationForm: React.FC = () => {
                 mutation MyMutation {
                   createEnquiry(input: {number_of_people: ${Number(
                     values.numberOfPeople
-                  )}, name: "${values.name}", phone_number: "${
-                    values.phone
-                  }" vacation_type: "${values.shootingCategory}", email: "${
-                    values.email
-                  }", destination_name: "${values.destinationName}"}) {
+                  )}, name: "${values.name}", phone_number: "${values.phone
+                    }" vacation_type: "${values.shootingCategory}", email: "${values.email
+                    }", destination_name: "${values.destinationName}"}) {
                     email
                     id
                     name
@@ -281,10 +280,8 @@ const NextDestinationForm: React.FC = () => {
                           placeholder="Vacation Type"
                         >
                           <option>Couples</option>
-                          <option>Single</option>
-                          <option>option3</option>
-                          <option>option4</option>
-                          <option>option5</option>
+                          <option>Solo</option>
+                          <option>Groups</option>
                         </Select>
                         <FormErrorMessage>
                           {form.errors.shootingCategory}
@@ -307,7 +304,7 @@ const NextDestinationForm: React.FC = () => {
                         <Input
                           {...field}
                           id="numberOfPeople"
-                          placeholder="No. Of People"
+                          placeholder="No.Of People"
                         />
                         <FormErrorMessage>
                           {form.errors.numberOfPeople}
@@ -316,24 +313,6 @@ const NextDestinationForm: React.FC = () => {
                     )}
                   </Field>
 
-                  {/* <Field name="description" validate={validateDescription}>
-                    {({ field, form }) => (
-                      <FormControl
-                        isInvalid={
-                          form.errors.description && form.touched.description
-                        }
-                      >
-                        <Textarea
-                          {...field}
-                          id="description"
-                          placeholder="Describe what kind of photos you want to focus on"
-                        />
-                        <FormErrorMessage>
-                          {form.errors.description}
-                        </FormErrorMessage>
-                      </FormControl>
-                    )}
-                  </Field> */}
                   <Button
                     isLoading={props.isSubmitting}
                     type="submit"
