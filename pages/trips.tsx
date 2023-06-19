@@ -143,7 +143,7 @@ export async function getServerSideProps(context) {
     query: listActivities
   })
 
-  console.log('Act')
+
   console.log(activities.data.listActivities.items)
 
   let packages_data = packagesAndActivities.data.listPackages.items as Trip[]
