@@ -36,7 +36,7 @@ const Signup: React.FC = () => {
     birthdate: '',
     confirmPassword: ''
   })
-  
+
   const validateEmail = (email) => {
     return String(email)
       .toLowerCase()
@@ -47,18 +47,20 @@ const Signup: React.FC = () => {
 
   async function registerHandler() {
 
+    console.log(signUparams)
 
     const isEmpty = Object.values(signUparams).every(x => x !== null || x !== '');
     console.log(isEmpty)
-    if (isEmpty) {
+    
+    if (!isEmpty) {
       toast.error("Fill All fields");
       return;
     }
 
-    if (validateEmail(signUparams.email)) {
-      toast.error("Please enter a valid email address")
-      return;
-    }
+    // if (validateEmail(signUparams.email)) {
+    //   toast.error("Please enter a valid email address")
+    //   return;
+    // }
 
     if (signUparams.password !== signUparams.confirmPassword) {
       toast.error("Password doesn't match");

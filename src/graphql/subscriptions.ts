@@ -15,9 +15,10 @@ export const onCreateActivity = /* GraphQL */ `
       packageID
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const onUpdateActivity = /* GraphQL */ `
   subscription OnUpdateActivity($filter: ModelSubscriptionActivityFilterInput) {
     onUpdateActivity(filter: $filter) {
@@ -31,9 +32,10 @@ export const onUpdateActivity = /* GraphQL */ `
       packageID
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const onDeleteActivity = /* GraphQL */ `
   subscription OnDeleteActivity($filter: ModelSubscriptionActivityFilterInput) {
     onDeleteActivity(filter: $filter) {
@@ -47,9 +49,10 @@ export const onDeleteActivity = /* GraphQL */ `
       packageID
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const onCreateEnquiry = /* GraphQL */ `
   subscription OnCreateEnquiry($filter: ModelSubscriptionEnquiryFilterInput) {
     onCreateEnquiry(filter: $filter) {
@@ -62,9 +65,10 @@ export const onCreateEnquiry = /* GraphQL */ `
       phone_number
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const onUpdateEnquiry = /* GraphQL */ `
   subscription OnUpdateEnquiry($filter: ModelSubscriptionEnquiryFilterInput) {
     onUpdateEnquiry(filter: $filter) {
@@ -77,9 +81,10 @@ export const onUpdateEnquiry = /* GraphQL */ `
       phone_number
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const onDeleteEnquiry = /* GraphQL */ `
   subscription OnDeleteEnquiry($filter: ModelSubscriptionEnquiryFilterInput) {
     onDeleteEnquiry(filter: $filter) {
@@ -92,9 +97,10 @@ export const onDeleteEnquiry = /* GraphQL */ `
       phone_number
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const onCreateGallery = /* GraphQL */ `
   subscription OnCreateGallery($filter: ModelSubscriptionGalleryFilterInput) {
     onCreateGallery(filter: $filter) {
@@ -103,9 +109,10 @@ export const onCreateGallery = /* GraphQL */ `
       packageID
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const onUpdateGallery = /* GraphQL */ `
   subscription OnUpdateGallery($filter: ModelSubscriptionGalleryFilterInput) {
     onUpdateGallery(filter: $filter) {
@@ -114,9 +121,10 @@ export const onUpdateGallery = /* GraphQL */ `
       packageID
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const onDeleteGallery = /* GraphQL */ `
   subscription OnDeleteGallery($filter: ModelSubscriptionGalleryFilterInput) {
     onDeleteGallery(filter: $filter) {
@@ -125,9 +133,10 @@ export const onDeleteGallery = /* GraphQL */ `
       packageID
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const onCreateRegistration = /* GraphQL */ `
   subscription OnCreateRegistration(
     $filter: ModelSubscriptionRegistrationFilterInput
@@ -149,6 +158,7 @@ export const onCreateRegistration = /* GraphQL */ `
         video_link
         createdAt
         updatedAt
+        __typename
       }
       activitiesId
       passengers {
@@ -156,6 +166,7 @@ export const onCreateRegistration = /* GraphQL */ `
         birthdate
         firstName
         lastName
+        __typename
       }
       mainPassenger {
         firstName
@@ -165,15 +176,17 @@ export const onCreateRegistration = /* GraphQL */ `
         email
         starts
         ends
+        __typename
       }
       bookingStatus
       packageName
       createdAt
       updatedAt
       registrationPackageId
+      __typename
     }
   }
-`
+`;
 export const onUpdateRegistration = /* GraphQL */ `
   subscription OnUpdateRegistration(
     $filter: ModelSubscriptionRegistrationFilterInput
@@ -195,6 +208,7 @@ export const onUpdateRegistration = /* GraphQL */ `
         video_link
         createdAt
         updatedAt
+        __typename
       }
       activitiesId
       passengers {
@@ -202,6 +216,7 @@ export const onUpdateRegistration = /* GraphQL */ `
         birthdate
         firstName
         lastName
+        __typename
       }
       mainPassenger {
         firstName
@@ -211,15 +226,17 @@ export const onUpdateRegistration = /* GraphQL */ `
         email
         starts
         ends
+        __typename
       }
       bookingStatus
       packageName
       createdAt
       updatedAt
       registrationPackageId
+      __typename
     }
   }
-`
+`;
 export const onDeleteRegistration = /* GraphQL */ `
   subscription OnDeleteRegistration(
     $filter: ModelSubscriptionRegistrationFilterInput
@@ -241,6 +258,7 @@ export const onDeleteRegistration = /* GraphQL */ `
         video_link
         createdAt
         updatedAt
+        __typename
       }
       activitiesId
       passengers {
@@ -248,6 +266,7 @@ export const onDeleteRegistration = /* GraphQL */ `
         birthdate
         firstName
         lastName
+        __typename
       }
       mainPassenger {
         firstName
@@ -257,15 +276,17 @@ export const onDeleteRegistration = /* GraphQL */ `
         email
         starts
         ends
+        __typename
       }
       bookingStatus
       packageName
       createdAt
       updatedAt
       registrationPackageId
+      __typename
     }
   }
-`
+`;
 export const onCreateReview = /* GraphQL */ `
   subscription OnCreateReview($filter: ModelSubscriptionReviewFilterInput) {
     onCreateReview(filter: $filter) {
@@ -275,9 +296,10 @@ export const onCreateReview = /* GraphQL */ `
       review
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const onUpdateReview = /* GraphQL */ `
   subscription OnUpdateReview($filter: ModelSubscriptionReviewFilterInput) {
     onUpdateReview(filter: $filter) {
@@ -287,9 +309,10 @@ export const onUpdateReview = /* GraphQL */ `
       review
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const onDeleteReview = /* GraphQL */ `
   subscription OnDeleteReview($filter: ModelSubscriptionReviewFilterInput) {
     onDeleteReview(filter: $filter) {
@@ -299,9 +322,10 @@ export const onDeleteReview = /* GraphQL */ `
       review
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const onCreatePackage = /* GraphQL */ `
   subscription OnCreatePackage($filter: ModelSubscriptionPackageFilterInput) {
     onCreatePackage(filter: $filter) {
@@ -317,15 +341,18 @@ export const onCreatePackage = /* GraphQL */ `
       video_link
       Activities {
         nextToken
+        __typename
       }
       Galleries {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const onUpdatePackage = /* GraphQL */ `
   subscription OnUpdatePackage($filter: ModelSubscriptionPackageFilterInput) {
     onUpdatePackage(filter: $filter) {
@@ -341,15 +368,18 @@ export const onUpdatePackage = /* GraphQL */ `
       video_link
       Activities {
         nextToken
+        __typename
       }
       Galleries {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const onDeletePackage = /* GraphQL */ `
   subscription OnDeletePackage($filter: ModelSubscriptionPackageFilterInput) {
     onDeletePackage(filter: $filter) {
@@ -365,15 +395,18 @@ export const onDeletePackage = /* GraphQL */ `
       video_link
       Activities {
         nextToken
+        __typename
       }
       Galleries {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const onCreateUserInfo = /* GraphQL */ `
   subscription OnCreateUserInfo($filter: ModelSubscriptionUserInfoFilterInput) {
     onCreateUserInfo(filter: $filter) {
@@ -383,13 +416,15 @@ export const onCreateUserInfo = /* GraphQL */ `
       email
       Registrations {
         nextToken
+        __typename
       }
       name
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const onUpdateUserInfo = /* GraphQL */ `
   subscription OnUpdateUserInfo($filter: ModelSubscriptionUserInfoFilterInput) {
     onUpdateUserInfo(filter: $filter) {
@@ -399,13 +434,15 @@ export const onUpdateUserInfo = /* GraphQL */ `
       email
       Registrations {
         nextToken
+        __typename
       }
       name
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const onDeleteUserInfo = /* GraphQL */ `
   subscription OnDeleteUserInfo($filter: ModelSubscriptionUserInfoFilterInput) {
     onDeleteUserInfo(filter: $filter) {
@@ -415,10 +452,12 @@ export const onDeleteUserInfo = /* GraphQL */ `
       email
       Registrations {
         nextToken
+        __typename
       }
       name
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;

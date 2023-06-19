@@ -167,12 +167,5 @@
       ]
     }
   },
-  "storage": {
-    "kitefrontendd73ee5fd": {
-      "dependsOn": [],
-      "providerPlugin": "awscloudformation",
-      "service": "S3",
-      "serviceType": "imported"
-    }
-  }
+  "storage": {}
 }
