@@ -30,17 +30,6 @@ const ExtraPassenger: React.FC<ExtraPassengerProps> = ({
         <Text fontSize="18px" fontWeight="semibold" color="#6E7491">
           Passenger {num}
         </Text>
-        <Button
-          onClick={onToggle}
-          display={num !== 2 && 'none'}
-          bg="#E34100"
-          _hover={{ bg: 'red.600', color: 'white' }}
-          color="white"
-          px={6}
-          py={1}
-        >
-          Cancel
-        </Button>
       </Flex>
       <Flex gap={{ base: 4, md: 8 }} mb={6} direction="column">
         <Flex gap={{ base: 2, md: 6 }} w="100%">

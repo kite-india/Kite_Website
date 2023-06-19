@@ -162,6 +162,22 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
     }
   }
 
+  const addPassenger = () => {
+    if (passengers === 1) {
+      onToggle()
+      setPassengers(passengers + 1)
+    }
+    if (passengers < 7) {
+      setPassengers(passengers + 1)
+    }
+  }
+
+  const deletePassenger = () => {
+    if (passengers >= 2) {
+      setPassengers(passengers - 1)
+    }
+  }
+  console.log(passengers)
   return (
     <Layout title="Book Now">
       <ToastContainer></ToastContainer>
@@ -313,27 +329,35 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
                       onChange={handleChange}
                     />
                     <InputGroup>
-                      <InputRightElement>
-                        <Button
-                          color="white"
-                          bg="#009688"
-                          borderRadius={32}
-                          size="lg"
-                          _hover={{
-                            bg: '#3E7C17'
-                          }}
-                          onClick={onToggle}
-                        >
-                          +
-                        </Button>
-                      </InputRightElement>
-                      <Input
-                        type="number"
-                        name="persons"
-                        placeholder="No of persons"
-                        onChange={e => setPassengers(Number(e.target.value))}
-                        required
-                      />
+                      <Button
+                        disabled={passengers === 7}
+                        color="white"
+                        bg="#009688"
+                        borderRadius={32}
+                        size="lg"
+                        _hover={{
+                          bg: '#3E7C17'
+                        }}
+                        onClick={() => addPassenger()}
+                      >
+                        +
+                      </Button>
+                      <Text marginX={4} marginY={2} fontWeight={'bold'}>
+                        {passengers} Persons
+                      </Text>
+                      <Button
+                        disabled={passengers === 1}
+                        color="white"
+                        bg="#009688"
+                        borderRadius={32}
+                        size="lg"
+                        _hover={{
+                          bg: '#3E7C17'
+                        }}
+                        onClick={() => deletePassenger()}
+                      >
+                        -
+                      </Button>
                     </InputGroup>
                   </Flex>
                 </Flex>
@@ -345,7 +369,7 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
                   }}
                 />
                 <Collapse in={isOpen} animateOpacity>
-                  {[...Array(passengers)].map((x, i) => (
+                  {[...Array(passengers - 1)].map((x, i) => (
                     <ExtraPassenger
                       handleExtraPassengers={handleExtraPassengers}
                       key={i}
