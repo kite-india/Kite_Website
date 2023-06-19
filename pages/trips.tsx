@@ -132,7 +132,7 @@ const Trips: NextPage<TripsPageProps> = ({
   )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps(context) {
   const packagesAndActivities = await API.graphql<
     GraphQLQuery<ListPackagesQuery>
   >({

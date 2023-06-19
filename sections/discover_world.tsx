@@ -11,6 +11,8 @@ interface Props {
 }
 
 const DiscoverTheWorld: React.FC<Props> = ({ data }) => {
+
+  console.log(data);
   return (
     <Box position={'relative'} py={'8'} scrollSnapAlign="center">
       <Section delay={0.3}>
@@ -42,7 +44,7 @@ const DiscoverTheWorld: React.FC<Props> = ({ data }) => {
             modules={[Autoplay]}
             breakpoints={{
               1200: {
-                slidesPerView: 4
+                slidesPerView: 3
               },
 
               768: {
@@ -60,11 +62,14 @@ const DiscoverTheWorld: React.FC<Props> = ({ data }) => {
             loop={true}
             spaceBetween={40}
           >
-            {data.map(blog => (
-              <SwiperSlide key={data.id}>
-                <BlogCard blog={blog} key={blog.name} />
-              </SwiperSlide>
-            ))}
+            {data.map(blog => {
+              console.log()
+              return (
+                <SwiperSlide key={data.id}>
+                  <BlogCard blog={blog} key={blog.name} />
+                </SwiperSlide>
+              )
+            })}
           </Swiper>
         </Flex>
       </Section>
