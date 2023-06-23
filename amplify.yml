@@ -34,7 +34,7 @@ frontend:
 
         # Other Environment Variables
 
-        - export NEXT_PUBLIC_S3_ENDPOINT=$(aws ssm get-parameter --name /amplify/d3v46gbvy6d0x3/${Environment}/s3/endpoint | jq -r '.Parameter.Value')
+      #  - export NEXT_PUBLIC_S3_ENDPOINT=$(aws ssm get-parameter --name /amplify/d3v46gbvy6d0x3/${Environment}/s3/endpoint | jq -r '.Parameter.Value')
 
         - printenv
 

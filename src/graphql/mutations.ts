@@ -18,9 +18,10 @@ export const createActivity = /* GraphQL */ `
       packageID
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const updateActivity = /* GraphQL */ `
   mutation UpdateActivity(
     $input: UpdateActivityInput!
@@ -37,9 +38,10 @@ export const updateActivity = /* GraphQL */ `
       packageID
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const deleteActivity = /* GraphQL */ `
   mutation DeleteActivity(
     $input: DeleteActivityInput!
@@ -56,9 +58,10 @@ export const deleteActivity = /* GraphQL */ `
       packageID
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const createEnquiry = /* GraphQL */ `
   mutation CreateEnquiry(
     $input: CreateEnquiryInput!
@@ -74,9 +77,10 @@ export const createEnquiry = /* GraphQL */ `
       phone_number
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const updateEnquiry = /* GraphQL */ `
   mutation UpdateEnquiry(
     $input: UpdateEnquiryInput!
@@ -92,9 +96,10 @@ export const updateEnquiry = /* GraphQL */ `
       phone_number
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const deleteEnquiry = /* GraphQL */ `
   mutation DeleteEnquiry(
     $input: DeleteEnquiryInput!
@@ -110,9 +115,10 @@ export const deleteEnquiry = /* GraphQL */ `
       phone_number
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const createGallery = /* GraphQL */ `
   mutation CreateGallery(
     $input: CreateGalleryInput!
@@ -124,9 +130,10 @@ export const createGallery = /* GraphQL */ `
       packageID
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const updateGallery = /* GraphQL */ `
   mutation UpdateGallery(
     $input: UpdateGalleryInput!
@@ -138,9 +145,10 @@ export const updateGallery = /* GraphQL */ `
       packageID
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const deleteGallery = /* GraphQL */ `
   mutation DeleteGallery(
     $input: DeleteGalleryInput!
@@ -152,9 +160,10 @@ export const deleteGallery = /* GraphQL */ `
       packageID
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const createRegistration = /* GraphQL */ `
   mutation CreateRegistration(
     $input: CreateRegistrationInput!
@@ -177,6 +186,7 @@ export const createRegistration = /* GraphQL */ `
         video_link
         createdAt
         updatedAt
+        __typename
       }
       activitiesId
       passengers {
@@ -184,6 +194,7 @@ export const createRegistration = /* GraphQL */ `
         birthdate
         firstName
         lastName
+        __typename
       }
       mainPassenger {
         firstName
@@ -193,15 +204,17 @@ export const createRegistration = /* GraphQL */ `
         email
         starts
         ends
+        __typename
       }
       bookingStatus
       packageName
       createdAt
       updatedAt
       registrationPackageId
+      __typename
     }
   }
-`
+`;
 export const updateRegistration = /* GraphQL */ `
   mutation UpdateRegistration(
     $input: UpdateRegistrationInput!
@@ -224,6 +237,7 @@ export const updateRegistration = /* GraphQL */ `
         video_link
         createdAt
         updatedAt
+        __typename
       }
       activitiesId
       passengers {
@@ -231,6 +245,7 @@ export const updateRegistration = /* GraphQL */ `
         birthdate
         firstName
         lastName
+        __typename
       }
       mainPassenger {
         firstName
@@ -240,15 +255,17 @@ export const updateRegistration = /* GraphQL */ `
         email
         starts
         ends
+        __typename
       }
       bookingStatus
       packageName
       createdAt
       updatedAt
       registrationPackageId
+      __typename
     }
   }
-`
+`;
 export const deleteRegistration = /* GraphQL */ `
   mutation DeleteRegistration(
     $input: DeleteRegistrationInput!
@@ -271,6 +288,7 @@ export const deleteRegistration = /* GraphQL */ `
         video_link
         createdAt
         updatedAt
+        __typename
       }
       activitiesId
       passengers {
@@ -278,6 +296,7 @@ export const deleteRegistration = /* GraphQL */ `
         birthdate
         firstName
         lastName
+        __typename
       }
       mainPassenger {
         firstName
@@ -287,15 +306,17 @@ export const deleteRegistration = /* GraphQL */ `
         email
         starts
         ends
+        __typename
       }
       bookingStatus
       packageName
       createdAt
       updatedAt
       registrationPackageId
+      __typename
     }
   }
-`
+`;
 export const createReview = /* GraphQL */ `
   mutation CreateReview(
     $input: CreateReviewInput!
@@ -308,9 +329,10 @@ export const createReview = /* GraphQL */ `
       review
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const updateReview = /* GraphQL */ `
   mutation UpdateReview(
     $input: UpdateReviewInput!
@@ -323,9 +345,10 @@ export const updateReview = /* GraphQL */ `
       review
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const deleteReview = /* GraphQL */ `
   mutation DeleteReview(
     $input: DeleteReviewInput!
@@ -338,9 +361,10 @@ export const deleteReview = /* GraphQL */ `
       review
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const createPackage = /* GraphQL */ `
   mutation CreatePackage(
     $input: CreatePackageInput!
@@ -359,15 +383,18 @@ export const createPackage = /* GraphQL */ `
       video_link
       Activities {
         nextToken
+        __typename
       }
       Galleries {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const updatePackage = /* GraphQL */ `
   mutation UpdatePackage(
     $input: UpdatePackageInput!
@@ -386,15 +413,18 @@ export const updatePackage = /* GraphQL */ `
       video_link
       Activities {
         nextToken
+        __typename
       }
       Galleries {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const deletePackage = /* GraphQL */ `
   mutation DeletePackage(
     $input: DeletePackageInput!
@@ -413,15 +443,18 @@ export const deletePackage = /* GraphQL */ `
       video_link
       Activities {
         nextToken
+        __typename
       }
       Galleries {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const createUserInfo = /* GraphQL */ `
   mutation CreateUserInfo(
     $input: CreateUserInfoInput!
@@ -434,13 +467,15 @@ export const createUserInfo = /* GraphQL */ `
       email
       Registrations {
         nextToken
+        __typename
       }
       name
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const updateUserInfo = /* GraphQL */ `
   mutation UpdateUserInfo(
     $input: UpdateUserInfoInput!
@@ -453,13 +488,15 @@ export const updateUserInfo = /* GraphQL */ `
       email
       Registrations {
         nextToken
+        __typename
       }
       name
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;
 export const deleteUserInfo = /* GraphQL */ `
   mutation DeleteUserInfo(
     $input: DeleteUserInfoInput!
@@ -472,10 +509,12 @@ export const deleteUserInfo = /* GraphQL */ `
       email
       Registrations {
         nextToken
+        __typename
       }
       name
       createdAt
       updatedAt
+      __typename
     }
   }
-`
+`;

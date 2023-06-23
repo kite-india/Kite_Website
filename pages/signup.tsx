@@ -22,18 +22,56 @@ import 'react-toastify/dist/ReactToastify.css'
 import Verification from '@components/Verification'
 
 const Signup: React.FC = () => {
-  const [flag, setFlag] = useState(true)
-  const [confirmaton, setConfirmation] = useState(false)
+  const [flag, setFlag] = useState(true);
+  const [checkedBox, setCheckedBox] = useState(false);
+  const [confirmaton, setConfirmation] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
   const [signUparams, setSignUpParams] = useState({
     email: '',
     password: '',
     firstName: '',
     lastName: '',
     phone: '',
-    birthdate: ''
+    birthdate: '',
+    confirmPassword: ''
   })
 
+  const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
+
   async function registerHandler() {
+
+    console.log(signUparams)
+
+    const isEmpty = Object.values(signUparams).every(x => x !== null || x !== '');
+    console.log(isEmpty)
+    
+    if (!isEmpty) {
+      toast.error("Fill All fields");
+      return;
+    }
+
+    // if (validateEmail(signUparams.email)) {
+    //   toast.error("Please enter a valid email address")
+    //   return;
+    // }
+
+    if (signUparams.password !== signUparams.confirmPassword) {
+      toast.error("Password doesn't match");
+      return;
+    }
+
+    if (!checkedBox) {
+      toast.error("Please Agree to terms and conditions");
+      return;
+    }
+
     try {
       const { user } = await Auth.signUp({
         username: signUparams.email,
@@ -171,20 +209,26 @@ const Signup: React.FC = () => {
                   boxShadow="md"
                   borderRadius="6px"
                   backgroundColor="white"
+                  type={!showPassword ? "password" : "text"}
                 />
                 <Input
+                  name="confirmPassword"
+                  value={signUparams['confirmPassword']}
                   onChange={handleChange}
-                  placeholder="Confirm"
+                  placeholder="Confirm Password"
                   width="100%"
                   height="53px"
                   boxShadow="md"
                   borderRadius="6px"
                   backgroundColor="white"
+                  type="text"
                 />
               </Flex>
 
               <Flex justifyContent="space-between">
-                <Checkbox colorScheme="green" defaultChecked>
+                <Checkbox colorScheme="green" isChecked={showPassword} onChange={(e) => {
+                  setShowPassword(e.target.checked);
+                }}>
                   Show Password
                 </Checkbox>
                 <Button
@@ -292,7 +336,9 @@ const Signup: React.FC = () => {
                 <option value="Unknown">Others</option>
               </Select>
               <Flex direction="column">
-                <Checkbox colorScheme="green" defaultChecked>
+                <Checkbox colorScheme="green" isChecked={checkedBox} onChange={(e) => {
+                  setCheckedBox(e.target.checked);
+                }}>
                   I agree to terms and conditions
                 </Checkbox>
                 <Flex justifyContent="space-between">
