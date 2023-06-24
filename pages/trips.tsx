@@ -40,25 +40,8 @@ const Trips: NextPage<TripsPageProps> = ({
             mb={{ base: 3, lg: 6 }}
           >
             Plan your trips
-            <div
-              onClick={async () => {
-                const res = await axios.get('/api/register')
-
-                console.log(res)
-              }}
-            >
-              Hi
-            </div>
-            <div
-              onClick={async () => {
-                let foo = await API.post('kiterestapi', '/item', {
-                  body: { rfsd: 'fesd' }
-                })
-                console.log(foo)
-              }}
-            >
-              Book
-            </div>
+           
+            
           </Heading>
           <Flex
             direction={{ base: 'column', lg: 'row' }}

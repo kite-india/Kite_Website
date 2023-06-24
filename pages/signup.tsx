@@ -37,6 +37,15 @@ const Signup: React.FC = () => {
     confirmPassword: ''
   })
 
+  function areAllValuesNotNull(obj) {
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key) &&  obj[key] === '') {
+        return false;
+      }
+    }
+    return true;
+  }
+
   const validateEmail = (email) => {
     return String(email)
       .toLowerCase()
@@ -49,19 +58,20 @@ const Signup: React.FC = () => {
 
     console.log(signUparams)
 
-    const isEmpty = Object.values(signUparams).every(x => x !== null || x !== '');
-    console.log(isEmpty)
+
+
     
-    if (!isEmpty) {
+    if (!areAllValuesNotNull(signUparams)) {
       toast.error("Fill All fields");
       return;
     }
 
-    // if (validateEmail(signUparams.email)) {
-    //   toast.error("Please enter a valid email address")
-    //   return;
-    // }
+    if (!validateEmail(signUparams.email)) {
+      toast.error("Please enter a valid email address")
+      return;
+    }
 
+ 
     if (signUparams.password !== signUparams.confirmPassword) {
       toast.error("Password doesn't match");
       return;

@@ -18,7 +18,7 @@ import { Section } from '@components/index'
 import Layout from '@components/layouts/main'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import type { Gallery, Trip } from '@utils/types'
+import type {  Trip } from '@utils/types'
 import { GrDocumentPdf } from 'react-icons/gr'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper'
@@ -37,10 +37,10 @@ import {
   galleriesByPackageID,
   getPackage
 } from 'src/graphql/queries'
-import { ActivitiesByPackageIDQuery, GalleriesByPackageIDQuery } from 'src/API'
+import { ActivitiesByPackageIDQuery, GalleriesByPackageIDQuery, Package,Gallery } from 'src/API'
 
 interface PackagesPageProps {
-  packages_data: Trip
+  packages_data: Package
   gallery_data: Gallery[]
   activities: any
 }
@@ -52,7 +52,7 @@ const Page: NextPage<PackagesPageProps> = ({
 }) => {
   const router = useRouter()
   if (!packages_data) return null
-  const { name, id, image, description, cost, details_file, is_premium_flag, video_link } =
+  const { name, id, image, description, cost, details_file, is_premium_flag, video_link ,duration} =
     packages_data
 
   console.log(video_link)

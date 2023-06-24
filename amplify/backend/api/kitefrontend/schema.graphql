@@ -6,6 +6,7 @@ type MainPassenger {
   email: String!
   starts: String!
   ends: String!
+  suffix: String!
 }
 
 type PassengerDetails {
@@ -13,6 +14,7 @@ type PassengerDetails {
   birthdate: String!
   firstName: String!
   lastName: String!
+  suffix: String!
 }
 
 type Activity @model @auth(rules: [{allow: public, operations: [read]}, {allow: groups, groups: ["admin"], operations: [read, create, update, delete]}, {allow: groups, groups: ["ap-south-1_GnEmuWInD_Google"], operations: [create]}, {allow: private, operations: [create]}]) {
@@ -70,10 +72,11 @@ type Package @model @auth(rules: [{allow: public, operations: [read]}, {allow: p
   cost: Float!
   image: String!
   details_file: String!
-  is_premium_flag: Boolean
-  video_link: String
+  is_premium_flag: Boolean!
+  video_link: String!
   Activities: [Activity] @hasMany(indexName: "byPackage", fields: ["id"])
   Galleries: [Activity] @hasMany(indexName: "byPackage", fields: ["id"])
+  duration: String!
 }
 
 type UserInfo @model @auth(rules: [{allow: private, operations: [read]}, {allow: groups, groups: ["ap-south-1_GnEmuWInD_Google"], operations: [read]}, {allow: groups, groups: ["admin"], operations: [read, create, update, delete]}]) {

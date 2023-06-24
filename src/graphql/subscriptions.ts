@@ -156,6 +156,7 @@ export const onCreateRegistration = /* GraphQL */ `
         details_file
         is_premium_flag
         video_link
+        duration
         createdAt
         updatedAt
         __typename
@@ -206,6 +207,7 @@ export const onUpdateRegistration = /* GraphQL */ `
         details_file
         is_premium_flag
         video_link
+        duration
         createdAt
         updatedAt
         __typename
@@ -256,6 +258,7 @@ export const onDeleteRegistration = /* GraphQL */ `
         details_file
         is_premium_flag
         video_link
+        duration
         createdAt
         updatedAt
         __typename
@@ -347,6 +350,7 @@ export const onCreatePackage = /* GraphQL */ `
         nextToken
         __typename
       }
+      duration
       createdAt
       updatedAt
       __typename
@@ -374,6 +378,7 @@ export const onUpdatePackage = /* GraphQL */ `
         nextToken
         __typename
       }
+      duration
       createdAt
       updatedAt
       __typename
@@ -401,6 +406,7 @@ export const onDeletePackage = /* GraphQL */ `
         nextToken
         __typename
       }
+      duration
       createdAt
       updatedAt
       __typename

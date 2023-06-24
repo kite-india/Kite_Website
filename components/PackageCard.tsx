@@ -16,15 +16,16 @@ import type { Trip } from '@utils/types'
 import CustomImage from './CustomImage'
 import { transform } from 'framer-motion'
 import Link from 'next/link'
+import { Package } from 'src/API'
 
 interface PackageProps {
-  data: Trip
+  data: Package
   activities_data: any
 }
 
 const PackageCard: React.FC<PackageProps> = ({ data, activities_data }) => {
   const router = useRouter()
-  const { id, location, cost, description, image } = data
+  const { id, location, cost, description, image,duration } = data
 
   const bookNow = () => {
     router.push(`/packages/${id}/book-now`)
@@ -71,7 +72,7 @@ const PackageCard: React.FC<PackageProps> = ({ data, activities_data }) => {
         </Text>
         <Spacer />
         <Text fontFamily="'Poppins'" fontWeight={500} p={3} fontSize="16px">
-          Duration:{` 5 Days / 4 Nights`}
+          Duration:{duration}
         </Text>
       </Flex>
       <Text

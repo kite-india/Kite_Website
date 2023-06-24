@@ -26,9 +26,10 @@ import 'swiper/css/grid'
 
 import { PackageCard } from '@components/index'
 import type { Trip } from '@utils/types'
+import { Package } from 'src/API'
 
 interface PackageProps {
-  data: Trip[]
+  data: Package[]
   activities_data: any
 }
 

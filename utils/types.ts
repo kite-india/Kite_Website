@@ -1,3 +1,5 @@
+import { Package } from "src/API"
+
 /* eslint-disable no-unused-vars */
 export type User = {
   name?: string
@@ -15,7 +17,7 @@ export interface HomePageProps {
 }
 
 export interface TripsPageProps {
-  packages_data?: Trip[] | null
+  packages_data?: Package[] | null
   activities_data?: any
 }
 
@@ -62,7 +64,7 @@ export interface TransactionPageProps {
 }
 
 export interface BookNowProps {
-  packages_data?: Trip
+  packages_data?: Package
   activities?: any
 }
 

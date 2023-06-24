@@ -28,6 +28,7 @@ const Transactions: NextPage = (props: any) => {
 
   const [bookedData, setBookedData] = useState<Transaction[]>([])
   const [cancelData, setCancelData] = useState<Transaction[]>([])
+  const [processingData, setProcessingData] = useState<Transaction[]>([])
 
   const [update, setUpdate] = useState(false)
 
@@ -38,8 +39,13 @@ const Transactions: NextPage = (props: any) => {
     const booked = props.transaction.filter(
       pkg => pkg.bookingStatus === 'Booked'
     )
+    const processing = props.transaction.filter(
+      pkg => pkg.bookingStatus === 'Processing'
+    )
     setCancelData(cancel)
     setBookedData(booked)
+    setProcessingData(processing);
+    
   }, [update])
 
   return (
@@ -83,6 +89,9 @@ const Transactions: NextPage = (props: any) => {
                   <Tab px="25px" borderRadius={'30px'}>
                     All
                   </Tab>
+                  <Tab px="20px" borderRadius={'30px'}>
+                    Processing
+                  </Tab>
                   <Tab borderRadius={'30px'}>Booked</Tab>
                   <Tab px="20px" borderRadius={'30px'}>
                     Cancelled
@@ -92,6 +101,9 @@ const Transactions: NextPage = (props: any) => {
                 <TabPanels pb={'30px'}>
                   <TabPanel>
                     <TransactionCardGroup data={allData} />
+                  </TabPanel>
+                  <TabPanel>
+                    <TransactionCardGroup data={processingData} />
                   </TabPanel>
                   <TabPanel>
                     <TransactionCardGroup data={bookedData} />

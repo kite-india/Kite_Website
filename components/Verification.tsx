@@ -25,6 +25,8 @@ const Verification = ({ username }: { username: string }) => {
       await Auth.confirmSignUp(username, code)
       router.push('/login')
     } catch (e) {
+
+   
       toast.error(e.message)
     }
   }

@@ -70,6 +70,8 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
   }
 
   const addToCartHandler = (activityId: string, action: string) => {
+
+
     if (action == 'add') {
       setActivity(prevState => [...prevState, activityId])
     } else if (action == 'remove') {
@@ -82,9 +84,11 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
         console.log(activity)
       }
     }
+
+
   }
 
-  const { id, image, location, cost, description, name } = packages_data
+  const { id, image, location, cost, description, name, duration } = packages_data
   // const [days, nights] = duration.split('/')
   const handleExtraPassengers = (
     num: number,
@@ -105,8 +109,8 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
   }
 
   const handleSubmit = async () => {
-
-
+    console.log(mainPassenger)
+    
     try {
       let totalPassengers = Object.keys(extraPassengers)
       let cost = totalCost
@@ -122,11 +126,11 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
             userinfoID: user.username,
             registrationPackageId: router.query.id,
             activitiesId: activity,
-            bookingStatus: 'Booked',
+            bookingStatus: 'Processing',
             mainPassenger: mainPassenger,
             passengers: Object.values(extraPassengers),
             packageName: name,
-            total_cost: cost
+            total_cost: cost,
           }
         },
         authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS

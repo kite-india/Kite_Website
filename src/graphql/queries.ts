@@ -194,6 +194,7 @@ export const getRegistration = /* GraphQL */ `
         details_file
         is_premium_flag
         video_link
+        duration
         createdAt
         updatedAt
         __typename
@@ -336,6 +337,7 @@ export const getPackage = /* GraphQL */ `
         nextToken
         __typename
       }
+      duration
       createdAt
       updatedAt
       __typename
@@ -360,6 +362,7 @@ export const listPackages = /* GraphQL */ `
         details_file
         is_premium_flag
         video_link
+        duration
         createdAt
         updatedAt
         __typename
