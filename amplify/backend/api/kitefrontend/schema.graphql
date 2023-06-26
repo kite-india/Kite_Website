@@ -17,7 +17,7 @@ type PassengerDetails {
   suffix: String!
 }
 
-type Activity @model @auth(rules: [{allow: public}]) {
+type Activity @model @auth(rules: [{allow: private, operations: [read]}, {allow: groups, groups: ["admin"], operations: [read, create, update, delete]}, {allow: groups, groups: ["ap-south-1_wmFFMNf1O_Google"], operations: [read]}, {allow: public, operations: [read]}]) {
   id: ID!
   name: String
   description: String
@@ -38,13 +38,13 @@ type Enquiry @model @auth(rules: [{allow: public}]) {
   phone_number: String
 }
 
-type Gallery @model @auth(rules: [{allow: public}]) {
+type Gallery @model @auth(rules: [{allow: public, operations: [read]}, {allow: private, operations: [read]}, {allow: groups, groups: ["admin"], operations: [read, create, update, delete]}, {allow: groups, groups: ["ap-south-1_wmFFMNf1O_Google"], operations: [read]}]) {
   id: ID!
   image: String!
   packageID: ID! @index(name: "byPackage")
 }
 
-type Registration @model @auth(rules: [{allow: public}]) {
+type Registration @model @auth(rules: [{allow: private, operations: [create, read, update]}, {allow: groups, groups: ["admin"], operations: [read, create, update, delete]}, {allow: groups, groups: ["ap-south-1_wmFFMNf1O_Google"], operations: [read, create, update]}]) {
   id: ID!
   total_cost: Float!
   userinfoID: ID! @index(name: "byUserInfo")
@@ -63,7 +63,7 @@ type Review @model @auth(rules: [{allow: public}]) {
   review: String
 }
 
-type Package @model @auth(rules: [{allow: public}]) {
+type Package @model @auth(rules: [{allow: public, operations: [read]}, {allow: groups, groups: ["admin"], operations: [read, create, update, delete]}, {allow: private, operations: [read]}]) {
   id: ID!
   name: String!
   contact: String!
@@ -79,7 +79,7 @@ type Package @model @auth(rules: [{allow: public}]) {
   duration: String!
 }
 
-type UserInfo @model @auth(rules: [{allow: public}]) {
+type UserInfo @model @auth(rules: [{allow: private, operations: [create, read, update]}]) {
   id: ID!
   dob: String
   phone_number: String
