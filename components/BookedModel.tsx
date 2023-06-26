@@ -7,7 +7,8 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
-  Button
+  Button,
+  Box
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
@@ -21,6 +22,7 @@ export default function BookedModel(props) {
     if (props.booked) {
       onOpen()
     }
+
   }, [props.booked])
 
   function redirectAfterBooking() {
@@ -29,26 +31,36 @@ export default function BookedModel(props) {
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose}>
-        {/* <ModalOverlay /> */}
-        <ModalContent mt={'25%'}>
-          <ModalHeader>Booking Status</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            Successfully Registered the package! Our execute will contact you
-            soon!
-          </ModalBody>
 
-          <ModalFooter>
-            <Button
-              colorScheme="blue"
-              mr={3}
-              onClick={onClose && redirectAfterBooking}
-            >
-              Close
-            </Button>
-          </ModalFooter>
-        </ModalContent>
+
+      <Modal isOpen={isOpen} onClose={redirectAfterBooking}>
+        <ModalOverlay />
+
+        <div >
+          <ModalContent mt={330}>
+            <Box display={"flex"} flexDirection={"column"} alignItems={"left"} width="100%">
+              <Box>
+                <ModalHeader>Booking Status</ModalHeader>
+                <ModalCloseButton />
+                <ModalBody>
+                  Successfully Registered the package! Our execute will contact you
+                  soon!
+                </ModalBody>
+
+                <ModalFooter>
+                  <Button
+                    colorScheme="blue"
+                    mr={3}
+                    onClick={onClose && redirectAfterBooking}
+                  >
+                    Close
+                  </Button>
+                </ModalFooter>
+              </Box>
+            </Box>
+          </ModalContent>
+        </div>
+
       </Modal>
     </>
   )

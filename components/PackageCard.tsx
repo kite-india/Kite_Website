@@ -8,7 +8,10 @@ import {
   Icon,
   ButtonGroup,
   Button,
-  Spacer
+  Spacer,
+  List,
+  ListItem,
+  ListIcon
 } from '@chakra-ui/react'
 import { FiMap } from 'react-icons/fi'
 import Image from 'next/image'
@@ -17,6 +20,7 @@ import CustomImage from './CustomImage'
 import { transform } from 'framer-motion'
 import Link from 'next/link'
 import { Package } from 'src/API'
+import { MdCheckCircle } from 'react-icons/md'
 
 interface PackageProps {
   data: Package
@@ -25,7 +29,7 @@ interface PackageProps {
 
 const PackageCard: React.FC<PackageProps> = ({ data, activities_data }) => {
   const router = useRouter()
-  const { id, location, cost, description, image,duration } = data
+  const { id, location, cost, description, image, duration } = data
 
   const bookNow = () => {
     router.push(`/packages/${id}/book-now`)
@@ -92,7 +96,16 @@ const PackageCard: React.FC<PackageProps> = ({ data, activities_data }) => {
         // marginBottom="22px"
         pt={'3'}
       >
-        {description}
+        <List>
+          {description.split("\n").map(value => {
+            return (
+              <ListItem paddingBottom={3} display={'flex'}>
+                <ListIcon as={MdCheckCircle} color='green.500' />
+                <Text fontWeight={"medium"} marginTop={-1} >  {value}</Text>
+              </ListItem>
+            )
+          })}
+        </List>
       </Text>
       <Flex
         justifyContent={'space-between'}

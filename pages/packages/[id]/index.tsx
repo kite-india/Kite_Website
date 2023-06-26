@@ -9,16 +9,19 @@ import {
   SimpleGrid,
   Icon,
   Link,
-  Badge
+  Badge,
+  List,
+  ListItem,
+  ListIcon
 } from '@chakra-ui/react'
 import { FiMap } from 'react-icons/fi'
 import axios from 'axios'
-
+import { MdCheckCircle } from "react-icons/md";
 import { Section } from '@components/index'
 import Layout from '@components/layouts/main'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import type {  Trip } from '@utils/types'
+import type { Trip } from '@utils/types'
 import { GrDocumentPdf } from 'react-icons/gr'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper'
@@ -37,7 +40,7 @@ import {
   galleriesByPackageID,
   getPackage
 } from 'src/graphql/queries'
-import { ActivitiesByPackageIDQuery, GalleriesByPackageIDQuery, Package,Gallery } from 'src/API'
+import { ActivitiesByPackageIDQuery, GalleriesByPackageIDQuery, Package, Gallery } from 'src/API'
 
 interface PackagesPageProps {
   packages_data: Package
@@ -52,9 +55,10 @@ const Page: NextPage<PackagesPageProps> = ({
 }) => {
   const router = useRouter()
   if (!packages_data) return null
-  const { name, id, image, description, cost, details_file, is_premium_flag, video_link ,duration} =
+  const { name, id, image, description, cost, details_file, is_premium_flag, video_link, duration } =
     packages_data
 
+  console.log(description)
   console.log(video_link)
   const bookNow = () => {
     router.push(`/packages/${id}/book-now`)
@@ -108,9 +112,16 @@ const Page: NextPage<PackagesPageProps> = ({
                   <Badge colorScheme="green">New</Badge>
                 )}
               </Flex>
-              <Text fontSize={{ base: '15', sm: '20', md: '22' }}>
-                {description}
-              </Text>
+              <List>
+                {description.split("\n").map(value => {
+                  return (
+                    <ListItem paddingBottom={3} display={'flex'}>
+                      <ListIcon as={MdCheckCircle} color='green.500' />
+                      <Text fontWeight={"medium"} marginTop={-1} >  {value}</Text>
+                    </ListItem>
+                  )
+                })}
+              </List>
               <Text>{`₹ ${cost}`}</Text>
               <Flex direction="row" gap={4}>
                 <Button

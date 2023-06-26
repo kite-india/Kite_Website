@@ -28,9 +28,12 @@ interface FeaturedDataProps {
 }
 
 const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
-  const { name, description, image, id } = data
+  const { name, description, image, id ,video_link} = data
   const { isOpen, onOpen, onClose } = useDisclosure()
+
+  console.log(video_link)
   const WatchNow = () => (
+
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent maxW="80%">
@@ -39,7 +42,7 @@ const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
           <Box
             as="video"
             controls
-            src={`${process.env.NEXT_PUBLIC_S3_ENDPOINT}videos/default.MOV`}
+            src={`${process.env.NEXT_PUBLIC_S3_ENDPOINT}${video_link}`}
             objectFit="contain"
             autoPlay={true}
             sx={{
