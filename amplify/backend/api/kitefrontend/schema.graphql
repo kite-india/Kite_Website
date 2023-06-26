@@ -17,7 +17,7 @@ type PassengerDetails {
   suffix: String!
 }
 
-type Activity @model @auth(rules: [{allow: public, operations: [read]}, {allow: groups, groups: ["admin"], operations: [read, create, update, delete]}, {allow: groups, groups: ["ap-south-1_GnEmuWInD_Google"], operations: [create]}, {allow: private, operations: [create]}]) {
+type Activity @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String
   description: String
@@ -28,7 +28,7 @@ type Activity @model @auth(rules: [{allow: public, operations: [read]}, {allow: 
   packageID: ID! @index(name: "byPackage")
 }
 
-type Enquiry @model @auth(rules: [{allow: public, operations: [create]}, {allow: groups, groups: ["admin"], operations: [read, create, update, delete]}, {allow: groups, groups: ["ap-south-1_GnEmuWInD_Google"], operations: [create]}, {allow: private, operations: [create]}]) {
+type Enquiry @model @auth(rules: [{allow: public}]) {
   id: ID!
   destination_name: String
   name: String
@@ -38,13 +38,13 @@ type Enquiry @model @auth(rules: [{allow: public, operations: [create]}, {allow:
   phone_number: String
 }
 
-type Gallery @model @auth(rules: [{allow: groups, groups: ["admin"], operations: [read, create, update, delete]}, {allow: public, operations: [read]}, {allow: private, operations: [read]}]) {
+type Gallery @model @auth(rules: [{allow: public}]) {
   id: ID!
   image: String!
   packageID: ID! @index(name: "byPackage")
 }
 
-type Registration @model @auth(rules: [{allow: private, operations: [read, update, create]}, {allow: groups, groups: ["admin"], operations: [read, create, update, delete]}, {allow: groups, groups: ["ap-south-1_GnEmuWInD_Google"], operations: [read, create, update]}]) {
+type Registration @model @auth(rules: [{allow: public}]) {
   id: ID!
   total_cost: Float!
   userinfoID: ID! @index(name: "byUserInfo")
@@ -56,14 +56,14 @@ type Registration @model @auth(rules: [{allow: private, operations: [read, updat
   packageName: String!
 }
 
-type Review @model @auth(rules: [{allow: public, operations: [create]}, {allow: private, operations: [create]}, {allow: groups, groups: ["admin"], operations: [read, create, update, delete]}, {allow: groups, groups: ["ap-south-1_GnEmuWInD_Google"], operations: [create]}]) {
+type Review @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String
   email: String
   review: String
 }
 
-type Package @model @auth(rules: [{allow: public, operations: [read]}, {allow: private, operations: [read]}, {allow: groups, groups: ["ap-south-1_GnEmuWInD_Google"], operations: [read]}, {allow: groups, groups: ["admin"], operations: [read, create, update, delete]}]) {
+type Package @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String!
   contact: String!
@@ -79,7 +79,7 @@ type Package @model @auth(rules: [{allow: public, operations: [read]}, {allow: p
   duration: String!
 }
 
-type UserInfo @model @auth(rules: [{allow: private, operations: [read]}, {allow: groups, groups: ["ap-south-1_GnEmuWInD_Google"], operations: [read]}, {allow: groups, groups: ["admin"], operations: [read, create, update, delete]}]) {
+type UserInfo @model @auth(rules: [{allow: public}]) {
   id: ID!
   dob: String
   phone_number: String

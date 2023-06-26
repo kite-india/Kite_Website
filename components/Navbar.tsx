@@ -66,7 +66,7 @@ const BookBtn = () => (
     }}
     fontWeight="normal"
     display={{ base: 'none', md: 'flex' }}
-    onClick={() => {}}
+    onClick={() => { }}
     variant="outline"
   >
     Book now
@@ -438,22 +438,24 @@ const Navbar: React.FC<NavProps> = () => {
                     {name}
                   </DrawerLink>
                 ))}
-                <Button
-                  bg="color2"
-                  fontFamily="'Roboto'"
-                  _hover={{ color: 'color3' }}
-                  _active={{ color: 'color3' }}
-                  color="white"
-                  rounded="md"
-                  px={4}
-                  m={1}
-                  fontSize="16px"
-                  w="200px"
-                  as={motion.button}
-                  whileTap={{ scale: 1.2 }}
-                >
-                  Book Now
-                </Button>
+                <Link href='/trips'>
+                  <Button
+                    bg="color2"
+                    fontFamily="'Roboto'"
+                    _hover={{ color: 'color3' }}
+                    _active={{ color: 'color3' }}
+                    color="white"
+                    rounded="md"
+                    px={4}
+                    m={1}
+                    fontSize="16px"
+                    w="200px"
+                    as={motion.button}
+                    whileTap={{ scale: 1.2 }}
+                  >
+                    Book Now
+                  </Button>
+                  </Link>
               </VStack>
             </DrawerBody>
             <DrawerFooter

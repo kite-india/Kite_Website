@@ -15,7 +15,6 @@ export type AmplifyDependentResourcesAttributes = {
     "kitefrontend": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
-      "CreatedSNSRole": "string",
       "HostedUIDomain": "string",
       "IdentityPoolId": "string",
       "IdentityPoolName": "string",

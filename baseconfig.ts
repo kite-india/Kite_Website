@@ -14,10 +14,10 @@ const awsmobile = {
             "region": "ap-south-1"
         }
     ],
-    "aws_cognito_identity_pool_id": "ap-south-1:71d958c5-d54d-4cc7-94f1-76d538c8e58f",
+    "aws_cognito_identity_pool_id": "ap-south-1:353961ec-18bf-49c9-82f8-3cc0a46ee4ed",
     "aws_cognito_region": "ap-south-1",
-    "aws_user_pools_id": "ap-south-1_TKDDhFQm1",
-    "aws_user_pools_web_client_id": "67fpr0a3rf7d8uu426gvk3aqln",
+    "aws_user_pools_id": "ap-south-1_wmFFMNf1O",
+    "aws_user_pools_web_client_id": "562l8pu3o5ujbvrt4doactpm1b",
     "oauth": {
         "domain": "fx4iju9c5gwz-prod.auth.ap-south-1.amazoncognito.com",
         "scope": [
@@ -38,13 +38,7 @@ const awsmobile = {
     "aws_cognito_social_providers": [
         "GOOGLE"
     ],
-    "aws_cognito_signup_attributes": [
-        "NAME",
-        "BIRTHDATE",
-        "EMAIL",
-        "PHONE_NUMBER",
-        "PICTURE"
-    ],
+    "aws_cognito_signup_attributes": [],
     "aws_cognito_mfa_configuration": "OFF",
     "aws_cognito_mfa_types": [
         "SMS"

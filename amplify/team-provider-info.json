@@ -62,7 +62,7 @@
         },
         "signUpTrigger": {
           "deploymentBucketName": "amplify-kitefrontend-prod-221209-deployment",
-          "s3Key": "amplify-builds/signUpTrigger-6f7954416d344f435335-build.zip"
+          "s3Key": "amplify-builds/signUpTrigger-2b314f4b585375455855-build.zip"
         },
         "test": {
           "deploymentBucketName": "amplify-kitefrontend-prod-221209-deployment",
