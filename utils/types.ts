@@ -1,4 +1,4 @@
-import { Package } from "src/API"
+import { Package,Activity } from "src/API"
 
 /* eslint-disable no-unused-vars */
 export type User = {
@@ -11,8 +11,9 @@ export type User = {
   profile_img?: string
 }
 
+
 export interface HomePageProps {
-  featured_data?: FeaturedDestination[] | null
+  featured_data?: Package[] | null
   activities_data?: Activity[] | null
 }
 
@@ -21,13 +22,7 @@ export interface TripsPageProps {
   activities_data?: any
 }
 
-export type Activity = {
-  id?: string
-  name?: string
-  description?: string
-  image?: string
-  cost?: string | number
-}
+
 
 export type FeaturedDestination = Trip & {
   video_link?: string

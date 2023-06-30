@@ -5,9 +5,10 @@ import { Autoplay } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/autoplay'
+import { Activity } from 'src/API'
 
 interface Props {
-  data: any
+  data: Activity[]
 }
 
 const DiscoverTheWorld: React.FC<Props> = ({ data }) => {
@@ -39,8 +40,9 @@ const DiscoverTheWorld: React.FC<Props> = ({ data }) => {
           </Heading>
         </Box>
 
-        <Flex p={4} align={'center'} justify="center">
+        <Flex  align={'center'} justify="center">
           <Swiper
+              
             modules={[Autoplay]}
             breakpoints={{
               1200: {
@@ -65,7 +67,7 @@ const DiscoverTheWorld: React.FC<Props> = ({ data }) => {
             {data.map(blog => {
               console.log()
               return (
-                <SwiperSlide key={data.id}>
+                <SwiperSlide key={blog.id}>
                   <BlogCard blog={blog} key={blog.name} />
                 </SwiperSlide>
               )

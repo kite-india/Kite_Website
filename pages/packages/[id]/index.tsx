@@ -112,16 +112,7 @@ const Page: NextPage<PackagesPageProps> = ({
                   <Badge colorScheme="green">New</Badge>
                 )}
               </Flex>
-              <List>
-                {description.split("\n").map(value => {
-                  return (
-                    <ListItem paddingBottom={3} display={'flex'}>
-                      <ListIcon as={MdCheckCircle} color='green.500' />
-                      <Text fontWeight={"medium"} marginTop={-1} >  {value}</Text>
-                    </ListItem>
-                  )
-                })}
-              </List>
+
               <Text>{`₹ ${cost}`}</Text>
               <Flex direction="row" gap={4}>
                 <Button
@@ -171,17 +162,27 @@ const Page: NextPage<PackagesPageProps> = ({
                 pr={6}
                 w={{ sm: '100%', md: '50%' }}
               >
-                <Heading fontSize={{ base: '20', md: '35' }}>
+                <Heading fontSize={{ base: '20', md: '35' }} pb={4}>
                   Plan Includes:
+
                 </Heading>
-                <SimpleGrid
-                  mt={2}
-                  fontFamily="'Poppins'"
-                  columns={2}
-                  alignItems={{ base: 'center', lg: 'left' }}
-                  w="full"
-                  pt={3}
-                >
+                <List>
+                  {description.split("\n").map(value => {
+                    return (
+                      <ListItem paddingBottom={3} display={'flex'}>
+                        <ListIcon as={MdCheckCircle} color='green.500' />
+                        <Text fontWeight={"medium"} marginTop={-1} >  {value}</Text>
+                      </ListItem>
+                    )
+                  })}
+                </List>
+
+                <Heading fontSize={{ base: '10', md: '20' }} pt={4} pb={4}>
+                  Major Activities:
+
+                </Heading>
+                <Flex flexDirection={'column'}>
+
                   {activities.map(tag => (
                     <Box key={tag.id} w="100%">
                       <Text key={tag.id}>
@@ -190,7 +191,8 @@ const Page: NextPage<PackagesPageProps> = ({
                       </Text>
                     </Box>
                   ))}
-                </SimpleGrid>
+                </Flex>
+
               </Flex>
               <Flex
                 direction="column"
