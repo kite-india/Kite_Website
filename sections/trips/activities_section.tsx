@@ -30,13 +30,14 @@ const Activities: React.FC<ActivityProps> = ({
         gap={{ base: 1, lg: 4 }}
         mb={4}
         justifyContent={{ base: 'center', lg: 'flex-start' }}
+        px={6}
       >
-        <Heading fontSize="72px" fontWeight="semibold" color="#8FB339">
+        <Heading fontSize="40px" fontWeight="semibold" color="#8FB339">
           Activities
         </Heading>
         <Text
           fontFamily="'Poppins'"
-          fontSize="24px"
+          fontSize="17px"
           fontWeight="normal"
           color="#3E7C17"
           pb={2}

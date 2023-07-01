@@ -1,3 +1,11 @@
+type ContactUs @model @auth(rules: [{allow: public, operations: [create]}, {allow: private, operations: [create]}, {allow: groups, groups: ["admin"], operations: [read, create, update, delete]}, {allow: groups, groups: ["ap-south-1_wmFFMNf1O_Google"], operations: [create]}]) {
+  id: ID!
+  name: String!
+  email: String
+  phone_number: String!
+  description: String
+}
+
 type MainPassenger {
   firstName: String!
   lastName: String!
@@ -63,7 +71,7 @@ type Review @model @auth(rules: [{allow: public}]) {
   review: String
 }
 
-type Package @model @auth(rules: [{allow: public, operations: [read]}, {allow: groups, groups: ["admin"], operations: [read, create, update, delete]}, {allow: private, operations: [read]}]) {
+type Package @model @auth(rules: [{allow: public, operations: [read]}, {allow: groups, groups: ["admin"], operations: [read, create, update, delete]}, {allow: groups, groups: ["ap-south-1_wmFFMNf1O_Google"], operations: [read]}, {allow: private, operations: [read]}]) {
   id: ID!
   name: String!
   contact: String!
@@ -77,6 +85,13 @@ type Package @model @auth(rules: [{allow: public, operations: [read]}, {allow: g
   Activities: [Activity] @hasMany(indexName: "byPackage", fields: ["id"])
   Galleries: [Activity] @hasMany(indexName: "byPackage", fields: ["id"])
   duration: String!
+  actual_cost: Float!
+  have_flight: Boolean!
+  have_hotels: Boolean!
+  have_sightseeing: Boolean!
+  have_meals: Boolean!
+  have_transfers: Boolean!
+  cities: String!
 }
 
 type UserInfo @model @auth(rules: [{allow: private, operations: [create, read, update]}]) {

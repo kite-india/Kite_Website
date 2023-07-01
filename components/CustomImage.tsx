@@ -9,7 +9,7 @@ const CustomImage = ({ src, ...rest }: ImageProps) => {
     src = S3_URL + src
   }
 
-  return <Image src={src} {...rest} alt={src as string} />
+  return <Image src={src} {...rest} />
 }
 
 export default CustomImage

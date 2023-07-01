@@ -24,13 +24,13 @@ const ActivityCard: React.FC<IProps> = ({
   return (
     <Flex
       gap={4}
-      height={{ base: '360px', lg: '200px' }}
+      height={{ base: '360px', lg: '300px' }}
       bg="white"
       borderRadius="lg"
       boxShadow="md"
       alignItems="center"
       direction={{ base: 'column', lg: 'row' }}
-      p={3}
+      p={5}
       w="100%"
     >
       <Box
@@ -53,10 +53,11 @@ const ActivityCard: React.FC<IProps> = ({
         <Flex
           flexDirection="column"
           justifyContent="center"
-          alignItems="center"
+          alignItems="flex-start"
           mb={4}
+
         >
-          <Heading fontWeight="semibold" fontSize="24px">
+          <Heading fontWeight="semibold" fontSize="24px" p={4}>
             {name}
           </Heading>
           <Text as="p" fontFamily="'Poppins'" fontSize="16px">

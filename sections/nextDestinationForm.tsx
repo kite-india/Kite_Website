@@ -202,30 +202,6 @@ const NextDestinationForm: React.FC = () => {
                       </FormControl>
                     )}
                   </Field>
-                  {/* <Field name="country" validate={validateCountry}>
-                    {({ field, form }) => (
-                      <FormControl
-                        isInvalid={form.errors.country && form.touched.country}
-                      >
-                        <Select
-                          {...field}
-                          id="country"
-                          placeholder="Country of Destination"
-                        >
-                          <option>India</option>
-                          <option>Nepal</option>
-                          <option>Sri-Lanka</option>
-                          <option>Bhutan</option>
-                          <option>Switzerland</option>
-                          <option>United Arab Emirates</option>
-                          <option>Nigeria</option>
-                        </Select>
-                        <FormErrorMessage>
-                          {form.errors.country}
-                        </FormErrorMessage>
-                      </FormControl>
-                    )}
-                  </Field> */}
                   <Field name="name" validate={validateName}>
                     {({ field, form }) => (
                       <FormControl

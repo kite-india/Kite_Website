@@ -2,6 +2,54 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateContactUs = /* GraphQL */ `
+  subscription OnCreateContactUs(
+    $filter: ModelSubscriptionContactUsFilterInput
+  ) {
+    onCreateContactUs(filter: $filter) {
+      id
+      name
+      email
+      phone_number
+      description
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onUpdateContactUs = /* GraphQL */ `
+  subscription OnUpdateContactUs(
+    $filter: ModelSubscriptionContactUsFilterInput
+  ) {
+    onUpdateContactUs(filter: $filter) {
+      id
+      name
+      email
+      phone_number
+      description
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onDeleteContactUs = /* GraphQL */ `
+  subscription OnDeleteContactUs(
+    $filter: ModelSubscriptionContactUsFilterInput
+  ) {
+    onDeleteContactUs(filter: $filter) {
+      id
+      name
+      email
+      phone_number
+      description
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
 export const onCreateActivity = /* GraphQL */ `
   subscription OnCreateActivity($filter: ModelSubscriptionActivityFilterInput) {
     onCreateActivity(filter: $filter) {
@@ -157,6 +205,13 @@ export const onCreateRegistration = /* GraphQL */ `
         is_premium_flag
         video_link
         duration
+        actual_cost
+        have_flight
+        have_hotels
+        have_sightseeing
+        have_meals
+        have_transfers
+        cities
         createdAt
         updatedAt
         __typename
@@ -167,6 +222,7 @@ export const onCreateRegistration = /* GraphQL */ `
         birthdate
         firstName
         lastName
+        suffix
         __typename
       }
       mainPassenger {
@@ -177,6 +233,7 @@ export const onCreateRegistration = /* GraphQL */ `
         email
         starts
         ends
+        suffix
         __typename
       }
       bookingStatus
@@ -208,6 +265,13 @@ export const onUpdateRegistration = /* GraphQL */ `
         is_premium_flag
         video_link
         duration
+        actual_cost
+        have_flight
+        have_hotels
+        have_sightseeing
+        have_meals
+        have_transfers
+        cities
         createdAt
         updatedAt
         __typename
@@ -218,6 +282,7 @@ export const onUpdateRegistration = /* GraphQL */ `
         birthdate
         firstName
         lastName
+        suffix
         __typename
       }
       mainPassenger {
@@ -228,6 +293,7 @@ export const onUpdateRegistration = /* GraphQL */ `
         email
         starts
         ends
+        suffix
         __typename
       }
       bookingStatus
@@ -259,6 +325,13 @@ export const onDeleteRegistration = /* GraphQL */ `
         is_premium_flag
         video_link
         duration
+        actual_cost
+        have_flight
+        have_hotels
+        have_sightseeing
+        have_meals
+        have_transfers
+        cities
         createdAt
         updatedAt
         __typename
@@ -269,6 +342,7 @@ export const onDeleteRegistration = /* GraphQL */ `
         birthdate
         firstName
         lastName
+        suffix
         __typename
       }
       mainPassenger {
@@ -279,6 +353,7 @@ export const onDeleteRegistration = /* GraphQL */ `
         email
         starts
         ends
+        suffix
         __typename
       }
       bookingStatus
@@ -351,6 +426,13 @@ export const onCreatePackage = /* GraphQL */ `
         __typename
       }
       duration
+      actual_cost
+      have_flight
+      have_hotels
+      have_sightseeing
+      have_meals
+      have_transfers
+      cities
       createdAt
       updatedAt
       __typename
@@ -379,6 +461,13 @@ export const onUpdatePackage = /* GraphQL */ `
         __typename
       }
       duration
+      actual_cost
+      have_flight
+      have_hotels
+      have_sightseeing
+      have_meals
+      have_transfers
+      cities
       createdAt
       updatedAt
       __typename
@@ -407,6 +496,13 @@ export const onDeletePackage = /* GraphQL */ `
         __typename
       }
       duration
+      actual_cost
+      have_flight
+      have_hotels
+      have_sightseeing
+      have_meals
+      have_transfers
+      cities
       createdAt
       updatedAt
       __typename

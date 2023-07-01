@@ -13,7 +13,7 @@ interface Props {
 
 const DiscoverTheWorld: React.FC<Props> = ({ data }) => {
 
-  console.log(data);
+
   return (
     <Box position={'relative'} py={'8'} scrollSnapAlign="center">
       <Section delay={0.3}>
@@ -27,7 +27,7 @@ const DiscoverTheWorld: React.FC<Props> = ({ data }) => {
             color={'color13'}
             fontFamily="'Poppins'"
             size={'sm'}
-            align={'center'}
+            textAlign={'center'}
           >
             JOIN OUR ADVENTURES
           </Heading>
@@ -65,7 +65,7 @@ const DiscoverTheWorld: React.FC<Props> = ({ data }) => {
             spaceBetween={40}
           >
             {data.map(blog => {
-              console.log()
+        
               return (
                 <SwiperSlide key={blog.id}>
                   <BlogCard blog={blog} key={blog.name} />

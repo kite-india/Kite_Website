@@ -14,7 +14,8 @@ import {
   ModalCloseButton,
   AspectRatio,
   useDisclosure,
-  Link
+  Link,
+  Icon
 } from '@chakra-ui/react'
 import Section from './Section'
 import NextLink from 'next/link'
@@ -23,15 +24,20 @@ import { BsPlayCircleFill } from 'react-icons/bs'
 import { FeaturedDestination } from '@utils/types'
 import CustomImage from './CustomImage'
 
+import { TbPlane } from "react-icons/tb";
+import { MdLocalDining } from "react-icons/md";
+import { BsBinoculars } from "react-icons/bs";
+import { Package } from 'src/API'
 interface FeaturedDataProps {
-  data: FeaturedDestination
+  data: Package
 }
 
+import { MdFastfood } from "react-icons/md";
+
 const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
-  const { name, description, image, id ,video_link} = data
+  const { name, description, image, id, video_link, duration, cost, actual_cost, cities } = data
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  console.log(video_link)
   const WatchNow = () => (
 
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -58,7 +64,7 @@ const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
     <Box
       w="100%"
       py={{ base: 0, md: 3 }}
-      px={2}
+      px={4}
       display="flex"
       justifyContent="center"
       alignItems="center"
@@ -89,15 +95,55 @@ const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
                 textTransform="uppercase"
                 fontFamily="'Roboto'"
                 color="#125C13"
-                mb={3}
+
               >
                 Featured Destination
               </Heading>
               <Heading fontSize="35px">{name}</Heading>
-              <Text fontFamily="'Roboto'" fontWeight="normal" fontSize="18px">
-                {description}
-              </Text>
-              <Box>
+              <Flex flexDirection={"column"}>
+                <Flex>
+                  <Text fontWeight={"bold"} pr={3}>
+                    Cities:
+
+                  </Text>
+                  <Text>
+                    {cities}
+                  </Text>
+
+                </Flex>
+                <Flex pt={5} textAlign={"center"}>
+                  <Box pr={8}>
+                    <Icon as={TbPlane} w={8} h={8} />
+                    <Text>Flight</Text>
+                  </Box>
+
+                  <Box pr={8}>
+                    <Icon as={MdLocalDining} w={8} h={8} />
+                    <Text>Hotels</Text>
+                  </Box>
+                  <Box pr={8} >
+                    <Icon as={BsBinoculars} w={10} h={8} />
+                    <Text>Sightseeing</Text>
+                  </Box>
+
+                  <Box pr={8} >
+                    <Icon as={MdFastfood} w={10} h={8} />
+                    <Text>Meals</Text>
+                  </Box>
+
+                  <Box pr={8} >
+                    <Icon as={BsBinoculars} w={10} h={8} />
+                    <Text>Transfers</Text>
+                  </Box>
+                </Flex>
+                <Text pt={5}>Duration: {duration}</Text>
+                <Flex>
+                  <Text color={"green"} pt={5} fontSize={30} fontWeight={"bold"}>Rs. {cost}</Text>
+                  <Text pl={4} fontSize={20} pt={8} as={'s'}>Rs. {actual_cost}</Text>
+
+                </Flex>
+              </Flex>
+              {/* <Box>
                 <Button
                   color="#3E7C17"
                   bg="white"
@@ -112,7 +158,7 @@ const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
                   Watch Now
                 </Button>
                 <WatchNow />
-              </Box>
+              </Box> */}
               <ButtonGroup spacing={6} mt={6} fontFamily="'Roboto'">
                 <Link
                   //  as={NextLink}

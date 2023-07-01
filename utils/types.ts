@@ -40,6 +40,7 @@ export type Trip = {
   details_file?: string
   is_premium_flag?: boolean,
   video_link?:string,
+  duration?:string
 }
 
 export type Transaction = {

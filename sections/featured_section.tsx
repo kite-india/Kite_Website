@@ -7,6 +7,7 @@ import 'swiper/css/autoplay'
 
 import FeaturedCard from '@components/FeaturedCard'
 import { FeaturedDestination } from '@utils/types'
+import { Package } from 'src/API'
 
 /* const dummyData = [
   {
@@ -40,14 +41,14 @@ import { FeaturedDestination } from '@utils/types'
 */
 
 interface Props {
-  data: FeaturedDestination[]
+  data: Package[]
 }
 
 const FeaturedSection: React.FC<Props> = ({ data }) => {
   return (
     <Box bg="white" w="100%" px={2}>
       <Swiper
-        modules={[Pagination, Autoplay]}
+        modules={[Pagination]}
         slidesPerView={1}
         autoplay={{
           delay: 3000,

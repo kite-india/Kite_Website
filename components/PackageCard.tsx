@@ -1,4 +1,3 @@
-import React from 'react'
 import { useRouter } from 'next/router'
 import {
   Box,
@@ -14,10 +13,7 @@ import {
   ListIcon
 } from '@chakra-ui/react'
 import { FiMap } from 'react-icons/fi'
-import Image from 'next/image'
-import type { Trip } from '@utils/types'
 import CustomImage from './CustomImage'
-import { transform } from 'framer-motion'
 import Link from 'next/link'
 import { Package } from 'src/API'
 import { MdCheckCircle } from 'react-icons/md'
@@ -39,8 +35,6 @@ const PackageCard: React.FC<PackageProps> = ({ data, activities_data }) => {
     <Box
       display={'flex'}
       flexDirection={'column'}
-      // justifyContent={'space-around'}
-      // gap={2}
       as="div"
       boxShadow="lg"
       borderRadius="lg"
@@ -88,7 +82,7 @@ const PackageCard: React.FC<PackageProps> = ({ data, activities_data }) => {
         Plan Includes:
       </Text>
 
-      <Text
+      <Box
         // height="56px"
         fontFamily="'Poppins'"
         fontWeight="normal"
@@ -97,16 +91,16 @@ const PackageCard: React.FC<PackageProps> = ({ data, activities_data }) => {
         pt={'3'}
       >
         <List>
-          {description.split("\n").map(value => {
+          {description.split("\n").map((value, index) => {
             return (
-              <ListItem paddingBottom={3} display={'flex'}>
+              <ListItem paddingBottom={3} display={'flex'} key={index}>
                 <ListIcon as={MdCheckCircle} color='green.500' />
                 <Text fontWeight={"medium"} marginTop={-1} >  {value}</Text>
               </ListItem>
             )
           })}
         </List>
-      </Text>
+      </Box>
       <Flex
         justifyContent={'space-between'}
         flexDirection={'column'}
@@ -121,17 +115,17 @@ const PackageCard: React.FC<PackageProps> = ({ data, activities_data }) => {
           pt={3}
         >
           {activities_data.map(tag => {
+
             if (tag.packageID === id) {
               return (
-                <>
-                  <Box w="100%">
-                    <Text key={tag.id}>
-                      <Icon as={FiMap} mr={2} />
+                <Box w="100%" key={tag.id}>
+                  <Text >
+                    <Icon as={FiMap} mr={2} />
 
-                      {tag.name}
-                    </Text>
-                  </Box>
-                </>
+                    {tag.name}
+                  </Text>
+                </Box>
+
               )
             }
           })}

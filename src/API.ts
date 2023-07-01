@@ -2,28 +2,22 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateActivityInput = {
+export type CreateContactUsInput = {
   id?: string | null,
-  name?: string | null,
+  name: string,
+  email?: string | null,
+  phone_number: string,
   description?: string | null,
-  image?: string | null,
-  link?: string | null,
-  packageName?: string | null,
-  cost?: number | null,
-  packageID: string,
 };
 
-export type ModelActivityConditionInput = {
+export type ModelContactUsConditionInput = {
   name?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  phone_number?: ModelStringInput | null,
   description?: ModelStringInput | null,
-  image?: ModelStringInput | null,
-  link?: ModelStringInput | null,
-  packageName?: ModelStringInput | null,
-  cost?: ModelFloatInput | null,
-  packageID?: ModelIDInput | null,
-  and?: Array< ModelActivityConditionInput | null > | null,
-  or?: Array< ModelActivityConditionInput | null > | null,
-  not?: ModelActivityConditionInput | null,
+  and?: Array< ModelContactUsConditionInput | null > | null,
+  or?: Array< ModelContactUsConditionInput | null > | null,
+  not?: ModelContactUsConditionInput | null,
 };
 
 export type ModelStringInput = {
@@ -64,6 +58,53 @@ export type ModelSizeInput = {
   ge?: number | null,
   gt?: number | null,
   between?: Array< number | null > | null,
+};
+
+export type ContactUs = {
+  __typename: "ContactUs",
+  id: string,
+  name: string,
+  email?: string | null,
+  phone_number: string,
+  description?: string | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateContactUsInput = {
+  id: string,
+  name?: string | null,
+  email?: string | null,
+  phone_number?: string | null,
+  description?: string | null,
+};
+
+export type DeleteContactUsInput = {
+  id: string,
+};
+
+export type CreateActivityInput = {
+  id?: string | null,
+  name?: string | null,
+  description?: string | null,
+  image?: string | null,
+  link?: string | null,
+  packageName?: string | null,
+  cost?: number | null,
+  packageID: string,
+};
+
+export type ModelActivityConditionInput = {
+  name?: ModelStringInput | null,
+  description?: ModelStringInput | null,
+  image?: ModelStringInput | null,
+  link?: ModelStringInput | null,
+  packageName?: ModelStringInput | null,
+  cost?: ModelFloatInput | null,
+  packageID?: ModelIDInput | null,
+  and?: Array< ModelActivityConditionInput | null > | null,
+  or?: Array< ModelActivityConditionInput | null > | null,
+  not?: ModelActivityConditionInput | null,
 };
 
 export type ModelFloatInput = {
@@ -234,6 +275,7 @@ export type PassengerDetailsInput = {
   birthdate: string,
   firstName: string,
   lastName: string,
+  suffix: string,
 };
 
 export type MainPassengerInput = {
@@ -244,6 +286,7 @@ export type MainPassengerInput = {
   email: string,
   starts: string,
   ends: string,
+  suffix: string,
 };
 
 export type ModelRegistrationConditionInput = {
@@ -284,11 +327,18 @@ export type Package = {
   cost: number,
   image: string,
   details_file: string,
-  is_premium_flag?: boolean | null,
-  video_link?: string | null,
+  is_premium_flag: boolean,
+  video_link: string,
   Activities?: ModelActivityConnection | null,
   Galleries?: ModelActivityConnection | null,
-  duration?: string | null,
+  duration: string,
+  actual_cost: number,
+  have_flight: boolean,
+  have_hotels: boolean,
+  have_sightseeing: boolean,
+  have_meals: boolean,
+  have_transfers: boolean,
+  cities: string,
   createdAt: string,
   updatedAt: string,
 };
@@ -305,6 +355,7 @@ export type PassengerDetails = {
   birthdate: string,
   firstName: string,
   lastName: string,
+  suffix: string,
 };
 
 export type MainPassenger = {
@@ -316,6 +367,7 @@ export type MainPassenger = {
   email: string,
   starts: string,
   ends: string,
+  suffix: string,
 };
 
 export type UpdateRegistrationInput = {
@@ -380,9 +432,16 @@ export type CreatePackageInput = {
   cost: number,
   image: string,
   details_file: string,
-  is_premium_flag?: boolean | null,
-  video_link?: string | null,
-  duration?: string | null,
+  is_premium_flag: boolean,
+  video_link: string,
+  duration: string,
+  actual_cost: number,
+  have_flight: boolean,
+  have_hotels: boolean,
+  have_sightseeing: boolean,
+  have_meals: boolean,
+  have_transfers: boolean,
+  cities: string,
 };
 
 export type ModelPackageConditionInput = {
@@ -396,6 +455,13 @@ export type ModelPackageConditionInput = {
   is_premium_flag?: ModelBooleanInput | null,
   video_link?: ModelStringInput | null,
   duration?: ModelStringInput | null,
+  actual_cost?: ModelFloatInput | null,
+  have_flight?: ModelBooleanInput | null,
+  have_hotels?: ModelBooleanInput | null,
+  have_sightseeing?: ModelBooleanInput | null,
+  have_meals?: ModelBooleanInput | null,
+  have_transfers?: ModelBooleanInput | null,
+  cities?: ModelStringInput | null,
   and?: Array< ModelPackageConditionInput | null > | null,
   or?: Array< ModelPackageConditionInput | null > | null,
   not?: ModelPackageConditionInput | null,
@@ -420,6 +486,13 @@ export type UpdatePackageInput = {
   is_premium_flag?: boolean | null,
   video_link?: string | null,
   duration?: string | null,
+  actual_cost?: number | null,
+  have_flight?: boolean | null,
+  have_hotels?: boolean | null,
+  have_sightseeing?: boolean | null,
+  have_meals?: boolean | null,
+  have_transfers?: boolean | null,
+  cities?: string | null,
 };
 
 export type DeletePackageInput = {
@@ -472,6 +545,23 @@ export type UpdateUserInfoInput = {
 
 export type DeleteUserInfoInput = {
   id: string,
+};
+
+export type ModelContactUsFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  phone_number?: ModelStringInput | null,
+  description?: ModelStringInput | null,
+  and?: Array< ModelContactUsFilterInput | null > | null,
+  or?: Array< ModelContactUsFilterInput | null > | null,
+  not?: ModelContactUsFilterInput | null,
+};
+
+export type ModelContactUsConnection = {
+  __typename: "ModelContactUsConnection",
+  items:  Array<ContactUs | null >,
+  nextToken?: string | null,
 };
 
 export type ModelActivityFilterInput = {
@@ -569,6 +659,13 @@ export type ModelPackageFilterInput = {
   is_premium_flag?: ModelBooleanInput | null,
   video_link?: ModelStringInput | null,
   duration?: ModelStringInput | null,
+  actual_cost?: ModelFloatInput | null,
+  have_flight?: ModelBooleanInput | null,
+  have_hotels?: ModelBooleanInput | null,
+  have_sightseeing?: ModelBooleanInput | null,
+  have_meals?: ModelBooleanInput | null,
+  have_transfers?: ModelBooleanInput | null,
+  cities?: ModelStringInput | null,
   and?: Array< ModelPackageFilterInput | null > | null,
   or?: Array< ModelPackageFilterInput | null > | null,
   not?: ModelPackageFilterInput | null,
@@ -597,17 +694,14 @@ export type ModelUserInfoConnection = {
   nextToken?: string | null,
 };
 
-export type ModelSubscriptionActivityFilterInput = {
+export type ModelSubscriptionContactUsFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   name?: ModelSubscriptionStringInput | null,
+  email?: ModelSubscriptionStringInput | null,
+  phone_number?: ModelSubscriptionStringInput | null,
   description?: ModelSubscriptionStringInput | null,
-  image?: ModelSubscriptionStringInput | null,
-  link?: ModelSubscriptionStringInput | null,
-  packageName?: ModelSubscriptionStringInput | null,
-  cost?: ModelSubscriptionFloatInput | null,
-  packageID?: ModelSubscriptionIDInput | null,
-  and?: Array< ModelSubscriptionActivityFilterInput | null > | null,
-  or?: Array< ModelSubscriptionActivityFilterInput | null > | null,
+  and?: Array< ModelSubscriptionContactUsFilterInput | null > | null,
+  or?: Array< ModelSubscriptionContactUsFilterInput | null > | null,
 };
 
 export type ModelSubscriptionIDInput = {
@@ -638,6 +732,19 @@ export type ModelSubscriptionStringInput = {
   beginsWith?: string | null,
   in?: Array< string | null > | null,
   notIn?: Array< string | null > | null,
+};
+
+export type ModelSubscriptionActivityFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  name?: ModelSubscriptionStringInput | null,
+  description?: ModelSubscriptionStringInput | null,
+  image?: ModelSubscriptionStringInput | null,
+  link?: ModelSubscriptionStringInput | null,
+  packageName?: ModelSubscriptionStringInput | null,
+  cost?: ModelSubscriptionFloatInput | null,
+  packageID?: ModelSubscriptionIDInput | null,
+  and?: Array< ModelSubscriptionActivityFilterInput | null > | null,
+  or?: Array< ModelSubscriptionActivityFilterInput | null > | null,
 };
 
 export type ModelSubscriptionFloatInput = {
@@ -716,6 +823,13 @@ export type ModelSubscriptionPackageFilterInput = {
   is_premium_flag?: ModelSubscriptionBooleanInput | null,
   video_link?: ModelSubscriptionStringInput | null,
   duration?: ModelSubscriptionStringInput | null,
+  actual_cost?: ModelSubscriptionFloatInput | null,
+  have_flight?: ModelSubscriptionBooleanInput | null,
+  have_hotels?: ModelSubscriptionBooleanInput | null,
+  have_sightseeing?: ModelSubscriptionBooleanInput | null,
+  have_meals?: ModelSubscriptionBooleanInput | null,
+  have_transfers?: ModelSubscriptionBooleanInput | null,
+  cities?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionPackageFilterInput | null > | null,
   or?: Array< ModelSubscriptionPackageFilterInput | null > | null,
 };
@@ -733,6 +847,60 @@ export type ModelSubscriptionUserInfoFilterInput = {
   name?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionUserInfoFilterInput | null > | null,
   or?: Array< ModelSubscriptionUserInfoFilterInput | null > | null,
+};
+
+export type CreateContactUsMutationVariables = {
+  input: CreateContactUsInput,
+  condition?: ModelContactUsConditionInput | null,
+};
+
+export type CreateContactUsMutation = {
+  createContactUs?:  {
+    __typename: "ContactUs",
+    id: string,
+    name: string,
+    email?: string | null,
+    phone_number: string,
+    description?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateContactUsMutationVariables = {
+  input: UpdateContactUsInput,
+  condition?: ModelContactUsConditionInput | null,
+};
+
+export type UpdateContactUsMutation = {
+  updateContactUs?:  {
+    __typename: "ContactUs",
+    id: string,
+    name: string,
+    email?: string | null,
+    phone_number: string,
+    description?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteContactUsMutationVariables = {
+  input: DeleteContactUsInput,
+  condition?: ModelContactUsConditionInput | null,
+};
+
+export type DeleteContactUsMutation = {
+  deleteContactUs?:  {
+    __typename: "ContactUs",
+    id: string,
+    name: string,
+    email?: string | null,
+    phone_number: string,
+    description?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type CreateActivityMutationVariables = {
@@ -927,9 +1095,16 @@ export type CreateRegistrationMutation = {
       cost: number,
       image: string,
       details_file: string,
-      is_premium_flag?: boolean | null,
-      video_link?: string | null,
-      duration?: string | null,
+      is_premium_flag: boolean,
+      video_link: string,
+      duration: string,
+      actual_cost: number,
+      have_flight: boolean,
+      have_hotels: boolean,
+      have_sightseeing: boolean,
+      have_meals: boolean,
+      have_transfers: boolean,
+      cities: string,
       createdAt: string,
       updatedAt: string,
     },
@@ -940,6 +1115,7 @@ export type CreateRegistrationMutation = {
       birthdate: string,
       firstName: string,
       lastName: string,
+      suffix: string,
     } > | null,
     mainPassenger:  {
       __typename: "MainPassenger",
@@ -950,6 +1126,7 @@ export type CreateRegistrationMutation = {
       email: string,
       starts: string,
       ends: string,
+      suffix: string,
     },
     bookingStatus: string,
     packageName: string,
@@ -980,9 +1157,16 @@ export type UpdateRegistrationMutation = {
       cost: number,
       image: string,
       details_file: string,
-      is_premium_flag?: boolean | null,
-      video_link?: string | null,
-      duration?: string | null,
+      is_premium_flag: boolean,
+      video_link: string,
+      duration: string,
+      actual_cost: number,
+      have_flight: boolean,
+      have_hotels: boolean,
+      have_sightseeing: boolean,
+      have_meals: boolean,
+      have_transfers: boolean,
+      cities: string,
       createdAt: string,
       updatedAt: string,
     },
@@ -993,6 +1177,7 @@ export type UpdateRegistrationMutation = {
       birthdate: string,
       firstName: string,
       lastName: string,
+      suffix: string,
     } > | null,
     mainPassenger:  {
       __typename: "MainPassenger",
@@ -1003,6 +1188,7 @@ export type UpdateRegistrationMutation = {
       email: string,
       starts: string,
       ends: string,
+      suffix: string,
     },
     bookingStatus: string,
     packageName: string,
@@ -1033,9 +1219,16 @@ export type DeleteRegistrationMutation = {
       cost: number,
       image: string,
       details_file: string,
-      is_premium_flag?: boolean | null,
-      video_link?: string | null,
-      duration?: string | null,
+      is_premium_flag: boolean,
+      video_link: string,
+      duration: string,
+      actual_cost: number,
+      have_flight: boolean,
+      have_hotels: boolean,
+      have_sightseeing: boolean,
+      have_meals: boolean,
+      have_transfers: boolean,
+      cities: string,
       createdAt: string,
       updatedAt: string,
     },
@@ -1046,6 +1239,7 @@ export type DeleteRegistrationMutation = {
       birthdate: string,
       firstName: string,
       lastName: string,
+      suffix: string,
     } > | null,
     mainPassenger:  {
       __typename: "MainPassenger",
@@ -1056,6 +1250,7 @@ export type DeleteRegistrationMutation = {
       email: string,
       starts: string,
       ends: string,
+      suffix: string,
     },
     bookingStatus: string,
     packageName: string,
@@ -1132,8 +1327,8 @@ export type CreatePackageMutation = {
     cost: number,
     image: string,
     details_file: string,
-    is_premium_flag?: boolean | null,
-    video_link?: string | null,
+    is_premium_flag: boolean,
+    video_link: string,
     Activities?:  {
       __typename: "ModelActivityConnection",
       nextToken?: string | null,
@@ -1142,7 +1337,14 @@ export type CreatePackageMutation = {
       __typename: "ModelActivityConnection",
       nextToken?: string | null,
     } | null,
-    duration?: string | null,
+    duration: string,
+    actual_cost: number,
+    have_flight: boolean,
+    have_hotels: boolean,
+    have_sightseeing: boolean,
+    have_meals: boolean,
+    have_transfers: boolean,
+    cities: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1164,8 +1366,8 @@ export type UpdatePackageMutation = {
     cost: number,
     image: string,
     details_file: string,
-    is_premium_flag?: boolean | null,
-    video_link?: string | null,
+    is_premium_flag: boolean,
+    video_link: string,
     Activities?:  {
       __typename: "ModelActivityConnection",
       nextToken?: string | null,
@@ -1174,7 +1376,14 @@ export type UpdatePackageMutation = {
       __typename: "ModelActivityConnection",
       nextToken?: string | null,
     } | null,
-    duration?: string | null,
+    duration: string,
+    actual_cost: number,
+    have_flight: boolean,
+    have_hotels: boolean,
+    have_sightseeing: boolean,
+    have_meals: boolean,
+    have_transfers: boolean,
+    cities: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1196,8 +1405,8 @@ export type DeletePackageMutation = {
     cost: number,
     image: string,
     details_file: string,
-    is_premium_flag?: boolean | null,
-    video_link?: string | null,
+    is_premium_flag: boolean,
+    video_link: string,
     Activities?:  {
       __typename: "ModelActivityConnection",
       nextToken?: string | null,
@@ -1206,7 +1415,14 @@ export type DeletePackageMutation = {
       __typename: "ModelActivityConnection",
       nextToken?: string | null,
     } | null,
-    duration?: string | null,
+    duration: string,
+    actual_cost: number,
+    have_flight: boolean,
+    have_hotels: boolean,
+    have_sightseeing: boolean,
+    have_meals: boolean,
+    have_transfers: boolean,
+    cities: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1275,6 +1491,46 @@ export type DeleteUserInfoMutation = {
     name?: string | null,
     createdAt: string,
     updatedAt: string,
+  } | null,
+};
+
+export type GetContactUsQueryVariables = {
+  id: string,
+};
+
+export type GetContactUsQuery = {
+  getContactUs?:  {
+    __typename: "ContactUs",
+    id: string,
+    name: string,
+    email?: string | null,
+    phone_number: string,
+    description?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListContactusesQueryVariables = {
+  filter?: ModelContactUsFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListContactusesQuery = {
+  listContactuses?:  {
+    __typename: "ModelContactUsConnection",
+    items:  Array< {
+      __typename: "ContactUs",
+      id: string,
+      name: string,
+      email?: string | null,
+      phone_number: string,
+      description?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
   } | null,
 };
 
@@ -1475,9 +1731,16 @@ export type GetRegistrationQuery = {
       cost: number,
       image: string,
       details_file: string,
-      is_premium_flag?: boolean | null,
-      video_link?: string | null,
-      duration?: string | null,
+      is_premium_flag: boolean,
+      video_link: string,
+      duration: string,
+      actual_cost: number,
+      have_flight: boolean,
+      have_hotels: boolean,
+      have_sightseeing: boolean,
+      have_meals: boolean,
+      have_transfers: boolean,
+      cities: string,
       createdAt: string,
       updatedAt: string,
     },
@@ -1488,6 +1751,7 @@ export type GetRegistrationQuery = {
       birthdate: string,
       firstName: string,
       lastName: string,
+      suffix: string,
     } > | null,
     mainPassenger:  {
       __typename: "MainPassenger",
@@ -1498,6 +1762,7 @@ export type GetRegistrationQuery = {
       email: string,
       starts: string,
       ends: string,
+      suffix: string,
     },
     bookingStatus: string,
     packageName: string,
@@ -1612,8 +1877,8 @@ export type GetPackageQuery = {
     cost: number,
     image: string,
     details_file: string,
-    is_premium_flag?: boolean | null,
-    video_link?: string | null,
+    is_premium_flag: boolean,
+    video_link: string,
     Activities?:  {
       __typename: "ModelActivityConnection",
       nextToken?: string | null,
@@ -1622,7 +1887,14 @@ export type GetPackageQuery = {
       __typename: "ModelActivityConnection",
       nextToken?: string | null,
     } | null,
-    duration?: string | null,
+    duration: string,
+    actual_cost: number,
+    have_flight: boolean,
+    have_hotels: boolean,
+    have_sightseeing: boolean,
+    have_meals: boolean,
+    have_transfers: boolean,
+    cities: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1647,9 +1919,16 @@ export type ListPackagesQuery = {
       cost: number,
       image: string,
       details_file: string,
-      is_premium_flag?: boolean | null,
-      video_link?: string | null,
-      duration?: string | null,
+      is_premium_flag: boolean,
+      video_link: string,
+      duration: string,
+      actual_cost: number,
+      have_flight: boolean,
+      have_hotels: boolean,
+      have_sightseeing: boolean,
+      have_meals: boolean,
+      have_transfers: boolean,
+      cities: string,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -1698,6 +1977,57 @@ export type ListUserInfosQuery = {
       updatedAt: string,
     } | null >,
     nextToken?: string | null,
+  } | null,
+};
+
+export type OnCreateContactUsSubscriptionVariables = {
+  filter?: ModelSubscriptionContactUsFilterInput | null,
+};
+
+export type OnCreateContactUsSubscription = {
+  onCreateContactUs?:  {
+    __typename: "ContactUs",
+    id: string,
+    name: string,
+    email?: string | null,
+    phone_number: string,
+    description?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateContactUsSubscriptionVariables = {
+  filter?: ModelSubscriptionContactUsFilterInput | null,
+};
+
+export type OnUpdateContactUsSubscription = {
+  onUpdateContactUs?:  {
+    __typename: "ContactUs",
+    id: string,
+    name: string,
+    email?: string | null,
+    phone_number: string,
+    description?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteContactUsSubscriptionVariables = {
+  filter?: ModelSubscriptionContactUsFilterInput | null,
+};
+
+export type OnDeleteContactUsSubscription = {
+  onDeleteContactUs?:  {
+    __typename: "ContactUs",
+    id: string,
+    name: string,
+    email?: string | null,
+    phone_number: string,
+    description?: string | null,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -1883,9 +2213,16 @@ export type OnCreateRegistrationSubscription = {
       cost: number,
       image: string,
       details_file: string,
-      is_premium_flag?: boolean | null,
-      video_link?: string | null,
-      duration?: string | null,
+      is_premium_flag: boolean,
+      video_link: string,
+      duration: string,
+      actual_cost: number,
+      have_flight: boolean,
+      have_hotels: boolean,
+      have_sightseeing: boolean,
+      have_meals: boolean,
+      have_transfers: boolean,
+      cities: string,
       createdAt: string,
       updatedAt: string,
     },
@@ -1896,6 +2233,7 @@ export type OnCreateRegistrationSubscription = {
       birthdate: string,
       firstName: string,
       lastName: string,
+      suffix: string,
     } > | null,
     mainPassenger:  {
       __typename: "MainPassenger",
@@ -1906,6 +2244,7 @@ export type OnCreateRegistrationSubscription = {
       email: string,
       starts: string,
       ends: string,
+      suffix: string,
     },
     bookingStatus: string,
     packageName: string,
@@ -1935,9 +2274,16 @@ export type OnUpdateRegistrationSubscription = {
       cost: number,
       image: string,
       details_file: string,
-      is_premium_flag?: boolean | null,
-      video_link?: string | null,
-      duration?: string | null,
+      is_premium_flag: boolean,
+      video_link: string,
+      duration: string,
+      actual_cost: number,
+      have_flight: boolean,
+      have_hotels: boolean,
+      have_sightseeing: boolean,
+      have_meals: boolean,
+      have_transfers: boolean,
+      cities: string,
       createdAt: string,
       updatedAt: string,
     },
@@ -1948,6 +2294,7 @@ export type OnUpdateRegistrationSubscription = {
       birthdate: string,
       firstName: string,
       lastName: string,
+      suffix: string,
     } > | null,
     mainPassenger:  {
       __typename: "MainPassenger",
@@ -1958,6 +2305,7 @@ export type OnUpdateRegistrationSubscription = {
       email: string,
       starts: string,
       ends: string,
+      suffix: string,
     },
     bookingStatus: string,
     packageName: string,
@@ -1987,9 +2335,16 @@ export type OnDeleteRegistrationSubscription = {
       cost: number,
       image: string,
       details_file: string,
-      is_premium_flag?: boolean | null,
-      video_link?: string | null,
-      duration?: string | null,
+      is_premium_flag: boolean,
+      video_link: string,
+      duration: string,
+      actual_cost: number,
+      have_flight: boolean,
+      have_hotels: boolean,
+      have_sightseeing: boolean,
+      have_meals: boolean,
+      have_transfers: boolean,
+      cities: string,
       createdAt: string,
       updatedAt: string,
     },
@@ -2000,6 +2355,7 @@ export type OnDeleteRegistrationSubscription = {
       birthdate: string,
       firstName: string,
       lastName: string,
+      suffix: string,
     } > | null,
     mainPassenger:  {
       __typename: "MainPassenger",
@@ -2010,6 +2366,7 @@ export type OnDeleteRegistrationSubscription = {
       email: string,
       starts: string,
       ends: string,
+      suffix: string,
     },
     bookingStatus: string,
     packageName: string,
@@ -2082,8 +2439,8 @@ export type OnCreatePackageSubscription = {
     cost: number,
     image: string,
     details_file: string,
-    is_premium_flag?: boolean | null,
-    video_link?: string | null,
+    is_premium_flag: boolean,
+    video_link: string,
     Activities?:  {
       __typename: "ModelActivityConnection",
       nextToken?: string | null,
@@ -2092,7 +2449,14 @@ export type OnCreatePackageSubscription = {
       __typename: "ModelActivityConnection",
       nextToken?: string | null,
     } | null,
-    duration?: string | null,
+    duration: string,
+    actual_cost: number,
+    have_flight: boolean,
+    have_hotels: boolean,
+    have_sightseeing: boolean,
+    have_meals: boolean,
+    have_transfers: boolean,
+    cities: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -2113,8 +2477,8 @@ export type OnUpdatePackageSubscription = {
     cost: number,
     image: string,
     details_file: string,
-    is_premium_flag?: boolean | null,
-    video_link?: string | null,
+    is_premium_flag: boolean,
+    video_link: string,
     Activities?:  {
       __typename: "ModelActivityConnection",
       nextToken?: string | null,
@@ -2123,7 +2487,14 @@ export type OnUpdatePackageSubscription = {
       __typename: "ModelActivityConnection",
       nextToken?: string | null,
     } | null,
-    duration?: string | null,
+    duration: string,
+    actual_cost: number,
+    have_flight: boolean,
+    have_hotels: boolean,
+    have_sightseeing: boolean,
+    have_meals: boolean,
+    have_transfers: boolean,
+    cities: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -2144,8 +2515,8 @@ export type OnDeletePackageSubscription = {
     cost: number,
     image: string,
     details_file: string,
-    is_premium_flag?: boolean | null,
-    video_link?: string | null,
+    is_premium_flag: boolean,
+    video_link: string,
     Activities?:  {
       __typename: "ModelActivityConnection",
       nextToken?: string | null,
@@ -2154,7 +2525,14 @@ export type OnDeletePackageSubscription = {
       __typename: "ModelActivityConnection",
       nextToken?: string | null,
     } | null,
-    duration?: string | null,
+    duration: string,
+    actual_cost: number,
+    have_flight: boolean,
+    have_hotels: boolean,
+    have_sightseeing: boolean,
+    have_meals: boolean,
+    have_transfers: boolean,
+    cities: string,
     createdAt: string,
     updatedAt: string,
   } | null,

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import {
   Box,
@@ -15,7 +15,6 @@ import Section from '@components/Section'
 import Layout from '@components/layouts/main'
 import type { NextPage } from 'next'
 import type { Trip, TripsPageProps } from '@utils/types'
-import { useTripsStore } from '@utils/redux/useTripsStore'
 import Link from 'next/link'
 import { API } from 'aws-amplify'
 import { GraphQLQuery, GRAPHQL_AUTH_MODE } from '@aws-amplify/api'
@@ -25,13 +24,55 @@ import {
   ListPackagesQuery
 } from 'src/API'
 import { listActivities, listPackages } from 'src/graphql/queries'
-const Trips: NextPage<TripsPageProps> = ({
-  packages_data,
-  activities_data
-}) => {
+import ThreeDotsWaveLoadingScreen from '@components/LoadingScreen'
+import { toast } from 'react-toastify'
+
+const Trips: NextPage<TripsPageProps> = () => {
+
+
+  const [packages_data, setPackage] = useState(null);
+  const [activities_data, setActivity] = useState(null)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const packagesAndActivities = await API.graphql<
+          GraphQLQuery<ListPackagesQuery>
+        >({
+          query: listPackages
+        })
+
+        let activities = await API.graphql<GraphQLQuery<ListActivitiesQuery>>({
+          query: listActivities
+        })
+
+
+
+        let packages_data = packagesAndActivities.data.listPackages.items as Trip[]
+        let activities_data = activities.data.listActivities.items
+
+        setPackage(packages_data);
+        setActivity(activities_data);
+      }
+      catch (e) {
+
+
+        toast.error(e.errors[0].message)
+      }
+
+    }
+
+    fetchData();
+  }, [])
+
+
+
+
+
   return (
     <Layout title="Trips">
-      <Container w="100%" pt={8} maxW="container.xl">
+
+      {activities_data && packages_data ? <Container w="100%" pt={8} maxW="container.xl">
         <Section delay={0.2}>
           <Heading
             fontSize={{ base: '56px', lg: '72px' }}
@@ -40,8 +81,8 @@ const Trips: NextPage<TripsPageProps> = ({
             mb={{ base: 3, lg: 6 }}
           >
             Plan your trips
-           
-            
+
+
           </Heading>
           <Flex
             direction={{ base: 'column', lg: 'row' }}
@@ -110,31 +151,11 @@ const Trips: NextPage<TripsPageProps> = ({
             data={packages_data}
           />
         </Section>
-      </Container>
+      </Container> : <ThreeDotsWaveLoadingScreen></ThreeDotsWaveLoadingScreen>}
     </Layout>
   )
 }
 
-export async function getServerSideProps(context) {
-  const packagesAndActivities = await API.graphql<
-    GraphQLQuery<ListPackagesQuery>
-  >({
-    query: listPackages
-  })
 
-  let activities = await API.graphql<GraphQLQuery<ListActivitiesQuery>>({
-    query: listActivities
-  })
-
-
-  console.log(activities.data.listActivities.items)
-
-  let packages_data = packagesAndActivities.data.listPackages.items as Trip[]
-  let activities_data = activities.data.listActivities.items
-  console.log('Hi')
-  console.log(packages_data.length)
-  console.log('end')
-  return { props: { packages_data, activities_data } }
-}
 
 export default Trips

@@ -24,7 +24,7 @@ const Page: NextPage<HomePageProps> = ({
 
   useEffect(() => {
     setTimeout(() => {
-        setMode(true);
+      setMode(true);
     }, 4000)
   }, [])
 
@@ -45,14 +45,14 @@ const Page: NextPage<HomePageProps> = ({
 
         </Flex>}
       <HeroSection />
-      <FeaturedSection data={featured_data} />
-      <DiscoverTheWorld data={activities_data} />
+      {featured_data && <FeaturedSection data={featured_data} />}
+      {activities_data && <DiscoverTheWorld data={activities_data} />}
       <NextDestinationForm />
     </Layout>
   )
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
 
   const premiumPackages = await API.graphql<GraphQLQuery<ListPackagesQuery>>({
     query: listPackages,
@@ -66,13 +66,7 @@ export async function getServerSideProps() {
   const featured_data = premiumPackages.data.listPackages.items
   const activities_data = activities.data.listActivities.items
 
-  if (!featured_data || !activities_data) {
-    return {
-      notFound: true
-    }
-  }
-
-  return { props: { featured_data, activities_data } }
+  return { props: { featured_data, activities_data, revalidate: 10 } }
 }
 
 export default Page

@@ -33,7 +33,7 @@ const BlogCard: React.FC<BlogProps> = ({ blog }) => {
           <Box borderRadius="lg" overflow={'hidden'}>
             <CustomImage
               src={image}
-              alt={id}
+              alt={name}
               layout="responsive"
               width={150}
               height={100}

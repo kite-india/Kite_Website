@@ -2,6 +2,57 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createContactUs = /* GraphQL */ `
+  mutation CreateContactUs(
+    $input: CreateContactUsInput!
+    $condition: ModelContactUsConditionInput
+  ) {
+    createContactUs(input: $input, condition: $condition) {
+      id
+      name
+      email
+      phone_number
+      description
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const updateContactUs = /* GraphQL */ `
+  mutation UpdateContactUs(
+    $input: UpdateContactUsInput!
+    $condition: ModelContactUsConditionInput
+  ) {
+    updateContactUs(input: $input, condition: $condition) {
+      id
+      name
+      email
+      phone_number
+      description
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const deleteContactUs = /* GraphQL */ `
+  mutation DeleteContactUs(
+    $input: DeleteContactUsInput!
+    $condition: ModelContactUsConditionInput
+  ) {
+    deleteContactUs(input: $input, condition: $condition) {
+      id
+      name
+      email
+      phone_number
+      description
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
 export const createActivity = /* GraphQL */ `
   mutation CreateActivity(
     $input: CreateActivityInput!
@@ -185,6 +236,13 @@ export const createRegistration = /* GraphQL */ `
         is_premium_flag
         video_link
         duration
+        actual_cost
+        have_flight
+        have_hotels
+        have_sightseeing
+        have_meals
+        have_transfers
+        cities
         createdAt
         updatedAt
         __typename
@@ -195,6 +253,7 @@ export const createRegistration = /* GraphQL */ `
         birthdate
         firstName
         lastName
+        suffix
         __typename
       }
       mainPassenger {
@@ -205,6 +264,7 @@ export const createRegistration = /* GraphQL */ `
         email
         starts
         ends
+        suffix
         __typename
       }
       bookingStatus
@@ -237,6 +297,13 @@ export const updateRegistration = /* GraphQL */ `
         is_premium_flag
         video_link
         duration
+        actual_cost
+        have_flight
+        have_hotels
+        have_sightseeing
+        have_meals
+        have_transfers
+        cities
         createdAt
         updatedAt
         __typename
@@ -247,6 +314,7 @@ export const updateRegistration = /* GraphQL */ `
         birthdate
         firstName
         lastName
+        suffix
         __typename
       }
       mainPassenger {
@@ -257,6 +325,7 @@ export const updateRegistration = /* GraphQL */ `
         email
         starts
         ends
+        suffix
         __typename
       }
       bookingStatus
@@ -289,6 +358,13 @@ export const deleteRegistration = /* GraphQL */ `
         is_premium_flag
         video_link
         duration
+        actual_cost
+        have_flight
+        have_hotels
+        have_sightseeing
+        have_meals
+        have_transfers
+        cities
         createdAt
         updatedAt
         __typename
@@ -299,6 +375,7 @@ export const deleteRegistration = /* GraphQL */ `
         birthdate
         firstName
         lastName
+        suffix
         __typename
       }
       mainPassenger {
@@ -309,6 +386,7 @@ export const deleteRegistration = /* GraphQL */ `
         email
         starts
         ends
+        suffix
         __typename
       }
       bookingStatus
@@ -393,6 +471,13 @@ export const createPackage = /* GraphQL */ `
         __typename
       }
       duration
+      actual_cost
+      have_flight
+      have_hotels
+      have_sightseeing
+      have_meals
+      have_transfers
+      cities
       createdAt
       updatedAt
       __typename
@@ -424,6 +509,13 @@ export const updatePackage = /* GraphQL */ `
         __typename
       }
       duration
+      actual_cost
+      have_flight
+      have_hotels
+      have_sightseeing
+      have_meals
+      have_transfers
+      cities
       createdAt
       updatedAt
       __typename
@@ -455,6 +547,13 @@ export const deletePackage = /* GraphQL */ `
         __typename
       }
       duration
+      actual_cost
+      have_flight
+      have_hotels
+      have_sightseeing
+      have_meals
+      have_transfers
+      cities
       createdAt
       updatedAt
       __typename
