@@ -66,7 +66,7 @@ export async function getStaticProps() {
   const featured_data = premiumPackages.data.listPackages.items
   const activities_data = activities.data.listActivities.items
 
-  return { props: { featured_data, activities_data, revalidate: 10 } }
+  return { props: { featured_data, activities_data},revalidate: 10  }
 }
 
 export default Page
