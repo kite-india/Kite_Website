@@ -58,11 +58,15 @@ const Page: NextPage<PackagesPageProps> = () => {
   const [packages_data, setPackage] = useState<Trip>(null);
   const [activities, setActivity] = useState<Activity[]>(null);
   const [gallery_data, setGallery] = useState<Gallery[]>(null);
+
+
   useEffect(() => {
-    const { id } = router.query;
+
+    if(!router.isReady) return;
 
     const fetchData = async () => {
 
+      const { id } = router.query;
       try {
         const packages = await API.graphql<GraphQLQuery<GetPackageQuery>>({
           query: getPackage,
@@ -70,7 +74,7 @@ const Page: NextPage<PackagesPageProps> = () => {
             id: `${id}`
           }
         })
-
+        console.log(id)
         const activities = await API.graphql<
           GraphQLQuery<ActivitiesByPackageIDQuery>
         >({
@@ -79,6 +83,7 @@ const Page: NextPage<PackagesPageProps> = () => {
             packageID: id
           }
         })
+
 
         let data = packages.data.getPackage
 
@@ -96,13 +101,15 @@ const Page: NextPage<PackagesPageProps> = () => {
         setGallery(gallery_data);
       }
       catch (e) {
+        console.log(e)
         toast.error(e.errors[0].message)
       }
 
     }
 
     fetchData();
-  })
+
+  }, [router.isReady])
 
 
   const bookNow = () => {
@@ -253,7 +260,7 @@ const Page: NextPage<PackagesPageProps> = () => {
 
                     </Heading>
                     <List>
-                      {packages_data.description.split("\n").map((value,index) => {
+                      {packages_data.description.split("\n").map((value, index) => {
                         return (
                           <ListItem paddingBottom={3} display={'flex'} key={index}>
                             <ListIcon as={MdCheckCircle} color='green.500' />
@@ -339,8 +346,8 @@ const Page: NextPage<PackagesPageProps> = () => {
                   pagination={{ clickable: true }}
                   slidesPerView={1}
                 >
-                  {gallery_data.map((item,index) => {
-                
+                  {gallery_data.map((item, index) => {
+
                     return (
                       <SwiperSlide
                         key={item.id}
