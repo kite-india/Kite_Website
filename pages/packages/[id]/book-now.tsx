@@ -282,7 +282,7 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
               <Text fontFamily="'Roboto'" color="#7C8DB0" fontSize="18px">
                 Enter the required information for each traveler and be sure
                 that it exactly matches the government-issued ID presented at
-                thhe airport.
+                the airport.
               </Text>
             </Box>
             <Box maxW="container.xl" alignContent="center">

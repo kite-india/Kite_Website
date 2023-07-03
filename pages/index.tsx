@@ -29,6 +29,7 @@ const Page: NextPage<HomePageProps> = ({
 
   return (
     <Layout title="Home">
+<<<<<<< HEAD
       {mode && (
         <Flex justifyContent={'center'}>
           <Box
@@ -53,6 +54,19 @@ const Page: NextPage<HomePageProps> = ({
           </Box>
         </Flex>
       )}
+=======
+      {mode &&
+        <Flex justifyContent={"center"}>
+          <Box backgroundColor={"rgba(0, 0, 0, 0.4)"} zIndex={99} position={"fixed"} height={"100vh"} width={"100%"}></Box>
+          <Box position={"fixed"} zIndex={100} textAlign="center">
+            <CloseButton position={"relative"} zIndex={200} left={[320,460]} top={{'lg':75,"sm":3}} size='lg' onClick={(e) => {
+              setMode(false)
+            }} />
+            <IndexModal />
+          </Box>
+        </Flex>}
+
+>>>>>>> 86bf31622779488e175627685535ac400973ee5c
       <HeroSection />
       {featured_data && <FeaturedSection data={featured_data} />}
       {activities_data && <DiscoverTheWorld data={activities_data} />}
@@ -74,7 +88,11 @@ export async function getStaticProps() {
   const featured_data = premiumPackages.data.listPackages.items
   const activities_data = activities.data.listActivities.items
 
+<<<<<<< HEAD
   return { props: { featured_data, activities_data }, revalidate: 10 }
+=======
+  return { props: { featured_data, activities_data} }
+>>>>>>> 86bf31622779488e175627685535ac400973ee5c
 }
 
 export default Page
