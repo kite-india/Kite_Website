@@ -4,12 +4,14 @@
  * Any changes to this file will be overwritten when running amplify pull. *
  **************************************************************************/
 
-export { default as studioTheme } from './studioTheme'
-export { default as EnquiryCreateForm } from './EnquiryCreateForm'
-export { default as EnquiryUpdateForm } from './EnquiryUpdateForm'
-export { default as GalleryCreateForm } from './GalleryCreateForm'
-export { default as GalleryUpdateForm } from './GalleryUpdateForm'
-export { default as ReviewCreateForm } from './ReviewCreateForm'
-export { default as ReviewUpdateForm } from './ReviewUpdateForm'
-export { default as PackageCreateForm } from './PackageCreateForm'
-export { default as PackageUpdateForm } from './PackageUpdateForm'
+export { default as studioTheme } from "./studioTheme";
+export { default as ContactUsCreateForm } from "./ContactUsCreateForm";
+export { default as ContactUsUpdateForm } from "./ContactUsUpdateForm";
+export { default as EnquiryCreateForm } from "./EnquiryCreateForm";
+export { default as EnquiryUpdateForm } from "./EnquiryUpdateForm";
+export { default as GalleryCreateForm } from "./GalleryCreateForm";
+export { default as GalleryUpdateForm } from "./GalleryUpdateForm";
+export { default as ReviewCreateForm } from "./ReviewCreateForm";
+export { default as ReviewUpdateForm } from "./ReviewUpdateForm";
+export { default as PackageCreateForm } from "./PackageCreateForm";
+export { default as PackageUpdateForm } from "./PackageUpdateForm";

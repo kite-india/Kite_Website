@@ -12,31 +12,34 @@ export declare type ValidationResponse = {
     errorMessage?: string;
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
-export declare type ReviewCreateFormInputValues = {
+export declare type ContactUsCreateFormInputValues = {
     name?: string;
     email?: string;
-    review?: string;
+    phone_number?: string;
+    description?: string;
 };
-export declare type ReviewCreateFormValidationValues = {
+export declare type ContactUsCreateFormValidationValues = {
     name?: ValidationFunction<string>;
     email?: ValidationFunction<string>;
-    review?: ValidationFunction<string>;
+    phone_number?: ValidationFunction<string>;
+    description?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type ReviewCreateFormOverridesProps = {
-    ReviewCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
+export declare type ContactUsCreateFormOverridesProps = {
+    ContactUsCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
     name?: PrimitiveOverrideProps<TextFieldProps>;
     email?: PrimitiveOverrideProps<TextFieldProps>;
-    review?: PrimitiveOverrideProps<TextFieldProps>;
+    phone_number?: PrimitiveOverrideProps<TextFieldProps>;
+    description?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
-export declare type ReviewCreateFormProps = React.PropsWithChildren<{
-    overrides?: ReviewCreateFormOverridesProps | undefined | null;
+export declare type ContactUsCreateFormProps = React.PropsWithChildren<{
+    overrides?: ContactUsCreateFormOverridesProps | undefined | null;
 } & {
     clearOnSuccess?: boolean;
-    onSubmit?: (fields: ReviewCreateFormInputValues) => ReviewCreateFormInputValues;
-    onSuccess?: (fields: ReviewCreateFormInputValues) => void;
-    onError?: (fields: ReviewCreateFormInputValues, errorMessage: string) => void;
-    onChange?: (fields: ReviewCreateFormInputValues) => ReviewCreateFormInputValues;
-    onValidate?: ReviewCreateFormValidationValues;
+    onSubmit?: (fields: ContactUsCreateFormInputValues) => ContactUsCreateFormInputValues;
+    onSuccess?: (fields: ContactUsCreateFormInputValues) => void;
+    onError?: (fields: ContactUsCreateFormInputValues, errorMessage: string) => void;
+    onChange?: (fields: ContactUsCreateFormInputValues) => ContactUsCreateFormInputValues;
+    onValidate?: ContactUsCreateFormValidationValues;
 } & React.CSSProperties>;
-export default function ReviewCreateForm(props: ReviewCreateFormProps): React.ReactElement;
+export default function ContactUsCreateForm(props: ContactUsCreateFormProps): React.ReactElement;

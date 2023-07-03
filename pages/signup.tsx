@@ -22,10 +22,10 @@ import 'react-toastify/dist/ReactToastify.css'
 import Verification from '@components/Verification'
 
 const Signup: React.FC = () => {
-  const [flag, setFlag] = useState(true);
-  const [checkedBox, setCheckedBox] = useState(false);
-  const [confirmaton, setConfirmation] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
+  const [flag, setFlag] = useState(true)
+  const [checkedBox, setCheckedBox] = useState(false)
+  const [confirmaton, setConfirmation] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
 
   const [signUparams, setSignUpParams] = useState({
     email: '',
@@ -39,47 +39,42 @@ const Signup: React.FC = () => {
 
   function areAllValuesNotNull(obj) {
     for (let key in obj) {
-      if (obj.hasOwnProperty(key) &&  obj[key] === '') {
-        return false;
+      if (obj.hasOwnProperty(key) && obj[key] === '') {
+        return false
       }
     }
-    return true;
+    return true
   }
 
-  const validateEmail = (email) => {
+  const validateEmail = email => {
     return String(email)
       .toLowerCase()
       .match(
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  };
+      )
+  }
 
   async function registerHandler() {
-
     console.log(signUparams)
 
-
-
-    
     if (!areAllValuesNotNull(signUparams)) {
-      toast.error("Fill All fields");
-      return;
+      toast.error('Fill All fields')
+      return
     }
 
     if (!validateEmail(signUparams.email)) {
-      toast.error("Please enter a valid email address")
-      return;
+      toast.error('Please enter a valid email address')
+      return
     }
 
- 
     if (signUparams.password !== signUparams.confirmPassword) {
-      toast.error("Password doesn't match");
-      return;
+      toast.error("Password doesn't match")
+      return
     }
 
     if (!checkedBox) {
-      toast.error("Please Agree to terms and conditions");
-      return;
+      toast.error('Please Agree to terms and conditions')
+      return
     }
 
     try {
@@ -89,7 +84,9 @@ const Signup: React.FC = () => {
         attributes: {
           picture: 'fds',
           birthdate: signUparams.birthdate,
-          phone_number: signUparams.phone.includes("+") ? signUparams.phone : "+" + signUparams.phone,
+          phone_number: signUparams.phone.includes('+')
+            ? signUparams.phone
+            : '+' + signUparams.phone,
           email: signUparams.email,
           name: signUparams.firstName + ' ' + signUparams.lastName
         }
@@ -98,14 +95,14 @@ const Signup: React.FC = () => {
       //If signUp success enable confirmation page
       setConfirmation(true)
     } catch (e) {
-      console.log(e);
-      if (e.message === "Invalid phone number format.") {
-        toast.error("Include your country code with phone number/Check your phone number correctly")
+      console.log(e)
+      if (e.message === 'Invalid phone number format.') {
+        toast.error(
+          'Include your country code with phone number/Check your phone number correctly'
+        )
+      } else {
+        toast.error(e.message)
       }
-      else {
-        toast.error(e.message);
-      }
-
     }
   }
 
@@ -219,7 +216,7 @@ const Signup: React.FC = () => {
                   boxShadow="md"
                   borderRadius="6px"
                   backgroundColor="white"
-                  type={!showPassword ? "password" : "text"}
+                  type={!showPassword ? 'password' : 'text'}
                 />
                 <Input
                   name="confirmPassword"
@@ -231,14 +228,18 @@ const Signup: React.FC = () => {
                   boxShadow="md"
                   borderRadius="6px"
                   backgroundColor="white"
-                  type="text"
+                  type={!showPassword ? 'password' : 'text'}
                 />
               </Flex>
 
               <Flex justifyContent="space-between">
-                <Checkbox colorScheme="green" isChecked={showPassword} onChange={(e) => {
-                  setShowPassword(e.target.checked);
-                }}>
+                <Checkbox
+                  colorScheme="green"
+                  isChecked={showPassword}
+                  onChange={e => {
+                    setShowPassword(e.target.checked)
+                  }}
+                >
                   Show Password
                 </Checkbox>
                 <Button
@@ -300,8 +301,10 @@ const Signup: React.FC = () => {
                 borderRadius="6px"
                 backgroundColor="white"
               />
-              <Flex >
-                <Text width="30%" paddingTop={3}>Date of Birth: </Text>
+              <Flex>
+                <Text width="30%" paddingTop={3}>
+                  Date of Birth:{' '}
+                </Text>
                 <Input
                   name="birthdate"
                   onChange={handleChange}
@@ -313,7 +316,6 @@ const Signup: React.FC = () => {
                   borderRadius="6px"
                   backgroundColor="white"
                 />
-
               </Flex>
               {/* <Input
                 name="image"
@@ -346,9 +348,13 @@ const Signup: React.FC = () => {
                 <option value="Unknown">Others</option>
               </Select>
               <Flex direction="column">
-                <Checkbox colorScheme="green" isChecked={checkedBox} onChange={(e) => {
-                  setCheckedBox(e.target.checked);
-                }}>
+                <Checkbox
+                  colorScheme="green"
+                  isChecked={checkedBox}
+                  onChange={e => {
+                    setCheckedBox(e.target.checked)
+                  }}
+                >
                   I agree to terms and conditions
                 </Checkbox>
                 <Flex justifyContent="space-between">

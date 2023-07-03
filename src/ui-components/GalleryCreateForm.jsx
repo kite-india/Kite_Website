@@ -5,12 +5,12 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from 'react'
-import { Button, Flex, Grid, TextField } from '@aws-amplify/ui-react'
-import { getOverrideProps } from '@aws-amplify/ui-react/internal'
-import { Gallery } from '../models'
-import { fetchByPath, validateField } from './utils'
-import { DataStore } from 'aws-amplify'
+import * as React from "react";
+import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
+import { getOverrideProps } from "@aws-amplify/ui-react/internal";
+import { Gallery } from "../models";
+import { fetchByPath, validateField } from "./utils";
+import { DataStore } from "aws-amplify";
 export default function GalleryCreateForm(props) {
   const {
     clearOnSuccess = true,
@@ -21,23 +21,23 @@ export default function GalleryCreateForm(props) {
     onChange,
     overrides,
     ...rest
-  } = props
+  } = props;
   const initialValues = {
-    image: '',
-    packageID: ''
-  }
-  const [image, setImage] = React.useState(initialValues.image)
-  const [packageID, setPackageID] = React.useState(initialValues.packageID)
-  const [errors, setErrors] = React.useState({})
+    image: "",
+    packageID: "",
+  };
+  const [image, setImage] = React.useState(initialValues.image);
+  const [packageID, setPackageID] = React.useState(initialValues.packageID);
+  const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    setImage(initialValues.image)
-    setPackageID(initialValues.packageID)
-    setErrors({})
-  }
+    setImage(initialValues.image);
+    setPackageID(initialValues.packageID);
+    setErrors({});
+  };
   const validations = {
-    image: [{ type: 'Required' }],
-    packageID: [{ type: 'Required' }]
-  }
+    image: [{ type: "Required" }],
+    packageID: [{ type: "Required" }],
+  };
   const runValidationTasks = async (
     fieldName,
     currentValue,
@@ -46,67 +46,69 @@ export default function GalleryCreateForm(props) {
     const value =
       currentValue && getDisplayValue
         ? getDisplayValue(currentValue)
-        : currentValue
-    let validationResponse = validateField(value, validations[fieldName])
-    const customValidator = fetchByPath(onValidate, fieldName)
+        : currentValue;
+    let validationResponse = validateField(value, validations[fieldName]);
+    const customValidator = fetchByPath(onValidate, fieldName);
     if (customValidator) {
-      validationResponse = await customValidator(value, validationResponse)
+      validationResponse = await customValidator(value, validationResponse);
     }
-    setErrors(errors => ({ ...errors, [fieldName]: validationResponse }))
-    return validationResponse
-  }
+    setErrors((errors) => ({ ...errors, [fieldName]: validationResponse }));
+    return validationResponse;
+  };
   return (
     <Grid
       as="form"
       rowGap="15px"
       columnGap="15px"
       padding="20px"
-      onSubmit={async event => {
-        event.preventDefault()
+      onSubmit={async (event) => {
+        event.preventDefault();
         let modelFields = {
           image,
-          packageID
-        }
+          packageID,
+        };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
             if (Array.isArray(modelFields[fieldName])) {
               promises.push(
-                ...modelFields[fieldName].map(item =>
+                ...modelFields[fieldName].map((item) =>
                   runValidationTasks(fieldName, item)
                 )
-              )
-              return promises
+              );
+              return promises;
             }
-            promises.push(runValidationTasks(fieldName, modelFields[fieldName]))
-            return promises
+            promises.push(
+              runValidationTasks(fieldName, modelFields[fieldName])
+            );
+            return promises;
           }, [])
-        )
-        if (validationResponses.some(r => r.hasError)) {
-          return
+        );
+        if (validationResponses.some((r) => r.hasError)) {
+          return;
         }
         if (onSubmit) {
-          modelFields = onSubmit(modelFields)
+          modelFields = onSubmit(modelFields);
         }
         try {
           Object.entries(modelFields).forEach(([key, value]) => {
-            if (typeof value === 'string' && value.trim() === '') {
-              modelFields[key] = undefined
+            if (typeof value === "string" && value.trim() === "") {
+              modelFields[key] = undefined;
             }
-          })
-          await DataStore.save(new Gallery(modelFields))
+          });
+          await DataStore.save(new Gallery(modelFields));
           if (onSuccess) {
-            onSuccess(modelFields)
+            onSuccess(modelFields);
           }
           if (clearOnSuccess) {
-            resetStateValues()
+            resetStateValues();
           }
         } catch (err) {
           if (onError) {
-            onError(modelFields, err.message)
+            onError(modelFields, err.message);
           }
         }
       }}
-      {...getOverrideProps(overrides, 'GalleryCreateForm')}
+      {...getOverrideProps(overrides, "GalleryCreateForm")}
       {...rest}
     >
       <TextField
@@ -114,77 +116,77 @@ export default function GalleryCreateForm(props) {
         isRequired={true}
         isReadOnly={false}
         value={image}
-        onChange={e => {
-          let { value } = e.target
+        onChange={(e) => {
+          let { value } = e.target;
           if (onChange) {
             const modelFields = {
               image: value,
-              packageID
-            }
-            const result = onChange(modelFields)
-            value = result?.image ?? value
+              packageID,
+            };
+            const result = onChange(modelFields);
+            value = result?.image ?? value;
           }
           if (errors.image?.hasError) {
-            runValidationTasks('image', value)
+            runValidationTasks("image", value);
           }
-          setImage(value)
+          setImage(value);
         }}
-        onBlur={() => runValidationTasks('image', image)}
+        onBlur={() => runValidationTasks("image", image)}
         errorMessage={errors.image?.errorMessage}
         hasError={errors.image?.hasError}
-        {...getOverrideProps(overrides, 'image')}
+        {...getOverrideProps(overrides, "image")}
       ></TextField>
       <TextField
         label="Package id"
         isRequired={true}
         isReadOnly={false}
         value={packageID}
-        onChange={e => {
-          let { value } = e.target
+        onChange={(e) => {
+          let { value } = e.target;
           if (onChange) {
             const modelFields = {
               image,
-              packageID: value
-            }
-            const result = onChange(modelFields)
-            value = result?.packageID ?? value
+              packageID: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.packageID ?? value;
           }
           if (errors.packageID?.hasError) {
-            runValidationTasks('packageID', value)
+            runValidationTasks("packageID", value);
           }
-          setPackageID(value)
+          setPackageID(value);
         }}
-        onBlur={() => runValidationTasks('packageID', packageID)}
+        onBlur={() => runValidationTasks("packageID", packageID)}
         errorMessage={errors.packageID?.errorMessage}
         hasError={errors.packageID?.hasError}
-        {...getOverrideProps(overrides, 'packageID')}
+        {...getOverrideProps(overrides, "packageID")}
       ></TextField>
       <Flex
         justifyContent="space-between"
-        {...getOverrideProps(overrides, 'CTAFlex')}
+        {...getOverrideProps(overrides, "CTAFlex")}
       >
         <Button
           children="Clear"
           type="reset"
-          onClick={event => {
-            event.preventDefault()
-            resetStateValues()
+          onClick={(event) => {
+            event.preventDefault();
+            resetStateValues();
           }}
-          {...getOverrideProps(overrides, 'ClearButton')}
+          {...getOverrideProps(overrides, "ClearButton")}
         ></Button>
         <Flex
           gap="15px"
-          {...getOverrideProps(overrides, 'RightAlignCTASubFlex')}
+          {...getOverrideProps(overrides, "RightAlignCTASubFlex")}
         >
           <Button
             children="Submit"
             type="submit"
             variation="primary"
-            isDisabled={Object.values(errors).some(e => e?.hasError)}
-            {...getOverrideProps(overrides, 'SubmitButton')}
+            isDisabled={Object.values(errors).some((e) => e?.hasError)}
+            {...getOverrideProps(overrides, "SubmitButton")}
           ></Button>
         </Flex>
       </Flex>
     </Grid>
-  )
+  );
 }

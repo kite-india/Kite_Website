@@ -24,22 +24,36 @@ import { BsPlayCircleFill } from 'react-icons/bs'
 import { FeaturedDestination } from '@utils/types'
 import CustomImage from './CustomImage'
 
-import { TbPlane } from "react-icons/tb";
-import { MdLocalDining } from "react-icons/md";
-import { BsBinoculars } from "react-icons/bs";
+import { TbPlane } from 'react-icons/tb'
+import { MdLocalDining } from 'react-icons/md'
+import { BsBinoculars } from 'react-icons/bs'
 import { Package } from 'src/API'
 interface FeaturedDataProps {
   data: Package
 }
 
-import { MdFastfood } from "react-icons/md";
+import { MdFastfood } from 'react-icons/md'
 
 const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
-  const { name, description, image, id, video_link, duration, cost, actual_cost, cities, have_flight, have_hotels, have_meals, have_sightseeing, have_transfers } = data
+  const {
+    name,
+    description,
+    image,
+    id,
+    video_link,
+    duration,
+    cost,
+    actual_cost,
+    cities,
+    have_flight,
+    have_hotels,
+    have_meals,
+    have_sightseeing,
+    have_transfers
+  } = data
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const WatchNow = () => (
-
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent maxW="80%">
@@ -64,7 +78,6 @@ const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
     <Box
       w="100%"
       py={{ base: 0, md: 3 }}
-      px={4}
       display="flex"
       justifyContent="center"
       alignItems="center"
@@ -86,7 +99,7 @@ const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
             height="400px"
             style={{ borderRadius: '10px' }}
           />
-          <Box pt={{ base: 0, md: 6 }} w={{ base: '95vw', md: '38rem' }}>
+          <Box pt={{ base: 0, md: 6 }} w={{ base: '80vw', md: '38rem' }}>
             <Flex direction="column" gap="1.2rem" align="left">
               <Heading
                 as="h4"
@@ -95,23 +108,18 @@ const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
                 textTransform="uppercase"
                 fontFamily="'Roboto'"
                 color="#125C13"
-
               >
                 Featured Destination
               </Heading>
               <Heading fontSize="35px">{name}</Heading>
-              <Flex flexDirection={"column"}>
+              <Flex flexDirection={'column'}>
                 <Flex>
-                  <Text fontWeight={"bold"} pr={3}>
+                  <Text fontWeight={'bold'} pr={3}>
                     Cities:
-
                   </Text>
-                  <Text>
-                    {cities}
-                  </Text>
-
+                  <Text>{cities}</Text>
                 </Flex>
-                <Flex pt={5} textAlign={"center"}>
+                <Flex pt={5} textAlign={'center'}>
                   <Box opacity={!have_flight ? 0.3 : 1} pr={8}>
                     <Icon as={TbPlane} w={8} h={8} />
                     <Text>Flight</Text>
@@ -119,28 +127,36 @@ const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
 
                   <Box opacity={!have_hotels ? 0.3 : 1} pr={8}>
                     <Icon as={MdLocalDining} w={8} h={8} />
-                    <Text >Hotels</Text>
+                    <Text>Hotels</Text>
                   </Box>
-                  <Box opacity={!have_sightseeing ? 0.3 : 1} pr={8} >
+                  <Box opacity={!have_sightseeing ? 0.3 : 1} pr={8}>
                     <Icon as={BsBinoculars} w={10} h={8} />
                     <Text>Sightseeing</Text>
                   </Box>
 
-                  <Box opacity={!have_meals ? 0.3 : 1} pr={8} >
+                  <Box opacity={!have_meals ? 0.3 : 1} pr={8}>
                     <Icon as={MdFastfood} w={10} h={8} />
                     <Text>Meals</Text>
                   </Box>
 
-                  <Box opacity={!have_transfers ? 0.3 : 1} pr={8} >
+                  <Box opacity={!have_transfers ? 0.3 : 1} pr={8}>
                     <Icon as={BsBinoculars} w={10} h={8} />
                     <Text>Transfers</Text>
                   </Box>
                 </Flex>
                 <Text pt={5}>Duration: {duration}</Text>
                 <Flex>
-                  <Text color={"green"} pt={5} fontSize={30} fontWeight={"bold"}>Rs. {cost}</Text>
-                  <Text pl={4} fontSize={20} pt={8} as={'s'}>Rs. {actual_cost}</Text>
-
+                  <Text
+                    color={'green'}
+                    pt={5}
+                    fontSize={30}
+                    fontWeight={'bold'}
+                  >
+                    Rs. {cost}
+                  </Text>
+                  <Text pl={4} fontSize={20} pt={8} as={'s'}>
+                    Rs. {actual_cost}
+                  </Text>
                 </Flex>
               </Flex>
               {/* <Box>

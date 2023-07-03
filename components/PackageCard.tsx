@@ -91,11 +91,14 @@ const PackageCard: React.FC<PackageProps> = ({ data, activities_data }) => {
         pt={'3'}
       >
         <List>
-          {description.split("\n").map((value, index) => {
+          {description.split('\n').map((value, index) => {
             return (
               <ListItem paddingBottom={3} display={'flex'} key={index}>
-                <ListIcon as={MdCheckCircle} color='green.500' />
-                <Text fontWeight={"medium"} marginTop={-1} >  {value}</Text>
+                <ListIcon as={MdCheckCircle} color="green.500" />
+                <Text fontWeight={'medium'} marginTop={-1}>
+                  {' '}
+                  {value}
+                </Text>
               </ListItem>
             )
           })}
@@ -115,17 +118,15 @@ const PackageCard: React.FC<PackageProps> = ({ data, activities_data }) => {
           pt={3}
         >
           {activities_data.map(tag => {
-
             if (tag.packageID === id) {
               return (
                 <Box w="100%" key={tag.id}>
-                  <Text >
+                  <Text>
                     <Icon as={FiMap} mr={2} />
 
                     {tag.name}
                   </Text>
                 </Box>
-
               )
             }
           })}
@@ -176,6 +177,8 @@ const PackageCard: React.FC<PackageProps> = ({ data, activities_data }) => {
                 bg="#8FB339"
                 px={4}
                 py={2}
+                mx={8}
+                width={{ sm: 95 }}
                 _hover={{ bg: '#125C13' }}
                 onClick={bookNow}
               >

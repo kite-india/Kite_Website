@@ -16,7 +16,6 @@ import {
   Image,
   Icon
 } from '@chakra-ui/react'
-import axios from 'axios'
 import { Section } from '@components/index'
 import Layout from '@components/layouts/main'
 import type { GetServerSidePropsContext, NextPage } from 'next'
@@ -41,10 +40,10 @@ import BookedModel from '@components/BookedModel'
 import 'react-toastify/dist/ReactToastify.css'
 import { activitiesByPackageID, getPackage } from 'src/graphql/queries'
 
-import { TbPlane } from "react-icons/tb";
-import { MdLocalDining } from "react-icons/md";
-import { BsBinoculars } from "react-icons/bs";
-import { MdFastfood } from "react-icons/md";
+import { TbPlane } from 'react-icons/tb'
+import { MdLocalDining } from 'react-icons/md'
+import { BsBinoculars } from 'react-icons/bs'
+import { MdFastfood } from 'react-icons/md'
 
 const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
   const router = useRouter()
@@ -76,8 +75,6 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
   }
 
   const addToCartHandler = (activityId: string, action: string) => {
-
-
     if (action == 'add') {
       setActivity(prevState => [...prevState, activityId])
     } else if (action == 'remove') {
@@ -90,11 +87,24 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
         console.log(activity)
       }
     }
-
-
   }
 
-  const { id, image, location, cost, description, name, duration, actual_cost, cities, have_flight, have_meals, have_hotels, have_sightseeing, have_transfers } = packages_data
+  const {
+    id,
+    image,
+    location,
+    cost,
+    description,
+    name,
+    duration,
+    actual_cost,
+    cities,
+    have_flight,
+    have_meals,
+    have_hotels,
+    have_sightseeing,
+    have_transfers
+  } = packages_data
 
   const handleExtraPassengers = (
     num: number,
@@ -136,7 +146,7 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
             mainPassenger: mainPassenger,
             passengers: Object.values(extraPassengers),
             packageName: name,
-            total_cost: cost,
+            total_cost: cost
           }
         },
         authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS
@@ -151,8 +161,9 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
     }
   }
 
-  const addPassenger = () => {
-    if (passengers === 1) {
+  const addPassenger = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    if (passengers === 1 && !isOpen) {
       onToggle()
       setPassengers(passengers + 1)
     }
@@ -161,7 +172,8 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
     }
   }
 
-  const deletePassenger = () => {
+  const deletePassenger = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
     if (passengers >= 2) {
       setPassengers(passengers - 1)
     }
@@ -193,77 +205,59 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
                 }}
                 mb={{ base: 6, lg: 0 }}
               />
-              {/* <Box textAlign="center" w="100%">
-                <Heading fontSize="48px" fontWeight="semibold" mb={2}>
-                  {location}
-                </Heading>
-                <Flex
-                  direction="column-reverse"
-                  gap={6}
-                  fontSize="20px"
-                  fontFamily="'Poppins'"
-                  justifyContent="center"
-                >
-                  <Text>
-                    {description}
-                    {/* {days} Days / {nights} Nights */}
-              {/* </Text>
-                  {/* <Text>{location}</Text> */}
-              {/* <Text>
-                    Rs {cost}/
-                    <Text as="span" fontSize="12px">
-                      per person
-                    </Text>
-                  </Text>
-                </Flex> */}
-              {/* </Box> */}
 
-              <Flex flexDirection={"column"} paddingLeft={34}>
+              <Flex flexDirection={'column'} paddingLeft={34}>
                 <Flex>
-                  <Text fontSize={40} fontWeight={'bold'}>  {name}</Text>
+                  <Text fontSize={40} fontWeight={'bold'}>
+                    {' '}
+                    {name}
+                  </Text>
                 </Flex>
-                <Flex pt={5} textAlign={"center"}>
-                  <Box opacity={!have_flight ? 0.3 : 1}  pr={8}>
+                <Flex pt={5} textAlign={'center'}>
+                  <Box opacity={!have_flight ? 0.3 : 1} pr={8}>
                     <Icon as={TbPlane} w={8} h={8} />
                     <Text>Flight</Text>
                   </Box>
 
-                  <Box opacity={!have_hotels ? 0.3 : 1}  pr={8}>
+                  <Box opacity={!have_hotels ? 0.3 : 1} pr={8}>
                     <Icon as={MdLocalDining} w={8} h={8} />
-                    <Text >Hotels</Text>
+                    <Text>Hotels</Text>
                   </Box>
-                  <Box opacity={!have_sightseeing ? 0.3 : 1}  pr={8} >
+                  <Box opacity={!have_sightseeing ? 0.3 : 1} pr={8}>
                     <Icon as={BsBinoculars} w={10} h={8} />
                     <Text>Sightseeing</Text>
                   </Box>
 
-                  <Box opacity={!have_meals ? 0.3 : 1}  pr={8} >
+                  <Box opacity={!have_meals ? 0.3 : 1} pr={8}>
                     <Icon as={MdFastfood} w={10} h={8} />
                     <Text>Meals</Text>
                   </Box>
 
-                  <Box opacity={!have_transfers ? 0.3 : 1}  pr={8} >
+                  <Box opacity={!have_transfers ? 0.3 : 1} pr={8}>
                     <Icon as={BsBinoculars} w={10} h={8} />
                     <Text>Transfers</Text>
                   </Box>
                 </Flex>
                 <Text pt={5}>Duration: {duration}</Text>
                 <Flex pt={3}>
-                  <Text fontWeight={"bold"} pr={3}>
+                  <Text fontWeight={'bold'} pr={3}>
                     Cities:
-
                   </Text>
-                  <Text>
-                    {cities}
-                  </Text>
+                  <Text>{cities}</Text>
                 </Flex>
                 <Flex>
-                  <Text color={"green"} pt={5} fontSize={30} fontWeight={"bold"}>Rs. {cost}</Text>
-                  <Text pl={4} fontSize={20} pt={8} as={'s'}>Rs. {actual_cost}</Text>
-
+                  <Text
+                    color={'green'}
+                    pt={5}
+                    fontSize={30}
+                    fontWeight={'bold'}
+                  >
+                    Rs. {cost}
+                  </Text>
+                  <Text pl={4} fontSize={20} pt={8} as={'s'}>
+                    Rs. {actual_cost}
+                  </Text>
                 </Flex>
-
-
               </Flex>
             </Flex>
             <Box mt={20}>
@@ -348,8 +342,11 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
                       onChange={handleChange}
                     />
                   </Flex>
-                  <Flex gap={{ base: 2, md: 6 }}>
-                    <Text>Start Date</Text>
+                  <Flex
+                    gap={{ base: 2, md: 6 }}
+                    flexDir={{ sm: 'column', lg: 'row' }}
+                  >
+                    <Text fontWeight={'bold'}>Start Date</Text>
                     <Input
                       type="date"
                       name="starts"
@@ -357,7 +354,7 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
                       required
                       onChange={handleChange}
                     />
-                    <Text>End Date</Text>
+                    <Text fontWeight={'bold'}>End Date</Text>
                     <Input
                       type="date"
                       name="ends"
@@ -375,12 +372,12 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
                         _hover={{
                           bg: '#3E7C17'
                         }}
-                        onClick={() => addPassenger()}
+                        onClick={e => addPassenger(e)}
                       >
                         +
                       </Button>
                       <Text marginX={4} marginY={2} fontWeight={'bold'}>
-                        {passengers} Persons
+                        {passengers} {passengers === 1 ? 'Person' : 'Persons'}
                       </Text>
                       <Button
                         disabled={passengers === 1}
@@ -391,7 +388,7 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
                         _hover={{
                           bg: '#3E7C17'
                         }}
-                        onClick={() => deletePassenger()}
+                        onClick={e => deletePassenger(e)}
                       >
                         -
                       </Button>
@@ -406,7 +403,7 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
                   }}
                 />
                 <Collapse in={isOpen} animateOpacity>
-                  {[...Array(passengers - 1)].map((x, i) => (
+                  {[...Array(passengers - 1)].map((_x, i) => (
                     <ExtraPassenger
                       handleExtraPassengers={handleExtraPassengers}
                       key={i}

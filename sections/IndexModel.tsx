@@ -1,5 +1,3 @@
-
-
 import React from 'react'
 import { Formik, Form, Field } from 'formik'
 import {
@@ -24,6 +22,7 @@ import { GraphQLQuery } from '@aws-amplify/api'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { CreateEnquiryInput } from 'src/API'
+import { relative } from 'path'
 
 const IndexModal: React.FC = () => {
   function validateDestinationName(value) {
@@ -97,9 +96,10 @@ const IndexModal: React.FC = () => {
     <Box
       bg={useColorModeValue('gray.50', 'gray.800')}
       position={'relative'}
+      bottom={8}
       py={{ base: '3', lg: '6' }}
       px="4"
-      margin={[30]}
+      mx={12}
     >
       <ToastContainer></ToastContainer>
       <Box textAlign="center" gap={{ base: 2, lg: 4 }} pt={4}>
@@ -115,13 +115,13 @@ const IndexModal: React.FC = () => {
           <Heading
             color={'color5'}
             fontFamily={'Poppins'}
-            fontSize={{ base: 'xl', sm: '3xl' }}
+            fontSize={{ base: 'xl', sm: '3xl', md: 'sm' }}
           >
             Join our next destination
           </Heading>
         </Section>
       </Box>
-      <Flex minH={'50vh'} align={'center'} justify={'center'}>
+      <Flex minH={'30vh'} align={'center'} justify={'center'}>
         <Stack
           spacing={4}
           w={'full'}
@@ -130,14 +130,13 @@ const IndexModal: React.FC = () => {
           rounded={'xl'}
           boxShadow={'lg'}
           p={6}
-          my={8}
         >
           <Heading
             fontFamily="'Changa One'"
             lineHeight={1.1}
             color="#434343"
             fontWeight={'semibold'}
-            fontSize={{ base: 'xl', sm: '2xl' }}
+            fontSize={{ base: 'xl', sm: '2xl', md: 'sm' }}
             as="h2"
           >
             Enquiry Form
@@ -160,9 +159,11 @@ const IndexModal: React.FC = () => {
                 mutation MyMutation {
                   createEnquiry(input: {number_of_people: ${Number(
                     values.numberOfPeople
-                  )}, name: "${values.name}", phone_number: "${values.phone
-                    }" vacation_type: "${values.shootingCategory}", email: "${values.email
-                    }", destination_name: "${values.destinationName}"}) {
+                  )}, name: "${values.name}", phone_number: "${
+                    values.phone
+                  }" vacation_type: "${values.shootingCategory}", email: "${
+                    values.email
+                  }", destination_name: "${values.destinationName}"}) {
                     email
                     id
                     name
@@ -182,7 +183,7 @@ const IndexModal: React.FC = () => {
           >
             {props => (
               <Form>
-                <Stack spacing={4} fontFamily="'Roboto'" fontSize="16px">
+                <Stack fontFamily="'Roboto'" fontSize="10px">
                   <Field
                     name="destinationName"
                     validate={validateDestinationName}
@@ -305,6 +306,7 @@ const IndexModal: React.FC = () => {
                     as={motion.button}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
+                    mt={2}
                   >
                     Submit
                   </Button>

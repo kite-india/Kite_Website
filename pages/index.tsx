@@ -19,29 +19,40 @@ const Page: NextPage<HomePageProps> = ({
   featured_data = null,
   activities_data = null
 }) => {
-
-  const [mode, setMode] = useState(false);
+  const [mode, setMode] = useState(false)
 
   useEffect(() => {
     setTimeout(() => {
-      setMode(true);
+      setMode(true)
     }, 4000)
   }, [])
 
-
   return (
     <Layout title="Home">
-      {mode &&
-        <Flex justifyContent={"center"}>
-
-          <Box backgroundColor={"rgba(0, 0, 0, 0.4)"} zIndex={99} position={"fixed"} height={"100vh"} width={"100%"}></Box>
-          <Box position={"fixed"} zIndex={100} textAlign="center">
-            <CloseButton position={"relative"} zIndex={200} left={[320,460]} top={{'lg':75,"sm":3}} size='lg' onClick={(e) => {
-              setMode(false)
-            }} />
+      {mode && (
+        <Flex justifyContent={'center'}>
+          <Box
+            backgroundColor={'rgba(0, 0, 0, 0.4)'}
+            zIndex={99}
+            position={'fixed'}
+            height={'100vh'}
+            width={'100%'}
+          ></Box>
+          <Box position={'fixed'} zIndex={100} textAlign="center">
+            <CloseButton
+              position={'relative'}
+              zIndex={200}
+              left={[320, 460]}
+              top={{ lg: 75, sm: 3 }}
+              size="lg"
+              onClick={e => {
+                setMode(false)
+              }}
+            />
             <IndexModal />
           </Box>
-        </Flex>}
+        </Flex>
+      )}
       <HeroSection />
       {featured_data && <FeaturedSection data={featured_data} />}
       {activities_data && <DiscoverTheWorld data={activities_data} />}
@@ -51,7 +62,6 @@ const Page: NextPage<HomePageProps> = ({
 }
 
 export async function getStaticProps() {
-
   const premiumPackages = await API.graphql<GraphQLQuery<ListPackagesQuery>>({
     query: listPackages,
     variables: { filter: { is_premium_flag: { eq: true } } }
@@ -64,7 +74,7 @@ export async function getStaticProps() {
   const featured_data = premiumPackages.data.listPackages.items
   const activities_data = activities.data.listActivities.items
 
-  return { props: { featured_data, activities_data},revalidate: 10  }
+  return { props: { featured_data, activities_data }, revalidate: 10 }
 }
 
 export default Page

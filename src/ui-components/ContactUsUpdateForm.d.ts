@@ -7,45 +7,41 @@
 import * as React from "react";
 import { GridProps, TextFieldProps } from "@aws-amplify/ui-react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
+import { ContactUs } from "../models";
 export declare type ValidationResponse = {
     hasError: boolean;
     errorMessage?: string;
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
-export declare type EnquiryCreateFormInputValues = {
-    destination_name?: string;
+export declare type ContactUsUpdateFormInputValues = {
     name?: string;
     email?: string;
-    number_of_people?: number;
-    vacation_type?: string;
     phone_number?: string;
+    description?: string;
 };
-export declare type EnquiryCreateFormValidationValues = {
-    destination_name?: ValidationFunction<string>;
+export declare type ContactUsUpdateFormValidationValues = {
     name?: ValidationFunction<string>;
     email?: ValidationFunction<string>;
-    number_of_people?: ValidationFunction<number>;
-    vacation_type?: ValidationFunction<string>;
     phone_number?: ValidationFunction<string>;
+    description?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type EnquiryCreateFormOverridesProps = {
-    EnquiryCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
-    destination_name?: PrimitiveOverrideProps<TextFieldProps>;
+export declare type ContactUsUpdateFormOverridesProps = {
+    ContactUsUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
     name?: PrimitiveOverrideProps<TextFieldProps>;
     email?: PrimitiveOverrideProps<TextFieldProps>;
-    number_of_people?: PrimitiveOverrideProps<TextFieldProps>;
-    vacation_type?: PrimitiveOverrideProps<TextFieldProps>;
     phone_number?: PrimitiveOverrideProps<TextFieldProps>;
+    description?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
-export declare type EnquiryCreateFormProps = React.PropsWithChildren<{
-    overrides?: EnquiryCreateFormOverridesProps | undefined | null;
+export declare type ContactUsUpdateFormProps = React.PropsWithChildren<{
+    overrides?: ContactUsUpdateFormOverridesProps | undefined | null;
 } & {
-    clearOnSuccess?: boolean;
-    onSubmit?: (fields: EnquiryCreateFormInputValues) => EnquiryCreateFormInputValues;
-    onSuccess?: (fields: EnquiryCreateFormInputValues) => void;
-    onError?: (fields: EnquiryCreateFormInputValues, errorMessage: string) => void;
-    onChange?: (fields: EnquiryCreateFormInputValues) => EnquiryCreateFormInputValues;
-    onValidate?: EnquiryCreateFormValidationValues;
+    id?: string;
+    contactUs?: ContactUs;
+    onSubmit?: (fields: ContactUsUpdateFormInputValues) => ContactUsUpdateFormInputValues;
+    onSuccess?: (fields: ContactUsUpdateFormInputValues) => void;
+    onError?: (fields: ContactUsUpdateFormInputValues, errorMessage: string) => void;
+    onChange?: (fields: ContactUsUpdateFormInputValues) => ContactUsUpdateFormInputValues;
+    onValidate?: ContactUsUpdateFormValidationValues;
 } & React.CSSProperties>;
-export default function EnquiryCreateForm(props: EnquiryCreateFormProps): React.ReactElement;
+export default function ContactUsUpdateForm(props: ContactUsUpdateFormProps): React.ReactElement;

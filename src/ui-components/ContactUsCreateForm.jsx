@@ -8,13 +8,12 @@
 import * as React from "react";
 import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Enquiry } from "../models";
+import { ContactUs } from "../models";
 import { fetchByPath, validateField } from "./utils";
 import { DataStore } from "aws-amplify";
-export default function EnquiryUpdateForm(props) {
+export default function ContactUsCreateForm(props) {
   const {
-    id: idProp,
-    enquiry: enquiryModelProp,
+    clearOnSuccess = true,
     onSuccess,
     onError,
     onSubmit,
@@ -24,58 +23,32 @@ export default function EnquiryUpdateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    destination_name: "",
     name: "",
     email: "",
-    number_of_people: "",
-    vacation_type: "",
     phone_number: "",
+    description: "",
   };
-  const [destination_name, setDestination_name] = React.useState(
-    initialValues.destination_name
-  );
   const [name, setName] = React.useState(initialValues.name);
   const [email, setEmail] = React.useState(initialValues.email);
-  const [number_of_people, setNumber_of_people] = React.useState(
-    initialValues.number_of_people
-  );
-  const [vacation_type, setVacation_type] = React.useState(
-    initialValues.vacation_type
-  );
   const [phone_number, setPhone_number] = React.useState(
     initialValues.phone_number
   );
+  const [description, setDescription] = React.useState(
+    initialValues.description
+  );
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    const cleanValues = enquiryRecord
-      ? { ...initialValues, ...enquiryRecord }
-      : initialValues;
-    setDestination_name(cleanValues.destination_name);
-    setName(cleanValues.name);
-    setEmail(cleanValues.email);
-    setNumber_of_people(cleanValues.number_of_people);
-    setVacation_type(cleanValues.vacation_type);
-    setPhone_number(cleanValues.phone_number);
+    setName(initialValues.name);
+    setEmail(initialValues.email);
+    setPhone_number(initialValues.phone_number);
+    setDescription(initialValues.description);
     setErrors({});
   };
-  const [enquiryRecord, setEnquiryRecord] = React.useState(enquiryModelProp);
-  React.useEffect(() => {
-    const queryData = async () => {
-      const record = idProp
-        ? await DataStore.query(Enquiry, idProp)
-        : enquiryModelProp;
-      setEnquiryRecord(record);
-    };
-    queryData();
-  }, [idProp, enquiryModelProp]);
-  React.useEffect(resetStateValues, [enquiryRecord]);
   const validations = {
-    destination_name: [],
-    name: [],
+    name: [{ type: "Required" }],
     email: [],
-    number_of_people: [],
-    vacation_type: [],
-    phone_number: [],
+    phone_number: [{ type: "Required" }],
+    description: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -103,12 +76,10 @@ export default function EnquiryUpdateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          destination_name,
           name,
           email,
-          number_of_people,
-          vacation_type,
           phone_number,
+          description,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -138,13 +109,12 @@ export default function EnquiryUpdateForm(props) {
               modelFields[key] = undefined;
             }
           });
-          await DataStore.save(
-            Enquiry.copyOf(enquiryRecord, (updated) => {
-              Object.assign(updated, modelFields);
-            })
-          );
+          await DataStore.save(new ContactUs(modelFields));
           if (onSuccess) {
             onSuccess(modelFields);
+          }
+          if (clearOnSuccess) {
+            resetStateValues();
           }
         } catch (err) {
           if (onError) {
@@ -152,53 +122,22 @@ export default function EnquiryUpdateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "EnquiryUpdateForm")}
+      {...getOverrideProps(overrides, "ContactUsCreateForm")}
       {...rest}
     >
       <TextField
-        label="Destination name"
-        isRequired={false}
-        isReadOnly={false}
-        value={destination_name}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              destination_name: value,
-              name,
-              email,
-              number_of_people,
-              vacation_type,
-              phone_number,
-            };
-            const result = onChange(modelFields);
-            value = result?.destination_name ?? value;
-          }
-          if (errors.destination_name?.hasError) {
-            runValidationTasks("destination_name", value);
-          }
-          setDestination_name(value);
-        }}
-        onBlur={() => runValidationTasks("destination_name", destination_name)}
-        errorMessage={errors.destination_name?.errorMessage}
-        hasError={errors.destination_name?.hasError}
-        {...getOverrideProps(overrides, "destination_name")}
-      ></TextField>
-      <TextField
         label="Name"
-        isRequired={false}
+        isRequired={true}
         isReadOnly={false}
         value={name}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              destination_name,
               name: value,
               email,
-              number_of_people,
-              vacation_type,
               phone_number,
+              description,
             };
             const result = onChange(modelFields);
             value = result?.name ?? value;
@@ -222,12 +161,10 @@ export default function EnquiryUpdateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              destination_name,
               name,
               email: value,
-              number_of_people,
-              vacation_type,
               phone_number,
+              description,
             };
             const result = onChange(modelFields);
             value = result?.email ?? value;
@@ -243,82 +180,18 @@ export default function EnquiryUpdateForm(props) {
         {...getOverrideProps(overrides, "email")}
       ></TextField>
       <TextField
-        label="Number of people"
-        isRequired={false}
-        isReadOnly={false}
-        type="number"
-        step="any"
-        value={number_of_people}
-        onChange={(e) => {
-          let value = isNaN(parseInt(e.target.value))
-            ? e.target.value
-            : parseInt(e.target.value);
-          if (onChange) {
-            const modelFields = {
-              destination_name,
-              name,
-              email,
-              number_of_people: value,
-              vacation_type,
-              phone_number,
-            };
-            const result = onChange(modelFields);
-            value = result?.number_of_people ?? value;
-          }
-          if (errors.number_of_people?.hasError) {
-            runValidationTasks("number_of_people", value);
-          }
-          setNumber_of_people(value);
-        }}
-        onBlur={() => runValidationTasks("number_of_people", number_of_people)}
-        errorMessage={errors.number_of_people?.errorMessage}
-        hasError={errors.number_of_people?.hasError}
-        {...getOverrideProps(overrides, "number_of_people")}
-      ></TextField>
-      <TextField
-        label="Vacation type"
-        isRequired={false}
-        isReadOnly={false}
-        value={vacation_type}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              destination_name,
-              name,
-              email,
-              number_of_people,
-              vacation_type: value,
-              phone_number,
-            };
-            const result = onChange(modelFields);
-            value = result?.vacation_type ?? value;
-          }
-          if (errors.vacation_type?.hasError) {
-            runValidationTasks("vacation_type", value);
-          }
-          setVacation_type(value);
-        }}
-        onBlur={() => runValidationTasks("vacation_type", vacation_type)}
-        errorMessage={errors.vacation_type?.errorMessage}
-        hasError={errors.vacation_type?.hasError}
-        {...getOverrideProps(overrides, "vacation_type")}
-      ></TextField>
-      <TextField
         label="Phone number"
-        isRequired={false}
+        isRequired={true}
         isReadOnly={false}
         value={phone_number}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              destination_name,
               name,
               email,
-              number_of_people,
-              vacation_type,
               phone_number: value,
+              description,
             };
             const result = onChange(modelFields);
             value = result?.phone_number ?? value;
@@ -333,19 +206,45 @@ export default function EnquiryUpdateForm(props) {
         hasError={errors.phone_number?.hasError}
         {...getOverrideProps(overrides, "phone_number")}
       ></TextField>
+      <TextField
+        label="Description"
+        isRequired={false}
+        isReadOnly={false}
+        value={description}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name,
+              email,
+              phone_number,
+              description: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.description ?? value;
+          }
+          if (errors.description?.hasError) {
+            runValidationTasks("description", value);
+          }
+          setDescription(value);
+        }}
+        onBlur={() => runValidationTasks("description", description)}
+        errorMessage={errors.description?.errorMessage}
+        hasError={errors.description?.hasError}
+        {...getOverrideProps(overrides, "description")}
+      ></TextField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}
       >
         <Button
-          children="Reset"
+          children="Clear"
           type="reset"
           onClick={(event) => {
             event.preventDefault();
             resetStateValues();
           }}
-          isDisabled={!(idProp || enquiryModelProp)}
-          {...getOverrideProps(overrides, "ResetButton")}
+          {...getOverrideProps(overrides, "ClearButton")}
         ></Button>
         <Flex
           gap="15px"
@@ -355,10 +254,7 @@ export default function EnquiryUpdateForm(props) {
             children="Submit"
             type="submit"
             variation="primary"
-            isDisabled={
-              !(idProp || enquiryModelProp) ||
-              Object.values(errors).some((e) => e?.hasError)
-            }
+            isDisabled={Object.values(errors).some((e) => e?.hasError)}
             {...getOverrideProps(overrides, "SubmitButton")}
           ></Button>
         </Flex>
