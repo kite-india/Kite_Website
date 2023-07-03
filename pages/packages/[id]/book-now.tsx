@@ -13,7 +13,8 @@ import {
   InputRightElement,
   Collapse,
   useDisclosure,
-  Image
+  Image,
+  Icon
 } from '@chakra-ui/react'
 import axios from 'axios'
 import { Section } from '@components/index'
@@ -39,6 +40,11 @@ import { toast } from 'react-toastify'
 import BookedModel from '@components/BookedModel'
 import 'react-toastify/dist/ReactToastify.css'
 import { activitiesByPackageID, getPackage } from 'src/graphql/queries'
+
+import { TbPlane } from "react-icons/tb";
+import { MdLocalDining } from "react-icons/md";
+import { BsBinoculars } from "react-icons/bs";
+import { MdFastfood } from "react-icons/md";
 
 const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
   const router = useRouter()
@@ -88,8 +94,8 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
 
   }
 
-  const { id, image, location, cost, description, name, duration } = packages_data
-  // const [days, nights] = duration.split('/')
+  const { id, image, location, cost, description, name, duration, actual_cost, cities, have_flight, have_meals, have_hotels, have_sightseeing, have_transfers } = packages_data
+
   const handleExtraPassengers = (
     num: number,
     passenger: ExtraPassengersType
@@ -110,7 +116,7 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
 
   const handleSubmit = async () => {
     console.log(mainPassenger)
-    
+
     try {
       let totalPassengers = Object.keys(extraPassengers)
       let cost = totalCost
@@ -187,7 +193,7 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
                 }}
                 mb={{ base: 6, lg: 0 }}
               />
-              <Box textAlign="center" w="100%">
+              {/* <Box textAlign="center" w="100%">
                 <Heading fontSize="48px" fontWeight="semibold" mb={2}>
                   {location}
                 </Heading>
@@ -201,16 +207,64 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
                   <Text>
                     {description}
                     {/* {days} Days / {nights} Nights */}
-                  </Text>
+              {/* </Text>
                   {/* <Text>{location}</Text> */}
-                  <Text>
+              {/* <Text>
                     Rs {cost}/
                     <Text as="span" fontSize="12px">
                       per person
                     </Text>
                   </Text>
+                </Flex> */}
+              {/* </Box> */}
+
+              <Flex flexDirection={"column"} paddingLeft={34}>
+                <Flex>
+                  <Text fontSize={40} fontWeight={'bold'}>  {name}</Text>
                 </Flex>
-              </Box>
+                <Flex pt={5} textAlign={"center"}>
+                  <Box opacity={!have_flight ? 0.3 : 1}  pr={8}>
+                    <Icon as={TbPlane} w={8} h={8} />
+                    <Text>Flight</Text>
+                  </Box>
+
+                  <Box opacity={!have_hotels ? 0.3 : 1}  pr={8}>
+                    <Icon as={MdLocalDining} w={8} h={8} />
+                    <Text >Hotels</Text>
+                  </Box>
+                  <Box opacity={!have_sightseeing ? 0.3 : 1}  pr={8} >
+                    <Icon as={BsBinoculars} w={10} h={8} />
+                    <Text>Sightseeing</Text>
+                  </Box>
+
+                  <Box opacity={!have_meals ? 0.3 : 1}  pr={8} >
+                    <Icon as={MdFastfood} w={10} h={8} />
+                    <Text>Meals</Text>
+                  </Box>
+
+                  <Box opacity={!have_transfers ? 0.3 : 1}  pr={8} >
+                    <Icon as={BsBinoculars} w={10} h={8} />
+                    <Text>Transfers</Text>
+                  </Box>
+                </Flex>
+                <Text pt={5}>Duration: {duration}</Text>
+                <Flex pt={3}>
+                  <Text fontWeight={"bold"} pr={3}>
+                    Cities:
+
+                  </Text>
+                  <Text>
+                    {cities}
+                  </Text>
+                </Flex>
+                <Flex>
+                  <Text color={"green"} pt={5} fontSize={30} fontWeight={"bold"}>Rs. {cost}</Text>
+                  <Text pl={4} fontSize={20} pt={8} as={'s'}>Rs. {actual_cost}</Text>
+
+                </Flex>
+
+
+              </Flex>
             </Flex>
             <Box mt={20}>
               <Section delay={0.4}>

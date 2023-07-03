@@ -35,7 +35,7 @@ interface FeaturedDataProps {
 import { MdFastfood } from "react-icons/md";
 
 const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
-  const { name, description, image, id, video_link, duration, cost, actual_cost, cities } = data
+  const { name, description, image, id, video_link, duration, cost, actual_cost, cities, have_flight, have_hotels, have_meals, have_sightseeing, have_transfers } = data
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const WatchNow = () => (
@@ -112,26 +112,26 @@ const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
 
                 </Flex>
                 <Flex pt={5} textAlign={"center"}>
-                  <Box pr={8}>
+                  <Box opacity={!have_flight ? 0.3 : 1} pr={8}>
                     <Icon as={TbPlane} w={8} h={8} />
                     <Text>Flight</Text>
                   </Box>
 
-                  <Box pr={8}>
+                  <Box opacity={!have_hotels ? 0.3 : 1} pr={8}>
                     <Icon as={MdLocalDining} w={8} h={8} />
-                    <Text>Hotels</Text>
+                    <Text >Hotels</Text>
                   </Box>
-                  <Box pr={8} >
+                  <Box opacity={!have_sightseeing ? 0.3 : 1} pr={8} >
                     <Icon as={BsBinoculars} w={10} h={8} />
                     <Text>Sightseeing</Text>
                   </Box>
 
-                  <Box pr={8} >
+                  <Box opacity={!have_meals ? 0.3 : 1} pr={8} >
                     <Icon as={MdFastfood} w={10} h={8} />
                     <Text>Meals</Text>
                   </Box>
 
-                  <Box pr={8} >
+                  <Box opacity={!have_transfers ? 0.3 : 1} pr={8} >
                     <Icon as={BsBinoculars} w={10} h={8} />
                     <Text>Transfers</Text>
                   </Box>

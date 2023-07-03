@@ -52,10 +52,11 @@ interface PackagesPageProps {
 }
 
 const Page: NextPage<PackagesPageProps> = () => {
+
   const router = useRouter()
 
 
-  const [packages_data, setPackage] = useState<Trip>(null);
+  const [packages_data, setPackage] = useState<any>(null);
   const [activities, setActivity] = useState<Activity[]>(null);
   const [gallery_data, setGallery] = useState<Gallery[]>(null);
 
@@ -180,26 +181,26 @@ const Page: NextPage<PackagesPageProps> = () => {
 
                     </Flex>
                     <Flex pt={5} textAlign={"center"} >
-                      <Box pr={8}>
+                      <Box opacity={!packages_data.have_flight?0.3:1} pr={8}>
                         <Icon as={TbPlane} w={8} h={8} />
                         <Text fontSize={18}>Flight</Text>
                       </Box>
 
-                      <Box pr={8}>
+                      <Box opacity={!packages_data.have_hotels?0.3:1}  pr={8}>
                         <Icon as={MdLocalDining} w={8} h={8} />
                         <Text fontSize={18}>Hotels</Text>
                       </Box>
-                      <Box pr={8} >
+                      <Box opacity={!packages_data.have_sightseeing?0.3:1}  pr={8} >
                         <Icon as={BsBinoculars} w={10} h={8} />
                         <Text fontSize={18}>SiteSeeing</Text>
                       </Box>
 
-                      <Box pr={8} >
+                      <Box opacity={!packages_data.have_meals?0.3:1}  pr={8} >
                         <Icon as={MdFastfood} w={10} h={8} />
                         <Text fontSize={18}>Meals</Text>
                       </Box>
 
-                      <Box pr={8} >
+                      <Box opacity={!packages_data.have_transfers?0.3:1}  pr={8} >
                         <Icon as={BsBinoculars} w={10} h={8} />
                         <Text fontSize={18}>Transfers</Text>
                       </Box>

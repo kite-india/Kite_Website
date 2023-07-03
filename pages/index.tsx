@@ -3,7 +3,7 @@ import {
   HeroSection,
   FeaturedSection,
   DiscoverTheWorld,
-  NextDestinationForm
+  IndexModal
 } from '@sections/index'
 import Layout from '@components/layouts/main'
 import type { NextPage } from 'next'
@@ -13,7 +13,7 @@ import { GraphQLQuery } from '@aws-amplify/api'
 import { ListActivitiesQuery, ListPackagesQuery } from 'src/API'
 import { listPackages, listActivities } from 'src/graphql/queries'
 import { CloseButton } from '@chakra-ui/react'
-import { Box, Flex, Modal, ModalBody, ModalCloseButton, ModalContent, ModalOverlay, StylesProvider, useDisclosure } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
 
 const Page: NextPage<HomePageProps> = ({
   featured_data = null,
@@ -35,19 +35,17 @@ const Page: NextPage<HomePageProps> = ({
         <Flex justifyContent={"center"}>
 
           <Box backgroundColor={"rgba(0, 0, 0, 0.4)"} zIndex={99} position={"fixed"} height={"100vh"} width={"100%"}></Box>
-
           <Box position={"fixed"} zIndex={100} textAlign="center">
-            <CloseButton position={"relative"} zIndex={200} left={430} top={10} size='lg' onClick={(e) => {
+            <CloseButton position={"relative"} zIndex={200} left={[320,460]} top={{'lg':75,"sm":3}} size='lg' onClick={(e) => {
               setMode(false)
             }} />
-            <NextDestinationForm />
+            <IndexModal />
           </Box>
-
         </Flex>}
       <HeroSection />
       {featured_data && <FeaturedSection data={featured_data} />}
       {activities_data && <DiscoverTheWorld data={activities_data} />}
-      <NextDestinationForm />
+      <IndexModal />
     </Layout>
   )
 }
