@@ -39,6 +39,7 @@ const WebsiteLinks = () => {
     </Flex>
   )
 }
+
 const TeamLinks = () => {
   return (
     <Flex
@@ -55,7 +56,7 @@ const TeamLinks = () => {
         <Link href="#">Our Policy</Link>
       </Tooltip>
       <Tooltip label="Coming soon!" cursor="pointer">
-        <Link href="#">Our Vison</Link>
+        <Link href="#">Our Vision</Link>
       </Tooltip>
     </Flex>
   )
@@ -66,7 +67,7 @@ const Footer: React.FC = () => {
     <Box w="100%" py={6} bgColor="#F9F9F9" bottom={0}>
       <Flex
         w="100%"
-        direction={{ base: 'column', md: 'row' }}
+        flexDir={{ base: 'column', md: 'row' }}
         gap={{ base: 12, md: 6 }}
         align="center"
         justify="space-evenly"

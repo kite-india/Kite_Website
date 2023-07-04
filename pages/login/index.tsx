@@ -22,7 +22,6 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 const Login: NextPage = () => {
-
   const router = useRouter()
   const [confirmation, setConfirmation] = useState(false)
   const [loginParams, setLoginParams] = useState({
@@ -91,13 +90,12 @@ const Login: NextPage = () => {
           break
         }
         case 'UsernameExistsException': {
-          toast.error("Email Already exist");
-          break;
+          toast.error('Email Already exist')
+          break
         }
 
         default:
           toast.error(e.message)
-
       }
     }
   }
@@ -105,13 +103,13 @@ const Login: NextPage = () => {
   return (
     <Layout title="Login">
       <Container
-        maxW={{ base: 'container.sm', lg: 'container.md' }}
         my={12}
-        w="100%"
+        mt={20}
         borderWidth={3}
         borderRadius={16}
         backgroundColor="#f3f3f3"
         boxShadow="lg"
+        mx={{ md: 'auto', sm: '2' }}
       >
         <Section delay={0.2}>
           {!confirmation && (
@@ -123,7 +121,7 @@ const Login: NextPage = () => {
                   fontWeight="600"
                   fontSize="48px"
                   mt={4}
-                  letterSpacing="10px"
+                  letterSpacing="11px"
                 >
                   LOG IN
                 </Heading>

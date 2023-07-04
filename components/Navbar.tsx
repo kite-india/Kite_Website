@@ -66,7 +66,7 @@ const BookBtn = () => (
     }}
     fontWeight="normal"
     display={{ base: 'none', md: 'flex' }}
-    onClick={() => { }}
+    onClick={() => {}}
     variant="outline"
   >
     Book now
@@ -373,7 +373,7 @@ const Navbar: React.FC<NavProps> = () => {
               _active={{ color: 'color5' }}
               fontWeight="normal"
             >
-              <Flex direction="row" gap={2}>
+              <Flex direction="row" gap={2} mx={4}>
                 <FaRegUserCircle size={20} />
                 <Text>Sign In</Text>
               </Flex>
@@ -438,7 +438,7 @@ const Navbar: React.FC<NavProps> = () => {
                     {name}
                   </DrawerLink>
                 ))}
-                <Link href='/trips'>
+                <Link href="/trips">
                   <Button
                     bg="color2"
                     fontFamily="'Roboto'"
@@ -455,19 +455,9 @@ const Navbar: React.FC<NavProps> = () => {
                   >
                     Book Now
                   </Button>
-                  </Link>
+                </Link>
               </VStack>
             </DrawerBody>
-            <DrawerFooter
-              bg="rgba(255,255,255,1)"
-              boxShadow="lg"
-              fontFamily="'Roboto'"
-              color="#B7CE6A"
-              fontSize="20px"
-              fontStyle="italic"
-            >
-              Kite India @2022
-            </DrawerFooter>
           </DrawerContent>
         </Drawer>
       </Flex>

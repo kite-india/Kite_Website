@@ -12,8 +12,6 @@ interface Props {
 }
 
 const DiscoverTheWorld: React.FC<Props> = ({ data }) => {
-
-
   return (
     <Box position={'relative'} py={'8'} scrollSnapAlign="center">
       <Section delay={0.3}>
@@ -40,9 +38,8 @@ const DiscoverTheWorld: React.FC<Props> = ({ data }) => {
           </Heading>
         </Box>
 
-        <Flex  align={'center'} justify="center">
+        <Flex align={'center'} justify="center" mx={6}>
           <Swiper
-              
             modules={[Autoplay]}
             breakpoints={{
               1200: {
@@ -65,7 +62,6 @@ const DiscoverTheWorld: React.FC<Props> = ({ data }) => {
             spaceBetween={40}
           >
             {data.map(blog => {
-        
               return (
                 <SwiperSlide key={blog.id}>
                   <BlogCard blog={blog} key={blog.name} />

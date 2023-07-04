@@ -23,7 +23,7 @@ const Page: NextPage<HomePageProps> = ({
 
   useEffect(() => {
     setTimeout(() => {
-      setMode(false)
+      setMode(true)
     }, 4000)
   }, [])
 
@@ -42,8 +42,8 @@ const Page: NextPage<HomePageProps> = ({
             <CloseButton
               position={'relative'}
               zIndex={200}
-              left={[320, 460]}
-              top={{ lg: 75, sm: 3 }}
+              top={{ lg: 75, sm: 40 }}
+              left={{ sm: 270, md: 400, lg: 480 }}
               size="lg"
               onClick={e => {
                 setMode(false)
@@ -62,7 +62,6 @@ const Page: NextPage<HomePageProps> = ({
 }
 
 export async function getStaticProps() {
-  
   const premiumPackages = await API.graphql<GraphQLQuery<ListPackagesQuery>>({
     query: listPackages,
     variables: { filter: { is_premium_flag: { eq: true } } }
@@ -75,8 +74,7 @@ export async function getStaticProps() {
   const featured_data = premiumPackages.data.listPackages.items
   const activities_data = activities.data.listActivities.items
 
-
-  return { props: { featured_data, activities_data} }
+  return { props: { featured_data, activities_data } }
 }
 
 export default Page
