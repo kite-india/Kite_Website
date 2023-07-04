@@ -185,7 +185,7 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
       <BookedModel booked={booked}></BookedModel>
       <Container w="100%" pt={8} maxWidth="container.xl">
         <Section delay={0.1}>
-          <Heading fontSize="72px" fontWeight="semibold" color="#8FB339">
+          <Heading fontSize={{sm:"2rem"}} fontWeight="semibold" color="#8FB339">
             Book Now
           </Heading>
         </Section>
@@ -195,7 +195,7 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
               <Image
                 alt={id}
                 src={`${process.env.NEXT_PUBLIC_S3_ENDPOINT}${image}`}
-                w={{ base: '80vw', lg: '100%' }}
+                w={{ base: '80vw', lg: '80vh' }}
                 h={{ base: '80vw', lg: '32vh' }}
                 objectFit="cover"
                 borderRadius="lg"
@@ -206,7 +206,7 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
                 mb={{ base: 6, lg: 0 }}
               />
 
-              <Flex flexDirection={'column'} paddingLeft={34}>
+              <Flex flexDirection={'column'} paddingLeft={{xl:38}}>
                 <Flex>
                   <Text fontSize={40} fontWeight={'bold'}>
                     {' '}
@@ -214,28 +214,28 @@ const BookNow: NextPage<BookNowProps> = ({ packages_data, activities }) => {
                   </Text>
                 </Flex>
                 <Flex pt={5} textAlign={'center'}>
-                  <Box opacity={!have_flight ? 0.3 : 1} pr={8}>
-                    <Icon as={TbPlane} w={8} h={8} />
-                    <Text>Flight</Text>
+                  <Box opacity={!have_flight ? 0.3 : 1} pr={{sm:"3","2sm":"7"}}>
+                    <Icon as={TbPlane} w={{sm:"5","2sm":"7"}} h={{sm:"5","2sm":"7"}} />
+                    <Text fontSize={{sm:"0.8rem"}}>Flight</Text>
                   </Box>
 
-                  <Box opacity={!have_hotels ? 0.3 : 1} pr={8}>
-                    <Icon as={MdLocalDining} w={8} h={8} />
-                    <Text>Hotels</Text>
+                  <Box opacity={!have_hotels ? 0.3 : 1} pr={{sm:"3","2sm":"7"}}>
+                    <Icon as={MdLocalDining} w={{sm:"5","2sm":"7"}} h={{sm:"5","2sm":"7"}}/>
+                    <Text fontSize={{sm:"0.8rem"}}>Hotels</Text>
                   </Box>
-                  <Box opacity={!have_sightseeing ? 0.3 : 1} pr={8}>
-                    <Icon as={BsBinoculars} w={10} h={8} />
-                    <Text>Sightseeing</Text>
-                  </Box>
-
-                  <Box opacity={!have_meals ? 0.3 : 1} pr={8}>
-                    <Icon as={MdFastfood} w={10} h={8} />
-                    <Text>Meals</Text>
+                  <Box opacity={!have_sightseeing ? 0.3 : 1} pr={{sm:"3","2sm":"7"}}>
+                    <Icon as={BsBinoculars} w={{sm:"5","2sm":"7"}} h={{sm:"5","2sm":"7"}} />
+                    <Text fontSize={{sm:"0.8rem"}}>Sightseeing</Text>
                   </Box>
 
-                  <Box opacity={!have_transfers ? 0.3 : 1} pr={8}>
-                    <Icon as={BsBinoculars} w={10} h={8} />
-                    <Text>Transfers</Text>
+                  <Box opacity={!have_meals ? 0.3 : 1} pr={{sm:"3"}}>
+                    <Icon as={MdFastfood} w={{sm:"5","2sm":"7"}} h={{sm:"5","2sm":"7"}}/>
+                    <Text fontSize={{sm:"0.8rem"}}>Meals</Text>
+                  </Box>
+
+                  <Box opacity={!have_transfers ? 0.3 : 1} pr={{sm:"3"}}>
+                    <Icon as={BsBinoculars}w={{sm:"5","2sm":"7"}} h={{sm:"5","2sm":"7"}} />
+                    <Text fontSize={{sm:"0.8rem"}}>Transfers</Text>
                   </Box>
                 </Flex>
                 <Text pt={5}>Duration: {duration}</Text>
@@ -437,7 +437,7 @@ export default BookNow
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { Auth } = withSSRContext(context)
   try {
-    await Auth.currentAuthenticatedUser()
+    // await Auth.currentAuthenticatedUser()
     const { id } = context.params
     // const SSR = withSSRContext(context)
     // console.log(SSR)

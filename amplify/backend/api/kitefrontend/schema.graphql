@@ -52,7 +52,7 @@ type Gallery @model @auth(rules: [{allow: public, operations: [read]}, {allow: p
   packageID: ID! @index(name: "byPackage")
 }
 
-type Registration @model @auth(rules: [{allow: private, operations: [create, read, update]}, {allow: groups, groups: ["admin"], operations: [read, create, update, delete]}, {allow: groups, groups: ["ap-south-1_wmFFMNf1O_Google"], operations: [read, create, update]}]) {
+type Registration @model @auth(rules: [{allow: groups, groups: ["admin"], operations: [read, create, update, delete]}, {allow: owner, operations: [create, read, update]}]) {
   id: ID!
   total_cost: Float!
   userinfoID: ID! @index(name: "byUserInfo")

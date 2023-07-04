@@ -48,7 +48,7 @@ const FeaturedSection: React.FC<Props> = ({ data }) => {
   return (
     <Box bg="white" w="100%" px={2}>
       <Swiper
-        modules={[Pagination]}
+        modules={[Pagination,Autoplay]}
         slidesPerView={1}
         autoplay={{
           delay: 3000,

@@ -56,7 +56,7 @@ const Packages: React.FC<PackageProps> = ({ data, activities_data }) => {
   })
 
   return (
-    <Box w="100%" mt={12}>
+    <Box w="100%">
       <Flex direction={{ base: 'column', md: 'row' }} alignItems="center">
         <Heading
           w="100%"
@@ -122,7 +122,7 @@ const Packages: React.FC<PackageProps> = ({ data, activities_data }) => {
               lg: 'repeat( auto-fit, minmax(450px, 1fr) )'
             }}
             gap={8}
-            px={3}
+            px={{md:3}}
           >
             {data.map(data => (
               <PackageCard

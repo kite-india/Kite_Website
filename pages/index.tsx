@@ -23,7 +23,7 @@ const Page: NextPage<HomePageProps> = ({
 
   useEffect(() => {
     setTimeout(() => {
-      setMode(true)
+      setMode(false)
     }, 4000)
   }, [])
 
@@ -62,6 +62,7 @@ const Page: NextPage<HomePageProps> = ({
 }
 
 export async function getStaticProps() {
+  
   const premiumPackages = await API.graphql<GraphQLQuery<ListPackagesQuery>>({
     query: listPackages,
     variables: { filter: { is_premium_flag: { eq: true } } }

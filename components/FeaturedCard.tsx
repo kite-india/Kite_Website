@@ -85,7 +85,7 @@ const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
     >
       <Section delay={0.3}>
         <Stack
-          direction={{ base: 'column', lg: 'row' }}
+          direction={{ base: 'column', xl: 'row' }}
           spacing="2.18rem"
           borderRadius="xl"
           borderColor="blackAlpha.300"
@@ -99,7 +99,7 @@ const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
             height="400px"
             style={{ borderRadius: '10px' }}
           />
-          <Box pt={{ base: 0, md: 6 }} w={{ base: '80vw', md: '38rem' }}>
+          <Box pt={{ base: 0, md: 6 }} pl={{"2sm":2}} w={{ base: '80vw', xl: '38rem' }}>
             <Flex direction="column" gap="1.2rem" align="left">
               <Heading
                 as="h4"
@@ -120,28 +120,28 @@ const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
                   <Text>{cities}</Text>
                 </Flex>
                 <Flex pt={5} textAlign={'center'}>
-                  <Box opacity={!have_flight ? 0.3 : 1} pr={8}>
-                    <Icon as={TbPlane} w={8} h={8} />
-                    <Text>Flight</Text>
+                  <Box opacity={!have_flight ? 0.3 : 1} pr={{sm:"3","2sm":"7"}}>
+                    <Icon as={TbPlane} w={{sm:"5","2sm":"7"}} h={{sm:"5","2sm":"7"}} />
+                    <Text fontSize={{sm:"0.8rem"}}>Flight</Text>
                   </Box>
 
-                  <Box opacity={!have_hotels ? 0.3 : 1} pr={8}>
-                    <Icon as={MdLocalDining} w={8} h={8} />
-                    <Text>Hotels</Text>
+                  <Box opacity={!have_hotels ? 0.3 : 1} pr={{sm:"3","2sm":"7"}}>
+                    <Icon as={MdLocalDining} w={{sm:"5","2sm":"7"}} h={{sm:"5","2sm":"7"}}/>
+                    <Text fontSize={{sm:"0.8rem"}}>Hotels</Text>
                   </Box>
-                  <Box opacity={!have_sightseeing ? 0.3 : 1} pr={8}>
-                    <Icon as={BsBinoculars} w={10} h={8} />
-                    <Text>Sightseeing</Text>
-                  </Box>
-
-                  <Box opacity={!have_meals ? 0.3 : 1} pr={8}>
-                    <Icon as={MdFastfood} w={10} h={8} />
-                    <Text>Meals</Text>
+                  <Box opacity={!have_sightseeing ? 0.3 : 1} pr={{sm:"3","2sm":"7"}}>
+                    <Icon as={BsBinoculars} w={{sm:"5","2sm":"7"}} h={{sm:"5","2sm":"7"}} />
+                    <Text fontSize={{sm:"0.8rem"}}>Sightseeing</Text>
                   </Box>
 
-                  <Box opacity={!have_transfers ? 0.3 : 1} pr={8}>
-                    <Icon as={BsBinoculars} w={10} h={8} />
-                    <Text>Transfers</Text>
+                  <Box opacity={!have_meals ? 0.3 : 1} pr={{sm:"3"}}>
+                    <Icon as={MdFastfood} w={{sm:"5","2sm":"7"}} h={{sm:"5","2sm":"7"}}/>
+                    <Text fontSize={{sm:"0.8rem"}}>Meals</Text>
+                  </Box>
+
+                  <Box opacity={!have_transfers ? 0.3 : 1} pr={{sm:"3"}}>
+                    <Icon as={BsBinoculars}w={{sm:"5","2sm":"7"}} h={{sm:"5","2sm":"7"}} />
+                    <Text fontSize={{sm:"0.8rem"}}>Transfers</Text>
                   </Box>
                 </Flex>
                 <Text pt={5}>Duration: {duration}</Text>

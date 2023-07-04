@@ -26,10 +26,24 @@ const fonts = {
   heading: "'Poppins'"
 }
 
+
+
+const breakpoints = {
+  sm: '320px',
+  "2sm": "375px",
+  md: '480px',
+  lg: '600px',
+  xl: '801px',
+  '2xl': '1025px',
+  '3xl': '1281px'
+}
+
+
 const theme = extendTheme({
   config,
   colors,
-  fonts
+  fonts,
+  breakpoints
 })
 
 export default theme

@@ -39,7 +39,7 @@ const PackageCard: React.FC<PackageProps> = ({ data, activities_data }) => {
       boxShadow="lg"
       borderRadius="lg"
       maxW="600px"
-      p={6}
+      p={{ sm: 6, md: 6 }}
     >
       <Box
         // w={{ base: '100%', lg: '380px' }}
@@ -60,12 +60,13 @@ const PackageCard: React.FC<PackageProps> = ({ data, activities_data }) => {
       </Box>
       <Flex
         flexDirection="column"
-        align="center"
-        justify="space-between"
+        justify={{ sm: "flex-start", md: "center" }}
+
+        alignContent={{ sm: "flex-start", md: "center" }}
         w="100%"
         mb={6}
       >
-        <Text fontFamily="'Poppins'" fontWeight="semibold" fontSize="24px">
+        <Text fontFamily="'Poppins'" fontWeight="semibold" fontSize={{ sm: "1.3rem", md: "2rem" }}>
           {location}
         </Text>
         <Spacer />
@@ -105,7 +106,8 @@ const PackageCard: React.FC<PackageProps> = ({ data, activities_data }) => {
         </List>
       </Box>
       <Flex
-        justifyContent={'space-between'}
+        justifyContent={'flex-end'}
+        alignContent={"flex-end"}
         flexDirection={'column'}
         flexGrow={1}
       >
@@ -131,62 +133,59 @@ const PackageCard: React.FC<PackageProps> = ({ data, activities_data }) => {
             }
           })}
         </SimpleGrid>
-        <SimpleGrid
-          mt={3}
-          fontFamily="'Poppins'"
-          columns={2}
-          alignItems={{ base: 'center', lg: 'left' }}
-          w="100%"
-          spacingX="40px"
-          px={1}
-        >
-          <Text fontFamily="'Poppins'" fontSize="18px" fontWeight={'bold'}>
-            Rs {cost}/{' '}
-            <Text
-              as="span"
-              fontWeight={'normal'}
-              fontFamily="'Poppins'"
-              fontSize="12px"
-            >
-              person
-            </Text>
-          </Text>
-          <Flex
-            direction={{ base: 'column', md: 'row' }}
-            align="center"
-            justify="space-between"
-            w="100%"
-            gap={{ base: 2, lg: 0 }}
-          >
-            <ButtonGroup gap={2}>
-              <Link href={`/packages/${id}`}>
-                <Button
-                  color="white"
-                  textAlign="center"
-                  px={4}
-                  py={2}
-                  bg="#125C13"
-                  _hover={{ bg: '#8FB339' }}
-                >
-                  More Info
-                </Button>
-              </Link>
-              <Button
-                textAlign="center"
-                color="white"
-                bg="#8FB339"
-                px={4}
-                py={2}
-                mx={8}
-                width={{ sm: 95 }}
-                _hover={{ bg: '#125C13' }}
-                onClick={bookNow}
+
+        <Flex direction={{sm:"column",lg:"row"}} justifyContent={"space-between"}>
+
+          <Flex>
+
+            <Text fontFamily="'Poppins'" fontSize="18px" fontWeight={'bold'}>
+              Rs {cost}/{' '}
+              <Text
+                as="span"
+                fontWeight={'normal'}
+                fontFamily="'Poppins'"
+                fontSize="12px"
               >
-                Book Now
-              </Button>
-            </ButtonGroup>
+                person
+              </Text>
+            </Text>
           </Flex>
-        </SimpleGrid>
+          <Flex
+            direction={{ sm: "row" }}
+            alignContent="center"
+            justifyContent="flex-start"
+            pt={"1rem"}
+          >
+
+            <Link href={`/packages/${id}`}>
+              <Button
+                color="white"
+                textAlign="center"
+                pl={4}
+                py={2}
+                bg="#125C13"
+                _hover={{ bg: '#8FB339' }}
+              >
+                More Info
+              </Button>
+            </Link>
+            <Button
+              textAlign="center"
+              color="white"
+              bg="#8FB339"
+              px={4}
+              py={2}
+              ml={4}
+              width={{ sm: 95 }}
+              _hover={{ bg: '#125C13' }}
+              onClick={bookNow}
+            >
+              Book Now
+            </Button>
+
+          </Flex>
+
+        </Flex>
       </Flex>
     </Box>
   )

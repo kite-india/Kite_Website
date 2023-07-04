@@ -12,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css'
 
 Amplify.configure({ ...awsconfig, ssr: true })
 
+
 const Website = ({
   Component,
   pageProps,

@@ -63,7 +63,7 @@ const Page: NextPage<PackagesPageProps> = () => {
 
   useEffect(() => {
 
-    if(!router.isReady) return;
+    if (!router.isReady) return;
 
     const fetchData = async () => {
 
@@ -122,11 +122,11 @@ const Page: NextPage<PackagesPageProps> = () => {
       {(!packages_data || !activities || !gallery_data) && <ThreeDotsWaveLoadingScreen></ThreeDotsWaveLoadingScreen>}
       {packages_data && activities && gallery_data &&
         <Layout title={packages_data.name}>
-          <Container w="100%" pt={8} maxWidth="container.xl">
+          <Container w="100%" pt={8} maxWidth="container.xl" overflowX={"hidden"}>
             <Section delay={0.2}>
-              <Flex direction={{ base: 'column', md: 'row' }} w="100%">
+              <Flex direction={{ sm:"column","2xl":"row" }} w="100%">
                 <Box
-                  w={{ sm: '100%', md: '50%' }}
+                  w={{ sm: '100%' }}
                   borderRadius="xl"
                   overflow="hidden"
                 >
@@ -139,26 +139,27 @@ const Page: NextPage<PackagesPageProps> = () => {
                     height={200}
                   />
                 </Box>
+
                 <Flex
-                  w={{ sm: '100%', md: '50%' }}
+                  w={{ sm: '100%' }}
                   direction="column"
                   gap={4}
-                  p={{ sm: 6, md: 12 }}
-                  ml={{ sm: 0, md: 4 }}
+                  p={{ sm: 2,"2xl":16 }}
+                  ml={{ sm: 0 }}
                   fontSize={20}
                   fontFamily="'Poppins'"
                 >
                   <Heading
-                    fontSize={{ base: '25', md: '64' }}
+                    fontSize={{ sm:"25",xl:"3rem" }}
                     textAlign={{ base: 'center', md: 'left' }}
-                    p={{ base: 4, sm: 0 }}
+                    p={{  sm: 0 }}
                   >
                     {packages_data.name}
                   </Heading>
                   <Flex
                     direction="row"
                     gap={4}
-                    fontSize={{ base: '15', sm: '20', md: '25' }}
+                    fontSize={{ sm: '20' }}
                   >
                     {packages_data.is_premium_flag ? (
                       <Badge colorScheme="purple" fontSize="0.6em">
@@ -171,44 +172,46 @@ const Page: NextPage<PackagesPageProps> = () => {
 
                   <Flex flexDirection={"column"}>
                     <Flex>
-                      <Text fontWeight={"bold"} pr={3}>
+                      <Text fontSize={{ sm: "0.9rem", md: "1rem",xl:"1rem" }} fontWeight={"bold"} pr={3}>
                         Cities:
 
                       </Text>
-                      <Text>
+                      <Text fontSize={{ sm: "0.9rem", md: "1rem",xl:"1rem" }} >
                         Manali
                       </Text>
 
                     </Flex>
                     <Flex pt={5} textAlign={"center"} >
-                      <Box opacity={!packages_data.have_flight?0.3:1} pr={8}>
-                        <Icon as={TbPlane} w={8} h={8} />
-                        <Text fontSize={18}>Flight</Text>
+
+                      <Box opacity={!packages_data.have_flight ? 0.3 : 1} pr={{sm:"3","2sm":"6"}}>
+                        <Icon as={TbPlane} w={{ sm: 6, "2sm": 8,lg:16 }} h={{ sm: 6, "2sm": 8 }} />
+                        <Text fontSize={{ sm: "0.8rem",lg:16 }}>Flight</Text>
                       </Box>
 
-                      <Box opacity={!packages_data.have_hotels?0.3:1}  pr={8}>
-                        <Icon as={MdLocalDining} w={8} h={8} />
-                        <Text fontSize={18}>Hotels</Text>
-                      </Box>
-                      <Box opacity={!packages_data.have_sightseeing?0.3:1}  pr={8} >
-                        <Icon as={BsBinoculars} w={10} h={8} />
-                        <Text fontSize={18}>SiteSeeing</Text>
+                      <Box opacity={!packages_data.have_hotels ? 0.3 : 1} pr={{sm:"3","2sm":"6"}}>
+                        <Icon as={MdLocalDining}w={{ sm: 6, "2sm": 8,lg:16 }} h={{ sm: 6, "2sm": 8 }}/>
+                        <Text fontSize={{ sm: "0.8rem",lg:16 }}>Hotels</Text>
                       </Box>
 
-                      <Box opacity={!packages_data.have_meals?0.3:1}  pr={8} >
-                        <Icon as={MdFastfood} w={10} h={8} />
-                        <Text fontSize={18}>Meals</Text>
+                      <Box opacity={!packages_data.have_sightseeing ? 0.3 : 1} pr={{sm:"3","2sm":"6"}} >
+                        <Icon as={BsBinoculars}w={{ sm: 6, "2sm": 8,lg:16 }} h={{ sm: 6, "2sm": 8 }} />
+                        <Text fontSize={{ sm: "0.8rem",lg:16 }}>SiteSeeing</Text>
                       </Box>
 
-                      <Box opacity={!packages_data.have_transfers?0.3:1}  pr={8} >
-                        <Icon as={BsBinoculars} w={10} h={8} />
-                        <Text fontSize={18}>Transfers</Text>
+                      <Box opacity={!packages_data.have_meals ? 0.3 : 1} pr={{sm:"3","2sm":"6"}} >
+                        <Icon as={MdFastfood} w={{ sm: 6, "2sm": 8,lg:16 }} h={{ sm: 6, "2sm": 8 }} />
+                        <Text fontSize={{ sm: "0.8rem",lg:16 }}>Meals</Text>
+                      </Box>
+
+                      <Box opacity={!packages_data.have_transfers ? 0.3 : 1} pr={{sm:"3","2sm":"6"}} >
+                        <Icon as={BsBinoculars} w={{ sm: 6, "2sm": 8,lg:16 }} h={{ sm: 6, "2sm": 8 }}/>
+                        <Text fontSize={{ sm: "0.8rem",lg:16 }}>Transfers</Text>
                       </Box>
                     </Flex>
-                    <Text pt={5}>Duration: {packages_data.duration}</Text>
+                    <Text fontSize={{ sm: "1rem" }} pt={5}>Duration: {packages_data.duration}</Text>
                     <Flex>
-                      <Text color={"green"} pt={5} fontSize={30} fontWeight={"bold"}>Rs. {packages_data.cost}</Text>
-                      <Text pl={4} fontSize={20} pt={8} as={'s'}>Rs. 30000</Text>
+                      <Text color={"green"} pt={5} fontSize={{ sm: "1.3rem" }} fontWeight={"bold"}>Rs. {packages_data.cost}</Text>
+                      <Text pl={4} fontSize={{ sm: "1rem" }} pt={8} as={'s'}>Rs. 30000</Text>
 
                     </Flex>
                   </Flex>
@@ -220,9 +223,8 @@ const Page: NextPage<PackagesPageProps> = () => {
                       color="white"
                       fontFamily="'Roboto'"
                       borderRadius="10px"
-                      fontSize={{ base: '15', sm: '20', md: '20' }}
-                      px={{ base: 6, lg: 12 }}
-                      py={{ base: 3, lg: 6 }}
+                      fontSize={{ sm: "1rem" }}
+
                       onClick={bookNow}
                     >
                       Book now
@@ -234,27 +236,27 @@ const Page: NextPage<PackagesPageProps> = () => {
                       color="white"
                       fontFamily="'Roboto'"
                       borderRadius="10px"
-                      fontSize={{ base: '15', sm: '20', md: '20' }}
-                      px={{ base: 6, lg: 12 }}
-                      py={{ base: 3, lg: 6 }}
+                      fontSize={{ sm: "1rem" }}
+
                     >
                       Contact us
                     </Button>
                   </Flex>
                 </Flex>
+
               </Flex>
               <Box fontSize={20} mt={10}>
                 <Flex
-                  direction={{ base: 'column', md: 'row' }}
+                  direction={{ sm:"column",xl:"row" }}
                   justify="space-evenly"
                   w="100%"
                   gap={4}
                 >
                   <Flex
                     direction="column"
-                    borderRight={{ base: 0, md: '2px' }}
+                    borderRight={{ sm: 0 }}
                     pr={6}
-                    w={{ sm: '100%', md: '50%' }}
+                    w={{ sm: '100%',xl:"50%" }}
                   >
                     <Heading fontSize={{ base: '20', md: '35' }} pb={4}>
                       Plan Includes:
@@ -265,13 +267,13 @@ const Page: NextPage<PackagesPageProps> = () => {
                         return (
                           <ListItem paddingBottom={3} display={'flex'} key={index}>
                             <ListIcon as={MdCheckCircle} color='green.500' />
-                            <Text fontWeight={"medium"} marginTop={-1} >  {value}</Text>
+                            <Text fontWeight={"medium"} marginTop={-1} fontSize={{ sm: "1rem" }} >  {value}</Text>
                           </ListItem>
                         )
                       })}
                     </List>
 
-                    <Heading fontSize={{ base: '10', md: '20' }} pt={4} pb={4}>
+                    <Heading fontSize={{ sm: "1.3rem" }} pt={4} pb={4}>
                       Major Activities:
 
                     </Heading>
@@ -292,7 +294,7 @@ const Page: NextPage<PackagesPageProps> = () => {
                     direction="column"
                     fontSize={20}
                     gap={4}
-                    w={{ sm: '100%', md: '50%' }}
+                    w={{ sm: '100%', lg: '50%' }}
                     pr={6}
                   >
                     <Heading fontSize={{ base: '20', md: '35' }}>
@@ -302,7 +304,7 @@ const Page: NextPage<PackagesPageProps> = () => {
                       border="2px"
                       borderRadius="20px"
                       borderColor="gray.200"
-                      fontSize={{ base: '15', md: '20' }}
+                      fontSize={{ sm:"15"}}
                     >
                       <Flex p={8} direction="row" gap={6}>
                         <GrDocumentPdf size={60} />

@@ -36,9 +36,11 @@ const Transactions: NextPage = (props: any) => {
     const cancel = props.transaction.filter(
       pkg => pkg.bookingStatus === 'canceled'
     )
+    
     const booked = props.transaction.filter(
       pkg => pkg.bookingStatus === 'Booked'
     )
+
     const processing = props.transaction.filter(
       pkg => pkg.bookingStatus === 'Processing'
     )

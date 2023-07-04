@@ -56,7 +56,6 @@ const Trips: NextPage<TripsPageProps> = () => {
       }
       catch (e) {
 
-
         toast.error(e.errors[0].message)
       }
 
@@ -67,15 +66,15 @@ const Trips: NextPage<TripsPageProps> = () => {
 
 
 
-
-
   return (
+
     <Layout title="Trips">
 
       {activities_data && packages_data ? <Container w="100%" pt={8} maxW="container.xl">
+
         <Section delay={0.2}>
           <Heading
-            fontSize={{ base: '56px', lg: '72px' }}
+            fontSize={{sm:'2rem', md: '3rem', lg: '3.3rem',xl:"4rem" }}
             fontWeight="semibold"
             color="#8FB339"
             mb={{ base: 3, lg: 6 }}
@@ -85,7 +84,7 @@ const Trips: NextPage<TripsPageProps> = () => {
 
           </Heading>
           <Flex
-            direction={{ base: 'column', lg: 'row' }}
+            direction={{ sm:"column",md:"column","2xl":"row" }}
             pt={6}
             w="100%"
             gap={{ base: 8, lg: 16 }}
@@ -103,13 +102,13 @@ const Trips: NextPage<TripsPageProps> = () => {
                 py={3}
                 textAlign={{ base: 'center', lg: 'left' }}
               >
-                <Heading fontSize="72px" fontWeight="semibold">
+                <Heading fontSize={{sm:"2rem",xl:"3rem"}} textAlign={"left"} fontWeight="semibold">
                   Kashmir
                 </Heading>
                 <Text
                   fontFamily="'Poppins'"
                   fontWeight="light"
-                  fontSize="22px"
+                  fontSize={{sm:"1rem",xl:"1.3rem"}}
                   textAlign="justify"
                   my={1}
                 >
@@ -127,13 +126,13 @@ const Trips: NextPage<TripsPageProps> = () => {
                     size="xl"
                     mt={3}
                     py={4}
-                    px={16}
+                    px={20}
                     bg="#B7CE63"
                     color="white"
                     fontFamily="'Roboto', serif"
                     borderRadius="full"
                     _hover={{ bg: 'green.400' }}
-                    fontSize="2xl"
+                    fontSize={{sm:"1rem",lg:"2rem"}}
                     as={motion.button}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
@@ -151,7 +150,9 @@ const Trips: NextPage<TripsPageProps> = () => {
             data={packages_data}
           />
         </Section>
-      </Container> : <ThreeDotsWaveLoadingScreen></ThreeDotsWaveLoadingScreen>}
+      </Container> : <ThreeDotsWaveLoadingScreen></ThreeDotsWaveLoadingScreen>
+      
+      }
     </Layout>
   )
 }
