@@ -30,38 +30,40 @@ const Page: NextPage<HomePageProps> = ({
   return (
     <Layout title="Home">
       {mode && (
-        <Flex justifyContent={'center'}>
-          <Box
-            backgroundColor={'rgba(0, 0, 0, 0.4)'}
-            zIndex={99}
-            position={'fixed'}
-            height={'100vh'}
-            width={'100%'}
-          ></Box>
-          <Box position={'fixed'} zIndex={100} textAlign="center">
-            <CloseButton
-              position={'relative'}
-              zIndex={200}
-              top={{ lg: 75, sm: 40 }}
-              left={{ sm: 270, md: 400, lg: 480 }}
-              size="lg"
-              onClick={e => {
-                setMode(false)
-              }}
-            />
-            <IndexModal />
-          </Box>
-        </Flex>
+        <div>
+          <Flex justifyContent={'center'}>
+            <Box
+              backgroundColor={'rgba(0, 0, 0, 0.4)'}
+              zIndex={99}
+              position={'fixed'}
+              height={'100vh'}
+              width={'100%'}
+            ></Box>
+            <Box position={'fixed'} zIndex={100} textAlign="center">
+              <CloseButton
+                position={'relative'}
+                zIndex={200}
+                top={{ lg: 75, sm: 40 }}
+                left={{ sm: 270, md: 400, lg: 480 }}
+                size="lg"
+                onClick={e => {
+                  setMode(false)
+                }}
+              />
+              <IndexModal />
+            </Box>
+          </Flex>
+        </div>
       )}
       <HeroSection />
       {featured_data && <FeaturedSection data={featured_data} />}
       {activities_data && <DiscoverTheWorld data={activities_data} />}
-      <IndexModal />
+      {/* <IndexModal /> */}
     </Layout>
   )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const premiumPackages = await API.graphql<GraphQLQuery<ListPackagesQuery>>({
     query: listPackages,
     variables: { filter: { is_premium_flag: { eq: true } } }

@@ -30,36 +30,53 @@ import { toast } from 'react-toastify'
 const Trips: NextPage<TripsPageProps> = () => {
 
 
-  const [packages_data, setPackage] = useState(null);
+  const [packages_data, setPackage] = useState([]);
   const [activities_data, setActivity] = useState(null)
+  const [paginatorToken, setPaginatorToken] = useState(null);
+  const fetchData = async () => {
+    try {
+      console.log("Feyching")
+      const packagesAndActivities = await API.graphql<
+        GraphQLQuery<ListPackagesQuery>
+      >({
+        query: listPackages,
+        variables: {
+          limit: 4,
+          nextToken: paginatorToken
+        }
+      })
+
+      let activities = await API.graphql<GraphQLQuery<ListActivitiesQuery>>({
+        query: listActivities
+      })
+
+
+
+      let packages_data = packagesAndActivities.data.listPackages.items as Trip[]
+      let activities_data = activities.data.listActivities.items
+      setPaginatorToken(packagesAndActivities.data.listPackages.nextToken)
+      setPackage((prevState) => {
+        let newState = [...prevState, ...packages_data]
+
+
+        let arr = newState.filter((value, index, self) =>
+          index === self.findIndex((t) => (
+            t.id == value.id
+          )))
+
+        return arr
+      });
+      setActivity(activities_data);
+    }
+    catch (e) {
+
+      toast.error(e.errors[0].message)
+    }
+
+  }
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const packagesAndActivities = await API.graphql<
-          GraphQLQuery<ListPackagesQuery>
-        >({
-          query: listPackages
-        })
 
-        let activities = await API.graphql<GraphQLQuery<ListActivitiesQuery>>({
-          query: listActivities
-        })
-
-
-
-        let packages_data = packagesAndActivities.data.listPackages.items as Trip[]
-        let activities_data = activities.data.listActivities.items
-
-        setPackage(packages_data);
-        setActivity(activities_data);
-      }
-      catch (e) {
-
-        toast.error(e.errors[0].message)
-      }
-
-    }
 
     fetchData();
   }, [])
@@ -74,7 +91,7 @@ const Trips: NextPage<TripsPageProps> = () => {
 
         <Section delay={0.2}>
           <Heading
-            fontSize={{sm:'2rem', md: '3rem', lg: '3.3rem',xl:"4rem" }}
+            fontSize={{ sm: '2rem', md: '3rem', lg: '3.3rem', xl: "4rem" }}
             fontWeight="semibold"
             color="#8FB339"
             mb={{ base: 3, lg: 6 }}
@@ -84,7 +101,7 @@ const Trips: NextPage<TripsPageProps> = () => {
 
           </Heading>
           <Flex
-            direction={{ sm:"column",md:"column","2xl":"row" }}
+            direction={{ sm: "column", md: "column", "2xl": "row" }}
             pt={6}
             w="100%"
             gap={{ base: 8, lg: 16 }}
@@ -102,13 +119,13 @@ const Trips: NextPage<TripsPageProps> = () => {
                 py={3}
                 textAlign={{ base: 'center', lg: 'left' }}
               >
-                <Heading fontSize={{sm:"2rem",xl:"3rem"}} textAlign={"left"} fontWeight="semibold">
+                <Heading fontSize={{ sm: "2rem", xl: "3rem" }} textAlign={"left"} fontWeight="semibold">
                   Kashmir
                 </Heading>
                 <Text
                   fontFamily="'Poppins'"
                   fontWeight="light"
-                  fontSize={{sm:"1rem",xl:"1.3rem"}}
+                  fontSize={{ sm: "1rem", xl: "1.3rem" }}
                   textAlign="justify"
                   my={1}
                 >
@@ -132,7 +149,7 @@ const Trips: NextPage<TripsPageProps> = () => {
                     fontFamily="'Roboto', serif"
                     borderRadius="full"
                     _hover={{ bg: 'green.400' }}
-                    fontSize={{sm:"1rem",lg:"2rem"}}
+                    fontSize={{ sm: "1rem", lg: "2rem" }}
                     as={motion.button}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
@@ -148,10 +165,11 @@ const Trips: NextPage<TripsPageProps> = () => {
           <PackagesSection
             activities_data={activities_data}
             data={packages_data}
+            fetchData={fetchData}
           />
         </Section>
       </Container> : <ThreeDotsWaveLoadingScreen></ThreeDotsWaveLoadingScreen>
-      
+
       }
     </Layout>
   )

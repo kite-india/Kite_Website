@@ -12,18 +12,20 @@ interface Props {
 
 const Layout: React.FC<Props> = ({ children, title }) => {
   const router = useRouter()
+  let content = `Kite India - ${title}`
   return (
-    <Box w="100%" as="main">
+    <>
       <Head>
-        <title>Kite India - {title}</title>
+        <title>{content}</title>
         <meta name="viewport" content="width=device-width" />
       </Head>
       <Navbar path={router.asPath} />
-      <Box w="100%" pt={16} scrollSnapType="y mandatory">
+      <Box w="100%" as={"div"} pt={16} scrollSnapType="y mandatory">
         {children}
       </Box>
       <Footer />
-    </Box>
+    </>
+
   )
 }
 

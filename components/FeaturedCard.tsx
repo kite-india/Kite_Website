@@ -159,7 +159,7 @@ const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
                     <Text fontSize={{ sm: '0.8rem' }}>Sightseeing</Text>
                   </Box>
 
-                  <Box opacity={!have_meals ? 0.3 : 1} pr={{ sm: '3' }}>
+                  <Box opacity={!have_meals ? 0.3 : 1} pr={{ sm: '3','2sm': '7' }}>
                     <Icon
                       as={MdFastfood}
                       w={{ sm: '5', '2sm': '7' }}

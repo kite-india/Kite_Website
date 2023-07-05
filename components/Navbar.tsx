@@ -66,7 +66,7 @@ const BookBtn = () => (
     }}
     fontWeight="normal"
     display={{ base: 'none', md: 'flex' }}
-    onClick={() => {}}
+    onClick={() => { }}
     variant="outline"
   >
     Book now
@@ -158,23 +158,27 @@ const Navbar: React.FC<NavProps> = () => {
         animate={{ y: [-200, 0], opacity: [0, 1] }}
         transition={{ duration: 3, delay: 3, ease: 'linear' }}
       >
-        <Link
-          href="/"
-          _focus={{ textDecoration: 'none' }}
-          _hover={{ textDecoration: 'none' }}
-        >
-          <Heading as="h4" fontSize="24px" color="navbarLogo">
-            Kite India
-          </Heading>
-        </Link>
+        <Box>
+          <Link
+            href="/"
+            _focus={{ textDecoration: 'none' }}
+            _hover={{ textDecoration: 'none' }}
+          >
+            <Heading as="h4" fontSize="24px" color="navbarLogo">
+              Kite India
+            </Heading>
+          </Link>
+        </Box>
         <Spacer />
         <HStack gap={{ base: 4, lg: 8 }} display={{ base: 'none', md: 'flex' }}>
           {links.map(
             ({ name, href }) =>
               name !== 'Home' && (
-                <LinkItem key={name} href={href}>
-                  {name}
-                </LinkItem>
+                <Box key={name}>
+                  <LinkItem href={href}>
+                    {name}
+                  </LinkItem>
+                </Box>
               )
           )}
         </HStack>
@@ -206,42 +210,44 @@ const Navbar: React.FC<NavProps> = () => {
               border={'2px solid rgba(199, 213, 159, 1)'}
               borderRadius="2xl"
             >
-              <Link
-                href="/info"
-                _focus={{ textDecoration: 'none' }}
-                _hover={{ textDecoration: 'none' }}
-              >
-                <MenuItem
-                  minH={'48px'}
-                  _hover={{
-                    borderRadius: '15px',
-                    backgroundColor: 'rgba(199, 213, 159, 1)'
-                  }}
-                  _focus={{
-                    borderRadius: '15px',
-                    backgroundColor: 'rgba(199, 213, 159, 1)'
-                  }}
+              <Box>
+                <Link
+                  href="/info"
+                  _focus={{ textDecoration: 'none' }}
+                  _hover={{ textDecoration: 'none' }}
                 >
-                  <Avatar
-                    icon={<FaRegUserCircle color="black" />}
-                    color="color5"
-                    bg="white"
-                    w="30px"
-                    h="30px"
-                    mr="23px"
-                    size="lg"
-                    _hover={{ color: 'green.400' }}
-                    cursor="pointer"
-                  />
-                  <Text
-                    fontFamily={'Poppins'}
-                    fontWeight="500"
-                    fontSize={{ sm: '14px', md: '16px', lg: '18px' }}
+                  <MenuItem
+                    minH={'48px'}
+                    _hover={{
+                      borderRadius: '15px',
+                      backgroundColor: 'rgba(199, 213, 159, 1)'
+                    }}
+                    _focus={{
+                      borderRadius: '15px',
+                      backgroundColor: 'rgba(199, 213, 159, 1)'
+                    }}
                   >
-                    Personal Info
-                  </Text>
-                </MenuItem>
-              </Link>
+                    <Avatar
+                      icon={<FaRegUserCircle color="black" />}
+                      color="color5"
+                      bg="white"
+                      w="30px"
+                      h="30px"
+                      mr="23px"
+                      size="lg"
+                      _hover={{ color: 'green.400' }}
+                      cursor="pointer"
+                    />
+                    <Text
+                      fontFamily={'Poppins'}
+                      fontWeight="500"
+                      fontSize={{ sm: '14px', md: '16px', lg: '18px' }}
+                    >
+                      Personal Info
+                    </Text>
+                  </MenuItem>
+                </Link>
+              </Box>
               <Link
                 href="/passwordReset"
                 _focus={{ textDecoration: 'none' }}

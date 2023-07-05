@@ -27,14 +27,16 @@ import 'swiper/css/grid'
 import { PackageCard } from '@components/index'
 import type { Trip } from '@utils/types'
 import { Package } from 'src/API'
+import TripsPaginator from '@components/TripsPaginator'
 
 interface PackageProps {
   data: Package[]
-  activities_data: any
+  activities_data: any,
+  fetchData:Function
 }
 
-const Packages: React.FC<PackageProps> = ({ data, activities_data }) => {
-  
+const Packages: React.FC<PackageProps> = ({ data, activities_data,fetchData }) => {
+
   const [sort, setSort] = useState(1)
   const allParams = ['cost', 'location', 'description', 'activities']
   const [search, setSearch] = useState('')
@@ -106,34 +108,8 @@ const Packages: React.FC<PackageProps> = ({ data, activities_data }) => {
           </Select>
         </Flex>
       </Flex>
-
-      <Box>
-        <Flex
-          direction="column"
-          mt={5}
-          justifyContent="center"
-          maxW={{ xl: '1200px' }}
-        >
-          <Grid
-            w="full"
-            gridTemplateColumns={{
-              sm: 'repeat( auto-fit, minmax(350px, 1fr) )',
-              md: 'repeat( auto-fit, minmax(400px, 1fr) )',
-              lg: 'repeat( auto-fit, minmax(450px, 1fr) )'
-            }}
-            gap={8}
-            px={{md:3}}
-          >
-            {data.map(data => (
-              <PackageCard
-                activities_data={activities_data}
-                key={data.id}
-                data={data}
-              />
-            ))}
-          </Grid>
-        </Flex>
-      </Box>
+      <TripsPaginator fetchData={fetchData} data={data} activities_data={activities_data}></TripsPaginator>
+      
     </Box>
   )
 }

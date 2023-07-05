@@ -25,7 +25,7 @@ interface PackageProps {
 
 const PackageCard: React.FC<PackageProps> = ({ data, activities_data }) => {
   const router = useRouter()
-  const { id, location, cost, description, image, duration } = data
+  const { id, location, cost, description, image, duration, actual_cost } = data
 
   const bookNow = () => {
     router.push(`/packages/${id}/book-now`)
@@ -79,6 +79,7 @@ const PackageCard: React.FC<PackageProps> = ({ data, activities_data }) => {
         fontWeight={700}
         fontSize="18px"
         lineHeight="10px"
+        pb={4}
       >
         Plan Includes:
       </Text>
@@ -118,6 +119,7 @@ const PackageCard: React.FC<PackageProps> = ({ data, activities_data }) => {
           alignItems={{ base: 'center', lg: 'left' }}
           w="full"
           pt={3}
+          pb={4}
         >
           {activities_data.map(tag => {
             if (tag.packageID === id) {
@@ -134,11 +136,22 @@ const PackageCard: React.FC<PackageProps> = ({ data, activities_data }) => {
           })}
         </SimpleGrid>
 
-        <Flex direction={{sm:"column",lg:"row"}} justifyContent={"space-between"}>
+        <Flex direction={{ sm: "column", lg: "row" }} justifyContent={"space-between"}>
 
-          <Flex>
+          <Flex direction={"column"}>
 
-            <Text fontFamily="'Poppins'" fontSize="18px" fontWeight={'bold'}>
+            <Text textDecoration={"line-through"} fontFamily="'Poppins'" fontSize="18px" fontWeight={'light'}>
+              Rs {actual_cost}/{' '}
+              <Text
+                as="span"
+                fontWeight={'normal'}
+                fontFamily="'Poppins'"
+                fontSize="12px"
+              >
+                person
+              </Text>
+            </Text>
+            <Text fontFamily="'Poppins'" fontSize="20px" fontWeight={'bold'}>
               Rs {cost}/{' '}
               <Text
                 as="span"
