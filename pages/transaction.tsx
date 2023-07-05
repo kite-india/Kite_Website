@@ -36,7 +36,7 @@ const Transactions: NextPage = (props: any) => {
     const cancel = props.transaction.filter(
       pkg => pkg.bookingStatus === 'canceled'
     )
-    
+
     const booked = props.transaction.filter(
       pkg => pkg.bookingStatus === 'Booked'
     )
@@ -47,7 +47,7 @@ const Transactions: NextPage = (props: any) => {
     setCancelData(cancel)
     setBookedData(booked)
     setProcessingData(processing);
-    
+
   }, [update])
 
   return (
@@ -56,7 +56,7 @@ const Transactions: NextPage = (props: any) => {
         <Layout title="Transactions">
           <Container
             maxW={'1000px'}
-            paddingX={{ base: '35px', md: '70px', lg: '100px' }}
+            paddingX={{ lg: '100px' }}
           >
             <Container alignItems={'center'} mt={'80px'}>
               <Text
@@ -70,8 +70,8 @@ const Transactions: NextPage = (props: any) => {
               </Text>
             </Container>
             <Container
-              mt={'40px'}
-              border={'3px solid #D9D9D9'}
+              mt={{ sm: '2px', lg: '40px' }}
+              border={{ lg: '3px solid #D9D9D9' }}
               borderRadius={'38px'}
               maxW={'1000px'}
               alignItems="center"
@@ -79,7 +79,7 @@ const Transactions: NextPage = (props: any) => {
             >
               <Tabs
                 fontFamily={'Poppins'}
-                fontSize={'20px'}
+                fontSize={'10px'}
                 fontWeight={'500'}
                 my={'15px'}
                 lineHeight={'38px'}
@@ -88,10 +88,10 @@ const Transactions: NextPage = (props: any) => {
                 colorScheme="green"
               >
                 <TabList mb="2">
-                  <Tab px="25px" borderRadius={'30px'}>
+                  <Tab display={{ sm: "none", md: "block" }} px="25px" borderRadius={'30px'}>
                     All
                   </Tab>
-                  <Tab px="20px" borderRadius={'30px'}>
+                  <Tab fontSize={{sm:"14px"}} px={{sm:"2px",lg:"20px"}} borderRadius={'30px'}>
                     Processing
                   </Tab>
                   <Tab borderRadius={'30px'}>Booked</Tab>
@@ -101,7 +101,7 @@ const Transactions: NextPage = (props: any) => {
                 </TabList>
                 <hr />
                 <TabPanels pb={'30px'}>
-                  <TabPanel>
+                  <TabPanel >
                     <TransactionCardGroup data={allData} />
                   </TabPanel>
                   <TabPanel>

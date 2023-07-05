@@ -13,10 +13,10 @@ const TransactionCardGroup: React.FC<IProps> = ({ data }) => {
 
   return (
     <Stack
-      mx={{ sm: '10px' }}
+      mx={{ sm: '0px' }}
       direction={'column'}
-      gap={'20px'}
-      ml={{ lg: '60px' }}
+      gap={{sm:"10px",lg:'20px'}}
+      ml={{ xl: '60px' }}
     >
       {data.map((transact, idx) => {
         return <TransactCard key={idx} transaction={transact} />

@@ -26,7 +26,7 @@ const TransactCard: React.FC<IProps> = ({ transaction }) => {
   } = transaction
   return (
     <Box
-      py={'15px'}
+      py={{ md:"20px",xl: "25px" }}
       key={id}
       maxWidth={{ base: '2000px', md: '800px' }}
       _hover={{ border: '3px solid #9ca75c' }}
@@ -37,6 +37,7 @@ const TransactCard: React.FC<IProps> = ({ transaction }) => {
         pl={'25px'}
         backgroundColor={'rgba(217, 217, 217, 0.22)'}
         fontSize={'12px'}
+        display={{ "sm": "none", xl: "block" }}
       >
         id : {id}
       </Text>
@@ -46,7 +47,7 @@ const TransactCard: React.FC<IProps> = ({ transaction }) => {
           fontFamily={'Poppins'}
           flexDirection={{ base: 'column', md: 'row' }}
           pl={'25px'}
-          py="15px"
+          py={{ sm: "0px", lg: "15px" }}
         >
           <div style={{ width: '72px' }}>
             {/* <Image
@@ -65,15 +66,11 @@ const TransactCard: React.FC<IProps> = ({ transaction }) => {
             <Text
               fontSize={{ base: '16px', md: '17px', lg: '19px' }}
               fontWeight={'700'}
+              pr={{lg:"10px"}}
             >
               {packageName}
             </Text>
-            <Text
-              fontSize={{ base: '15px', md: '16px', lg: '18px' }}
-              fontWeight={'500'}
-            >
-              {}
-            </Text>
+          
             <Text
               fontSize={{ base: '16px', md: '17px', lg: '19px' }}
               fontWeight={'700'}
@@ -82,10 +79,10 @@ const TransactCard: React.FC<IProps> = ({ transaction }) => {
             </Text>
           </Flex>
           <Text
-            pr={{ base: '10px', md: '40px', lg: '60px' }}
+            pr={{ base: '10px', md: '30px', lg: '15px',xl:'10px' }}
             mt={'15px'}
             fontWeight={'400'}
-            fontSize={{ base: '24px', md: '28px', lg: '32px' }}
+            fontSize={{ base: '24px', md: '28px', lg: '25px' }}
           >
             Rs : {total_cost}
           </Text>
