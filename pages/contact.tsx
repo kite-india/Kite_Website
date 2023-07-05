@@ -17,9 +17,37 @@ import { NextPage } from 'next'
 import Layout from '@components/layouts/main'
 import { Section } from '@components/index'
 import axios from 'axios'
-
+import { API } from 'aws-amplify'
+import { GraphQLQuery } from '@aws-amplify/api'
+import { CreateContactUsMutation } from "src/API"
+import { createContactUs } from 'src/graphql/mutations'
+import { toast } from 'react-toastify'
 const Contact: NextPage = () => {
-  const [contactDetails, setContactDetails] = useState({})
+
+  const [contactDetails, setContactDetails] = useState({
+    first_name: "",
+    last_name: "",
+    email: "",
+    review: "",
+    phone: ""
+  })
+  const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
+
+  function areAllValuesNotNull(obj) {
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key) && obj[key] === '') {
+        return false
+      }
+    }
+    return true
+  }
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
     setContactDetails(prevState => ({
@@ -27,12 +55,42 @@ const Contact: NextPage = () => {
       [e.target.name]: e.target.value
     }))
   }
-  const handleSubmit = () => {
-    console.log(contactDetails)
-    axios
-      .post(`${process.env.NEXT_PUBLIC_KITE_BACKEND}/feedback`, contactDetails)
-      .then(response => console.log(response.data))
-      .catch(err => console.log(err))
+  const handleSubmit = async () => {
+
+
+
+    if (!areAllValuesNotNull(contactDetails)) {
+      toast.error('Fill All fields')
+      return;
+    }
+
+    if (!validateEmail(contactDetails.email)) {
+      toast.error("Please Enter a valid email address")
+      return;
+    }
+    try {
+
+      await API.graphql<GraphQLQuery<CreateContactUsMutation>>({
+        query: createContactUs,
+        variables: {
+          input: {
+            name: contactDetails.first_name + " " + contactDetails.last_name,
+            email: contactDetails.email,
+            description: contactDetails.review,
+            phone_number: contactDetails.phone
+          }
+        }
+      })
+
+      toast.success("Our Executive Will Contact you Soon")
+    }
+    catch (e) {
+      console.log(e)
+      toast.error("Please fill All field properly")
+
+    }
+
+
   }
   return (
     <Layout title="Contact US">
@@ -108,6 +166,28 @@ const Contact: NextPage = () => {
                       bg="white"
                       name="email"
                       type="email"
+                      onChange={handleChange}
+                    />
+                  </InputGroup>
+                </Flex>
+                <Flex direction="column" gap={1} w="100%">
+                  <Text as="label" fontWeight="semibold" htmlFor="email">
+                    Phone Number
+                  </Text>
+                  <InputGroup>
+                    <InputLeftElement pointerEvents="none" px={2} ml={1}>
+                      <IoIosMail color="gray" size="md" />
+                    </InputLeftElement>
+                    <Input
+                      boxShadow="md"
+                      pl={10}
+                      required
+                      fontWeight="light"
+                      placeholder="Email"
+                      rounded="full"
+                      bg="white"
+                      name="phone"
+                      type="text"
                       onChange={handleChange}
                     />
                   </InputGroup>

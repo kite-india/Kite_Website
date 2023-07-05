@@ -3,7 +3,8 @@ import {
   HeroSection,
   FeaturedSection,
   DiscoverTheWorld,
-  IndexModal
+  IndexModal,
+  NextDestinationForm
 } from '@sections/index'
 import Layout from '@components/layouts/main'
 import type { NextPage } from 'next'
@@ -58,7 +59,7 @@ const Page: NextPage<HomePageProps> = ({
       <HeroSection />
       {featured_data && <FeaturedSection data={featured_data} />}
       {activities_data && <DiscoverTheWorld data={activities_data} />}
-      {/* <IndexModal /> */}
+      <NextDestinationForm></NextDestinationForm>
     </Layout>
   )
 }
