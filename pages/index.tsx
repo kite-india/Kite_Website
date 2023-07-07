@@ -44,8 +44,8 @@ const Page: NextPage<HomePageProps> = ({
               <CloseButton
                 position={'relative'}
                 zIndex={200}
-                top={{ lg: 75, sm: 40 }}
-                left={{ sm: 270, md: 400, lg: 480 }}
+                top={{ lg: 75, sm: 10 }}
+                left={{ sm: 280, md: 400, lg: 480 }}
                 size="lg"
                 onClick={e => {
                   setMode(false)

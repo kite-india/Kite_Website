@@ -87,7 +87,7 @@ const Info: NextPage = () => {
         fontFamily="'Poppins'"
         fontWeight="500"
         fontSize={{ base: '20px', sm: '25px', lg: '35px' }}
-        m={{ base: '5px', sm: '100px' }}
+        m={{ base: '5px', sm: '60px' }}
         lineHeight="52px"
         align="center"
       >
@@ -96,6 +96,7 @@ const Info: NextPage = () => {
       <Container
         maxW={{ base: 'container.sm', lg: 'container.lg' }}
         my={{ base: 0, sm: 14 }}
+        mb={{ base: 0, sm: 24 }}
         borderWidth={{ base: 0, sm: 3 }}
         borderRadius="38px"
         boxShadow={{ base: 'none', sm: 'lg' }}
