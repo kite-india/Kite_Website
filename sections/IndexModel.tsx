@@ -114,7 +114,7 @@ const IndexModal = ({ setModes }: { setModes: Function }) => {
           <Heading
             color={'color13'}
             fontFamily="'Poppins'"
-            size={'sm'}
+            size={'xs'}
             textAlign={'center'}
           >
             LET&apos;S BUILD OUR COMMUNITY
@@ -122,7 +122,7 @@ const IndexModal = ({ setModes }: { setModes: Function }) => {
           <Heading
             color={'color5'}
             fontFamily={'Poppins'}
-            fontSize={{ base: 'xl', sm: '3xl', md: 'sm' }}
+            fontSize={{ base: 'xl', sm: 'sm', md: 'sm' }}
           >
             Join our next destination
           </Heading>
@@ -130,25 +130,24 @@ const IndexModal = ({ setModes }: { setModes: Function }) => {
       </Box>
       <Flex minH={'30vh'} align={'center'} justify={'center'}>
         <Stack
-          spacing={4}
           w={'full'}
-          maxW={'md'}
+          maxW={'sm'}
           bg={useColorModeValue('white', 'gray.700')}
-          rounded={'xl'}
+          rounded={'2xl'}
           boxShadow={'lg'}
-          p={6}
+          p={3}
         >
           <Heading
             fontFamily="'Changa One'"
             lineHeight={1.1}
             color="#434343"
             fontWeight={'semibold'}
-            fontSize={{ base: 'xl', sm: '2xl', md: 'sm' }}
+            fontSize={{ sm: 'sm', md: '2xl' }}
             as="h2"
           >
             Enquiry Form
           </Heading>
-          <Text fontFamily="'Roboto'">
+          <Text fontFamily="'Roboto'" fontSize={{ sm: 'sm', md: 'xl' }}>
             Suggest a new travel destination that you want to see and we will
             feature it in our blog.
           </Text>
