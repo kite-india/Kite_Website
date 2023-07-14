@@ -12,7 +12,8 @@ import {
   Box,
   Select,
   Textarea,
-  FormErrorMessage
+  FormErrorMessage,
+  CloseButton
 } from '@chakra-ui/react'
 import { Section } from '../components'
 import { motion } from 'framer-motion'
@@ -24,7 +25,9 @@ import 'react-toastify/dist/ReactToastify.css'
 import { CreateEnquiryInput } from 'src/API'
 import { relative } from 'path'
 
-const IndexModal: React.FC = () => {
+const IndexModal = ({ setModes }: { setModes: Function }) => {
+
+
   function validateDestinationName(value) {
     let error = ''
     if (!value) {
@@ -95,14 +98,18 @@ const IndexModal: React.FC = () => {
   return (
     <Box
       bg={useColorModeValue('gray.50', 'gray.800')}
-      position={'relative'}
-      bottom={8}
-      py={{ base: '3', lg: '6' }}
-      px="4"
-      mx={12}
+
     >
       <ToastContainer></ToastContainer>
       <Box textAlign="center" gap={{ base: 2, lg: 4 }} pt={4}>
+        <Flex justifyContent={"flex-end"}>
+          <CloseButton
+            pr={"10px"}
+            onClick={e => {
+              setModes()
+            }}
+          />
+        </Flex>
         <Section>
           <Heading
             color={'color13'}
@@ -159,11 +166,9 @@ const IndexModal: React.FC = () => {
                 mutation MyMutation {
                   createEnquiry(input: {number_of_people: ${Number(
                     values.numberOfPeople
-                  )}, name: "${values.name}", phone_number: "${
-                    values.phone
-                  }" vacation_type: "${values.shootingCategory}", email: "${
-                    values.email
-                  }", destination_name: "${values.destinationName}"}) {
+                  )}, name: "${values.name}", phone_number: "${values.phone
+                    }" vacation_type: "${values.shootingCategory}", email: "${values.email
+                    }", destination_name: "${values.destinationName}"}) {
                     email
                     id
                     name
@@ -281,14 +286,14 @@ const IndexModal: React.FC = () => {
                           form.touched.numberOfPeople
                         }
                       >
-                        <Input
+                        {/* <Input
                           {...field}
                           id="numberOfPeople"
                           placeholder="No.Of People"
                         />
                         <FormErrorMessage>
                           {form.errors.numberOfPeople}
-                        </FormErrorMessage>
+                        </FormErrorMessage> */}
                       </FormControl>
                     )}
                   </Field>

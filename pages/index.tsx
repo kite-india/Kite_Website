@@ -22,6 +22,10 @@ const Page: NextPage<HomePageProps> = ({
 }) => {
   const [mode, setMode] = useState(false)
 
+  function setModeHandler() {
+    setMode(false)
+  }
+
   useEffect(() => {
     setTimeout(() => {
       setMode(true)
@@ -31,30 +35,22 @@ const Page: NextPage<HomePageProps> = ({
   return (
     <Layout title="Home">
       {mode && (
-        <div>
-          <Flex justifyContent={'center'}>
-            <Box
-              backgroundColor={'rgba(0, 0, 0, 0.4)'}
-              zIndex={99}
-              position={'fixed'}
-              height={'100vh'}
-              width={'100%'}
-            ></Box>
-            <Box position={'fixed'} zIndex={100} textAlign="center">
-              <CloseButton
-                position={'relative'}
-                zIndex={200}
-                top={{ lg: 75, sm: 40 }}
-                left={{ sm: 270, md: 400, lg: 480 }}
-                size="lg"
-                onClick={e => {
-                  setMode(false)
-                }}
-              />
-              <IndexModal />
+        <Flex justifyContent={'center'}>
+          <Box
+            backgroundColor={'rgba(0, 0, 0, 0.4)'}
+            zIndex={99}
+            position={'fixed'}
+            height={'100vh'}
+            width={'100%'}
+          ></Box>
+          <Flex zIndex={100} position={'fixed'} width={"100%"} height={"100vh"} id='not' justifyContent={"center"} alignItems={"flex-start"}>
+            <Box textAlign="center" mx={["20px"]} >
+
+              <IndexModal setModes={setModeHandler} />
             </Box>
           </Flex>
-        </div>
+        </Flex>
+
       )}
       <HeroSection />
       {featured_data && <FeaturedSection data={featured_data} />}
@@ -64,7 +60,7 @@ const Page: NextPage<HomePageProps> = ({
   )
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const premiumPackages = await API.graphql<GraphQLQuery<ListPackagesQuery>>({
     query: listPackages,
     variables: { filter: { is_premium_flag: { eq: true } } }
