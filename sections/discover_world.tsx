@@ -13,12 +13,12 @@ interface Props {
 
 const DiscoverTheWorld: React.FC<Props> = ({ data }) => {
   return (
-    <Box position={'relative'} py={'8'} scrollSnapAlign="center">
+    <Box position={'relative'} py={'8'} scrollSnapAlign="center" px={100}>
       <Section delay={0.3}>
         <Box
           textAlign="center"
           px={6}
-          py={{ base: 2, lg: 6 }}
+          py={{ base: 2, lg: 20 }}
           gap={{ base: 2, lg: 4 }}
         >
           <Heading

@@ -11,7 +11,9 @@ interface Props {
 }
 
 const Layout: React.FC<Props> = ({ children, title }) => {
+
   const router = useRouter()
+
   return (
     <Box w="100%" as="main">
       <Head>

@@ -17,29 +17,26 @@ const BlogCard: React.FC<BlogProps> = ({ blog }) => {
       <Link href={`/packages/${packageID}`}>
 
         <Center
-          pb="40px"
-          my="40px"
+
           mx={{ base: '20px', md: '0px' }}
           as={motion.div}
-          whileHover={{ scale: 1.1 }}
-          cursor="pointer"
-          h="435px"
 
+          cursor="pointer"
         >
           <Box
             w={'100%'}
-            h={'435px'}
+
             // overflow={'hidden'}
             rounded="md"
           >
-            <Box borderRadius="lg" overflow={'hidden'}>
+            <Box borderRadius="lg" >
               <CustomImage
                 src={image}
                 alt={name}
                 layout="responsive"
-                width={150}
-                height={100}
-                objectFit="cover"
+                width={400}
+                height={400}
+
               />
             </Box>
             <Center>
@@ -58,8 +55,7 @@ const BlogCard: React.FC<BlogProps> = ({ blog }) => {
             </Center>
             <Center py={2}>
               <Box
-                maxW={'368.67px'}
-                h={'78px'}
+
                 w={'full'}
                 rounded={'md'}
                 pt={0}

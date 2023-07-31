@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import NextLink from 'next/link'
 import {
   Flex,
   Box,
@@ -37,7 +36,6 @@ import {
 import { GrGallery, GrContact } from 'react-icons/gr'
 import { FaRegUserCircle } from 'react-icons/fa'
 import { motion } from 'framer-motion'
-import { signOut, useSession } from 'next-auth/react'
 import { getAuthUserName, ionViewCanEnter } from '@libs/userAuth'
 import { Auth } from 'aws-amplify'
 import { useRouter } from 'next/router'
@@ -74,35 +72,37 @@ const BookBtn = () => (
 )
 
 const LinkItem = ({ href, children }) => (
-  <NextLink href={href}>
-    <Link
-      fontSize="16px"
-      fontFamily="'Roboto'"
-      color="black"
-      _hover={{ color: 'color5' }}
-      _active={{ color: 'color5' }}
-      fontWeight="normal"
-    >
-      {children}
-    </Link>
-  </NextLink>
+
+  <Link
+    href={href}
+    fontSize="16px"
+    fontFamily="'Roboto'"
+    color="black"
+    _hover={{ color: 'color5' }}
+    _active={{ color: 'color5' }}
+    fontWeight="normal"
+  >
+    {children}
+  </Link>
+
 )
 
 const DrawerLink = ({ href, children, icon }) => (
-  <NextLink href={href}>
-    <Link
-      fontFamily="'Roboto'"
-      fontSize="16px"
-      _hover={{ color: 'color5' }}
-      _active={{ color: 'color5' }}
-      display="flex"
-      alignItems="center"
-      gap={1}
-    >
-      {icon}
-      {children}
-    </Link>
-  </NextLink>
+
+  <Link
+    href={href}
+    fontFamily="'Roboto'"
+    fontSize="16px"
+    _hover={{ color: 'color5' }}
+    _active={{ color: 'color5' }}
+    display="flex"
+    alignItems="center"
+    gap={1}
+  >
+    {icon}
+    {children}
+  </Link>
+
 )
 
 interface NavProps {
@@ -169,6 +169,7 @@ const Navbar: React.FC<NavProps> = () => {
             </Heading>
           </Link>
         </Box>
+
         <Spacer />
         <HStack gap={{ base: 4, lg: 8 }} display={{ base: 'none', md: 'flex' }}>
           {links.map(
@@ -182,6 +183,7 @@ const Navbar: React.FC<NavProps> = () => {
               )
           )}
         </HStack>
+
         {status != 'unauthenticated' ? (
           <Menu>
             <MenuButton
@@ -368,23 +370,24 @@ const Navbar: React.FC<NavProps> = () => {
             </MenuList>
           </Menu>
         ) : (
-          <NextLink href="/login">
-            <Link
-              ml={8}
-              mr={4}
-              fontSize="16px"
-              fontFamily="'Roboto'"
-              color="black"
-              _hover={{ color: 'color5' }}
-              _active={{ color: 'color5' }}
-              fontWeight="normal"
-            >
-              <Flex direction="row" gap={2} mx={4}>
-                <FaRegUserCircle size={20} />
-                <Text>Sign In</Text>
-              </Flex>
-            </Link>
-          </NextLink>
+
+          <Link
+            href='/login'
+            ml={8}
+            mr={4}
+            fontSize="16px"
+            fontFamily="'Roboto'"
+            color="black"
+            _hover={{ color: 'color5' }}
+            _active={{ color: 'color5' }}
+            fontWeight="normal"
+          >
+            <Flex direction="row" gap={2} mx={4}>
+              <FaRegUserCircle size={20} />
+              <Text>Sign In</Text>
+            </Flex>
+          </Link>
+
         )}
 
         {/* <BookBtn /> */}
@@ -472,3 +475,8 @@ const Navbar: React.FC<NavProps> = () => {
 }
 
 export default Navbar
+
+
+
+
+
