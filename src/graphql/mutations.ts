@@ -272,6 +272,7 @@ export const createRegistration = /* GraphQL */ `
       createdAt
       updatedAt
       registrationPackageId
+      owner
       __typename
     }
   }
@@ -333,6 +334,7 @@ export const updateRegistration = /* GraphQL */ `
       createdAt
       updatedAt
       registrationPackageId
+      owner
       __typename
     }
   }
@@ -394,6 +396,7 @@ export const deleteRegistration = /* GraphQL */ `
       createdAt
       updatedAt
       registrationPackageId
+      owner
       __typename
     }
   }

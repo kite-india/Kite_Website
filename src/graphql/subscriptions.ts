@@ -188,8 +188,9 @@ export const onDeleteGallery = /* GraphQL */ `
 export const onCreateRegistration = /* GraphQL */ `
   subscription OnCreateRegistration(
     $filter: ModelSubscriptionRegistrationFilterInput
+    $owner: String
   ) {
-    onCreateRegistration(filter: $filter) {
+    onCreateRegistration(filter: $filter, owner: $owner) {
       id
       total_cost
       userinfoID
@@ -241,6 +242,7 @@ export const onCreateRegistration = /* GraphQL */ `
       createdAt
       updatedAt
       registrationPackageId
+      owner
       __typename
     }
   }
@@ -248,8 +250,9 @@ export const onCreateRegistration = /* GraphQL */ `
 export const onUpdateRegistration = /* GraphQL */ `
   subscription OnUpdateRegistration(
     $filter: ModelSubscriptionRegistrationFilterInput
+    $owner: String
   ) {
-    onUpdateRegistration(filter: $filter) {
+    onUpdateRegistration(filter: $filter, owner: $owner) {
       id
       total_cost
       userinfoID
@@ -301,6 +304,7 @@ export const onUpdateRegistration = /* GraphQL */ `
       createdAt
       updatedAt
       registrationPackageId
+      owner
       __typename
     }
   }
@@ -308,8 +312,9 @@ export const onUpdateRegistration = /* GraphQL */ `
 export const onDeleteRegistration = /* GraphQL */ `
   subscription OnDeleteRegistration(
     $filter: ModelSubscriptionRegistrationFilterInput
+    $owner: String
   ) {
-    onDeleteRegistration(filter: $filter) {
+    onDeleteRegistration(filter: $filter, owner: $owner) {
       id
       total_cost
       userinfoID
@@ -361,6 +366,7 @@ export const onDeleteRegistration = /* GraphQL */ `
       createdAt
       updatedAt
       registrationPackageId
+      owner
       __typename
     }
   }

@@ -39,6 +39,10 @@
           "deploymentBucketName": "amplify-kitefrontend-prod-221209-deployment",
           "s3Key": "amplify-builds/test-744a4a6375345737486d-build.zip"
         }
+      },
+      "api": {
+        "kitefrontend": {},
+        "kiterestapi": {}
       }
     }
   }

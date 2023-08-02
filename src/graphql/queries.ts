@@ -267,6 +267,7 @@ export const getRegistration = /* GraphQL */ `
       createdAt
       updatedAt
       registrationPackageId
+      owner
       __typename
     }
   }
@@ -288,6 +289,7 @@ export const listRegistrations = /* GraphQL */ `
         createdAt
         updatedAt
         registrationPackageId
+        owner
         __typename
       }
       nextToken
@@ -320,6 +322,7 @@ export const registrationsByUserinfoID = /* GraphQL */ `
         createdAt
         updatedAt
         registrationPackageId
+        owner
         __typename
       }
       nextToken

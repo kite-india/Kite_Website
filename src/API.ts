@@ -315,6 +315,7 @@ export type Registration = {
   createdAt: string,
   updatedAt: string,
   registrationPackageId: string,
+  owner?: string | null,
 };
 
 export type Package = {
@@ -1133,6 +1134,7 @@ export type CreateRegistrationMutation = {
     createdAt: string,
     updatedAt: string,
     registrationPackageId: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -1195,6 +1197,7 @@ export type UpdateRegistrationMutation = {
     createdAt: string,
     updatedAt: string,
     registrationPackageId: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -1257,6 +1260,7 @@ export type DeleteRegistrationMutation = {
     createdAt: string,
     updatedAt: string,
     registrationPackageId: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -1769,6 +1773,7 @@ export type GetRegistrationQuery = {
     createdAt: string,
     updatedAt: string,
     registrationPackageId: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -1792,6 +1797,7 @@ export type ListRegistrationsQuery = {
       createdAt: string,
       updatedAt: string,
       registrationPackageId: string,
+      owner?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -1819,6 +1825,7 @@ export type RegistrationsByUserinfoIDQuery = {
       createdAt: string,
       updatedAt: string,
       registrationPackageId: string,
+      owner?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -2195,6 +2202,7 @@ export type OnDeleteGallerySubscription = {
 
 export type OnCreateRegistrationSubscriptionVariables = {
   filter?: ModelSubscriptionRegistrationFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnCreateRegistrationSubscription = {
@@ -2251,11 +2259,13 @@ export type OnCreateRegistrationSubscription = {
     createdAt: string,
     updatedAt: string,
     registrationPackageId: string,
+    owner?: string | null,
   } | null,
 };
 
 export type OnUpdateRegistrationSubscriptionVariables = {
   filter?: ModelSubscriptionRegistrationFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnUpdateRegistrationSubscription = {
@@ -2312,11 +2322,13 @@ export type OnUpdateRegistrationSubscription = {
     createdAt: string,
     updatedAt: string,
     registrationPackageId: string,
+    owner?: string | null,
   } | null,
 };
 
 export type OnDeleteRegistrationSubscriptionVariables = {
   filter?: ModelSubscriptionRegistrationFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnDeleteRegistrationSubscription = {
@@ -2373,6 +2385,7 @@ export type OnDeleteRegistrationSubscription = {
     createdAt: string,
     updatedAt: string,
     registrationPackageId: string,
+    owner?: string | null,
   } | null,
 };
 
