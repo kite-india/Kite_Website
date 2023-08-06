@@ -12,12 +12,15 @@ import 'react-toastify/dist/ReactToastify.css'
 
 Amplify.configure({ ...awsconfig, ssr: true })
 
+interface CustomProps{
+
+}
 
 const Website = ({
   Component,
   pageProps,
   router
-}: AppProps<{ }>) => {
+}: AppProps<CustomProps>) => {
   return (
     <ChakraProvider theme={theme}>
       <Fonts />

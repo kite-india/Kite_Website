@@ -16,7 +16,6 @@ import { IoIosMail } from 'react-icons/io'
 import { NextPage } from 'next'
 import Layout from '@components/layouts/main'
 import { Section } from '@components/index'
-import axios from 'axios'
 import { API } from 'aws-amplify'
 import { GraphQLQuery } from '@aws-amplify/api'
 import { CreateContactUsMutation } from "src/API"
@@ -40,7 +39,7 @@ const Contact: NextPage = () => {
   };
 
   function areAllValuesNotNull(obj) {
-    for (let key in obj) {
+    for (const key in obj) {
       if (obj.hasOwnProperty(key) && obj[key] === '') {
         return false
       }

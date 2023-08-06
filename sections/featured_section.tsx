@@ -9,37 +9,6 @@ import FeaturedCard from '@components/FeaturedCard'
 import { FeaturedDestination } from '@utils/types'
 import { Package } from 'src/API'
 
-/* const dummyData = [
-  {
-    id: 1,
-    title: 'Our Himachal adventure blog',
-    description:
-      'Visiting the Peaks? Want to know the requirements on travelling to Himachal during the pandemic? Our blog might help! ',
-    imgUrl: '',
-    watchLink: '',
-    knowMoreLink: ''
-  },
-  {
-    id: 2,
-    title: 'Our Himachal adventure blog',
-    description:
-      'Visiting the Peaks? Want to know the requirements on travelling to Himachal during the pandemic? Our blog might help! ',
-    imgUrl: '',
-    watchLink: '',
-    knowMoreLink: ''
-  },
-  {
-    id: 3,
-    title: 'Our Himachal adventure blog',
-    description:
-      'Visiting the Peaks? Want to know the requirements on travelling to Himachal during the pandemic? Our blog might help! ',
-    imgUrl: '',
-    watchLink: '',
-    knowMoreLink: ''
-  }
-]
-*/
-
 interface Props {
   data: Package[]
 }

@@ -1,26 +1,75 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, Heading } from "@chakra-ui/react";
+import Section from "@components/Section";
+import { BiBold } from "react-icons/bi";
+import { Autoplay, Navigation, Pagination, Scrollbar } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 import TestimonialCard from "./TestimonialCard";
 
 
 export default function Testimonial() {
 
-
+    const data = ["Manali.webp", "Nim_malaysia.webp", "Bali.webp", "Bali.webp"]
 
     return (
-        <Flex mt={5} px={[2,2,2,50]}>
+        <Box position={'relative'} py={'8'} scrollSnapAlign="center" px={{ sm: '5px', md: '10px', xl: '50px' }}>
+            <Section delay={0.3}>
+                <Box
+                    textAlign="center"
+                    px={6}
+                    py={{ base: 2, lg: 20 }}
+                    gap={{ base: 2, lg: 4 }}
+                >
+                    <Heading
+                        color={'color5'}
+                        fontFamily="'Poppins'"
+                        fontSize={{ base: 'xl', sm: '3xl' }}
+                    >
+                        TESTIMONIALS
+                    </Heading>
+                </Box>
 
-            <Flex direction={"column"}>
-                <Box textAlign={"center"} p={5} fontSize={30} color={"green"} fontWeight={"bold"}>TESTIMONIALS</Box>
-                <Flex direction={["column", "column", "column", "column", "column", "column",'row']}>
-                    <TestimonialCard image="Bali.webp"></TestimonialCard>
-                    <TestimonialCard image="Manali.webp"></TestimonialCard>
-                    <TestimonialCard image="Nim_malaysia.webp"></TestimonialCard>
+                <Flex align={'center'} justify="center" mx={6}>
+                    <Swiper
+                        modules={[Autoplay, Pagination, Navigation]}
+                        breakpoints={{
+                            1200: {
+                                slidesPerView: 3
+                            },
+
+                            768: {
+                                slidesPerView: 2
+                            },
+                            640: {
+                                slidesPerView: 1
+                            }
+                        }}
+                        autoplay={{
+                            delay: 3000,
+                            disableOnInteraction: false,
+                            pauseOnMouseEnter: true
+                        }}
+                        loop={true}
+                        spaceBetween={40}
+
+
+                    >
+                        <Box>
+                            {data.map((blog, id) => {
+                                return (
+                                    <SwiperSlide key={id} >
+                                        <TestimonialCard image={blog}></TestimonialCard>
+                                    </SwiperSlide>
+                                )
+                            })}
+                        </Box>
+                    </Swiper>
                 </Flex>
-            </Flex>
+            </Section>
+        </Box>
 
 
-        </Flex>
     )
 
 
 }
+
