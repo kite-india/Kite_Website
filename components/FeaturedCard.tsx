@@ -85,7 +85,7 @@ const FeaturedCard: React.FC<FeaturedDataProps> = ({ data }) => {
     >
       <Section delay={0.3}>
         <Stack
-          direction={{ base: 'column', xl: 'row' }}
+          direction={{ base: 'column', '2xl': 'row' }}
           spacing="2.18rem"
           borderRadius="xl"
           borderColor="blackAlpha.300"

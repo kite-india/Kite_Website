@@ -8,11 +8,12 @@ import styles from "./TripsPaginator.module.css"
 interface PackageProps {
     data: Package[]
     activities_data: any,
-    fetchData: Function
+    fetchData: Function,
+    paginatorToken: number | null
 }
 
 
-const TripsPaginator: React.FC<PackageProps> = ({ data, activities_data, fetchData }) => {
+const TripsPaginator: React.FC<PackageProps> = ({ data, activities_data, fetchData, paginatorToken }) => {
 
 
     const [itemOffset, setItemOffset] = useState(0);
@@ -20,7 +21,8 @@ const TripsPaginator: React.FC<PackageProps> = ({ data, activities_data, fetchDa
     const endOffset = itemOffset + itemsPerPage;
 
     const currentItems = data.slice(itemOffset, endOffset);
-    const pageCount = Math.ceil(data.length / itemsPerPage);
+    const pageCount = paginatorToken ? Math.ceil(data.length / itemsPerPage) + 1 : Math.ceil(data.length / itemsPerPage);
+
     console.log(pageCount);
     // Invoke when user click to request another page.
     const handlePageClick = async (event) => {
@@ -29,12 +31,15 @@ const TripsPaginator: React.FC<PackageProps> = ({ data, activities_data, fetchDa
         console.log("pagecount", pageCount)
         console.log(event.selected)
         console.log(newOffset)
-        setItemOffset(newOffset);
-        if (pageCount == event.selected + 1) {
+
+
+        if (pageCount == event.selected + 1 && paginatorToken) {
 
             await fetchData();
+
         }
 
+        setItemOffset(newOffset);
     };
 
     return (

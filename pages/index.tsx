@@ -18,8 +18,8 @@ import { Box, Flex } from '@chakra-ui/react'
 import Testimonial from '@components/Testimonials/Testimonial'
 
 const Page: NextPage<HomePageProps> = ({
-  featured_data = null,
-  activities_data = null
+  featured_data = [],
+  activities_data = []
 }) => {
   const [mode, setMode] = useState(false)
 
@@ -54,9 +54,9 @@ const Page: NextPage<HomePageProps> = ({
 
       )}
       <HeroSection />
-      {featured_data && <FeaturedSection data={featured_data} />}
+      <FeaturedSection data={featured_data} />
       <Testimonial></Testimonial>
-        {activities_data && <DiscoverTheWorld data={activities_data} />}
+      <DiscoverTheWorld data={activities_data} />
       <NextDestinationForm></NextDestinationForm>
     </Layout>
   )

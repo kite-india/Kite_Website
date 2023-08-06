@@ -67,7 +67,7 @@ const Footer: React.FC = () => {
     <Box w="100%" py={6} bgColor="#F9F9F9" bottom={0}>
       <Flex
         w="100%"
-        flexDir={{ base: 'column', md: 'row' }}
+        flexDir={{ base: 'column', xl: 'row' }}
         gap={{ base: 12, md: 6 }}
         align="center"
         justify="space-evenly"

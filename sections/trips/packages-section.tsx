@@ -32,10 +32,11 @@ import TripsPaginator from '@components/TripsPaginator'
 interface PackageProps {
   data: Package[]
   activities_data: any,
-  fetchData:Function
+  fetchData: Function,
+  paginatorToken: number | null
 }
 
-const Packages: React.FC<PackageProps> = ({ data, activities_data,fetchData }) => {
+const Packages: React.FC<PackageProps> = ({ data, activities_data, fetchData, paginatorToken }) => {
 
   const [sort, setSort] = useState(1)
   const allParams = ['cost', 'location', 'description', 'activities']
@@ -108,8 +109,8 @@ const Packages: React.FC<PackageProps> = ({ data, activities_data,fetchData }) =
           </Select>
         </Flex>
       </Flex>
-      <TripsPaginator fetchData={fetchData} data={data} activities_data={activities_data}></TripsPaginator>
-      
+      <TripsPaginator paginatorToken={paginatorToken} fetchData={fetchData} data={data} activities_data={activities_data}></TripsPaginator>
+
     </Box>
   )
 }

@@ -33,6 +33,7 @@ const Trips: NextPage<TripsPageProps> = () => {
   const [packages_data, setPackage] = useState([]);
   const [activities_data, setActivity] = useState(null)
   const [paginatorToken, setPaginatorToken] = useState(null);
+
   const fetchData = async () => {
     try {
       console.log("Feyching")
@@ -40,10 +41,7 @@ const Trips: NextPage<TripsPageProps> = () => {
         GraphQLQuery<ListPackagesQuery>
       >({
         query: listPackages,
-        variables: {
-          limit: 4,
-          nextToken: paginatorToken
-        }
+      
       })
 
       let activities = await API.graphql<GraphQLQuery<ListActivitiesQuery>>({
@@ -53,6 +51,8 @@ const Trips: NextPage<TripsPageProps> = () => {
 
 
       let packages_data = packagesAndActivities.data.listPackages.items as Trip[]
+
+      console.log(packages_data)
       let activities_data = activities.data.listActivities.items
       setPaginatorToken(packagesAndActivities.data.listPackages.nextToken)
       setPackage((prevState) => {
@@ -163,6 +163,7 @@ const Trips: NextPage<TripsPageProps> = () => {
         </Section>
         <Section delay={0.3}>
           <PackagesSection
+            paginatorToken={paginatorToken}
             activities_data={activities_data}
             data={packages_data}
             fetchData={fetchData}

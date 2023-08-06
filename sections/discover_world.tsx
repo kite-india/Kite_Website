@@ -13,7 +13,7 @@ interface Props {
 
 const DiscoverTheWorld: React.FC<Props> = ({ data }) => {
   return (
-    <Box position={'relative'} py={'8'} scrollSnapAlign="center" px={100}>
+    <Box position={'relative'} py={'8'} scrollSnapAlign="center" px={{ sm: '5px', md: '10px', xl: '50px' }}>
       <Section delay={0.3}>
         <Box
           textAlign="center"
@@ -60,14 +60,17 @@ const DiscoverTheWorld: React.FC<Props> = ({ data }) => {
             }}
             loop={true}
             spaceBetween={40}
+
           >
-            {data.map(blog => {
-              return (
-                <SwiperSlide key={blog.id}>
-                  <BlogCard blog={blog} key={blog.name} />
-                </SwiperSlide>
-              )
-            })}
+            <Box>
+              {data.map(blog => {
+                return (
+                  <SwiperSlide key={blog.id} >
+                    <BlogCard blog={blog} key={blog.name} />
+                  </SwiperSlide>
+                )
+              })}
+            </Box>
           </Swiper>
         </Flex>
       </Section>

@@ -26,7 +26,6 @@ const BlogCard: React.FC<BlogProps> = ({ blog }) => {
           <Box
             w={'100%'}
 
-            // overflow={'hidden'}
             rounded="md"
           >
             <Box borderRadius="lg" >
