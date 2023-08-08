@@ -77,7 +77,6 @@ const Trips: NextPage<TripsPageProps> = () => {
 
   useEffect(() => {
 
-
     fetchData();
   }, [])
 

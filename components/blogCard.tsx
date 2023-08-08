@@ -12,7 +12,7 @@ interface BlogProps {
 const BlogCard: React.FC<BlogProps> = ({ blog }) => {
   const { id, name, image, description, packageID } = blog
   return (
-    <Box>
+    <Box padding={4}>
 
       <Link href={`/packages/${packageID}`}>
 
@@ -20,13 +20,15 @@ const BlogCard: React.FC<BlogProps> = ({ blog }) => {
 
           mx={{ base: '20px', md: '0px' }}
           as={motion.div}
-
+      
           cursor="pointer"
         >
           <Box
             w={'100%'}
-
+            boxShadow="1px 3px 10px #9E9E9E" 
+            padding={{sm:"10px",lg:"15px"}}
             rounded="md"
+            height={1000}
           >
             <Box borderRadius="lg" >
               <CustomImage
@@ -34,7 +36,7 @@ const BlogCard: React.FC<BlogProps> = ({ blog }) => {
                 alt={name}
                 layout="responsive"
                 width={400}
-                height={400}
+                height={300}
 
               />
             </Box>
@@ -64,7 +66,7 @@ const BlogCard: React.FC<BlogProps> = ({ blog }) => {
               // overflow={'hidden'}
               >
                 <Stack>
-                  <Text fontSize="16px" fontFamily="'Roboto'">
+                  <Text color={"#777"} fontSize="16px" fontFamily="'Roboto'">
                     {description}
                     <Text
                       fontSize="16px"

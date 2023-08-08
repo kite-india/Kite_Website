@@ -8,7 +8,34 @@ import TestimonialCard from "./TestimonialCard";
 
 export default function Testimonial() {
 
-    const data = ["Manali.webp", "Nim_malaysia.webp", "Bali.webp", "Bali.webp"]
+
+    const data = [
+        {
+            image: "Manali.webp",
+            name: "Prakriti Das - Manali",
+            description: "   Our romantic getaway to Manali, organized by Kitefy, was pure bliss! The breathtaking landscapes, cozy accommodations,and seamless arrangements made our trip truly special. Their customer service team was attentive and prompt, ensuring we  had everything we needed for a delightful experience. Kitefy is our go-to travel company for all future adventures!"
+            ,
+            rating: 5
+        },
+        {
+            image: "Nim_malaysia.webp",
+            name: "Nim - Malaysia",
+            description: "I had an incredible solo trip to Malaysia with Kitefy! Their well-planned itinerary and helpful customer service made my journey hassle-free. From exploring the vibrant streets of Kuala Lumpur to relaxing on the stunning beaches of Langkawi, every moment was unforgettable. I highly recommend Kitefy for solo travelers seeking a memorable adventure!",
+            rating: 4
+        },
+        {
+            image: "Bali.webp",
+            name: "Vishaka soman and Arpit - Bali",
+            description: "Our trip to Bali with Kitefy was beyond our expectations! The warm welcome we received in Bali was heartwarming, thanks to Kitefy's thoughtful arrangements. The romantic ambiance, luxurious resorts, and exciting activities made it an extraordinary journey. Kitefy's customer service was top-notch, attending to our requests promptly throughout the trip. We're already planning our next vacation with them!",
+            rating: 5
+        },
+        {
+            image: "Bali.webp",
+            name: "Vishaka soman and Arpit - Bali",
+            description: "Our romantic getaway to Manali, organized by Kitefy, was pure bliss! The breathtaking landscapes, cozy accommodations,and seamless arrangements made our trip truly special. Their customer service team was attentive and prompt, ensuring we  had everything we needed for a delightful experience. Kitefy is our go-to travel company for all future adventures!",
+            rating: 5
+        },
+    ]
 
     return (
         <Box position={'relative'} py={'8'} scrollSnapAlign="center" px={{ sm: '5px', md: '10px', xl: '50px' }}>
@@ -44,7 +71,7 @@ export default function Testimonial() {
                             }
                         }}
                         autoplay={{
-                            delay: 3000,
+                            delay: 3000000,
                             disableOnInteraction: false,
                             pauseOnMouseEnter: true
                         }}
@@ -54,10 +81,10 @@ export default function Testimonial() {
 
                     >
                         <Box>
-                            {data.map((blog, id) => {
+                            {data.map((testimonial, id) => {
                                 return (
                                     <SwiperSlide key={id} >
-                                        <TestimonialCard image={blog}></TestimonialCard>
+                                        <TestimonialCard image={testimonial.image} description={testimonial.description} name={testimonial.name} rating={testimonial.rating} />
                                     </SwiperSlide>
                                 )
                             })}
