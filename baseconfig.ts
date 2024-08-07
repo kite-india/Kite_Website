@@ -6,7 +6,7 @@ const awsmobile = {
     "aws_appsync_graphqlEndpoint": "https://a2temih7hfhk5haauiiithf4ge.appsync-api.ap-south-1.amazonaws.com/graphql",
     "aws_appsync_region": "ap-south-1",
     "aws_appsync_authenticationType": "API_KEY",
-    "aws_appsync_apiKey": "da2-c7jfj3hxujdwbhfcqobtitvfoe",
+    "aws_appsync_apiKey": "da2-o2cp7mlasfetlcki7hwb6veiyu",
     "aws_cloud_logic_custom": [
         {
             "name": "kiterestapi",
